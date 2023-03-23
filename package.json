@@ -1,15 +1,15 @@
 {
   "name": "exove_project",
-  "description":"",
+  "description": "",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "install:All": "npm install && cd back-end && npm install && cd ../front-end && npm install",
-    "startfrontend": "cd front-end && npm start",
-    "startbackend": "cd back-end && npm start",
-    "backendDev": "cd back-end && npm run dev",
-    "startall": "concurrently \"npm run startfrontend\" \"npm run startbackend\"",
-    "buildall": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\""
+    "start:front_end": "cd front-end && npm start",
+    "start:back_end": "cd back-end && npm start",
+    "backend:Dev": "cd back-end && npm run dev",
+    "start:All": "concurrently \"npm run startfrontend\" \"npm run startbackend\"",
+    "build:All": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "url": "https://github.com/TuanDao-0110/HangMan_Game/issues"
   },
   "dependencies": {
+    "concurrently": "^7.6.0"
   },
   "homepage": "https://github.com/TuanDao-0110/HangMan_Game#readme"
 }
