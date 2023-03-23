@@ -9,7 +9,9 @@
     "start:back_end": "cd back-end && npm start",
     "backend:Dev": "cd back-end && npm run dev",
     "start:All": "concurrently \"npm run startfrontend\" \"npm run startbackend\"",
-    "build:All": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\""
+    "build:All": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\"",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --max-warnings=0 --fix"
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,29 @@
   "dependencies": {
     "concurrently": "^7.6.0"
   },
-  "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README"
+  "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "include": [
+    "src"
+  ],
+  "paths": {},
+  "exclude": [
+    "node_modules"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/preset-react": "^7.18.6",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-jsconfig": "^1.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "prettier": "^2.7.1"
+  }
 }
