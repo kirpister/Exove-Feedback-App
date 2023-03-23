@@ -4,16 +4,15 @@
 
 <br/>
 
-<h2>User Store</h2>
+<h2>App features</h2>
 
-1. [x] Project have login / register.
-2. [x] Admin role can create feedback and send feedback request to selected other users.
-3. [x] User (not admin) will receives feedback's anwers request, once Admin created and send it.
-4. [x] User will see all feedback's answer request, once user logged in. 
-5. [x] Admin wil see feedback's result.
-6. [x] Admin will can request feedback request to users who have finished feedback's answer. 
-7. [x] Admin can export and get feedback's graph analysis.
-8. [x] Admin can set up other user roles to Admin.
+- Authentication
+- Roles for Admin and User
+- Admin will send out assessment form to collect feedback for colleagues
+- Admin can send reminders to those who have yet to give feedback
+- Admin can see assessment form results and convert them into graphs than can be turned into printable PDFs
+- User will receive and fill out assessment forms about their coworkers
+- User will see request to give feedback once logged in
 
 
 <br/>
@@ -40,12 +39,12 @@
 
 <br/>
 
-<h2>Set up </h2>
+<h2>Set up</h2>
 
-1. Project need to set up all module from the begining:
+1. Project needs to set up all modules from the beginning:
 
 ```
-npm run install:ALl
+npm run install:All
 ```
 
 2. Run Front-End independently
