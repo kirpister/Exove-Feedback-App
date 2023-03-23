@@ -4,6 +4,18 @@
 
 <br/>
 
+<h2>App features</h2>
+
+- Authentication
+- Roles for Admin and User
+- Admin will send out assessment form to collect feedback for colleagues
+- Admin can send reminders to those who have yet to give feedback
+- Admin can see assessment form results and convert them into graphs than can be turned into printable PDFs
+- User will receive and fill out assessment forms about their coworkers
+- User will see request to give feedback once logged in
+
+
+<br/>
 <h2>Contributors</h2>
 
 | Name           | Github                                                    |
@@ -27,12 +39,12 @@
 
 <br/>
 
-<h2>Set up </h2>
+<h2>Set up</h2>
 
-1. Project need to set up all module from the begining:
+1. Project needs to set up all modules from the beginning:
 
 ```
-npm run install:ALl
+npm run install:All
 ```
 
 2. Run Front-End independently
@@ -61,4 +73,33 @@ npm run start:All
 ```
 npm run build:All
 
+```
+
+<br/>
+<h2>Feedback data types: </h2>
+
+
+1. question type:
+```ts
+type Question = {
+  question: string;
+  isFreeForm: boolean;
+}
+```
+2. Section types:
+```ts
+type Section = {
+  name: string;
+  description?: string;
+  questions: Question[]; 
+}
+```
+
+3. Feedback questions type:
+
+```ts
+
+type FeedBackQuestions = {
+  sections: Section[];
+}
 ```
