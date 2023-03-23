@@ -1,43 +1,27 @@
 {
-  "name": "exove-feedback-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.18",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "exove_project",
+  "description":"",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "install:All": "npm install && cd back-end && npm install && cd ../front-end && npm install",
+    "startfrontend": "cd front-end && npm start",
+    "startbackend": "cd back-end && npm start",
+    "backendDev": "cd back-end && npm run dev",
+    "startall": "concurrently \"npm run startfrontend\" \"npm run startbackend\"",
+    "buildall": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kirpister/Exove-Feedback-App.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TuanDao-0110/HangMan_Game/issues"
+  },
+  "dependencies": {
+  },
+  "homepage": "https://github.com/TuanDao-0110/HangMan_Game#readme"
 }
