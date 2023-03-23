@@ -22,7 +22,12 @@
     "url": "https://github.com/kirpister/Exove-Feedback-App.git/issues"
   },
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "@reduxjs/toolkit": "^1.9.3",
+    "concurrently": "^7.6.0",
+    "react-router-dom": "^6.9.0"
   },
-  "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README"
+  "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README",
+  "devDependencies": {
+    "@types/react": "^18.0.28"
+  }
 }

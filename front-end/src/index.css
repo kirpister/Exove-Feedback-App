@@ -1,13 +1,36 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  overscroll-behavior: none;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'Gelion Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url(../src/assets/font/GelionRegular.woff) format('woff');
+  }
+
+  @font-face {
+    font-family: 'Gelion Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../src/assets/font/GelionBold.woff) format('woff');
+    }
+
+:root {
+  --purple-color: #9b51e0;
+  --dark-grey-color: #212121;
+  --pale-pink-color: #f78da7;
+  --main-font: 'Gelion Regular', sans-serif;
+  --bold-font: 'Gelion Bold', sans-serif;
 }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--main-font);
+}
+
+
