@@ -8,7 +8,7 @@
     "start:front_end": "cd front-end && npm start",
     "start:back_end": "cd back-end && npm start",
     "backend:Dev": "cd back-end && npm run dev",
-    "start:All": "concurrently \"npm run startfrontend\" \"npm run startbackend\"",
+    "start:All": "concurrently \"npm run start:front_end\" \"npm run start:back_end\"",
     "build:All": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\""
   },
   "repository": {
