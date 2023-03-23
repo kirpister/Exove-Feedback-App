@@ -1,12 +1,12 @@
 <h1>Exove's Feedback Project</h1>
 
-<p>Feed back project ... more description....</p>
+<p>Application is being built as part of Business College Helsinki Full Stack Developer program. App was ordered by our partner company Exove to help HR to collect employee feedback for yearly performance appraisals with the help of some automation. </p>
 
 <br/>
 
-<h2>contributor</h2>
+<h2>Contributors</h2>
 
-| Name           | address                                                    |
+| Name           | Github                                                    |
 | -------------- | ---------------------------------------------------------- |
 | Jenni          | 🇫🇮 👉(<a href='https://github.com/kirpister'>link</a>)     |
 | Marina         | 🇷🇺 👉 (<a href='https://github.com/marinezh'>link</a>)     |
@@ -15,11 +15,11 @@
 
 <br/>
 
-<h2>Technology</h2>
+<h2>Technologies Used</h2>
 
 |                   |                            |
 | ----------------- | -------------------------- |
-| Front-End         | React_Typescript           |
+| Front-End         | React with Typescript      |
 | Back-End          | Node/Express in Typescript |
 | UI                | Bootstrap, Module Css      |
 | State managerment | Redux                      |
