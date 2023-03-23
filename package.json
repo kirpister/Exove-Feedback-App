@@ -9,9 +9,7 @@
     "start:back_end": "cd back-end && npm start",
     "backend:Dev": "cd back-end && npm run dev",
     "start:All": "concurrently \"npm run startfrontend\" \"npm run startbackend\"",
-    "build:All": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\"",
-    "lint": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --max-warnings=0 --fix"
+    "build:All": "concurrently \"cd back-end && npm run buildUI\" \"cd back-end && npm run tsc\""
   },
   "repository": {
     "type": "git",
