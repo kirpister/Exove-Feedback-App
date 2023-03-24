@@ -1,4 +1,4 @@
-import mongoose   from "mongoose"; 
+import {Schema}  from 'mongoose'; 
 
 export interface userModel { 
    personalDetail: { 
@@ -10,5 +10,5 @@ export interface userModel {
        department:string,
        password:string,
     }
-    feedBack:Array< mongoose.Schema.Types.ObjectId>
+    feedBack : Array<[Schema.Types.ObjectId, boolean]>
 }

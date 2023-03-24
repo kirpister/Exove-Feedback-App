@@ -1,8 +1,8 @@
-import express, { urlencoded } from "express";
-import cors from "cors";
-import morgan from "morgan";
-import bodyParser from "body-parser";
-import { welcomeRouter } from "./router/welcome";
+import express, { urlencoded } from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import { welcomeRouter } from './router/welcome';
 
 const app = express();
 
@@ -10,8 +10,8 @@ const app = express();
 app.use(urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
-app.use(morgan(":method :url :status :response-time ms "));
+app.use(morgan(':method :url :status :response-time ms '));
 
-app.use("/", welcomeRouter);
+app.use('/', welcomeRouter);
 
 export default app;

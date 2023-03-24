@@ -13,7 +13,7 @@
     // to enforce using type for object type definitions, can be type or interface 
     "@typescript-eslint/consistent-type-definitions": ["error","interface"],
     "quotes":[
-        "error","double"
+        "error","single"
     ],
     "indent": [
       "error",
