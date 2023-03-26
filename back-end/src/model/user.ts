@@ -1,5 +1,9 @@
 import  { model, Schema,  } from 'mongoose';
 import { userModel } from './types/user';
+const feedbackSchema = new Schema({
+  feedbackId: { type: Schema.Types.ObjectId, ref: 'feedback' ,required:true},
+  finished: { type: Boolean, default: false },
+});
 const userSchema: Schema = new Schema<userModel>({
   personalDetail:{
     username: { type: String, required: [true,'user name required'],unique:true},
@@ -10,21 +14,29 @@ const userSchema: Schema = new Schema<userModel>({
     department: { type: String, required: true },
     password: { type: String, required: true }
   },
-  feedBack: [{
-    feedbackId: { type: Schema.Types.ObjectId, ref: 'feedback' },
-    finished: { type: Boolean, default: false }
-  }]
-})
-
-userSchema.set('timestamps',true)
-userSchema.set('toJSON',{
-  transform:(document,returnedObject )=> { 
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id;
-    delete returnedObject.__v;
+  feedBack: {
+    type: [{
+      feedbackId: { type : String, ref: 'feedback' },
+      finished: { type: Boolean, default: false }
+    }],
+    default: []
   }
-})
+  // feedBack: {
+  //   type: [feedbackSchema],
+  //   default: []
+  // }
+ 
+},{ timestamps: true, toJSON: { virtuals: true } })
 
-const User  = model<userModel>('user',userSchema)
 
-export default User
+userSchema.set('toJSON', {
+  transform(_doc, ret) {
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
+
+const UserModel  = model<userModel>('user',userSchema)
+
+export default UserModel

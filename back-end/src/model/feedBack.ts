@@ -7,19 +7,24 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
     title: { type: String, required: true },
     questions:{type: Array <Question>, required:true}
   },
-  userList: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  answers: [{ 
-    user:{ type: Schema.Types.ObjectId,ref :['user','admin']},
-    details:[
-      {type: Array <Question>,required:true}
-    ],
-    finished:{type:'boolean', default:false}
+  userList: {type:[{ type: Schema.Types.ObjectId, ref:'user' }],required:true},
+  answers: {type:[{ 
+    user:{ type: Schema.Types.ObjectId,ref:'user'},
+    details:{type: Array <Question>},
+    finished:{type:'boolean', default:false},
   }],
-  createBy:{type:Schema.Types.ObjectId, ref: 'admin'}
-});
+  default:function () {
+    const users = this.userList.map((userId: Schema.Types.ObjectId) => ({
+      user: userId,
+      details: this.details.questions.map((q: Array<Question>) => ({ question: q, answer: '' })),
+      finished: false }));
+    return users;
+  }
+  },
+  createdBy:{type:Schema.Types.ObjectId, ref: 'user'},
 
+},{timestamps:true});
 
-feedbackSchema.set('timestamps',true)
 feedbackSchema.set('toJSON',{
   transform:(document,returnedObject )=> { 
     returnedObject.id = returnedObject._id.toString()
@@ -28,7 +33,7 @@ feedbackSchema.set('toJSON',{
   }
 })
 
-const feedBack = model<feedBackModel>('feedback',feedbackSchema)
+const FeedbackModel = model<feedBackModel>('feedback',feedbackSchema)
 
 
-export default feedBack
+export default FeedbackModel

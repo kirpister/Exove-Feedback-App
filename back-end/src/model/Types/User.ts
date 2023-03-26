@@ -1,5 +1,12 @@
 import {Schema}  from 'mongoose'; 
+export enum Role {
+    Admin = 'admin'
+}
 
+interface FeedBackObject { 
+feedbackId : Schema.Types.ObjectId,
+finished?: boolean
+}
 export interface userModel { 
    personalDetail: { 
        username:string,
@@ -10,5 +17,6 @@ export interface userModel {
        department:string,
        password:string,
     }
-    feedBack : Array<[Schema.Types.ObjectId, boolean]>
+    // feedBack : Array<Object<Schema.Types.ObjectId, boolean>>
+    feedBack : Array<FeedBackObject>
 }
