@@ -1,9 +1,5 @@
 import  { model, Schema,  } from 'mongoose';
 import { userModel } from './types/user';
-const feedbackSchema = new Schema({
-  feedbackId: { type: Schema.Types.ObjectId, ref: 'feedback' ,required:true},
-  finished: { type: Boolean, default: false },
-});
 const userSchema: Schema = new Schema<userModel>({
   personalDetail:{
     username: { type: String, required: [true,'user name required'],unique:true},
@@ -21,10 +17,7 @@ const userSchema: Schema = new Schema<userModel>({
     }],
     default: []
   }
-  // feedBack: {
-  //   type: [feedbackSchema],
-  //   default: []
-  // }
+
  
 },{ timestamps: true, toJSON: { virtuals: true } })
 

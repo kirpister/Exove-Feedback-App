@@ -7,8 +7,8 @@ interface FeedBackObject {
 feedbackId : Schema.Types.ObjectId,
 finished?: boolean
 }
-export interface userModel { 
-   personalDetail: { 
+interface personalDetailType{
+     personalDetail: { 
        username:string,
        name:string,
        email:string,
@@ -17,6 +17,7 @@ export interface userModel {
        department:string,
        password:string,
     }
-    // feedBack : Array<Object<Schema.Types.ObjectId, boolean>>
+}
+export interface userModel  extends personalDetailType{ 
     feedBack : Array<FeedBackObject>
 }

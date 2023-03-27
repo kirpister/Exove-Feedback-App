@@ -15,14 +15,14 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
   }],
   default:function () {
     const users = this.userList.map((userId: Schema.Types.ObjectId) => ({
+      _id: userId,
       user: userId,
-      details: this.details.questions.map((q: Array<Question>) => ({ question: q, answer: '' })),
+      details: this.details.questions.map((q: Question) => ({ question: q, answer: [] })),
       finished: false }));
     return users;
   }
   },
   createdBy:{type:Schema.Types.ObjectId, ref: 'user'},
-
 },{timestamps:true});
 
 feedbackSchema.set('toJSON',{

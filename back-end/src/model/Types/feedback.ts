@@ -1,9 +1,10 @@
 import {Schema} from 'mongoose';
 import { Question } from './question';
 
-export interface AnswerType extends Question { 
+export interface AnswerType  {
 user:Schema.Types.ObjectId,
 finished:boolean
+details:Array< {question: Question, answer: Array<string>}>
 }
 
 

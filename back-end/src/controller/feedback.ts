@@ -1,11 +1,9 @@
 import { RequestHandler } from 'express';
 import { Schema } from 'mongoose';
-import { finished } from 'stream';
 import FeedbackModel from '../model/feedBack';
 import { AnswerType } from '../model/types/feedback';
 import { Question, QuestionType, Range } from '../model/types/question';
 import UserModel from '../model/user';
-import { feedBackRouter } from '../router/feedback';
 const questionList: Question[] = [  
   {    
     order: 1,    
@@ -35,7 +33,7 @@ const questionList: Question[] = [
   }
 ];
 
-const userList = ['641eea147069537347727491', ];
+const userList = ['641eea147069537347727491', '641eea147069537347727492'];
 
 const createdBy = '641eeaf0c608c18d17a0f28a';
 
@@ -44,6 +42,8 @@ export const getFeedbackController :RequestHandler = async(req,res, next)=> {
   const feedbackId = req.query.feedbackId;
   try {
     const feedBack = await FeedbackModel.findOne({_id:feedbackId})
+  .populate('answers.user',{personalDetail:{username:1,email:1,role:1,department:1}})
+  .populate('createdBy',{personalDetail:{username:1,email:1,role:1,department:1}})
     if (feedBack ) { 
       return res.status(200).json({feedBack})
     }
@@ -90,7 +90,7 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
     await removeFeedbackFromUsers(feedback.id , userListAsString);
     await feedback.deleteOne()
     console.log(
-        await FeedbackModel.findById({_id:feedbackId})
+      await FeedbackModel.findById({_id:feedbackId})
     )
     if (feedback) return res.status(201).json({msg:'delete',feedback})
   } catch (error) {

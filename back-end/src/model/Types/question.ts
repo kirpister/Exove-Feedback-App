@@ -16,6 +16,6 @@ export interface Question {
 order : number,
 title:string,
 type: QuestionType,
-result?: Range | string | Array<string>
+result?:  Array<string> // in case of selection 
 required : boolean
 }

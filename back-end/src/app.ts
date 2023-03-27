@@ -6,6 +6,7 @@ import { welcomeRouter } from './router/welcome';
 import { authenRouter } from './router/authen';
 import { unknownEndpoint } from './middleware/unknownEndpoint';
 import { feedBackRouter } from './router/feedback';
+import { userRouter } from './router/user';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(morgan(':method :url :status :response-time ms '));
 app.use('/', welcomeRouter);
 app.use('/',authenRouter)
 app.use('/feedback',feedBackRouter)
+app.use('/user',userRouter)
 
 
 app.use(unknownEndpoint)
