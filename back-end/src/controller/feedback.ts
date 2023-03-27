@@ -4,36 +4,6 @@ import FeedbackModel from '../model/feedBack';
 import { AnswerType } from '../model/types/feedback';
 import { Question, QuestionType, Range } from '../model/types/question';
 import UserModel from '../model/user';
-const questionList: Question[] = [  
-  {    
-    order: 1,    
-    title: 'What is your favorite color?',   
-    type: QuestionType.selection,    
-    result: ['Red', 'Green', 'Blue'],
-    required: true
-  },
-  {
-    order: 2,
-    title: 'How often do you exercise?',
-    type: QuestionType.range,
-    // result: Range.one,
-    required: true
-  },
-  {
-    order: 3,
-    title: 'What are your favorite hobbies?',
-    type: QuestionType.freeString,
-    required: true
-  },
-  {
-    order: 4,
-    title: 'What is your favorite book?',
-    type: QuestionType.freeString,
-    required: false
-  }
-];
-
-const userList = ['641eea147069537347727491', '641eea147069537347727492'];
 
 const createdBy = '641eeaf0c608c18d17a0f28a';
 
@@ -42,8 +12,8 @@ export const getFeedbackController :RequestHandler = async(req,res, next)=> {
   const feedbackId = req.query.feedbackId;
   try {
     const feedBack = await FeedbackModel.findOne({_id:feedbackId})
-  .populate('answers.user',{personalDetail:{username:1,email:1,role:1,department:1}})
-  .populate('createdBy',{personalDetail:{username:1,email:1,role:1,department:1}})
+      .populate('answers.user',{personalDetail:{username:1,email:1,role:1,department:1}})
+      .populate('createdBy',{personalDetail:{username:1,email:1,role:1,department:1}})
     if (feedBack ) { 
       return res.status(200).json({feedBack})
     }
@@ -53,15 +23,22 @@ export const getFeedbackController :RequestHandler = async(req,res, next)=> {
 }
 
 export const createFeedbackController :RequestHandler = async(req,res,next)=> { 
-//   const {questionList,title , userList,createdBy}  = req.body
-//   const answers : AnswerType =[]
+  const {details , userList}  = req.body
+  // 1. get user token 
+  // const userIdToken = req.body.userId
+  // if ( userIdToken !== req.body.userId ) { 
+  // return next(new Error())
+  // }
+  // const createBy = userId
+
+  // 2. create new feedback:
   try {
     const newFeedback = new FeedbackModel({
-      details : {title:'new',questions:questionList},
+      // details : {title,questions},
+      details,
       createdBy,
       userList 
     })
-    await newFeedback.save()
     const feedbackId = newFeedback.id as Schema.Types.ObjectId 
     for (const userId of userList) {
       const user = await UserModel.findOne({ _id: userId },);
@@ -69,6 +46,8 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
       //   user.feedBack.concat(feedbackId,finished:true)
       user.feedBack.push({feedbackId})
       await user.save()
+      await newFeedback.save()
+
     }
     return res.status(201).json({msg:'created', newFeedback}) 
   } catch (error) {
