@@ -7,6 +7,7 @@ import { authenRouter } from './router/authen';
 import { unknownEndpoint } from './middleware/unknownEndpoint';
 import { feedBackRouter } from './router/feedback';
 import { userRouter } from './router/user';
+import { errorHandler } from './middleware/errorHandler';
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use('/',authenRouter)
 app.use('/feedback',feedBackRouter)
 app.use('/user',userRouter)
 
-
+app.use(errorHandler)
 app.use(unknownEndpoint)
 
 export default app;

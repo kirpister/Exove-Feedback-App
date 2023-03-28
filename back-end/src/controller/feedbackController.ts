@@ -1,10 +1,9 @@
-import { RequestHandler } from 'express';
+import { NextFunction, RequestHandler } from 'express';
 import { Schema } from 'mongoose';
-import FeedbackModel from '../model/feedBack';
-import { AnswerType } from '../model/types/feedback';
-import { Question, QuestionType, Range } from '../model/types/question';
-import UserModel from '../model/user';
-
+import FeedbackModel from '../model/feedBackModel';
+import UserModel from '../model/userModel';
+import { createErrMessage, createSuccessMessage } from '../utils/message';
+import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
 const createdBy = '641eeaf0c608c18d17a0f28a';
 
 
@@ -14,9 +13,11 @@ export const getFeedbackController :RequestHandler = async(req,res, next)=> {
     const feedBack = await FeedbackModel.findOne({_id:feedbackId})
       .populate('answers.user',{personalDetail:{username:1,email:1,role:1,department:1}})
       .populate('createdBy',{personalDetail:{username:1,email:1,role:1,department:1}})
-    if (feedBack ) { 
-      return res.status(200).json({feedBack})
+    if (!feedBack ) { 
+      return  createErrMessage({msg:`feedback Id not found ${feedbackId}`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
+    // return res.status(200).json({feedBack})
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,feedBack)
   } catch (error) {
     next(error)
   }
@@ -39,17 +40,17 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
       createdBy,
       userList 
     })
-    const feedbackId = newFeedback.id as Schema.Types.ObjectId 
+    const feedbackId = newFeedback.id 
     for (const userId of userList) {
       const user = await UserModel.findOne({ _id: userId },);
-      if (!user) throw new Error(`User with ID ${userId} not found`);
-      //   user.feedBack.concat(feedbackId,finished:true)
+      // if (!user) throw new Error(`User with ID ${userId} not found`);
+      if (!user)  return  createErrMessage({msg:`User with ID ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
       user.feedBack.push({feedbackId})
       await user.save()
       await newFeedback.save()
-
     }
-    return res.status(201).json({msg:'created', newFeedback}) 
+    // return res.status(201).json({msg:'created', newFeedback}) 
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,newFeedback)
   } catch (error) {
     return next(error)
   }
@@ -62,31 +63,27 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
   try {
     const feedback = await FeedbackModel.findOne({_id : feedbackId})
     if (!feedback) {
-      return next(new Error('not found'));
+      return createErrMessage({msg:`feedback ${feedbackId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
     const userListAsString = feedback.userList.map(id => id.toString());
 
-    await removeFeedbackFromUsers(feedback.id , userListAsString);
+    await removeFeedbackFromUsers(feedback.id , userListAsString,next);
     await feedback.deleteOne()
-    console.log(
-      await FeedbackModel.findById({_id:feedbackId})
-    )
-    if (feedback) return res.status(201).json({msg:'delete',feedback})
+    // if (feedback) return res.status(201).json({msg:'delete',feedback})
+    if (feedback) return  createSuccessMessage({msg:'success delete',status:StatusCode_Success.REQUEST_CREATED_NO_CONTENT},res,)
   } catch (error) {
     next(error)
   }
 }
 
 
-async function removeFeedbackFromUsers(feedbackId:Schema.Types.ObjectId, userList: string[]) {
+async function removeFeedbackFromUsers(feedbackId:Schema.Types.ObjectId, userList: string[],next:NextFunction) {
   // Loop through each user and remove the feedback from their list
   for (const userId of userList) {
     const user = await UserModel.findOne({ _id: userId });
     if (!user) {
-      console.error(`User with ID ${userId} not found`);
-      continue;
+      return createErrMessage({msg:`User with ID ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
-    console.log(user.feedBack)
     user.feedBack = user.feedBack.filter(i => i.feedbackId !== feedbackId);
     await user.save();
   }

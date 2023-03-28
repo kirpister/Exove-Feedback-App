@@ -1,7 +1,7 @@
 import {Schema} from 'mongoose';
 import { Question } from './question';
 
-export interface AnswerType  {
+export interface FeedbackAnswerType  {
 user:Schema.Types.ObjectId,
 finished:boolean
 details:Array< {question: Question, answer: Array<string>}>
@@ -14,7 +14,7 @@ export interface feedBackModel {
         questions: Array <Question>
     },
     userList : Array <Schema.Types.ObjectId>,
-    answers: Array<AnswerType>,
+    answers: Array<FeedbackAnswerType>,
     createdBy : Schema.Types.ObjectId,
 }
 

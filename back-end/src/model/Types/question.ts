@@ -9,7 +9,7 @@ five = 5
 export enum QuestionType { 
     selection = 'selection',
     range= 'range',
-    freeString = 'free'
+    freeString = 'freeString'
 }
 
 export interface Question { 
