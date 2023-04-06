@@ -10,14 +10,14 @@ import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
 
 
 export const getUser:RequestHandler  =async (req,res,next) => {
-  const userId ='6420950f17ceb74d959d6ab0'
+  const userId ='641eea147069537347727491'
   try {
     const user  = await UserModel.findOne({_id:userId})
     if ( !user) { 
       return  createErrMessage({
         msg: 'user fail', status: StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
-    return createSuccessMessage({msg:`get user ${user.id} success`,status: StatusCode_Success.NEW_DATA_CREATED},res)
+    return createSuccessMessage({msg:`get user ${user.id} success`,status: StatusCode_Success.NEW_DATA_CREATED},res,user)
   } catch (error) {
     next(error)
   }
