@@ -28,7 +28,10 @@ export const registerController: RequestHandler =async (req, res, next) => {
     return createSuccessMessage({msg:'ok',status:StatusCode_Success.NEW_DATA_CREATED},res,{newUser,token})
   } catch (error) {
     console.log(error)
-    next(error)
+    if (error instanceof Error) {
+
+      next(error)
+    }
   }
 }
 

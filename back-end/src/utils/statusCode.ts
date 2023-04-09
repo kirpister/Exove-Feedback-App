@@ -9,5 +9,4 @@ export enum StatusCode_Success {
 NEW_DATA_CREATED = 201,
 REQUEST_CREATED_NO_CONTENT = 204,
 REQUEST_CREATED = 200
-
 }
