@@ -8,6 +8,7 @@ import { unknownEndpoint } from './middleware/unknownEndpoint';
 import { feedBackRouter } from './router/feedback';
 import { userRouter } from './router/user';
 import { errorHandler } from './middleware/errorHandler';
+import { adminRouter } from './router/admin';
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/', welcomeRouter);
 app.use('/',authenRouter)
 app.use('/feedback',feedBackRouter)
 app.use('/user',userRouter)
+app.use('/admin',adminRouter)
 
 app.use(errorHandler)
 app.use(unknownEndpoint)

@@ -26,10 +26,10 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
 },{timestamps:true});
 
 feedbackSchema.set('toJSON',{
-  transform:(document,returnedObject )=> { 
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id;
-    delete returnedObject.__v;
+  transform:(document,ret )=> { 
+    ret.id = ret._id.toString()
+    delete ret._id;
+    delete ret.__v;
   }
 })
 

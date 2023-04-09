@@ -3,13 +3,26 @@ import { userModel } from './types/user';
 const userSchema: Schema = new Schema<userModel>({
   personalDetail:{
     username: { type: String, required: [true,'user name required'],unique:true},
-    name: { type: String, required: true },
+    firstName: { type: String, required: true },
+    surName: { type: String, required: true },
     email: { type: String, required: true ,unique:true},
     phone: { type: String, required: true ,unique:true},
-    role: { type: String, required: true },
-    department: { type: String, required: true },
     password: { type: String, required: true }
   },
+  personal:{
+    hobbies:{type:[{type:String,unique:true}]},
+    horrific:{type:[{type:String}]},
+    birthDate:{type:String},
+    avatar:{type:String},
+    gender:{type:String},
+  },
+  work:{
+    departments:{type:[{type:String}]},
+    roles:{type:[{type:String}]},
+    startDate:{type:String},
+    projects:{type:[{type:String}]}
+  },
+  selfFeedbackRequests:{type:[{feedbackId:{type:Schema.Types.ObjectId,required:true,ref:'userRequestLit'}}]},
   feedBack: {
     type: [{
       feedbackId: { type : String, ref: 'feedback' },
@@ -17,13 +30,12 @@ const userSchema: Schema = new Schema<userModel>({
     }],
     default: []
   }
-
- 
 },{ timestamps: true, toJSON: { virtuals: true } })
 
 
 userSchema.set('toJSON', {
   transform(_doc, ret) {
+    ret.id = ret._id.toString()
     delete ret._id;
     delete ret.__v;
   },

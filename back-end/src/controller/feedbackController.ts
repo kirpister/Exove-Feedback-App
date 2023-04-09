@@ -4,6 +4,7 @@ import FeedbackModel from '../model/feedBackModel';
 import UserModel from '../model/userModel';
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
+import userRequestListModel from '../model/userListModel'; 
 const createdBy = '641eeaf0c608c18d17a0f28a';
 
 
@@ -40,12 +41,14 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
       createdBy,
       userList 
     })
+    if ( !newFeedback) { 
+      return createErrMessage({msg:'fail to create new feedback',status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
+    }
     const feedbackId = newFeedback.id 
     for (const userId of userList) {
       const user = await UserModel.findOne({ _id: userId },);
-      // if (!user) throw new Error(`User with ID ${userId} not found`);
       if (!user)  return  createErrMessage({msg:`User with ID ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
-      user.feedBack.push({feedbackId})
+      user.feedBack.push({feedbackId,finished:false})
       await user.save()
       await newFeedback.save()
     }
@@ -76,6 +79,15 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
   }
 }
 
+
+export const getFeedbackRequestController : RequestHandler = async (req,res,next)=> { 
+  try {
+    const requestFeedBackList = await userRequestListModel.find()
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,requestFeedBackList)
+  } catch (error) {
+    next(error)
+  }
+}
 
 async function removeFeedbackFromUsers(feedbackId:Schema.Types.ObjectId, userList: string[],next:NextFunction) {
   // Loop through each user and remove the feedback from their list

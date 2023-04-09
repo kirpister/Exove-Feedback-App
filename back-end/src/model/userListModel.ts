@@ -5,16 +5,16 @@ import { userListModel } from './types/userlist'
 const userListSchema:Schema = new Schema <userListModel>({
   requestUserId:{type:Schema.Types.ObjectId,required:true,ref:'user'},
   createFeedbackId:{type:Schema.Types.ObjectId,default:null,ref:'feedback'},
-  opened:{type:Boolean,required:true},
+  opened:{type:Boolean,required:true,default:false},
   userList: {type:[{ type: Schema.Types.ObjectId, ref:'user' }],required:true},
 },{timestamps:true})
 
 
 userListSchema.set('toJSON',{
-  transform:(document,returnedObject )=> { 
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id;
-    delete returnedObject.__v;
+  transform:(document,ret )=> { 
+    ret.id = ret._id.toString()
+    delete ret._id;
+    delete ret.__v;
   }
 })
 

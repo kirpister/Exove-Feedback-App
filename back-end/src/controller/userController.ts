@@ -6,6 +6,7 @@ import { userModel } from '../model/types/user';
 import UserModel from '../model/userModel'
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
+import userRequestListModel from '../model/userListModel';
 
 
 
@@ -23,7 +24,20 @@ export const getUser:RequestHandler  =async (req,res,next) => {
   }
     
 }
-
+export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
+  const requestUserId = '641eea147069537347727491'
+  // const listOfUser = [{}]
+  const userList =['641eea147069537347727493','641eea147069537347727493']
+  try {
+    const newRequest = {requestUserId,userList}
+    const user = await userRequestListModel.create({...newRequest})
+    user.save()
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.NEW_DATA_CREATED},res,user)
+  } catch (error) {
+    console.error(error)
+    next(error)
+  }
+}
 
 export const updateUserInfo:RequestHandler =async (req,res,next) => {
   // const personalDetail = req.body 
@@ -39,7 +53,7 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
       return createErrMessage({ msg: `no user with id: ${id}`, status: StatusCode_Err.RESOURCE_NOT_FOUND},next)   
     }
     else if ( user as userModel){
-      user.personalDetail.name = 'test'
+      user.personalDetail.firstName = 'test'
     }
     await user?.save()
     return createSuccessMessage({msg:`new user ${user.id} have been updated`,status:StatusCode_Success.NEW_DATA_CREATED},res)
