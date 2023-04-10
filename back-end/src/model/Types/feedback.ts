@@ -14,7 +14,7 @@ export interface feedBackModel {
         title: string,
         questions: Array <Question>
     },
-    requestedBy: Schema.Types.ObjectId,
+    requestedListBy: Schema.Types.ObjectId | undefined,
     userList : Array <Schema.Types.ObjectId>,
     answers: Array<FeedbackAnswerType>,
     createdBy : Schema.Types.ObjectId,

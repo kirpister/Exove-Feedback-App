@@ -35,4 +35,3 @@ export const registerController: RequestHandler =async (req, res, next) => {
   }
 }
 
-

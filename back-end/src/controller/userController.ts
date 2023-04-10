@@ -6,14 +6,17 @@ import { userModel } from '../model/types/user';
 import UserModel from '../model/userModel'
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
-import userRequestListModel from '../model/userListModel';
+import UserRequestListModel from '../model/userListModel';
 
 
 
 export const getUser:RequestHandler  =async (req,res,next) => {
-  const userId ='641eea147069537347727491'
+  // const userId = '643354a954f04e2f37eb8fd7'
+  // const  userId = req.query.userId 
+  console.log(req.query.userId)
   try {
-    const user  = await UserModel.findOne({_id:userId})
+    const user  = await UserModel.findOne({_id:req.query.userId})
+      .populate('selfFeedbackRequests.requestFeedbackId',)
     if ( !user) { 
       return  createErrMessage({
         msg: 'user fail', status: StatusCode_Err.RESOURCE_NOT_FOUND},next)
@@ -25,14 +28,26 @@ export const getUser:RequestHandler  =async (req,res,next) => {
     
 }
 export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
-  const requestUserId = '641eea147069537347727491'
+  const {userId:requestUserId,userListId} = req.body
+  // const requestUserId = '643354a954f04e2f37eb8fd7'
   // const listOfUser = [{}]
-  const userList =['641eea147069537347727493','641eea147069537347727493']
+  // const userListId =['643354a954f04e2f37eb8fd9','643354a954f04e2f37eb8fdb','643354a954f04e2f37eb8fdd','643354a954f04e2f37eb8fdf','643354a954f04e2f37eb8fe1']
   try {
-    const newRequest = {requestUserId,userList}
-    const user = await userRequestListModel.create({...newRequest})
+    // 1. check user id is correct
+    const user = await UserModel.findOne({_id :requestUserId})
+    if ( !user) return createErrMessage({msg:`user id ${requestUserId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+    // 2. check is all user from list exist ? 
+    for (const userId of userListId){
+      const user =await UserModel.findOne({_id:userId})
+      if ( !user) return createErrMessage({msg:`user id ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+    }
+    // 3. add new feedback request to user
+    const newRequest = {requestUserId,userList:userListId}
+    const newRequestFeedbackUser = await UserRequestListModel.create({...newRequest})
+    newRequestFeedbackUser.save()
+    user.selfFeedbackRequests.push({requestFeedbackId:newRequestFeedbackUser.id})
     user.save()
-    return createSuccessMessage({msg:'success',status:StatusCode_Success.NEW_DATA_CREATED},res,user)
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.NEW_DATA_CREATED},res,newRequestFeedbackUser)
   } catch (error) {
     console.error(error)
     next(error)
@@ -41,7 +56,7 @@ export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
 
 export const updateUserInfo:RequestHandler =async (req,res,next) => {
   // const personalDetail = req.body 
-  const id = '6420950f17ceb74d959d6ab0'
+  const id = '64334d1a79983fbe5eff96cb'
   // const userIdToken = req.body.userId
   // if ( userIdToken !== req.body.userId ) { 
   // return next(new Error())
@@ -66,9 +81,8 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
 
 export const updateUserFeedback: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  const userId = '641eea147069537347727491';
+  const userId = '643354a954f04e2f37eb8fd9';
   const { answers } = req.body as ListAnswerType;
-
   try {
     // 1. find the feedback
     const feedback = await FeedbackModel.findById(feedbackId);
@@ -93,7 +107,6 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
       const questionIndex = feedback.answers[userIndex].details.findIndex(
         (q) => q.question.order === userAnswer.order
       );
-
       if (questionIndex === -1) {
         // return res.status(400).json({ error: `Invalid answer order: ${userAnswer.order}` });
         return createErrMessage({msg:`Invalid answer order: ${userAnswer.order}`,status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
@@ -115,6 +128,9 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
       case QuestionType.range:
         if (userAnswer.answer.length === 1) {
           if (userAnswer.answer[0] in Range) {
+            if ( userAnswer.answer.length > 1){
+              return createErrMessage({msg:'Range answer must have 1 answer ',status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
+            }
             feedback.answers[userIndex].details[questionIndex].answer= userAnswer.answer
           } else {
             return createErrMessage({msg:'value should contain 1 value from 1 - 5',status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
@@ -128,6 +144,7 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
         return createErrMessage({msg:`Unknown question type: ${question.type}`,status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
       }
     }
+
     feedback.answers[userIndex].finished = true;
     // 5. find user and update feedback
     const user = await UserModel.findOne({ _id: userId });
@@ -144,6 +161,8 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
     return createSuccessMessage({msg:'Answer updated successfully',status: StatusCode_Success.NEW_DATA_CREATED},res,feedback)
 
   } catch (error) {
+    console.log('error')
+    console.log(error)
     next(error);
   }
 };

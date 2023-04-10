@@ -4,7 +4,7 @@ import { userListModel } from './types/userlist'
 
 const userListSchema:Schema = new Schema <userListModel>({
   requestUserId:{type:Schema.Types.ObjectId,required:true,ref:'user'},
-  createFeedbackId:{type:Schema.Types.ObjectId,default:null,ref:'feedback'},
+  createFeedbackId:{type:Schema.Types.ObjectId,default:undefined,ref:'feedback'},
   opened:{type:Boolean,required:true,default:false},
   userList: {type:[{ type: Schema.Types.ObjectId, ref:'user' }],required:true},
 },{timestamps:true})
@@ -18,5 +18,5 @@ userListSchema.set('toJSON',{
   }
 })
 
-const userRequestListModel  = model<userListModel>('userRequestLit',userListSchema)
-export default userRequestListModel
+const UserRequestListModel  = model<userListModel>('userRequestLit',userListSchema)
+export default UserRequestListModel

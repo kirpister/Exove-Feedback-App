@@ -22,13 +22,19 @@ const userSchema: Schema = new Schema<userModel>({
     startDate:{type:String},
     projects:{type:[{type:String}]}
   },
-  selfFeedbackRequests:{type:[{feedbackId:{type:Schema.Types.ObjectId,required:true,ref:'userRequestLit'}}]},
+  selfFeedbackRequests:{
+    type:[{
+      requestFeedbackId:{type:Schema.Types.ObjectId,required:true,ref:'userRequestLit'}
+    }],
+    default:[],_id:false},
   feedBack: {
     type: [{
       feedbackId: { type : String, ref: 'feedback' },
       finished: { type: Boolean, default: false }
     }],
     default: []
+    ,
+    _id:false
   }
 },{ timestamps: true, toJSON: { virtuals: true } })
 

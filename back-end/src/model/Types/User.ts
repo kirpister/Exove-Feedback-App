@@ -5,10 +5,10 @@ export enum Role {
 
 interface FeedBackObject { 
 feedbackId : Schema.Types.ObjectId,
-finished: boolean
+finished?: boolean
 }
 interface SelfFeedbackRequest { 
-    feedbackId : Schema.Types.ObjectId,
+    requestFeedbackId : Schema.Types.ObjectId,
 }
 interface personalDetailType{
     personalDetail: { 
@@ -32,7 +32,7 @@ interface personalDetailType{
         startDate:string,
         projects:Array<string>
     }
-    selfFeedbackRequests:Array<SelfFeedbackRequest> | null
+    selfFeedbackRequests:Array<SelfFeedbackRequest>
 }
 export interface userModel  extends personalDetailType{ 
     feedBack : Array<FeedBackObject>
