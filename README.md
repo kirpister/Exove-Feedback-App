@@ -1,12 +1,30 @@
 <h1>Exove's Feedback Project</h1>
 
-<p>Feed back project ... more description....</p>
+<p>Application is being built as part of Business College Helsinki Full Stack Developer program. App was ordered by our partner company Exove to help HR to collect employee feedback for yearly performance appraisals with the help of some automation. </p>
 
 <br/>
 
-<h2>contributor</h2>
+<h2>App features</h2>
 
-| Name           | address                                                    |
+- Authentication
+- Roles for Admin and User
+- Admin will send out assessment form to collect feedback for colleagues
+- Admin can send reminders to those who have yet to give feedback
+- Admin can see assessment form results and convert them into graphs than can be turned into printable PDFs
+- User will receive and fill out assessment forms about their coworkers
+- User will see request to give feedback once logged in
+
+- Admin can see who have not sent feedbacks yet.
+- Admin can see all information in a table.
+- Admin can sort information in the table for convinience. 
+- Each user should have 7 feedbacks , 5 from colleagues , one from Competence Manager, one form Project Manager.
+- User can choose from the form for whom feedback will be given (colleague/subordinate/CM/PM)
+
+
+<br/>
+<h2>Contributors</h2>
+
+| Name           | Github                                                    |
 | -------------- | ---------------------------------------------------------- |
 | Jenni          | 🇫🇮 👉(<a href='https://github.com/kirpister'>link</a>)     |
 | Marina         | 🇷🇺 👉 (<a href='https://github.com/marinezh'>link</a>)     |
@@ -15,11 +33,11 @@
 
 <br/>
 
-<h2>Technology</h2>
+<h2>Technologies Used</h2>
 
 |                   |                            |
 | ----------------- | -------------------------- |
-| Front-End         | React_Typescript           |
+| Front-End         | React with Typescript      |
 | Back-End          | Node/Express in Typescript |
 | UI                | Bootstrap, Module Css      |
 | State managerment | Redux                      |
@@ -27,12 +45,12 @@
 
 <br/>
 
-<h2>Set up </h2>
+<h2>Set up</h2>
 
-1. Project need to set up all module from the begining:
+1. Project needs to set up all modules from the beginning:
 
 ```
-npm run install:ALl
+npm run install:All
 ```
 
 2. Run Front-End independently
@@ -61,4 +79,33 @@ npm run start:All
 ```
 npm run build:All
 
+```
+
+<br/>
+<h2>Feedback data types: </h2>
+
+
+1. question type:
+```ts
+type Question = {
+  question: string;
+  isFreeForm: boolean;
+}
+```
+2. Section types:
+```ts
+type Section = {
+  name: string;
+  description?: string;
+  questions: Question[]; 
+}
+```
+
+3. Feedback questions type:
+
+```ts
+
+type FeedBackQuestions = {
+  sections: Section[];
+}
 ```
