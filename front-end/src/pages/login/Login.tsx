@@ -1,12 +1,12 @@
 import React from 'react';
 import './login.css';
-import circle from '../../../assets/cirle-half.png';
+import circle from '../../assets/circle-half.png';
 
 const Login: React.FC = () => {
 
     return (
         <div className="wrapper">
-        <div><img className="circle" src={circle} alt="cirlce"/></div>  
+        <div><img className="circle" src={circle} alt="circle"/></div>  
     
         <div className="login-form">
         <h2>LOGIN</h2>
@@ -29,4 +29,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default { Login };
+export default Login;
