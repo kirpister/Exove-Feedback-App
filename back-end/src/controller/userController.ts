@@ -16,7 +16,7 @@ export const getUser:RequestHandler  =async (req,res,next) => {
   console.log(req.query.userId)
   try {
     const user  = await UserModel.findOne({_id:req.query.userId})
-      .populate('selfFeedbackRequests.requestFeedbackId',)
+      .populate('selfFeedbackRequests.requestFeedbackId',{createFeedbackId:1,userList:1,opened:1})
     if ( !user) { 
       return  createErrMessage({
         msg: 'user fail', status: StatusCode_Err.RESOURCE_NOT_FOUND},next)

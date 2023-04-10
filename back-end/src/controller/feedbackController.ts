@@ -96,7 +96,8 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
     if ( feedback.requestedListBy) { 
       const requestedUserList = await UserRequestListModel.findOne({_id: feedback.requestedListBy})
       if ( requestedUserList){
-        requestedUserList.createFeedbackId = undefined
+        requestedUserList.createFeedbackId = null
+        requestedUserList.opened = false
         await requestedUserList.save()
       }
       else { 
@@ -115,7 +116,8 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
 export const getFeedbackRequestController : RequestHandler = async (req,res,next)=> { 
   try {
     const requestFeedBackList = await UserRequestListModel.find()
-      .populate('requestedBy',{})
+      .populate('requestUserId',{personalDetail:1})
+      .populate('userList',{personalDetail:1})
     return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,requestFeedBackList)
   } catch (error) {
     next(error)
