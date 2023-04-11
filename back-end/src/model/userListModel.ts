@@ -4,7 +4,7 @@ import { userListModel } from './types/userlist'
 
 const userListSchema:Schema = new Schema <userListModel>({
   requestUserId:{type:Schema.Types.ObjectId,required:true,ref:'user'},
-  createFeedbackId:{type:Schema.Types.ObjectId,default:undefined,ref:'feedback'},
+  createFeedbackId:{type:Schema.Types.ObjectId,default:null,ref:'feedback'},
   opened:{type:Boolean,required:true,default:false},
   userList: {type:[{ type: Schema.Types.ObjectId, ref:'user' }],required:true},
 },{timestamps:true})

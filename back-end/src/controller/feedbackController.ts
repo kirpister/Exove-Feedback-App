@@ -11,7 +11,7 @@ export const getFeedbackController :RequestHandler = async(req,res, next)=> {
   const feedbackId = req.query.feedbackId;
   try {
     const feedBack = await FeedbackModel.findOne({_id:feedbackId})
-      .populate('answers.user',{personalDetail:{username:1,email:1,role:1,department:1}})
+      .populate('answers.user',{personalDetail:1})
       .populate('createdBy',{personalDetail:{username:1,email:1,role:1,department:1}})
     if (!feedBack ) { 
       return  createErrMessage({msg:`feedback Id not found ${feedbackId}`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
@@ -24,7 +24,7 @@ export const getFeedbackController :RequestHandler = async(req,res, next)=> {
 }
 
 export const createFeedbackController :RequestHandler = async(req,res,next)=> { 
-  const {details , userList,requestedListBy}  = req.body
+  const {details , userList,requestedListBy,createdBy}  = req.body
   // 1. get user token 
   // const userIdToken = req.body.userId
   // if ( userIdToken !== req.body.userId ) { 
@@ -116,8 +116,8 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
 export const getFeedbackRequestController : RequestHandler = async (req,res,next)=> { 
   try {
     const requestFeedBackList = await UserRequestListModel.find()
-      .populate('requestUserId',{personalDetail:1})
-      .populate('userList',{personalDetail:1})
+    // .populate('requestUserId',{personalDetail:1})
+    // .populate('userList',{personalDetail:3})
     return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,requestFeedBackList)
   } catch (error) {
     next(error)

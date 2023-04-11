@@ -16,7 +16,7 @@ export const getUser:RequestHandler  =async (req,res,next) => {
   console.log(req.query.userId)
   try {
     const user  = await UserModel.findOne({_id:req.query.userId})
-      .populate('selfFeedbackRequests.requestFeedbackId',{createFeedbackId:1,userList:1,opened:1})
+      .populate('selfFeedbackRequests.requestFeedbackId',{opened:1})
     if ( !user) { 
       return  createErrMessage({
         msg: 'user fail', status: StatusCode_Err.RESOURCE_NOT_FOUND},next)
@@ -26,32 +26,6 @@ export const getUser:RequestHandler  =async (req,res,next) => {
     next(error)
   }
     
-}
-export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
-  const {userId:requestUserId,userListId} = req.body
-  // const requestUserId = '643354a954f04e2f37eb8fd7'
-  // const listOfUser = [{}]
-  // const userListId =['643354a954f04e2f37eb8fd9','643354a954f04e2f37eb8fdb','643354a954f04e2f37eb8fdd','643354a954f04e2f37eb8fdf','643354a954f04e2f37eb8fe1']
-  try {
-    // 1. check user id is correct
-    const user = await UserModel.findOne({_id :requestUserId})
-    if ( !user) return createErrMessage({msg:`user id ${requestUserId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
-    // 2. check is all user from list exist ? 
-    for (const userId of userListId){
-      const user =await UserModel.findOne({_id:userId})
-      if ( !user) return createErrMessage({msg:`user id ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
-    }
-    // 3. add new feedback request to user
-    const newRequest = {requestUserId,userList:userListId}
-    const newRequestFeedbackUser = await UserRequestListModel.create({...newRequest})
-    newRequestFeedbackUser.save()
-    user.selfFeedbackRequests.push({requestFeedbackId:newRequestFeedbackUser.id})
-    user.save()
-    return createSuccessMessage({msg:'success',status:StatusCode_Success.NEW_DATA_CREATED},res,newRequestFeedbackUser)
-  } catch (error) {
-    console.error(error)
-    next(error)
-  }
 }
 
 export const updateUserInfo:RequestHandler =async (req,res,next) => {
@@ -81,7 +55,7 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
 
 export const updateUserFeedback: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  const userId = '643354a954f04e2f37eb8fd9';
+  const userId = '643354a954f04e2f37eb8fdb';
   const { answers } = req.body as ListAnswerType;
   try {
     // 1. find the feedback
@@ -166,3 +140,58 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
+  const {userId:requestUserId,userListId} = req.body
+  // const requestUserId = '643354a954f04e2f37eb8fd7'
+  // const listOfUser = [{}]
+  // const userListId =['643354a954f04e2f37eb8fd9','643354a954f04e2f37eb8fdb','643354a954f04e2f37eb8fdd','643354a954f04e2f37eb8fdf','643354a954f04e2f37eb8fe1']
+  try {
+    // 1. check user id is correct
+    const user = await UserModel.findOne({_id :requestUserId})
+    if ( !user) return createErrMessage({msg:`user id ${requestUserId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+    // 2. check is all user from list exist ? 
+    for (const userId of userListId){
+      const user =await UserModel.findOne({_id:userId})
+      if ( !user) return createErrMessage({msg:`user id ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+    }
+    // 3. add new feedback request to user
+    const newRequest = {requestUserId,userList:userListId}
+    const newRequestFeedbackUser = await UserRequestListModel.create({...newRequest})
+    newRequestFeedbackUser.save()
+    user.selfFeedbackRequests.push({requestFeedbackId:newRequestFeedbackUser.id})
+    user.save()
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.NEW_DATA_CREATED},res,newRequestFeedbackUser)
+  } catch (error) {
+    console.error(error)
+    next(error)
+  }
+}
+export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
+  const userId = '643354a954f04e2f37eb8fd7'
+  console.log(req.query.requestListId)
+  if ( !req.query.requestListId){
+    return createErrMessage({msg:'send requestListId',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+  }
+
+  try {
+    const requestedUserList = await UserRequestListModel.findOne({_id:req.query.requestListId})
+    if ( !requestedUserList){
+      return createErrMessage({msg:`can not find requestListId ${req.body.requestListId}`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+    }
+    const user = await UserModel.findOne({_id:userId})
+    if ( !user){
+      return createErrMessage({msg:'can not find user',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+    }
+    if ( user.selfFeedbackRequests.length >=0){
+      const index = user.selfFeedbackRequests.findIndex(e => e.requestFeedbackId.toString() === req.query.requestListId?.toString())
+      if ( index ===-1){
+        return createErrMessage({msg:`can not found correct requestListId ${req.query.requestListId} `,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+      }
+      user.selfFeedbackRequests.slice(index,1)
+      await user.save()
+      await requestedUserList.deleteOne()
+    }
+  } catch (error) {
+    next(error)
+  }
+}

@@ -5,7 +5,19 @@ import { Question } from './types/question';
 const feedbackSchema:Schema = new Schema<feedBackModel>({
   details: {
     title: { type: String, required: true },
-    questions:{type: Array <Question>, required:true}
+    questions:{type: Array <Question>, required:true ,validate : { 
+      validator:(questions:Question[])=> { 
+        const orders : number[] = []
+        for ( const question of questions){
+          if ( orders.includes(question.order)){
+            return false
+          }
+          orders.push(question.order)
+        }
+        return true
+      },
+      message:'Question order must be unique'
+    }}
   },
   requestedListBy:{type:Schema.Types.ObjectId,_id:false,default:null},
   userList: {type:[{ type: Schema.Types.ObjectId, ref:'user' }],required:true},

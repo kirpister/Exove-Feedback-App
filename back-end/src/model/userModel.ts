@@ -26,7 +26,7 @@ const userSchema: Schema = new Schema<userModel>({
     type:[{
       requestFeedbackId:{type:Schema.Types.ObjectId,required:true,ref:'userRequestLit'}
     }],
-    default:[],_id:false},
+    default:[],_id:false}, 
   feedBack: {
     type: [{
       feedbackId: { type : String, ref: 'feedback' },
@@ -44,6 +44,8 @@ userSchema.set('toJSON', {
     ret.id = ret._id.toString()
     delete ret._id;
     delete ret.__v;
+    delete ret.personalDetail.password
+    delete ret.personalDetail.username
   },
 });
 
