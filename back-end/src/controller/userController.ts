@@ -55,7 +55,7 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
 
 export const updateUserFeedback: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  const userId = '643354a954f04e2f37eb8fdb';
+  const userId = '643354a954f04e2f37eb8fe1';
   const { answers } = req.body as ListAnswerType;
   try {
     // 1. find the feedback
@@ -191,6 +191,15 @@ export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
       await user.save()
       await requestedUserList.deleteOne()
     }
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getAllUser : RequestHandler =async (req,res,next) => {
+  try {
+    const user = await UserModel.find({},'personalDetail personal work')
+    return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,user)
   } catch (error) {
     next(error)
   }
