@@ -1,8 +1,9 @@
-body {
-    background-color: rgb(8, 8, 8);
+  .wrapper {
+    background-color: var(--black);
+    height: 100vh;
   }
-  
-  h2 {
+   
+  .wrapper h2 {
     font-family: var(--bold-font);
     color: white;
     margin: 2rem;
