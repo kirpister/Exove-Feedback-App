@@ -34,6 +34,12 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
 
   // 2. create new feedback:
   try {
+    if ( requestedListBy){
+      const feedback = await UserRequestListModel.findOne({_id : requestedListBy})
+      if (!feedback) {
+        return createErrMessage({msg:`feedback ${requestedListBy} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+      }
+    }
     const newFeedback = new FeedbackModel({
       // details : {title,questions},
       requestedListBy,
@@ -90,9 +96,7 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
     if (!feedback) {
       return createErrMessage({msg:`feedback ${feedbackId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
-    const userListAsString = feedback.userList.map(id => id.toString());
-
-    await removeFeedbackFromUsers(feedback.id , userListAsString,next);
+    // update request user list
     if ( feedback.requestedListBy) { 
       const requestedUserList = await UserRequestListModel.findOne({_id: feedback.requestedListBy})
       if ( requestedUserList){
@@ -104,9 +108,12 @@ export const deleteFeedbackController :RequestHandler = async(req,res,next)=> {
         return createErrMessage({msg:`feedback request user list can not find with id ${feedback.requestedListBy}`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
       }
     }
+    const userListAsString = feedback.userList.map(id => id.toString());
+    // remove feedback request to each users
+    await removeFeedbackFromUsers(feedback.id , userListAsString,next);
+    // remove feedback request
     await feedback.deleteOne()
-    // if (feedback) return res.status(201).json({msg:'delete',feedback})
-    if (feedback) return  createSuccessMessage({msg:'success delete',status:StatusCode_Success.REQUEST_CREATED_NO_CONTENT},res,)
+    if (feedback) return  createSuccessMessage({msg:'success delete',status:StatusCode_Success.REQUEST_CREATED},res,)
   } catch (error) {
     next(error)
   }
