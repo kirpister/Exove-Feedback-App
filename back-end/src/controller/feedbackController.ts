@@ -34,12 +34,6 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
 
   // 2. create new feedback:
   try {
-    if ( requestedListBy){
-      const feedback = await UserRequestListModel.findOne({_id : requestedListBy})
-      if (!feedback) {
-        return createErrMessage({msg:`feedback ${requestedListBy} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
-      }
-    }
     const newFeedback = new FeedbackModel({
       // details : {title,questions},
       requestedListBy,
@@ -51,7 +45,10 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
     let requestUserList;
     if ( requestedListBy){
       requestUserList = await  UserRequestListModel.findOne({_id:requestedListBy})
-      if ( requestUserList?.createFeedbackId){
+      if (!requestUserList){
+        return createErrMessage({msg:`request list not found ${requestedListBy} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
+      }
+      if ( requestUserList.createFeedbackId){
         return createErrMessage({msg:`this user list request with Id ${requestedListBy} have been created feedback`,status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
       }
     }
@@ -65,6 +62,9 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
       const user = await UserModel.findOne({ _id: userId },);
       if (!user)  return  createErrMessage({msg:`User with ID ${userId} not found`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
+    
+    // 2.5 save new feedback
+    await newFeedback.save()
     // 2.4 send feedback form to each user from the list which made by ADMIN
     for (const userId of userList) {
       const user = await UserModel.findOne({ _id: userId },);
@@ -72,8 +72,6 @@ export const createFeedbackController :RequestHandler = async(req,res,next)=> {
       user.feedBack.push({feedbackId})
       await user.save()
     }
-    // 2.5 save new feedback
-    await newFeedback.save()
     // 2.6 update request list user 
     if (requestUserList){
       requestUserList.opened = true

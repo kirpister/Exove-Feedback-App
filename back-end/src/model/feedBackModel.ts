@@ -1,6 +1,6 @@
 import   { model, Schema,  } from 'mongoose';
 import {feedBackModel} from './types/feedback'
-import { Question } from './types/question';
+import { Question, QuestionType } from './types/question';
 
 const feedbackSchema:Schema = new Schema<feedBackModel>({
   details: {
@@ -9,14 +9,18 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
       validator:(questions:Question[])=> { 
         const orders : number[] = []
         for ( const question of questions){
-          if ( orders.includes(question.order)){
+          if (question.type in QuestionType){
+            if ( orders.includes(question.order) ){
+              return false
+            }
+          }else{
             return false
           }
           orders.push(question.order)
         }
         return true
       },
-      message:'Question order must be unique'
+      message:'Question order must be unique or correct type'
     }}
   },
   requestedListBy:{type:Schema.Types.ObjectId,_id:false,default:null},
