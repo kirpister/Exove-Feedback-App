@@ -24,9 +24,9 @@
   "dependencies": {
     "concurrently": "^7.6.0"
   },
+
   "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README"
   ,
-
   "compilerOptions": {
     "baseUrl": "src",
     "module": "commonjs",

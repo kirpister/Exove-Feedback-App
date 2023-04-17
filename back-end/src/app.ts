@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import { welcomeRouter } from "./router/welcome";
+import { loginRouter } from "./router/login";
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.use(bodyParser.json());
 app.use(morgan(":method :url :status :response-time ms "));
 
 app.use("/", welcomeRouter);
+app.use("/log-in", loginRouter);
 
 export default app;

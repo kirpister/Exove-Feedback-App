@@ -16,15 +16,14 @@
 
 - Admin can see who have not sent feedbacks yet.
 - Admin can see all information in a table.
-- Admin can sort information in the table for convinience. 
+- Admin can sort information in the table for convinience.
 - Each user should have 7 feedbacks , 5 from colleagues , one from Competence Manager, one form Project Manager.
 - User can choose from the form for whom feedback will be given (colleague/subordinate/CM/PM)
-
 
 <br/>
 <h2>Contributors</h2>
 
-| Name           | Github                                                    |
+| Name           | Github                                                     |
 | -------------- | ---------------------------------------------------------- |
 | Jenni          | 🇫🇮 👉(<a href='https://github.com/kirpister'>link</a>)     |
 | Marina         | 🇷🇺 👉 (<a href='https://github.com/marinezh'>link</a>)     |
@@ -84,28 +83,29 @@ npm run build:All
 <br/>
 <h2>Feedback data types: </h2>
 
-
 1. question type:
+
 ```ts
 type Question = {
   question: string;
   isFreeForm: boolean;
-}
+};
 ```
+
 2. Section types:
+
 ```ts
 type Section = {
   name: string;
   description?: string;
-  questions: Question[]; 
-}
+  questions: Question[];
+};
 ```
 
 3. Feedback questions type:
 
 ```ts
-
 type FeedBackQuestions = {
   sections: Section[];
-}
+};
 ```
