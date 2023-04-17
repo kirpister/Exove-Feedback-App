@@ -1,0 +1,13 @@
+nav {
+    position: relative;
+}
+
+nav button {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+nav button::before {
+    content: 'LOGOUT';
+}

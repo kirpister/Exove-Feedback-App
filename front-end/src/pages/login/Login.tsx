@@ -12,8 +12,8 @@ const Login: React.FC = () => {
         <h2>LOGIN</h2>
     
         <div>
-        <label htmlFor="name">Email:</label>
-        <input type='text' placeholder='Email'/> 
+        <label htmlFor="name">Username:</label>
+        <input type='text' placeholder='Username'/> 
         </div>
     
         <div>

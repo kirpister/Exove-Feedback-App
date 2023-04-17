@@ -1,5 +1,6 @@
 import React from 'react';
 import circle from '../../assets/circle-half.png';
+import './admindash.css';
 
 const SidebarAdmin: React.FC = () => {
     return (
@@ -10,6 +11,8 @@ const SidebarAdmin: React.FC = () => {
                 <li>Whatever</li>
                 <li>Feedback Requests</li>
             </ul>
+            
+            <button></button>
             </nav>
         </div>
     );
