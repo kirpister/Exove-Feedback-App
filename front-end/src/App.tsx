@@ -12,6 +12,7 @@ const App = () => {
         <Route index element={<Login />} />
         <Route path="/userdash" element={<Userdash />} />
         <Route path="admindash" element={<Admindash />} />
+        <Route path="/welcome" element={<Admindash />} />
       </Route>
     </Routes>
   );
