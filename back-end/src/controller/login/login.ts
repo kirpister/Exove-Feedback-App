@@ -10,9 +10,18 @@ export const login: RequestHandler = async (req, res) => {
   try {
     const response = await auth(logInRequest.username, logInRequest.password);
     const token = jwt.sign(
-      { employeeNumber: response.employeeNumber, email: response.mail },
-      JWT_SECRET_KEY
+      {
+        employeeNumber: response.employeeNumber,
+        email: response.mail,
+        name: logInRequest.username,
+      },
+      JWT_SECRET_KEY,
+      {
+        expiresIn: "30m",
+      }
     );
+
+    jwt.verify;
 
     // fetch loggedIn user's details from mongodb based on username and send in the response if needed
     return res
