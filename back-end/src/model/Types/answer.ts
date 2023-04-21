@@ -4,5 +4,6 @@ export interface UserAnswerType {
 }
 
 export interface ListAnswerType {
-   answers: UserAnswerType[];
+  answers: UserAnswerType[],
+  userId:string
 }

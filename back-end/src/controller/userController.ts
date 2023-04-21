@@ -16,6 +16,7 @@ export const getUser:RequestHandler  =async (req,res,next) => {
   try {
     const user  = await UserModel.findOne({_id:req.query.userId})
       .populate('selfFeedbackRequests.requestFeedbackId',{opened:1})
+      .populate('feedBack.feedbackId',{details:1})
     if ( !user) { 
       return  createErrMessage({
         msg: 'user fail', status: StatusCode_Err.RESOURCE_NOT_FOUND},next)
@@ -53,8 +54,8 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
 
 export const updateUserFeedback: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  const userId = '643354a954f04e2f37eb8fe1';
-  const { answers } = req.body as ListAnswerType;
+  // const userId = '643354a954f04e2f37eb8fe1';
+  const { answers, userId } = req.body as ListAnswerType;
   try {
     // 1. find the feedback
     const feedback = await FeedbackModel.findById(feedbackId);
@@ -145,6 +146,7 @@ export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
   if ( checkArrayString(userListId) && typeof requestUserId === 'string'){
     const index = userListId.findIndex((e: string)=> e === requestUserId)
     if ( index !== -1){
+      console.log('go here')
       return createErrMessage({msg:'user can not suggest request feedback list for yourself',status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
     }
   }
