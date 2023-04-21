@@ -6,6 +6,7 @@ const Main: React.FC = () => {
     <main>
       <Outlet />
       maria
+      <h1>test</h1>
     </main>
   );
 };
