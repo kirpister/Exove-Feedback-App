@@ -4,17 +4,21 @@ import './admindash.css';
 
 const SidebarAdmin: React.FC = () => {
     return (
-        <div>
+        <>
             <nav>
             <ul>
                 <img className="circle" src={circle} alt="circle"/>
-                <li>Whatever</li>
+                <li>Status</li>
                 <li>Feedback Requests</li>
             </ul>
             
-            <button></button>
             </nav>
+
+            <div className='bottom-div'>
+            <span>Logged in as</span>
+            <button></button>
         </div>
+        </>
     );
 };
 

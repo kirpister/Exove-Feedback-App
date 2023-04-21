@@ -1,7 +1,8 @@
-import { Router } from "express";
-import { welcome } from "../controller/welcome";
+import {Router} from 'express';
+import { welcome } from '../controller/welcomeController';
+
 const router = Router();
 
-router.get("/", welcome);
+router.get('/', welcome);
 
 export { router as welcomeRouter };

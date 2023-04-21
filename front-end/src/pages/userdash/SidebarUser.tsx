@@ -11,14 +11,17 @@ const SidebarUser: React.FC = () => {
             <ul>
             
                 <img className="circle" src={circle} alt="circle"/>
-                <li>Whatever</li>
+                <li>Feedback Requests</li>
                 <li>Request Feedback</li>
                
             </ul>
            
-            <button></button>
-        
         </nav>
+
+        <div className='bottom-div'>
+            <span>Logged in as</span>
+            <button></button>
+        </div>
         </>
     );
 };

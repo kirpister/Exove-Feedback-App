@@ -11,3 +11,20 @@ nav button {
 nav button::before {
     content: 'LOGOUT';
 }
+
+.bottom-div {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+  }
+
+.bottom-div span {
+    color: white;
+    padding: .8rem;
+  }
+
+.bottom-div button::before {
+    content: 'LOG OUT';
+}
