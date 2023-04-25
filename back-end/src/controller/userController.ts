@@ -54,7 +54,7 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
 
 export const updateUserFeedback: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  // const userId = '643354a954f04e2f37eb8fe1';
+  // const userId = '643354a954f04e2f37eb8fdb';
   const { answers, userId } = req.body as ListAnswerType;
   try {
     // 1. find the feedback
@@ -172,13 +172,13 @@ export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
   }
 }
 export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
-  const userId = '643354aa54f04e2f37eb8fe9'
+  const userId = '643354a954f04e2f37eb8fe7';
   if ( !req.query.requestListId){
     return createErrMessage({msg:'send requestListId',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
   }
   try {
     const requestedUserList = await UserRequestListModel.findOne({_id:req.query.requestListId})
-    if ( !requestedUserList){
+    if (!requestedUserList){
       return createErrMessage({msg:`can not find requestListId ${req.body.requestListId}`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
     const user = await UserModel.findOne({_id:userId})
@@ -186,14 +186,13 @@ export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
       return createErrMessage({msg:'can not find user',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
     if ( user.selfFeedbackRequests.length >=0){
-      console.log('go here')
       const index = user.selfFeedbackRequests.findIndex(e => e.requestFeedbackId.toString() === req.query.requestListId?.toString())
       if ( index ===-1){
         return createErrMessage({msg:`can not found correct requestListId ${req.query.requestListId} `,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
       }
       user.selfFeedbackRequests.splice(index,1)
       await user.save()
-      await requestedUserList.deleteOne()
+      await requestedUserList.deleteOne();
       return createSuccessMessage({msg:`request list Id ${req.query.requestListId} have been deleted`,status:StatusCode_Success.REQUEST_CREATED},res)
     }
   } catch (error) {
