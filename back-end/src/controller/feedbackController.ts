@@ -72,7 +72,6 @@ export const createFeedbackController: RequestHandler = async (req, res, next) =
       const user = await UserModel.findOne({ _id: userId });
       if (!user) return createErrMessage({ msg: `User with ID ${userId} not found`, status: StatusCode_Err.RESOURCE_NOT_FOUND }, next);
     }
-
     // 2.5 save new feedback
     await newFeedback.save();
     // 2.4 send feedback form to each user from the list which made by ADMIN
