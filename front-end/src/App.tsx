@@ -7,6 +7,7 @@ import Admindash from './pages/admindash/Admindash';
 import Form from './pages/feedback/Form';
 
 
+
 const App = () => {
   return (
     <Routes>
@@ -18,6 +19,6 @@ const App = () => {
       </Route>
     </Routes>
   );
-}
+};
 
 export default App;
