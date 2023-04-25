@@ -1,6 +1,6 @@
 import   { model, Schema,  } from 'mongoose';
-import {feedBackModel} from './types/feedback'
-import { Question, QuestionType } from './types/question';
+import {feedBackModel} from './types_1/feedback'
+import { Question, QuestionType } from './types_1/question';
 
 const feedbackSchema:Schema = new Schema<feedBackModel>({
   details: {
