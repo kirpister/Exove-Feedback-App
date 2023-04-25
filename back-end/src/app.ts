@@ -1,3 +1,4 @@
+import { loginRouter } from './router/login';
 import express, { urlencoded } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -10,6 +11,7 @@ import { userRouter } from './router/user';
 import { errorHandler } from './middleware/errorHandler';
 import { adminRouter } from './router/admin';
 
+
 const app = express();
 
 // 1.
@@ -17,6 +19,8 @@ app.use(urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan(':method :url :status :response-time ms '));
+
+app.use('/log-in', loginRouter);
 
 app.use('/', welcomeRouter);
 app.use('/',authenRouter)
@@ -26,6 +30,7 @@ app.use('/admin',adminRouter)
 
 app.use(errorHandler)
 app.use(unknownEndpoint)
+
 
 export default app;
 

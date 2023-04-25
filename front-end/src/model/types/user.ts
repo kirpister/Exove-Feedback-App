@@ -1,17 +1,10 @@
-import {Schema}  from 'mongoose'; 
-export enum Role {
-    Admin = 'admin'
-}
+export interface personalDetailType {
 
-interface FeedBackObject { 
-feedbackId : Schema.Types.ObjectId,
-finished?: boolean
-}
-interface SelfFeedbackRequest { 
-    requestFeedbackId : Schema.Types.ObjectId,
-}
-export interface personalDetailType{
+
+    id: string;
+
     personalDetail: { 
+        id: string;
        username:string,
        firstName:string,
        surName:string,
@@ -32,8 +25,5 @@ export interface personalDetailType{
         startDate:string,
         projects:Array<string>
     }
-    selfFeedbackRequests:Array<SelfFeedbackRequest>
-}
-export interface userModel  extends personalDetailType{ 
-    feedBack : Array<FeedBackObject>
+    
 }

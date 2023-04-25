@@ -24,7 +24,9 @@
   "dependencies": {
     "concurrently": "^7.6.0"
   },
-  "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README",
+
+  "homepage": "https://github.com/kirpister/Exove-Feedback-App.git#README"
+  ,
   "compilerOptions": {
     "baseUrl": "src",
     "module": "commonjs",
@@ -38,6 +40,7 @@
     "node_modules"
   ],
   "devDependencies": {
+    "@types/react": "^18.0.28",
     "@babel/core": "^7.18.6",
     "@babel/eslint-parser": "^7.18.2",
     "@babel/preset-react": "^7.18.6",
@@ -50,3 +53,4 @@
     "prettier": "^2.7.1"
   }
 }
+

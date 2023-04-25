@@ -1,14 +1,20 @@
-import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Main from './router/template/main/Main';
-import Template from './router/template/Template';
+import Layout from './pages/Layout';
+import Login from './pages/login/Login';
+import Userdash from './pages/userdash/Userdash';
+import Admindash from './pages/admindash/Admindash';
+import Form from './pages/feedback/Form';
 
-function App() {
+
+const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Template />}>
-        <Route index element={<Main />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Login />} />
+        <Route path="/userdash" element={<Userdash />} />
+        <Route path="/admindash" element={<Admindash />} />
+        <Route path="/feedback" element={<Form />} />
       </Route>
     </Routes>
   );
