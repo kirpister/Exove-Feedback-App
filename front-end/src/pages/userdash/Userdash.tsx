@@ -7,6 +7,7 @@ import userimg from '../../assets/selfie.jpg';
 import SidebarUser from './SidebarUser';
 
 import './userdash.css';
+import { checkPrime } from 'crypto';
 
 
 interface DataType {
@@ -42,12 +43,13 @@ const Userdash: React.FC = () => {
         },[]);
 
         const handleSubmit = () => {
-            axios.post('localhost:4000/user/feedback_request', checkedUsers)
-              .then(response => console.log(response.data))
-              .catch(error => console.log(error));
-          };
+            // axios.post('localhost:4000/user/feedback_request', checkedUsers)
+            //   .then(response => console.log(response.data))
+            //   .catch(error => console.log(error));
+            console.log(checkedUsers)
+        };
 
-          const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
+        const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
             const isChecked = e.target.checked;
             const userId = user.id;
 
