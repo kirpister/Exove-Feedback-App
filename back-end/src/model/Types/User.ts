@@ -2,7 +2,6 @@ import {Schema}  from 'mongoose';
 export enum Role {
     Admin = 'admin'
 }
-
 interface FeedBackObject { 
 feedbackId : Schema.Types.ObjectId,
 finished?: boolean
