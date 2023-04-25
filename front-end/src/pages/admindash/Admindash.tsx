@@ -9,7 +9,9 @@ const Admindash: React.FC = () => {
       <SidebarAdmin />
 
       <div className="dash-wrapper">
-        <h2>Welcome {state}</h2>
+        <h2>
+          Welcome {state.firstName} !! You have {state.roles.join(", ")} roles
+        </h2>
       </div>
     </>
   );

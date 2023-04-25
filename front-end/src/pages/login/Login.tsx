@@ -3,14 +3,14 @@ import "./login.css";
 import circle from "../../assets/circle-half.png";
 import { useNavigate } from "react-router-dom";
 import Admindash from "../admindash/Admindash";
+import { UserDetails } from "../../common/types/UserDetails";
+import { ADMIN_ROLE } from "../../common/constants";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   let navigate = useNavigate();
-
-  
 
   const onsubmitHandler = (uname: string, pwd: string) => {
     return fetch("/log-in", {
@@ -63,14 +63,25 @@ const Login: React.FC = () => {
         <button
           className="login-btn"
           onClick={() =>
-            onsubmitHandler(username, password).then((res) =>
-             if(res.role === "HR") {
-              navigate("/admindash", { state: `${username}` })
-             }else{
-              navigate("/userdash", { state: `${username}` })
-             }
-             
-            )
+            onsubmitHandler(username, password)
+              .then((res) => res.json())
+              .then((res: UserDetails) => {
+                if (res.roles.includes(ADMIN_ROLE)) {
+                  navigate("/admindash", {
+                    state: {
+                      firstName: res.firstName,
+                      roles: res.roles,
+                    },
+                  });
+                } else {
+                  navigate("/userdash", {
+                    state: {
+                      firstName: res.firstName,
+                      roles: res.roles,
+                    },
+                  });
+                }
+              })
           }
         >
           LOGIN

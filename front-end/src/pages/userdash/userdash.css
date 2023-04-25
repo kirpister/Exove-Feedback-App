@@ -1,106 +1,107 @@
 nav ul {
-    background-color: var(--black);
-    width: 200px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    display: flex;
-    flex-direction: column;
+  background-color: var(--black);
+  width: 200px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 nav li {
-    list-style-type: none;
-    padding: 1rem 0 1rem 1rem;
-    cursor: pointer;
-    color: white;
+  list-style-type: none;
+  padding: 1rem 0 1rem 1rem;
+  cursor: pointer;
+  color: white;
 }
 
 nav img {
-    width: 100px;
-    padding-bottom: 3rem;
+  width: 100px;
+  padding-bottom: 3rem;
 }
 
 .dash-wrapper {
-    background: white;
-    color: var(--black);
-    margin: 5% 20%;
+  background: white;
+  color: var(--black);
+  margin: 5% 20%;
 }
 
-.dash-wrapper h3, p {
-    margin-top: 1rem;
+.dash-wrapper h3,
+p {
+  margin-top: 1rem;
 }
 
 .dash-wrapper button {
-    margin-top: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .dash-wrapper button::before {
-    content: 'SUBMIT';
+  content: "SUBMIT";
 }
 
 /* CHECKBOXES */
 
 article {
-    position: relative;
-    width: 220px;
-    height: 70px;
-    margin: .5rem;
-    float: left;
-    border: 2px solid var(--purple-color);
-    box-sizing: border-box;
-  }
+  position: relative;
+  width: 220px;
+  height: 70px;
+  margin: 0.5rem;
+  float: left;
+  border: 2px solid var(--purple-color);
+  box-sizing: border-box;
+}
 
-  article img {
-    width: 50px;
-    border-radius: 50%;
-  }
-  
-  article div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    line-height: 1.3;
-    transition: .5s ease;
-  }
-  
-  article input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 140px;
-    height: 100px;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  input[type=checkbox]:checked ~ div {
-    background-color: var(--purple-color);
-    color: white;
-  }
+article img {
+  width: 50px;
+  border-radius: 50%;
+}
 
-  .users {
-    margin-top: 5rem;
-    width: 70vw;
-    height: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-  }
+article div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 1.3;
+  transition: 0.5s ease;
+}
 
-  .sidebaruser .bottom-div {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    bottom: 0;
-    left: 1rem;
-  }
+article input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 100px;
+  opacity: 0;
+  cursor: pointer;
+}
 
-  .sidebaruser .bottom-div span {
-    color: white;
-    padding: .8rem;
-  }
+input[type="checkbox"]:checked ~ div {
+  background-color: var(--purple-color);
+  color: white;
+}
 
-  .sidebaruser .bottom-div button::before {
-    content: 'LOG OUT';
+.users {
+  margin-top: 5rem;
+  width: 70vw;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sidebaruser .bottom-div {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  left: 1rem;
+}
+
+.sidebaruser .bottom-div span {
+  color: white;
+  padding: 0.8rem;
+}
+
+.sidebaruser .bottom-div button::before {
+  content: "LOG OUT";
 }
