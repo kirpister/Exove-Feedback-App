@@ -1,8 +1,8 @@
 import {  RequestHandler } from 'express';
 import FeedbackModel from '../model/feedBackModel';
-import { ListAnswerType } from '../model/types_1/answer';
-import { QuestionType, Range } from '../model/types_1/question';
-import { userModel } from '../model/types_1/user_1';
+import { ListAnswerType } from '../model/types/answer';
+import { QuestionType, Range } from '../model/types/question';
+import { userModel } from '../model/types/user';
 import UserModel from '../model/userModel'
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
