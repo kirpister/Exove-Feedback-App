@@ -10,6 +10,8 @@ const Login: React.FC = () => {
 
   let navigate = useNavigate();
 
+  
+
   const onsubmitHandler = (uname: string, pwd: string) => {
     return fetch("/log-in", {
       method: "POST",
@@ -62,7 +64,12 @@ const Login: React.FC = () => {
           className="login-btn"
           onClick={() =>
             onsubmitHandler(username, password).then((res) =>
-              navigate("/welcome", { state: `${username}` })
+             if(res.role === "HR") {
+              navigate("/admindash", { state: `${username}` })
+             }else{
+              navigate("/userdash", { state: `${username}` })
+             }
+             
             )
           }
         >

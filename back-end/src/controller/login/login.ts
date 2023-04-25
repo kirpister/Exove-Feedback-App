@@ -9,6 +9,11 @@ export const login: RequestHandler = async (req, res) => {
 
   try {
     const response = await auth(logInRequest.username, logInRequest.password);
+    const x = mongoose.find(id);
+    const y = {
+      name: x.dadas.daa.da.name,
+      email: x.email,
+    };
     const token = jwt.sign(
       {
         employeeNumber: response.employeeNumber,
@@ -20,9 +25,6 @@ export const login: RequestHandler = async (req, res) => {
         expiresIn: "30m",
       }
     );
-
-    jwt.verify;
-
     // fetch loggedIn user's details from mongodb based on username and send in the response if needed
     return res
       .cookie("JWT_TOKEN_COOKIE", token, {
@@ -30,7 +32,7 @@ export const login: RequestHandler = async (req, res) => {
         secure: process.env.NODE_ENV === "production",
       })
       .status(200)
-      .json({ message: "Logged in successfully 😊 👌" });
+      .json({ message: "Logged in successfully 😊 👌", userData: y });
   } catch (error) {
     res.sendStatus(401);
   }
