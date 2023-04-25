@@ -16,38 +16,87 @@ interface DataType {
     },
     status:number
 }
+
+interface CheckedUser {
+    id: number;
+    personalDetail?: {
+      firstName?: string;
+      surName?: string;
+    };
+  }
+  
 const Userdash: React.FC = () => {
 
     const [users, setUsers] = useState<personalDetailType[]>([]);
+    const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
 
     useEffect(() => {
             axios.get<personalDetailType[]>('http://localhost:4000/user/get_all_user')
             .then((res) => {
                 console.log(res)
-                const { data,status }= res as unknown as DataType
+                const { data,status } = res as unknown as DataType
                 if (status === 200){
                     setUsers(data.data)
                 }
             });
         },[]);
-        const renderUser = (usersList:any) => {
+
+        const handleSubmit = () => {
+            axios.post('localhost:4000/user/feedback_request', checkedUsers)
+              .then(response => console.log(response.data))
+              .catch(error => console.log(error));
+          };
+
+          const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
+            const isChecked = e.target.checked;
+            const userId = user.id;
+
+            console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? 'checked' : 'unchecked'}`);
+
+            if (isChecked) {
+            const checkedUser: CheckedUser = {
+            id: userId,
+            personalDetail: user.personalDetail,
+            };
+
+            setCheckedUsers(prevCheckedUsers => [...prevCheckedUsers, checkedUser]);
+            } else {
+            setCheckedUsers(prevCheckedUsers => prevCheckedUsers.filter(checkedUser => checkedUser.id !== userId));
+            }
+        
+        console.log(checkedUsers);
+          
+        };
+
+        const renderUser = (usersList: any) => {
 
         if (Array.isArray(usersList)){
-            console.log(usersList)
+            // console.log(usersList)
             return users?.map((user) => {
                 return (
-                    <article className='user-list'>
-                <input type="checkbox" id="feature1"/>
-                <div>
-                <img src={userimg} alt="user-img" />
-                <span>{user.personalDetail.firstName} {user.personalDetail.surName}<br/>{user.work.roles[0]}</span>
-                </div>
-            </article>  
-           
+
+    <article className='user-list'>
+      <input
+        type="checkbox"
+        id={user.id}
+        value={user.id}
+        onChange={(e) => handleCheckboxChange(e, user)}
+         />
+      <div>
+        <img src={userimg} alt="user-img" />
+        <span>
+          {user.personalDetail.firstName} {user.personalDetail.surName}
+          <br />
+          {user.work.roles[0]}
+        </span>
+      </div>
+    </article> 
+    
             );
         })
     }
     }
+
     return (
         <>
         <SidebarUser />
@@ -61,7 +110,7 @@ const Userdash: React.FC = () => {
         </div>
     
 
-        <button>Submit</button>
+        <button onClick={handleSubmit}>Submit</button>
             
         </div>
         </>

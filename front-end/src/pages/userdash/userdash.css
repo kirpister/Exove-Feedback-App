@@ -88,19 +88,19 @@ article {
     flex-wrap: wrap;
   }
 
-  .bottom-div {
+  .sidebaruser .bottom-div {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 1rem;
   }
 
-  .bottom-div span {
+  .sidebaruser .bottom-div span {
     color: white;
     padding: .8rem;
   }
 
-  .bottom-div button::before {
+  .sidebaruser .bottom-div button::before {
     content: 'LOG OUT';
 }

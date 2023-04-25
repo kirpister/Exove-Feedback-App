@@ -4,7 +4,7 @@ import circle from '../../assets/circle-half.png';
 
 const SidebarUser: React.FC = () => {
     return (
-        <>
+        <div className='sidebaruser'>
        
         <nav>
            
@@ -22,7 +22,7 @@ const SidebarUser: React.FC = () => {
             <span>Logged in as</span>
             <button></button>
         </div>
-        </>
+        </div>
     );
 };
 
