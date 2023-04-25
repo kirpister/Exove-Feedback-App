@@ -87,3 +87,20 @@ article {
     display: flex;
     flex-wrap: wrap;
   }
+
+  .sidebaruser .bottom-div {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 1rem;
+  }
+
+  .sidebaruser .bottom-div span {
+    color: white;
+    padding: .8rem;
+  }
+
+  .sidebaruser .bottom-div button::before {
+    content: 'LOG OUT';
+}

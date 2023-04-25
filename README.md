@@ -8,7 +8,8 @@
 
 - Authentication
 - Roles for Admin and User
-- Admin will send out assessment form to collect feedback for colleagues
+- User create feedback's request to HR/Admin (list of other users, User want their feedback)
+- Admin will send out assessment form to collect feedback for colleagues (base on userlist which was sent by User)
 - Admin can send reminders to those who have yet to give feedback
 - Admin can see assessment form results and convert them into graphs than can be turned into printable PDFs
 - User will receive and fill out assessment forms about their coworkers
