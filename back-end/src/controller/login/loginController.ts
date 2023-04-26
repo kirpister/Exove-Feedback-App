@@ -9,7 +9,6 @@ const JWT_SECRET_KEY = 'shhhhhhh';
 
 export const loginController: RequestHandler = async (req, res,next) => {
   const logInRequest = req.body;
-
   try {
     const authResponse = await auth(
       logInRequest.username,
@@ -20,7 +19,6 @@ export const loginController: RequestHandler = async (req, res,next) => {
     });
     
     if (!userDetails) {
-      // throw new Error('Missing user details in database');
       return createErrMessage({msg:'Missing user detail in database',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
 

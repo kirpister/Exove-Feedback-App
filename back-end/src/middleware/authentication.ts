@@ -10,7 +10,7 @@ export const authentication :RequestHandler =async(req,res,next)=> {
   console.log(req.cookies.JWT_TOKEN_COOKIE);
   // const token = res.cookie
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZU51bWJlciI6IjY0MzM1NGE5NTRmMDRlMmYzN2ViOGZkOSIsInJvbGVzIjpbInJvbGUyIl0sImlhdCI6MTY4MjQ5NzUzMywiZXhwIjoxNjgyNDk5MzMzfQ.MuC6UmyponGOzWVZYtRtVgtRoWBWda3ikWe7EMAX_Io';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZU51bWJlciI6IjY0MzM1NGE5NTRmMDRlMmYzN2ViOGZkOSIsInJvbGVzIjpbInJvbGUyIl0sImlhdCI6MTY4MjUwMjAxNCwiZXhwIjoxNjgyNTAzODE0fQ.U_1MK0B_AG2kIEaIDXFQgDIDw1eJng7ulsjbwb5QUOM';
   if (!token) {
     return createErrMessage({msg:'token not found',status:StatusCode_Err.FORBIDDEN},next)
   }

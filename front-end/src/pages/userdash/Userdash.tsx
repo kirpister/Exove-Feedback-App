@@ -30,6 +30,7 @@ const Userdash: React.FC = () => {
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
   const { state } = useLocation();
   useEffect(() => {
+    const token = 
     axios
       .get<personalDetailType[]>("http://localhost:4000/user/get_all_user")
       .then((res) => {
