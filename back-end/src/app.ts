@@ -13,6 +13,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { adminRouter } from "./router/admin";
 import { authorization } from "./middleware/authorization";
 import { validateRouter } from "./router/validate";
+import { logoutRouter } from "./router/logout";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/private/*", authorization);
 app.use("/log-in", loginRouter);
 app.use("/private/validate", validateRouter);
+app.use("/private/logout", logoutRouter);
 app.use("/", welcomeRouter);
 app.use("/", authenRouter);
 app.use("/feedback", feedBackRouter);
