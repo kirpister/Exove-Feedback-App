@@ -42,7 +42,7 @@ const Userdash: React.FC = () => {
         },[]);
 
         const handleSubmit = () => {
-            axios.post('localhost:4000/user/feedback_request', checkedUsers)
+            axios.post('http://localhost:4000/user/feedback_request', checkedUsers)
               .then(response => console.log(response.data))
               .catch(error => console.log(error));
           };
