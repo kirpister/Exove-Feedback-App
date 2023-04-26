@@ -12,16 +12,6 @@ import AllFeedbacks from "./components/form/AllFeedbacks";
 const App = () => {
   return (
     <Routes>
-      {/* <Route path="/" exact={true} element={<Layout />}>
-        <Route index element={<Login />} />
-        <Route path="userdash" element={<Userdash />} />
-        <Route path="/admindash" element={<Admindash />}>
-          <Route path="feedbackform" element={<FeedbackForm1 />} />
-          <Route path="conformation" element={<Conformation />} />
-          <Route path="allfeedbacks" element={<AllFeedbacks />} />
-        </Route>
-      </Route> */}
-
       <Route path="/" element={<Layout />} />
       <Route index element={<Login />} />
       <Route path="userdash" element={<Userdash />} />
