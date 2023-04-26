@@ -7,7 +7,6 @@ import userimg from "../../assets/selfie.jpg";
 import SidebarUser from "./SidebarUser";
 
 import "./userdash.css";
-import { checkPrime } from "crypto";
 import { useLocation } from "react-router-dom";
 
 interface DataType {

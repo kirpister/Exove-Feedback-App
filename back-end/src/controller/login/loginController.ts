@@ -1,9 +1,9 @@
-import { RequestHandler } from "express";
-import jwt from "jsonwebtoken";
-import UserModel from "../../model/userModel";
-import { auth } from "./utils";
+import { RequestHandler } from 'express';
+import jwt from 'jsonwebtoken';
+import UserModel from '../../model/userModel';
+import { auth } from './utils';
 
-const JWT_SECRET_KEY = "shhhhhhh";
+const JWT_SECRET_KEY = 'shhhhhhh';
 
 export const loginController: RequestHandler = async (req, res) => {
   const logInRequest = req.body;
@@ -18,7 +18,7 @@ export const loginController: RequestHandler = async (req, res) => {
     });
 
     if (!userDetails) {
-      throw new Error("Missing user details in database");
+      throw new Error('Missing user details in database');
     }
 
     const responseToReturn = {
@@ -34,19 +34,19 @@ export const loginController: RequestHandler = async (req, res) => {
       },
       JWT_SECRET_KEY,
       {
-        expiresIn: "30m",
+        expiresIn: '30m',
       }
     );
 
     return res
-      .cookie("JWT_TOKEN_COOKIE", token, {
+      .cookie('JWT_TOKEN_COOKIE', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === 'production',
       })
       .status(200)
       .json(responseToReturn);
   } catch (error) {
-    console.log("error message is ", error);
+    console.log('error message is ', error);
     res.sendStatus(401);
   }
 };
