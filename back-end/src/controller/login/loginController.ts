@@ -1,11 +1,13 @@
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import UserModel from '../../model/userModel';
+import { createErrMessage } from '../../utils/message';
+import { StatusCode_Err } from '../../utils/statusCode';
 import { auth } from './utils';
 
 const JWT_SECRET_KEY = 'shhhhhhh';
 
-export const loginController: RequestHandler = async (req, res) => {
+export const loginController: RequestHandler = async (req, res,next) => {
   const logInRequest = req.body;
 
   try {
@@ -16,9 +18,10 @@ export const loginController: RequestHandler = async (req, res) => {
     const userDetails = await UserModel.findOne({
       _id: authResponse.employeeNumber,
     });
-
+    
     if (!userDetails) {
-      throw new Error('Missing user details in database');
+      // throw new Error('Missing user details in database');
+      return createErrMessage({msg:'Missing user detail in database',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
 
     const responseToReturn = {
@@ -30,7 +33,8 @@ export const loginController: RequestHandler = async (req, res) => {
 
     const token = jwt.sign(
       {
-        employeeNumber: authResponse.employeeNumber,
+        employeeNumber: userDetails.id,
+        roles:userDetails.work.roles
       },
       JWT_SECRET_KEY,
       {

@@ -201,6 +201,7 @@ export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
 }
 
 export const getAllUser : RequestHandler =async (req,res,next) => {
+  console.log('get all user')
   try {
     const user = await UserModel.find({},'personalDetail personal work')
     return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,user)
