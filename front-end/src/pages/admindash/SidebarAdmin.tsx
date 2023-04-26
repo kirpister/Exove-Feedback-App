@@ -22,13 +22,13 @@ const SidebarAdmin: React.FC = () => {
           {/* <li>Status</li>
           <li>Feedback Requests</li> */}
           <li>
-            <NavLink to="/admindash/feedbackform">Feedback form</NavLink>
+            <NavLink to="/feedbackform">Feedback form</NavLink>
           </li>
           <li>
-            <NavLink to="/admindash/conformation">Conformation</NavLink>
+            <NavLink to="/conformation">Conformation</NavLink>
           </li>
           <li>
-            <NavLink to="/admindash/allfeedbacks">All feedbacks</NavLink>
+            <NavLink to="/allfeedbacks">All feedbacks</NavLink>
           </li>
         </ul>
       </nav>
