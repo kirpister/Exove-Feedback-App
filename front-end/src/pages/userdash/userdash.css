@@ -1,35 +1,116 @@
-.sidebar nav ul {
+.sidebar nav {
     background-color: var(--black);
-    min-width: 15%;
+    min-width: 20vw;
     height: 100vh;
     position: fixed;
     top: 0;
-    display: flex;
-    flex-direction: column;
     display: block;
+    font-family: var(--main-font);
+}
+main {
+  width: 80vw;
 }
 
 .sidebar nav li {
   list-style-type: none;
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem 0 1rem 0;
   cursor: pointer;
   color: white;
 }
 
-.sidebar nav img {
+nav img {
   width: 100px;
+  margin-left: -2rem;
   padding-bottom: 3rem;
 }
+
+.sidebar li a {
+  text-decoration: none;
+}
+
+.bottom-div span {
+  color: white;
+  margin: 0 auto;
+  font-family: var(--main-font);
+}
+
+.bottom-div p {
+  color: white;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--pale-pink-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--main-font);
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto;
+}
+
+
+
+/********  USER DASHBOARD  ********/
+
+
 
 .dash-wrapper {
   background: white;
   color: var(--black);
-  margin: 5% 20%;
+  margin: 5% 30%;
 }
 
-.dash-wrapper h3,
+.dash-wrapper h2, h3,
 p {
-  margin-top: 1rem;
+  margin: 1rem;
+  font-family: var(--main-font);
+}
+
+.dash-wrapper h2 {
+  color: var(--purple-color);
+  font-weight: bold;
+}
+
+.dash-wrapper button {
+  margin: 1.2rem;
+  padding: 0.7rem 4.2rem 0.7rem 4.2rem;
+  font-size: 1rem;
+  outline: none;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: var(--purple-color);
+  color: rgb(0, 0, 0);
+  position: relative;
+  letter-spacing: 1px;
+  font-family: var(--main-font);
+}
+
+.dash-wrapper button::before {
+  content: "SUBMIT";
+  position: absolute;
+  top: -6%;
+  right: 1%;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  width: 100%;
+  height: 100%;
+  color: rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+  transform: translate(-1px, -1px);
+  font-weight: bold;
+}
+
+.dash-wrapper button:hover::before {
+  top: 0;
+  left: 0;
 }
 
 .dash-wrapper button {
@@ -40,7 +121,23 @@ p {
   content: "SUBMIT";
 }
 
-/* CHECKBOXES */
+.user-list .avatar {
+  margin: 0;
+}
+
+.dash-wrapper h4 {
+  margin: 5rem 0 0 1rem;
+}
+
+.dash-wrapper .user-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin: 3rem 0 0 .2rem;
+  font-size: 1.2rem;
+}
+
+
+/******** CHECKBOXES ********/
 
 article {
   position: relative;
@@ -50,6 +147,7 @@ article {
   float: left;
   border: 2px solid var(--purple-color);
   box-sizing: border-box;
+  font-family: var(--main-font);
 }
 
 article img {
@@ -88,21 +186,4 @@ article input {
   height: fit-content;
   display: flex;
   flex-wrap: wrap;
-}
-
-.sidebar .bottom-div {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  bottom: 0;
-  left: 1rem;
-}
-
-.sidebar .bottom-div span {
-  color: white;
-  padding: 0.8rem;
-}
-
-.sidebar .bottom-div button::before {
-  content: "LOG OUT";
 }

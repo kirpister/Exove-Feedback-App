@@ -12,6 +12,7 @@ import { ADMIN_ROLE } from "./common/constants";
 import { useEffect } from "react";
 import { initiateValidateSession } from "./features/authenticatedUserSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
+import RequestFeedback from "./pages/userdash/RequestFeedback";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -41,6 +42,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
+            <Route path="/requestfeedback" element={<RequestFeedback />} />
           </Route>
         </Routes>
       );
