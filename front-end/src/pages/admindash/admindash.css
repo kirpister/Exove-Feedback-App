@@ -1,30 +1,30 @@
 nav {
-    position: relative;
+  position: relative;
 }
 
 nav button {
-    position: fixed;
-    bottom: 1rem;
-    left: 1rem;
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
 }
 
 nav button::before {
-    content: 'LOGOUT';
+  content: "LOGOUT";
 }
 
 .bottom-div {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    bottom: 0;
-    left: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+}
 
 .bottom-div span {
-    color: white;
-    padding: .8rem;
-  }
+  color: white;
+  padding: 0.8rem;
+}
 
 .bottom-div button::before {
-    content: 'LOG OUT';
+  content: "LOG OUT";
 }

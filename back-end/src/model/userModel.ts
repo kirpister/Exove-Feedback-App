@@ -1,5 +1,5 @@
 import  { model, Schema,  } from 'mongoose';
-import { userModel } from './Types/User';
+import { userModel } from './types/user';
 const userSchema: Schema = new Schema<userModel>({
   personalDetail:{
     username: { type: String, required: [true,'user name required'],unique:true},

@@ -1,8 +1,8 @@
 import {  RequestHandler } from 'express';
 import FeedbackModel from '../model/feedBackModel';
-import { ListAnswerType } from '../model/Types/answer';
-import { QuestionType, Range } from '../model/Types/question';
-import { userModel } from '../model/Types/User';
+import { ListAnswerType } from '../model/types/answer';
+import { QuestionType, Range } from '../model/types/question';
+import { userModel } from '../model/types/user';
 import UserModel from '../model/userModel'
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success,StatusCode_Err } from '../utils/statusCode';
@@ -13,10 +13,10 @@ import UserRequestListModel from '../model/userListModel';
 export const getUser:RequestHandler  =async (req,res,next) => {
   // const userId = '643354a954f04e2f37eb8fd7'
   // const  userId = req.query.userId 
-  console.log(req.query.userId)
   try {
     const user  = await UserModel.findOne({_id:req.query.userId})
       .populate('selfFeedbackRequests.requestFeedbackId',{opened:1})
+      .populate('feedBack.feedbackId',{details:1})
     if ( !user) { 
       return  createErrMessage({
         msg: 'user fail', status: StatusCode_Err.RESOURCE_NOT_FOUND},next)
@@ -30,16 +30,15 @@ export const getUser:RequestHandler  =async (req,res,next) => {
 
 export const updateUserInfo:RequestHandler =async (req,res,next) => {
   // const personalDetail = req.body 
-  const id = '64334d1a79983fbe5eff96cb'
+  const userId = '64334d1a79983fbe5eff96cb'
   // const userIdToken = req.body.userId
   // if ( userIdToken !== req.body.userId ) { 
   // return next(new Error())
   // }
-
   try {
-    const user = await UserModel.findOne({_id :id})
+    const user = await UserModel.findOne({_id :userId})
     if ( !user ){
-      return createErrMessage({ msg: `no user with id: ${id}`, status: StatusCode_Err.RESOURCE_NOT_FOUND},next)   
+      return createErrMessage({ msg: `no user with id: ${userId}`, status: StatusCode_Err.RESOURCE_NOT_FOUND},next)   
     }
     else if ( user as userModel){
       user.personalDetail.firstName = 'test'
@@ -55,8 +54,8 @@ export const updateUserInfo:RequestHandler =async (req,res,next) => {
 
 export const updateUserFeedback: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  const userId = '643354a954f04e2f37eb8fe1';
-  const { answers } = req.body as ListAnswerType;
+  // const userId = '643354a954f04e2f37eb8fdb';
+  const { answers, userId } = req.body as ListAnswerType;
   try {
     // 1. find the feedback
     const feedback = await FeedbackModel.findById(feedbackId);
@@ -132,19 +131,25 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
     await user.save();
     await feedback.updateOne(feedback)
     // return res.status(200).json({ msg: 'Answer updated successfully' });
-    return createSuccessMessage({msg:'Answer updated successfully',status: StatusCode_Success.NEW_DATA_CREATED},res,feedback)
+    return createSuccessMessage({msg:'Answer updated successfully',status: StatusCode_Success.NEW_DATA_CREATED},res,)
 
   } catch (error) {
-    console.log('error')
-    console.log(error)
     next(error);
   }
 };
 export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
   const {userId:requestUserId,userListId} = req.body
+  // 1. check that user can not suggest to give feedback for themself
   // const requestUserId = '643354a954f04e2f37eb8fd7'
   // const listOfUser = [{}]
   // const userListId =['643354a954f04e2f37eb8fd9','643354a954f04e2f37eb8fdb','643354a954f04e2f37eb8fdd','643354a954f04e2f37eb8fdf','643354a954f04e2f37eb8fe1']
+  if ( checkArrayString(userListId) && typeof requestUserId === 'string'){
+    const index = userListId.findIndex((e: string)=> e === requestUserId)
+    if ( index !== -1){
+      console.log('go here')
+      return createErrMessage({msg:'user can not suggest request feedback list for yourself',status:StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX},next)
+    }
+  }
   try {
     // 1. check user id is correct
     const user = await UserModel.findOne({_id :requestUserId})
@@ -167,15 +172,13 @@ export const createFeedbackUserList:RequestHandler =async (req,res,next) => {
   }
 }
 export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
-  const userId = '643354a954f04e2f37eb8fd7'
-  console.log(req.query.requestListId)
+  const userId = '643354a954f04e2f37eb8fe7';
   if ( !req.query.requestListId){
     return createErrMessage({msg:'send requestListId',status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
   }
-
   try {
     const requestedUserList = await UserRequestListModel.findOne({_id:req.query.requestListId})
-    if ( !requestedUserList){
+    if (!requestedUserList){
       return createErrMessage({msg:`can not find requestListId ${req.body.requestListId}`,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
     }
     const user = await UserModel.findOne({_id:userId})
@@ -187,9 +190,10 @@ export const deleteFeedbackRequest : RequestHandler = async(req,res,next)=> {
       if ( index ===-1){
         return createErrMessage({msg:`can not found correct requestListId ${req.query.requestListId} `,status:StatusCode_Err.RESOURCE_NOT_FOUND},next)
       }
-      user.selfFeedbackRequests.slice(index,1)
+      user.selfFeedbackRequests.splice(index,1)
       await user.save()
-      await requestedUserList.deleteOne()
+      await requestedUserList.deleteOne();
+      return createSuccessMessage({msg:`request list Id ${req.query.requestListId} have been deleted`,status:StatusCode_Success.REQUEST_CREATED},res)
     }
   } catch (error) {
     next(error)
@@ -203,4 +207,16 @@ export const getAllUser : RequestHandler =async (req,res,next) => {
   } catch (error) {
     next(error)
   }
+}
+
+const checkArrayString  = (list:any) :boolean  => { 
+  if ( Array.isArray(list)) { 
+    list.every(e => {
+      if ( typeof e !=='string'){
+        return false
+      }
+    })
+    return true
+  }
+  return false
 }

@@ -1,4 +1,4 @@
-import { loginRouter } from "./router/login";
+import { loginRouter } from './router/login';
 import express, { urlencoded } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan(':method :url :status :response-time ms '));
 
-app.use("/log-in", loginRouter);
+app.use('/log-in', loginRouter);
 
 app.use('/', welcomeRouter);
 app.use('/',authenRouter)
@@ -33,3 +33,5 @@ app.use(unknownEndpoint)
 
 
 export default app;
+
+

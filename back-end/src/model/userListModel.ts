@@ -1,5 +1,5 @@
 import {model, Schema} from 'mongoose'
-import { userListModel } from './Types/userlist'
+import { userListModel } from './types/userlist'
 
 
 const userListSchema:Schema = new Schema <userListModel>({
