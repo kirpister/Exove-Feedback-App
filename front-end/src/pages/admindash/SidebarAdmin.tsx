@@ -5,12 +5,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 
+
 const SidebarAdmin: React.FC = () => {
   const { state } = useLocation();
   const dispatch = useAppDispatch();
   console.log("state", state);
   return (
-    <>
+    <div className="sidebar">
       <nav>
         <ul>
           <img className="circle" src={circle} alt="circle" />
@@ -22,8 +23,7 @@ const SidebarAdmin: React.FC = () => {
           ) : (
             ""
           )}
-          {/* <li>Status</li>
-          <li>Feedback Requests</li> */}
+    
           <li>
             <NavLink to="/feedbackform">Feedback form</NavLink>
           </li>
@@ -40,14 +40,16 @@ const SidebarAdmin: React.FC = () => {
       </nav>
 
       <div className="bottom-div">
-        <span>Logged in as</span>
+        
+        <span>Logged in as </span>
+        
         <button
           onClick={() => {
             dispatch(initiateLogoutSession());
           }}
         ></button>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import Login from "./pages/login/Login";
 import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
-//import Form from "./pages/feedback/Form";
+
 import FeedbackForm1 from "./components/form/FeedbackForm1";
 import Conformation from "./components/form/Conformation";
 import AllFeedbacks from "./components/form/AllFeedbacks";
