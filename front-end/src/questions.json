@@ -189,6 +189,7 @@
     },
     {
       "name": "Quality focus",
+      "id": 8,
       "questions": [
         {
           "question": "The person produces high quality product",
@@ -214,8 +215,7 @@
           "question": "Feedback about the person's quality focus",
           "isFreeForm": true
         }
-      ],
-      "id": 8
+      ]
     }
   ]
 }

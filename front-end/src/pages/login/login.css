@@ -57,7 +57,7 @@ input {
     box-shadow: 5px 5px 0;
   } */
 
-button {
+/* button {
   margin: 1.2rem;
   padding: 0.7rem 4.2rem 0.7rem 4.2rem;
   font-size: 1rem;
@@ -85,7 +85,7 @@ button::before {
   transition: 0.3s ease;
   transform: translate(-3px, -3px);
   font-weight: bold;
-}
+} */
 
 button:hover::before {
   top: 0;
