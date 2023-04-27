@@ -7,8 +7,9 @@ import userimg from "../../assets/selfie.jpg";
 import SidebarUser from "./SidebarUser";
 
 import "./userdash.css";
-import { checkPrime } from "crypto";
-import { useLocation } from "react-router-dom";
+
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 interface DataType {
   data: {
@@ -30,8 +31,11 @@ const Userdash: React.FC = () => {
 
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
-  const { state } = useLocation();
-  
+
+  const userDetails = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
+
   useEffect(() => {
     axios
       .get<personalDetailType[]>("http://localhost:4000/user/get_all_user")
@@ -62,7 +66,6 @@ const Userdash: React.FC = () => {
         isChecked ? "checked" : "unchecked"
       }`
     );
-
 
     if (isChecked) {
       const checkedUser: CheckedUser = {
@@ -111,7 +114,8 @@ const Userdash: React.FC = () => {
       <SidebarUser />
       <div className="dash-wrapper">
         <h2>
-          Welcome {state.firstName}, You have {state.roles.join(", ")} roles
+          Welcome {userDetails?.firstName}, You have{" "}
+          {userDetails?.roles.join(", ")} roles
         </h2>
         <h3>Request feedback</h3>
         <p>Choose five people to give you feedback.</p>

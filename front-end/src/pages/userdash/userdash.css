@@ -1,4 +1,4 @@
-nav ul {
+.sidebar nav ul {
     background-color: var(--black);
     min-width: 15%;
     height: 100vh;
@@ -9,14 +9,14 @@ nav ul {
     display: block;
 }
 
-nav li {
+.sidebar nav li {
   list-style-type: none;
   padding: 1rem 0 1rem 1rem;
   cursor: pointer;
   color: white;
 }
 
-nav img {
+.sidebar nav img {
   width: 100px;
   padding-bottom: 3rem;
 }
@@ -77,7 +77,7 @@ article input {
   cursor: pointer;
 }
 
-input[type="checkbox"]:checked ~ div {
+.user-list input[type="checkbox"]:checked ~ div {
   background-color: var(--purple-color);
   color: white;
 }

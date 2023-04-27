@@ -1,8 +1,10 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import feedBackSlicer from '../features/feedBackSlicer';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import feedBackSlicer from "../features/feedBackSlicer";
+import authenticatedUserSlicer from "../features/authenticatedUserSlice";
 export const store = configureStore({
   reducer: {
-    feedBack: feedBackSlicer
+    authenticatedUser: authenticatedUserSlicer,
+    feedBack: feedBackSlicer,
   },
 });
 

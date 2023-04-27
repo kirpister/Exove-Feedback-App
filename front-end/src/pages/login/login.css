@@ -10,14 +10,14 @@
   font-size: 2rem;
 }
 
-label {
+.login-form label {
   font-family: inherit;
   color: white;
   display: block;
   margin-bottom: 0.3rem;
 }
 
-input {
+.login-form input {
   width: 200px;
   padding: 0.5rem;
   border-radius: 2px;
@@ -35,29 +35,7 @@ input {
   align-items: center;
 }
 
-/* button {
-    position: relative;
-    width: 198px;
-    background-color: #fff;
-    border-color: #000;
-    /* border-radius: 0; */
-/* margin-top: .7rem;
-    margin-bottom: .7rem;
-    border-width: 3px;
-    padding: .7rem;
-    color: var(--purple-color);
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 1rem;
-    -webkit-transition: .3s ease;
-    -o-transition: .3s ease;
-   transition: .3s ease; 
-    border: solid;
-    -webkit-box-shadow: 5px 5px 0; 
-    box-shadow: 5px 5px 0;
-  } */
-
-button {
+.login-form button {
   margin: 1.2rem;
   padding: 0.7rem 4.2rem 0.7rem 4.2rem;
   font-size: 1rem;
@@ -69,7 +47,7 @@ button {
   letter-spacing: 1px;
 }
 
-button::before {
+.login-form button::before {
   content: "LOGIN";
   position: absolute;
   top: -12%;
@@ -87,7 +65,7 @@ button::before {
   font-weight: bold;
 }
 
-button:hover::before {
+.login-form button:hover::before {
   top: 0;
   left: 0;
 }
