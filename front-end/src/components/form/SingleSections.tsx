@@ -1,46 +1,47 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import SingleQuestion from "./SingleQuestion";
+import { Section } from "./FeedbackForm1";
 
-function SingleSection() {
-  return (
-    <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-          <ul>
-            <li>
-              <SingleQuestion />
-            </li>
-            <li>
-              <SingleQuestion />
-            </li>
-            <li>
-              <SingleQuestion />
-            </li>
-            <li>
-              <SingleQuestion />
-            </li>
-            <li>
-              <SingleQuestion />
-            </li>
-          </ul>
-        </Accordion.Body>
-      </Accordion.Item>
-      {/* <Accordion.Item eventKey="1">
-        <Accordion.Header>Accordion Item #2</Accordion.Header>
-        <Accordion.Body>
-          <ul>
-            <li>question 1</li>
-            <li>question 2</li>
-            <li>question 3</li>
-            <li>question 4</li>
-            <li>question 5</li>
-          </ul>
-        </Accordion.Body>
-      </Accordion.Item> */}
-    </Accordion>
-  );
+interface SingleSectionProps {
+  sections: Section[];
+  deleteQuestion: (index_section: number, index_question: number) => void;
 }
+
+const SingleSection: React.FC<SingleSectionProps> = ({
+  sections,
+  deleteQuestion,
+}) => {
+  return (
+    <>
+      {sections.map((section, i) => {
+        return (
+          <Accordion defaultActiveKey="0" key={section.id}>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <label htmlFor="section"></label>
+                <i className="fa-solid fa-chevron-down"></i>
+                <input type="text" defaultValue={section.name} />
+              </Accordion.Header>
+              <Accordion.Body>
+                {section.questions.map((question, j) => {
+                  return (
+                    <SingleQuestion
+                      key={j}
+                      question={question}
+                      deleteQuestion={deleteQuestion}
+                      index_section={i}
+                      index_question={j}
+                    />
+                  );
+                })}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        );
+      })}
+    </>
+  );
+};
 
 export default SingleSection;
