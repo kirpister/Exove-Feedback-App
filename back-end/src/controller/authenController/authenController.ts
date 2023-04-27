@@ -38,6 +38,7 @@ export const loginController : RequestHandler  =async (req,res,next) => {
       surName: userDetails.personalDetail.surName,
       email: userDetails.personalDetail.email,
       roles: userDetails.work.roles,
+      id: userDetails.id
     };
 
     return res
