@@ -1,0 +1,13 @@
+.single_form {
+  display: flex;
+
+  margin-top: 5rem;
+}
+h1 {
+  color: aqua;
+}
+
+.symbols {
+  display: flex;
+  gap: 2rem;
+}
