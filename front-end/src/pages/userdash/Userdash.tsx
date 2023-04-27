@@ -11,18 +11,21 @@ import { RootState } from "../../app/store";
 const Userdash: React.FC = () => {
 
 
+
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
 
-
-
-  return (
+return (
     <main>
       <SidebarUser />
       <div className="dash-wrapper">
         <h2>
+
           Hello hello {userDetails?.firstName}! 
+
+          Welcome {userDetails?.firstName}, You have {userDetails?.roles.join(", ")} roles
+
         </h2>
         
         <h4>What would you like to do today?</h4>

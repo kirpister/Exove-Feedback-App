@@ -1,14 +1,14 @@
-import { authenticate } from "ldap-authentication";
+import { authenticate } from 'ldap-authentication';
 
 export const auth = async (username: string, password: string) => {
   const options = {
     ldapOpts: {
-      url: "ldap://ldap.jumpcloud.com:389",
+      url: 'ldap://ldap.jumpcloud.com:389',
     },
     userDn: `uid=${username},ou=Users,o=6427e336e50f257fd58e4abd,dc=jumpcloud,dc=com`,
     userPassword: password,
-    userSearchBase: "ou=Users,o=6427e336e50f257fd58e4abd,dc=jumpcloud,dc=com",
-    usernameAttribute: "uid",
+    userSearchBase: 'ou=Users,o=6427e336e50f257fd58e4abd,dc=jumpcloud,dc=com',
+    usernameAttribute: 'uid',
     username: username,
   };
 

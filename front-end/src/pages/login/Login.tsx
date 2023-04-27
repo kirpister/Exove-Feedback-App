@@ -15,7 +15,7 @@ const Login: React.FC = () => {
   let navigate = useNavigate();
 
   const onsubmitHandler = (uname: string, pwd: string) => {
-    return fetch("/log-in", {
+    return fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
