@@ -5,15 +5,17 @@ import { useNavigate } from "react-router-dom";
 import Admindash from "../admindash/Admindash";
 import { UserDetails } from "../../common/types/UserDetails";
 import { ADMIN_ROLE } from "../../common/constants";
+import { useDispatch } from "react-redux";
+import { saveUserDetails } from "../../features/authenticatedUserSlice";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const onsubmitHandler = (uname: string, pwd: string) => {
-    return fetch("/log-in", {
+    return fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,21 +68,7 @@ const Login: React.FC = () => {
             onsubmitHandler(username, password)
               .then((res) => res.json())
               .then((res: UserDetails) => {
-                if (res.roles.includes(ADMIN_ROLE)) {
-                  navigate("/admindash", {
-                    state: {
-                      firstName: res.firstName,
-                      roles: res.roles,
-                    },
-                  });
-                } else {
-                  navigate("/userdash", {
-                    state: {
-                      firstName: res.firstName,
-                      roles: res.roles,
-                    },
-                  });
-                }
+                dispatch(saveUserDetails(res));
               })
           }
         >
