@@ -28,44 +28,39 @@ interface CheckedUser {
 }
 
 const Userdash: React.FC = () => {
-
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
 
-  const userDetails = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
+  const userDetails = useSelector((state: RootState) => state.authenticatedUser.userDetails);
+  console.log(userDetails)
 
   useEffect(() => {
-    axios
-      .get<personalDetailType[]>("http://localhost:4000/user/get_all_user")
-      .then((res) => {
-        console.log(res);
-        const { data, status } = res as unknown as DataType;
-        if (status === 200) {
-          setUsers(data.data);
-        }
-      });
+    axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
+      const { data, status } = res as unknown as DataType;
+      if (status === 200) {
+        setUsers(data.data);
+      }
+    });
   }, []);
 
   const handleSubmit = () => {
-    axios.post('localhost:4000/user/feedback_request', checkedUsers)
-      .then(response => console.log(response.data))
-      .catch(error => console.log(error));
+    const userListId = [];
+    for (const user of checkedUsers) {
+      userListId.push(user.id);
+    }
+    const sendData = {userListId} ;
+    axios
+      .post("/user/feedback_request", sendData)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
     console.log(checkedUsers);
   };
 
-  const handleCheckboxChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    user: any) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
     const isChecked = e.target.checked;
     const userId = user.id;
 
-    console.log(
-      `User ${user.id} ${user.personalDetail.firstName} ${
-        isChecked ? "checked" : "unchecked"
-      }`
-    );
+    console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? "checked" : "unchecked"}`);
 
     if (isChecked) {
       const checkedUser: CheckedUser = {
@@ -75,9 +70,7 @@ const Userdash: React.FC = () => {
 
       setCheckedUsers((prevCheckedUsers) => [...prevCheckedUsers, checkedUser]);
     } else {
-      setCheckedUsers((prevCheckedUsers) =>
-        prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId)
-      );
+      setCheckedUsers((prevCheckedUsers) => prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId));
     }
 
     console.log(checkedUsers);
@@ -89,12 +82,7 @@ const Userdash: React.FC = () => {
       return users?.map((user) => {
         return (
           <article className="user-list">
-            <input
-              type="checkbox"
-              id={user.id}
-              value={user.id}
-              onChange={(e) => handleCheckboxChange(e, user)}
-            />
+            <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
             <div>
               <img src={userimg} alt="user-img" />
               <span>
@@ -114,8 +102,7 @@ const Userdash: React.FC = () => {
       <SidebarUser />
       <div className="dash-wrapper">
         <h2>
-          Welcome {userDetails?.firstName}, You have{" "}
-          {userDetails?.roles.join(", ")} roles
+          Welcome {userDetails?.firstName}, You have {userDetails?.roles.join(", ")} roles
         </h2>
         <h3>Request feedback</h3>
         <p>Choose five people to give you feedback.</p>

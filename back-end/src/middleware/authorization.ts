@@ -1,9 +1,9 @@
-import { RequestHandler } from "express";
-import jwt from "jsonwebtoken";
-import { JWTTokenContent } from "../common/types/Jwt";
-import { AuthRequest } from "../common/types/Request";
+import { RequestHandler } from 'express';
+import jwt from 'jsonwebtoken';
+import { JWTTokenContent } from '../common/types/Jwt';
+import { AuthRequest } from '../common/types/Request';
 
-import { JWT_SECRET_KEY, JWT_TOKEN_COOKIE_NAME } from "../utils/jwt";
+import { JWT_SECRET_KEY, JWT_TOKEN_COOKIE_NAME } from '../utils/jwt';
 
 export const authorization: RequestHandler = async (
   req: AuthRequest,
