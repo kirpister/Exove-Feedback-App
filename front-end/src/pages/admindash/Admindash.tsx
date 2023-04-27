@@ -2,13 +2,20 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import SidebarAdmin from "./SidebarAdmin";
+import { useLocation } from 'react-router-dom';
 
 const Admindash: React.FC = () => {
+
+
+  const { state } = useLocation();
+
+
   const userDetails = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
+
   return (
-    <>
+    <div className="sidebar">
       <SidebarAdmin />
       <div className="dash-wrapper">
         {
@@ -18,7 +25,7 @@ const Admindash: React.FC = () => {
           </h2>
         }
       </div>
-    </>
+    </div>
   );
 };
 

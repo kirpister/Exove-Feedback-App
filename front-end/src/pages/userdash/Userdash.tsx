@@ -7,7 +7,7 @@ import userimg from "../../assets/selfie.jpg";
 import SidebarUser from "./SidebarUser";
 
 import "./userdash.css";
-import { checkPrime } from "crypto";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
@@ -28,11 +28,14 @@ interface CheckedUser {
 }
 
 const Userdash: React.FC = () => {
+
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
+
   const userDetails = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
+
   useEffect(() => {
     axios
       .get<personalDetailType[]>("http://localhost:4000/user/get_all_user")
@@ -46,16 +49,15 @@ const Userdash: React.FC = () => {
   }, []);
 
   const handleSubmit = () => {
-    // axios.post('localhost:4000/user/feedback_request', checkedUsers)
-    //   .then(response => console.log(response.data))
-    //   .catch(error => console.log(error));
+    axios.post('localhost:4000/user/feedback_request', checkedUsers)
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
     console.log(checkedUsers);
   };
 
   const handleCheckboxChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    user: any
-  ) => {
+    user: any) => {
     const isChecked = e.target.checked;
     const userId = user.id;
 

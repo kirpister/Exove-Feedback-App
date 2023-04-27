@@ -8,7 +8,7 @@ const SidebarUser: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="sidebaruser">
+    <div className="sidebar">
       <nav>
         <ul>
           <img className="circle" src={circle} alt="circle" />
