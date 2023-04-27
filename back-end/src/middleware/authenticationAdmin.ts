@@ -10,11 +10,7 @@ const JWT_TOKEN_COOKIE_NAME = 'JWT_TOKEN_COOKIE';
 export const authenticationAdmin: RequestHandler = async (req, res, next) => {
   
   try {
-    console.log('middleaware admin');
     const token = req.cookies[JWT_TOKEN_COOKIE_NAME];
-    console.log('token');
-    console.log(token);
-    // const token = res.cookie
     if (!token) {
       return createErrMessage({ msg: 'token not found', status: StatusCode_Err.FORBIDDEN }, next);
     }
@@ -26,13 +22,9 @@ export const authenticationAdmin: RequestHandler = async (req, res, next) => {
     if ( !roles?.includes('admin')){
       return createErrMessage({ msg: 'your role not admin', status: StatusCode_Err.FORBIDDEN }, next);
     }
-
     req.body.userDetails = { employeeNumber, roles };
-    // console.log('next')
     return next();
-    // Almost done
   } catch {
     return createErrMessage({ msg: 'error token', status: StatusCode_Err.FORBIDDEN }, next);
-    // return next()
   }
 };

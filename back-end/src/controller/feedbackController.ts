@@ -5,7 +5,7 @@ import UserModel from '../model/userModel';
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success, StatusCode_Err } from '../utils/statusCode';
 import UserRequestListModel from '../model/userListModel';
-
+import { UserDetailsType } from '../model/types/answer';
 
 export const getFeedbackController: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
@@ -31,18 +31,13 @@ export const getFeedbackController: RequestHandler = async (req, res, next) => {
 };
 
 export const createFeedbackController: RequestHandler = async (req, res, next) => {
-  const { details, userList, requestedListBy, createdBy } = req.body;
+  const { details, userList, requestedListBy, userDetails } = req.body;
+  const { employeeNumber: createdBy, roles } = userDetails as UserDetailsType;
   // 1. get user token
-  // const userIdToken = req.body.userId
-  // if ( userIdToken !== req.body.userId ) {
-  // return next(new Error())
-  // }
-  // const createBy = userId
 
   // 2. create new feedback:
   try {
     const newFeedback = new FeedbackModel({
-      // details : {title,questions},
       requestedListBy,
       details,
       createdBy,
@@ -96,7 +91,6 @@ export const createFeedbackController: RequestHandler = async (req, res, next) =
 
 export const deleteFeedbackController: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
-  //   const id = '123'
   try {
     const feedback = await FeedbackModel.findOne({ _id: feedbackId });
     if (!feedback) {
