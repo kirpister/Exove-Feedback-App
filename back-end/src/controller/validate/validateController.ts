@@ -8,11 +8,13 @@ import jwt from 'jsonwebtoken';
 const JWT_TOKEN_COOKIE_NAME = 'JWT_TOKEN_COOKIE';
 const JWT_SECRET_KEY = 'shhhhhhh';
 export const validateController: RequestHandler = async (
-  req: AuthRequest,
+  req,
   res,next
 ) => {
   try {
     const token = req.cookies[JWT_TOKEN_COOKIE_NAME];
+    console.log('validate router')
+    console.log(token)
     if (!token) {
       return createErrMessage({ msg: 'token not found', status: StatusCode_Err.FORBIDDEN }, next);
     }

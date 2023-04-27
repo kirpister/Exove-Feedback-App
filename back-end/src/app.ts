@@ -32,7 +32,7 @@ app.use('/private/validate', validateRouter);
 app.use('/', welcomeRouter);
 app.use('/', authenRouter);
 app.use('/feedback', authenticationAdmin, feedBackRouter);
-app.use('/user',authenticationUser, userRouter);
+app.use('/user', authenticationUser, userRouter);
 app.use('/admin', authenticationAdmin, adminRouter);
 
 app.use(errorHandler);
