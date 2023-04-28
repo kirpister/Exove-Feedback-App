@@ -15,7 +15,7 @@ const Admindash: React.FC = () => {
   );
 
   return (
-    <div className="sidebar">
+    <main>
       <SidebarAdmin />
       <div className="dash-wrapper">
         {
@@ -25,7 +25,7 @@ const Admindash: React.FC = () => {
           </h2>
         }
       </div>
-    </div>
+    </main>
   );
 };
 

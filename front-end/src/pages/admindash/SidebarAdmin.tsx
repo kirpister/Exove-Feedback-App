@@ -4,25 +4,29 @@ import "./admindash.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 
 const SidebarAdmin: React.FC = () => {
-  const { state } = useLocation();
+
+  const userDetails: any = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
+
   const dispatch = useAppDispatch();
-  console.log("state", state);
+
   return (
     <div className="sidebar">
       <nav>
         <ul>
           <img className="circle" src={circle} alt="circle" />
-          {state ? (
-            <h2 style={{ color: "white" }}>
-              Welcome {state.firstName} !! You have {state.roles.join(", ")}{" "}
+         
+            <h2>
+              Welcome {userDetails.firstName} !! You have {userDetails.roles.join(", ")}{" "}
               roles
             </h2>
-          ) : (
-            ""
-          )}
+     
     
           <li>
             <NavLink to="/feedbackform">Feedback form</NavLink>
@@ -41,7 +45,10 @@ const SidebarAdmin: React.FC = () => {
 
       <div className="bottom-div">
         
-        <span>Logged in as </span>
+      <div className="avatar">
+      {userDetails.firstName.charAt(0).toUpperCase()}
+      </div>
+        <span>{userDetails.firstName} {userDetails.surName}</span>
         
         <button
           onClick={() => {
