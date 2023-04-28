@@ -38,7 +38,7 @@ const RequestFeedback: React.FC = () => {
   
     useEffect(() => {
       axios
-        .get<personalDetailType[]>("http://localhost:4000/user/get_all_user")
+        .get<personalDetailType[]>("/user/get_all_user")
         .then((res) => {
           console.log(res);
           const { data, status } = res as unknown as DataType;
@@ -49,7 +49,7 @@ const RequestFeedback: React.FC = () => {
     }, []);
 
     const handleSubmit = () => {
-        axios.post('localhost:4000/user/feedback_request', checkedUsers)
+        axios.post('user/feedback_request', checkedUsers)
           .then(response => console.log(response.data))
           .catch(error => console.log(error));
         console.log(checkedUsers);
