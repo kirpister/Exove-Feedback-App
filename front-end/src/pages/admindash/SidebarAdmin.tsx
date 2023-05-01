@@ -22,17 +22,9 @@ const SidebarAdmin: React.FC = () => {
         <ul>
           <img className="circle" src={circle} alt="circle" />
          
-            <h2>
-              Welcome {userDetails.firstName} !! You have {userDetails.roles.join(", ")}{" "}
-              roles
-            </h2>
-     
     
           <li>
             <NavLink to="/feedbackform">Feedback form</NavLink>
-          </li>
-          <li>
-            <NavLink to="/feedbackformold">Feedback form old</NavLink>
           </li>
           <li>
             <NavLink to="/conformation">Conformation</NavLink>
@@ -50,11 +42,11 @@ const SidebarAdmin: React.FC = () => {
       </div>
         <span>{userDetails.firstName} {userDetails.surName}</span>
         
-        <button
+        <p
           onClick={() => {
             dispatch(initiateLogoutSession());
           }}
-        ></button>
+        >LOG OUT</p>
       </div>
     </div>
   );
