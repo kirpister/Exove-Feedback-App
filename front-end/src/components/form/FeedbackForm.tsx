@@ -7,6 +7,7 @@ import SingleSection from "./SingleSections";
 import classes from "./Feedbackform.module.css";
 import axios from "axios";
 import { useAppSelector } from "../../app/hooks";
+import CreateFeedback from "../createFeedback/CreateFeedback";
 
 export interface Question {
   question: string;
@@ -37,26 +38,28 @@ const FeedbackForm: React.FC = () => {
   // }
 
   if (!sections) {
-    return <p>Loading sections...</p>;
+    if (sections.length > 1) {
+      return <p>Loading sections...</p>;
+    }
   }
 
   const deleteQuestion = (index_section: number, index_question: number): void => {
     console.log("index_q", index_question);
     console.log("index_s", index_section);
-
     // sections[index_section].questions.splice(index_question, 1);
     // setSections([...sections]);
   };
 
   return (
-    <div className="admindash_wrapper">
+    <>
       <SidebarAdmin />
-
       <div className="dash-wrapper" style={{ color: "purple" }}>
         <SingleSection sections={sections} deleteQuestion={deleteQuestion} />
-        {/* <button onClick={() => postFeedbackForm}>Send</button> */}
+        <div>
+          <CreateFeedback/>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

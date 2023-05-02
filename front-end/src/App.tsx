@@ -6,7 +6,7 @@ import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
 
 import FeedbackForm from "./components/form/FeedbackForm";
-import Confirmation from "./components/confirm/Confirmation";
+import CreatedUserList from "./components/confirm/CreateUserList";
 import AllFeedbacks from "./components/allfeedbacks/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
 import { useEffect } from "react";
@@ -17,6 +17,7 @@ import RequestFeedback from "./pages/userdash/RequestFeedback";
 const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
+    console.log("dispatch");
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
@@ -31,8 +32,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Admindash />} />
-            <Route path="/feedbackform" element={<FeedbackForm />} />
-            <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="feedbackform" element={<FeedbackForm />} />
+            <Route path="selectUser" element={<CreatedUserList />} />
+            {/* <Route path="confirmation" element={<CreateFeedback />} /> */}
             <Route path="/allfeedbacks" element={<AllFeedbacks />} />
           </Route>
         </Routes>
@@ -50,7 +52,7 @@ const App = () => {
   } else {
     return (
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Login />}>
           <Route index element={<Login />} />
         </Route>
       </Routes>

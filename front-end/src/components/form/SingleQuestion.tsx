@@ -30,12 +30,11 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
     type: QuestionType.selection,
     title: question.question,
   });
+  const [disable, setDisable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const submitAddNewQuestion = (e: FormEvent) => {
-    console.log("submit");
-    e.preventDefault();
-    console.log(state)
-    // dispatch(updateQuestion(state));
+  const submitAddNewQuestion = () => {
+    setDisable(true);
+    dispatch(updateQuestion(state));
   };
   const setType = (value: QuestionType) => {
     setState({ ...state, type: value });
@@ -43,16 +42,19 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
   const renderQuestionOption = () => {
     let list = [<></>];
     for (let i in QuestionType) {
-      list.push(<option value={i}>{i}</option>);
+      list.push(
+        <option value={i} key={i}>
+          {i}
+        </option>
+      );
     }
     return list;
   };
 
-
   return (
     <ListGroup>
       <ListGroup.Item>
-        <form action="#" className={classes.single_form} onSubmit={submitAddNewQuestion}>
+        <form action="#" className={classes.single_form}>
           <div>
             <label htmlFor={`question${index_section}_${index_question}`}></label>
             <input type="text" id={`question${index_section}_${index_question}`} defaultValue={question.question} />
@@ -72,7 +74,9 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
               >
                 {renderQuestionOption()}
               </select>
-              <button type="submit">Add +</button>
+              <button onClick={submitAddNewQuestion} disabled={disable}>
+                Add +
+              </button>
             </div>
           </div>
         </form>

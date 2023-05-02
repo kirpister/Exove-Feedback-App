@@ -3,7 +3,7 @@ import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 
 const AllFeedbacks = () => {
   return (
-    <div className="admindash_wrapper">
+    <>
       <SidebarAdmin />
 
       <div>
@@ -11,7 +11,7 @@ const AllFeedbacks = () => {
           <h1>All feedbacks will be here</h1>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
