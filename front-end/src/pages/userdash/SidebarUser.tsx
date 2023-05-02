@@ -1,5 +1,5 @@
 import React from "react";
-import "./userdash.css";
+import userstyles from "./userdash.module.css";
 import circle from "../../assets/circle-half.png";
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -18,8 +18,8 @@ const SidebarUser: React.FC = () => {
 
   return (
     <>
-    <div className="sidebar">
-      <nav>
+    <div className={userstyles.sidebar}>
+      <nav className={userstyles.usernav}>
         <ul>
           <img className="circle" src={circle} alt="circle" />
           <NavLink to="/"><li>Main</li></NavLink>
@@ -29,14 +29,15 @@ const SidebarUser: React.FC = () => {
       </nav>
       </div>
       
-      <div className="bottom-div">
+      <div className={userstyles.bottomdiv}>
 
-      <div className="avatar">
+      <div className={userstyles.avatar}>
       {userDetails.firstName.charAt(0).toUpperCase()}
       </div>
         <span>{userDetails.firstName} {userDetails.surName}</span>
     
         <p
+        className={userstyles.logout}
           onClick={() => {
             // dispatch(initiateLogoutSession());
             dispatch(initiateLogoutSession(navigate));

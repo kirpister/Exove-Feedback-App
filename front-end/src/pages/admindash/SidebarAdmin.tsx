@@ -1,6 +1,5 @@
 import React from "react";
 import circle from "../../assets/circle-half.png";
-import "./admindash.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";

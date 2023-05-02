@@ -1,22 +1,21 @@
+.usermain {
+  width: calc(100vw - 18vw);
+}
+
 .sidebar {
   max-width: 20vw;
 }
 
 .sidebar nav {
+  background-color: var(--black);
+  min-width: 18vw;
+  max-width: 18vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: block;
+  font-family: var(--main-font);
 
-    background-color: var(--black);
-    min-width: 18vw;
-    max-width: 18vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    display: block;
-    font-family: var(--main-font);
-
-}
-
-main {
-  width: calc(100vw - 18vw);
 }
 
 .sidebar nav li {
@@ -26,26 +25,42 @@ main {
   color: white;
 }
 
-nav img {
+.usernav img {
   width: 100px;
   margin-left: -2rem;
   padding-bottom: 3rem;
+}
+
+.usernav a {
+  text-decoration: none;
+  color: white;
 }
 
 .sidebar li a {
   text-decoration: none;
 }
 
-.bottom-div span {
-  color: white;
-  margin: 0 auto;
-  font-family: var(--main-font);
+.bottomdiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 4rem;
+  margin-bottom: 2rem;
 }
 
-.bottom-div p {
+.bottomdiv span {
   color: white;
+  padding: 0.5rem;
+  font-family: var(--main-font);
   margin: 0 auto;
-  margin-bottom: 1rem;
+}
+
+.bottomdiv .logout {
+  color: white;
+  cursor: pointer;
 }
 
 .avatar {
@@ -65,82 +80,59 @@ nav img {
 /********  USER DASHBOARD  ********/
 
 
-.userdash-wrapper {
-
+.userdash {
   background: white;
   color: var(--black);
-  /* margin: 5% 30%; */
+  margin: 7% 30%;
 }
 
-
-.userdash-wrapper h2, h3,
-p {
-  margin: 1rem;
+.userdash h3, p {
+  margin: 2rem .2rem;
+  color: var(--black);
   font-family: var(--main-font);
 }
 
-.userdash-wrapper h2 {
+.userdash h2 {
   color: var(--purple-color);
   font-weight: bold;
-}
-
-.userdash-wrapper button {
-  margin: 1.2rem;
-  padding: 0.7rem 4.2rem 0.7rem 4.2rem;
-  font-size: 1rem;
-  outline: none;
-  border: 2px solid rgb(0, 0, 0);
-  background-color: var(--purple-color);
-  color: rgb(0, 0, 0);
-  position: relative;
-  letter-spacing: 1px;
   font-family: var(--main-font);
 }
 
-.userdash-wrapper button::before {
-  content: "SUBMIT";
-  position: absolute;
-  top: -6%;
-  right: 1%;
-  background-color: rgb(255, 255, 255);
+.userdash button {
+  width: fit-content;
+  padding: .5rem 4rem;
   border: 2px solid black;
-  width: 100%;
-  height: 100%;
-  color: rgb(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.3s ease;
-  transform: translate(-1px, -1px);
+  background-color: transparent;
+  font-family: inherit;
   font-weight: bold;
+  margin: 2rem .2rem;
 }
 
-.userdash-wrapper button:hover::before {
-  top: 0;
-  left: 0;
+.userdash button:hover {
+  background-color: var(--purple-color);
+  color: white;
+  border: 1.5px solid var(--purple-color);
 }
 
-.userdash-wrapper button {
-  margin-top: 2.5rem;
-}
-
-.userdash-wrapper button::before {
-  content: "SUBMIT";
-}
-
-.user-list .avatar {
+.userlist .avatar {
   margin: 0;
 }
 
-.userdash-wrapper h4 {
-  margin: 5rem 0 0 1rem;
+.userdash h4 {
+  margin: 5rem .2rem;
 }
 
-.userdash-wrapper .user-actions {
+.useractions {
   display: flex;
   justify-content: flex-start;
   margin: 3rem 0 0 0.2rem;
   font-size: 1.2rem;
+}
+
+.useractions button {
+  width: fit-content;
+  padding: .5rem 3rem;
+  font-weight: normal;
 }
 
 /******** CHECKBOXES ********/
@@ -149,7 +141,7 @@ article {
   position: relative;
   width: 220px;
   height: 70px;
-  margin: 0.5rem;
+  margin: .5rem .5rem;
   float: left;
   border: 2px solid var(--purple-color);
   box-sizing: border-box;
@@ -181,7 +173,7 @@ article input {
   cursor: pointer;
 }
 
-.user-list input[type="checkbox"]:checked ~ div {
+.userlist input[type="checkbox"]:checked ~ div {
   background-color: var(--purple-color);
   color: white;
 }
