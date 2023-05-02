@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { personalDetailType } from "../../model/types/user";
+import { useNavigate } from "react-router-dom";
 
 import SidebarUser from "./SidebarUser";
 
@@ -30,6 +31,7 @@ const RequestFeedback: React.FC = () => {
 
     const [users, setUsers] = useState<personalDetailType[]>([]);
     const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
+    const navigate = useNavigate();
   
     const userDetails: any = useSelector(
       (state: RootState) => state.authenticatedUser.userDetails
@@ -48,13 +50,27 @@ const RequestFeedback: React.FC = () => {
         });
     }, []);
 
+    // const handleSubmit = () => {
+    //     axios.post('user/feedback_request', checkedUsers)
+    //       .then(response => console.log(response.data))
+    //       .catch(error => console.log(error));
+    //     console.log(checkedUsers);
+    //   };
+    
+ 
     const handleSubmit = () => {
         axios.post('user/feedback_request', checkedUsers)
-          .then(response => console.log(response.data))
-          .catch(error => console.log(error));
-        console.log(checkedUsers);
+          .then(response => {
+            console.log(response.data);
+            alert('Success!');
+            navigate('/');
+          })
+          .catch(error => {
+            console.log(error);
+            alert('Sorry, something went wrong!');
+          });
       };
-    
+
       const handleCheckboxChange = (
         e: React.ChangeEvent<HTMLInputElement>,
         user: any) => {
@@ -102,7 +118,6 @@ const RequestFeedback: React.FC = () => {
                   onChange={(e) => handleCheckboxChange(e, user)}
                 />
                 <div>
-                  {/* <img src={userimg} alt="user-img" /> */}
                   <div className="avatar">
           {userDetails.firstName.charAt(0).toUpperCase()}
           </div>
@@ -119,13 +134,10 @@ const RequestFeedback: React.FC = () => {
       };
 
 
-
-
-
-    return (
+return (
         <div>
             <SidebarUser />
-      <div className="dash-wrapper">
+      <div className="userdash-wrapper">
  
         <h2>Request feedback</h2>
         <p>Choose five colleagues to give you feedback.</p>

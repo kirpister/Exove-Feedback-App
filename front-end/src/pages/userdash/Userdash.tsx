@@ -19,12 +19,10 @@ const Userdash: React.FC = () => {
 return (
     <main>
       <SidebarUser />
-      <div className="dash-wrapper">
+      <div className="userdash-wrapper">
         <h2>
 
           Hello hello {userDetails?.firstName}! 
-
-          Welcome {userDetails?.firstName}, You have {userDetails?.roles.join(", ")} roles
 
         </h2>
         

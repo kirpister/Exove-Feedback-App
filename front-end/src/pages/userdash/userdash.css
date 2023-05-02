@@ -3,18 +3,20 @@
 }
 
 .sidebar nav {
-  background-color: var(--black);
-  min-width: 20vw;
-  max-width: 20vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  display: block;
-  font-family: var(--main-font);
+
+    background-color: var(--black);
+    min-width: 18vw;
+    max-width: 18vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    display: block;
+    font-family: var(--main-font);
+
 }
 
 main {
-  width: 80vw;
+  width: calc(100vw - 18vw);
 }
 
 .sidebar nav li {
@@ -62,25 +64,27 @@ nav img {
 
 /********  USER DASHBOARD  ********/
 
-.dash-wrapper {
+
+.userdash-wrapper {
+
   background: white;
   color: var(--black);
   /* margin: 5% 30%; */
 }
 
-.dash-wrapper h2,
-h3,
+
+.userdash-wrapper h2, h3,
 p {
   margin: 1rem;
   font-family: var(--main-font);
 }
 
-.dash-wrapper h2 {
+.userdash-wrapper h2 {
   color: var(--purple-color);
   font-weight: bold;
 }
 
-.dash-wrapper button {
+.userdash-wrapper button {
   margin: 1.2rem;
   padding: 0.7rem 4.2rem 0.7rem 4.2rem;
   font-size: 1rem;
@@ -93,7 +97,7 @@ p {
   font-family: var(--main-font);
 }
 
-.dash-wrapper button::before {
+.userdash-wrapper button::before {
   content: "SUBMIT";
   position: absolute;
   top: -6%;
@@ -111,16 +115,16 @@ p {
   font-weight: bold;
 }
 
-.dash-wrapper button:hover::before {
+.userdash-wrapper button:hover::before {
   top: 0;
   left: 0;
 }
 
-.dash-wrapper button {
+.userdash-wrapper button {
   margin-top: 2.5rem;
 }
 
-.dash-wrapper button::before {
+.userdash-wrapper button::before {
   content: "SUBMIT";
 }
 
@@ -128,11 +132,11 @@ p {
   margin: 0;
 }
 
-.dash-wrapper h4 {
+.userdash-wrapper h4 {
   margin: 5rem 0 0 1rem;
 }
 
-.dash-wrapper .user-actions {
+.userdash-wrapper .user-actions {
   display: flex;
   justify-content: flex-start;
   margin: 3rem 0 0 0.2rem;
