@@ -1,12 +1,16 @@
+.sidebar {
+  max-width: 20vw;
+}
+
 .sidebar nav {
-    background-color: var(--black);
-    min-width: 20vw;
-    max-width: 20vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    display: block;
-    font-family: var(--main-font);
+  background-color: var(--black);
+  min-width: 20vw;
+  max-width: 20vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: block;
+  font-family: var(--main-font);
 }
 
 main {
@@ -56,19 +60,16 @@ nav img {
   margin: 0 auto;
 }
 
-
-
 /********  USER DASHBOARD  ********/
-
-
 
 .dash-wrapper {
   background: white;
   color: var(--black);
-  margin: 5% 30%;
+  /* margin: 5% 30%; */
 }
 
-.dash-wrapper h2, h3,
+.dash-wrapper h2,
+h3,
 p {
   margin: 1rem;
   font-family: var(--main-font);
@@ -79,7 +80,7 @@ p {
   font-weight: bold;
 }
 
-.dash-wrapper button {
+/* .dash-wrapper button {
   margin: 1.2rem;
   padding: 0.7rem 4.2rem 0.7rem 4.2rem;
   font-size: 1rem;
@@ -90,9 +91,9 @@ p {
   position: relative;
   letter-spacing: 1px;
   font-family: var(--main-font);
-}
+} */
 
-.dash-wrapper button::before {
+/* .dash-wrapper button::before {
   content: "SUBMIT";
   position: absolute;
   top: -6%;
@@ -119,9 +120,9 @@ p {
   margin-top: 2.5rem;
 }
 
-.dash-wrapper button::before {
+/* .dash-wrapper button::before {
   content: "SUBMIT";
-}
+} */
 
 .user-list .avatar {
   margin: 0;
@@ -134,10 +135,9 @@ p {
 .dash-wrapper .user-actions {
   display: flex;
   justify-content: flex-start;
-  margin: 3rem 0 0 .2rem;
+  margin: 3rem 0 0 0.2rem;
   font-size: 1.2rem;
 }
-
 
 /******** CHECKBOXES ********/
 
