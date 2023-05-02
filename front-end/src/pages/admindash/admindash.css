@@ -12,7 +12,7 @@ nav a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 4rem;
   margin-bottom: 2rem;
