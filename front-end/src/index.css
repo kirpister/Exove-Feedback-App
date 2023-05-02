@@ -34,9 +34,9 @@ body {
   font-family: var(--main-font);
 }
 
-main {
+/* main {
   width: 100vw;
-}
+} */
 
 .admindash_wrapper {
   display: grid;

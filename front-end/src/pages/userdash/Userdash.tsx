@@ -1,7 +1,7 @@
 import React from "react";
 import SidebarUser from "./SidebarUser";
 
-import "./userdash.css";
+import userstyles from "./userdash.module.css";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
@@ -17,19 +17,17 @@ const Userdash: React.FC = () => {
   );
 
 return (
-    <main>
+    <main className={userstyles.usermain}>
       <SidebarUser />
-      <div className="userdash-wrapper">
+      <div className={userstyles.userdash}>
         <h2>
-
-          Hello hello {userDetails?.firstName}! 
-
+            Hello hello {userDetails?.firstName}! 
         </h2>
         
         <h4>What would you like to do today?</h4>
-        <div className="user-actions">
-            <p>Give feedback</p>
-            <p>Request Feedback</p>
+        <div className={userstyles.useractions}>
+            <button>Give Feedback</button>
+            <button>Request Feedback</button>
         </div>
       </div>
     </main>

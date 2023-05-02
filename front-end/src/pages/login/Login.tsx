@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import loginstyles from "./login.module.css";
 import circle from "../../assets/circle-half.png";
 import { useNavigate } from "react-router-dom";
 import Admindash from "../admindash/Admindash";
@@ -36,12 +36,12 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className={loginstyles.wrapper}>
       <div>
         <img className="circle" src={circle} alt="circle" />
       </div>
 
-      <div className="login-form">
+      <div className={loginstyles.loginform}>
         <h2>LOGIN</h2>
 
         <div>
@@ -63,7 +63,6 @@ const Login: React.FC = () => {
         </div>
 
         <button
-          className="login-btn"
           onClick={() =>
             onsubmitHandler(username, password)
               .then((res) => res.json())
