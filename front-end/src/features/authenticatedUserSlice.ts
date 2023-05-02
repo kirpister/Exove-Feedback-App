@@ -56,7 +56,7 @@ export const initiateLogoutSession = (navigagte: NavigateFunction) => {
       const { status } = await logoutSession();
       if (status === 200) {
         dispatch(logout());
-        navigagte("/login");
+        navigagte("/");
       }
     } catch (error) {
       dispatch(setIsLoading(false));

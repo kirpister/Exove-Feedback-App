@@ -7,6 +7,7 @@ function CreateFeedback() {
     return sendQuestion.map((question, index) => {
       return (
         <div>
+          <p>order: {question.order}</p>
           <p>
             title:
             {question.title}

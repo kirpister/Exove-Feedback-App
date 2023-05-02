@@ -61,6 +61,7 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
           <div>
             <label htmlFor={`question${index_section}_${index_question}`}></label>
             <input
+            disabled={disable}
               type="text"
               id={`question${index_section}_${index_question}`}
               defaultValue={question.question}
