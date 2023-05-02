@@ -1,7 +1,7 @@
 import React from "react";
 import circle from "../../assets/circle-half.png";
 import "./admindash.css";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ const SidebarAdmin: React.FC = () => {
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
-
+const navigate = useNavigate()
   const dispatch = useAppDispatch();
 
   return (
@@ -44,7 +44,7 @@ const SidebarAdmin: React.FC = () => {
         
         <p
           onClick={() => {
-            dispatch(initiateLogoutSession());
+            dispatch(initiateLogoutSession(navigate));
           }}
         >LOG OUT</p>
       </div>

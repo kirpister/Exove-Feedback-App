@@ -49,11 +49,7 @@ const RequestFeedback: React.FC = () => {
     }, []);
 
     const handleSubmit = () => {
-<<<<<<< HEAD
-        axios.post('/user/feedback_request', checkedUsers)
-=======
         axios.post('user/feedback_request', checkedUsers)
->>>>>>> d277850562284d7d7983f7f6ba1b70f4d4f64fa7
           .then(response => console.log(response.data))
           .catch(error => console.log(error));
         console.log(checkedUsers);
