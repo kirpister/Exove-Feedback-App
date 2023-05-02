@@ -43,7 +43,10 @@ const FeedbackForm: React.FC = () => {
     }
   }
 
-  const deleteQuestion = (index_section: number, index_question: number): void => {
+  const deleteQuestion = (
+    index_section: number,
+    index_question: number
+  ): void => {
     console.log("index_q", index_question);
     console.log("index_s", index_section);
     // sections[index_section].questions.splice(index_question, 1);
@@ -53,10 +56,10 @@ const FeedbackForm: React.FC = () => {
   return (
     <>
       <SidebarAdmin />
-      <div className="dash-wrapper" style={{ color: "purple" }}>
+      <div className={classes.dashwrapper} style={{ color: "purple" }}>
         <SingleSection sections={sections} deleteQuestion={deleteQuestion} />
         <div>
-          <CreateFeedback/>
+          <CreateFeedback />
         </div>
       </div>
     </>

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import SidebarAdmin from "./SidebarAdmin";
 import { useLocation } from "react-router-dom";
+import classes from "./Admindash.module.css";
 
 const Admindash: React.FC = () => {
   const { state } = useLocation();
@@ -14,7 +15,7 @@ const Admindash: React.FC = () => {
   return (
     <main>
       <SidebarAdmin />
-      <div className="dash-wrapper">
+      <div className={classes.dash_wrapper}>
         {
           <h2>
             Welcome {userDetails?.firstName} !! You have{" "}

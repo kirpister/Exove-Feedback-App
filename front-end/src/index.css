@@ -38,7 +38,7 @@ body {
   width: 100vw;
 } */
 
-.admindash_wrapper {
+.global_wrapper {
   display: grid;
   grid-template-columns: 0.5fr 2fr;
 }
