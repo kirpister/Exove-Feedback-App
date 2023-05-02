@@ -1,0 +1,54 @@
+.wrapper {
+  background-color: var(--black);
+  height: 100vh;
+  width: 100vw;
+}
+
+.wrapper h2 {
+  font-family: var(--bold-font);
+  color: white;
+  margin: 2rem;
+  font-size: 2rem;
+}
+
+.loginform label {
+  font-family: inherit;
+  color: white;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.loginform input {
+  width: 200px;
+  padding: 0.5rem;
+  border-radius: 2px;
+  border: none;
+  font-family: inherit;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.loginform {
+  margin-top: -15%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginform button {
+  width: fit-content;
+  padding: .5rem 4.7rem;
+  border: 2px solid black;
+  background-color: white;
+  font-family: inherit;
+  font-weight: bold;
+  margin-top: 1.8rem;
+  border-radius: 2px;
+}
+
+.loginform button:hover {
+  background-color: var(--purple-color);
+  color: white;
+  border: 1.5px solid var(--purple-color);
+}

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import SidebarUser from "./SidebarUser";
 
-import "./userdash.css";
+import userstyles from "./userdash.module.css";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
@@ -43,13 +43,6 @@ const RequestFeedback: React.FC = () => {
       }
     });
   }, []);
-
-  // const handleSubmit = () => {
-  //     axios.post('user/feedback_request', checkedUsers)
-  //       .then(response => console.log(response.data))
-  //       .catch(error => console.log(error));
-  //     console.log(checkedUsers);
-  //   };
 
   const handleSubmit = () => {
     let userListId = [];
@@ -100,10 +93,10 @@ const RequestFeedback: React.FC = () => {
         //     return null;
         // }
         return (
-          <article className="user-list">
+          <article className={userstyles.userlist}>
             <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
             <div>
-              <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
+              <div className={userstyles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
               <span>
                 {user.personalDetail.firstName} {user.personalDetail.surName}
                 <br />
@@ -117,17 +110,17 @@ const RequestFeedback: React.FC = () => {
   };
 
   return (
-    <div>
+    <main className={userstyles.usermain}>
       <SidebarUser />
-      <div className="userdash-wrapper">
+      <div className={userstyles.userdash}>
         <h2>Request feedback</h2>
         <p>Choose five colleagues to give you feedback.</p>
 
-        <div className="users">{renderUser(users)}</div>
+        <div className={userstyles.users}>{renderUser(users)}</div>
 
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={handleSubmit}>SUBMIT</button>
       </div>
-    </div>
+    </main>
   );
 };
 
