@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { AppDispatch } from "../app/store";
 import { UserDetails } from "../common/types/UserDetails";
 import { logoutSession } from "../services/logout";
@@ -49,12 +50,13 @@ export const initiateValidateSession = () => {
   };
 };
 
-export const initiateLogoutSession = () => {
+export const initiateLogoutSession = (navigagte: NavigateFunction) => {
   return async (dispatch: AppDispatch) => {
     try {
       const { status } = await logoutSession();
       if (status === 200) {
         dispatch(logout());
+        navigagte("/");
       }
     } catch (error) {
       dispatch(setIsLoading(false));
@@ -62,6 +64,5 @@ export const initiateLogoutSession = () => {
   };
 };
 
-export const { saveUserDetails, setIsLoading, logout } =
-  authenticatedUserSlice.actions;
+export const { saveUserDetails, setIsLoading, logout } = authenticatedUserSlice.actions;
 export default authenticatedUserSlice.reducer;

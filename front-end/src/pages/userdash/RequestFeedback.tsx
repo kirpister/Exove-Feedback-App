@@ -28,117 +28,99 @@ interface CheckedUser {
 }
 
 const RequestFeedback: React.FC = () => {
+  const [users, setUsers] = useState<personalDetailType[]>([]);
+  const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
+  const navigate = useNavigate();
 
-    const [users, setUsers] = useState<personalDetailType[]>([]);
-    const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
-    const navigate = useNavigate();
-  
-    const userDetails: any = useSelector(
-      (state: RootState) => state.authenticatedUser.userDetails
-    );
-  
-  
-    useEffect(() => {
-      axios
-        .get<personalDetailType[]>("/user/get_all_user")
-        .then((res) => {
-          console.log(res);
-          const { data, status } = res as unknown as DataType;
-          if (status === 200) {
-            setUsers(data.data);
-          }
-        });
-    }, []);
+  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
 
-    // const handleSubmit = () => {
-    //     axios.post('user/feedback_request', checkedUsers)
-    //       .then(response => console.log(response.data))
-    //       .catch(error => console.log(error));
-    //     console.log(checkedUsers);
-    //   };
-    
- 
-    const handleSubmit = () => {
-        axios.post('user/feedback_request', checkedUsers)
-          .then(response => {
-            console.log(response.data);
-            alert('Success!');
-            navigate('/');
-          })
-          .catch(error => {
-            console.log(error);
-            alert('Sorry, something went wrong!');
-          });
+  useEffect(() => {
+    axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
+      console.log(res);
+      const { data, status } = res as unknown as DataType;
+      if (status === 200) {
+        setUsers(data.data);
+      }
+    });
+  }, []);
+
+  // const handleSubmit = () => {
+  //     axios.post('user/feedback_request', checkedUsers)
+  //       .then(response => console.log(response.data))
+  //       .catch(error => console.log(error));
+  //     console.log(checkedUsers);
+  //   };
+
+  const handleSubmit = () => {
+    let userListId = [];
+    if (checkedUsers.length > 1) {
+      for (let user of checkedUsers) {
+        // sendList.userListId.push(user);
+        userListId.push(user.id);
+      }
+    }
+    axios
+      .post("user/feedback_request", { userListId: userListId })
+      .then((response) => {
+        console.log(response.data);
+        alert("Success!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Sorry, something went wrong!");
+      });
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
+    const isChecked = e.target.checked;
+    const userId = user.id;
+
+    console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? "checked" : "unchecked"}`);
+
+    if (isChecked) {
+      const checkedUser: CheckedUser = {
+        id: userId,
+        personalDetail: user.personalDetail,
       };
 
-      const handleCheckboxChange = (
-        e: React.ChangeEvent<HTMLInputElement>,
-        user: any) => {
-        const isChecked = e.target.checked;
-        const userId = user.id;
-    
-        console.log(
-          `User ${user.id} ${user.personalDetail.firstName} ${
-            isChecked ? "checked" : "unchecked"
-          }`
+      setCheckedUsers((prevCheckedUsers) => [...prevCheckedUsers, checkedUser]);
+    } else {
+      setCheckedUsers((prevCheckedUsers) => prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId));
+    }
+
+    console.log(checkedUsers);
+  };
+
+  const renderUser = (usersList: any) => {
+    if (Array.isArray(usersList)) {
+      return usersList.map((user) => {
+        // console.log(`current id: ${userDetails.id}`);
+
+        // if (user.id === userDetails?.id) {
+        //     return null;
+        // }
+        return (
+          <article className="user-list">
+            <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
+            <div>
+              <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
+              <span>
+                {user.personalDetail.firstName} {user.personalDetail.surName}
+                <br />
+                {user.work.roles[0]}
+              </span>
+            </div>
+          </article>
         );
-    
-        if (isChecked) {
-          const checkedUser: CheckedUser = {
-            id: userId,
-            personalDetail: user.personalDetail,
-          };
-    
-          setCheckedUsers((prevCheckedUsers) => [...prevCheckedUsers, checkedUser]);
-        } else {
-          setCheckedUsers((prevCheckedUsers) =>
-            prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId)
-          );
-        }
-    
-        console.log(checkedUsers);
-      };
+      });
+    }
+  };
 
-      const renderUser = (usersList: any) => {
-        if (Array.isArray(usersList)) {
-         
-          return usersList.map((user) => {
-    
-            // console.log(`current id: ${userDetails.id}`);
-    
-            // if (user.id === userDetails?.id) {
-            //     return null;
-            // }
-            return (    
-              <article className="user-list">
-                <input
-                  type="checkbox"
-                  id={user.id}
-                  value={user.id}
-                  onChange={(e) => handleCheckboxChange(e, user)}
-                />
-                <div>
-                  <div className="avatar">
-          {userDetails.firstName.charAt(0).toUpperCase()}
-          </div>
-                  <span>
-                    {user.personalDetail.firstName} {user.personalDetail.surName}
-                    <br />
-                    {user.work.roles[0]}
-                  </span>
-                </div>
-              </article>
-            );
-          });
-        }
-      };
-
-
-return (
-        <div>
-            <SidebarUser />
+  return (
+    <div>
+      <SidebarUser />
       <div className="userdash-wrapper">
- 
         <h2>Request feedback</h2>
         <p>Choose five colleagues to give you feedback.</p>
 
@@ -146,8 +128,8 @@ return (
 
         <button onClick={handleSubmit}>Submit</button>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default RequestFeedback;
