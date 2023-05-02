@@ -33,3 +33,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--main-font);
 }
+
+main {
+  width: 100vw;
+}
+
+.admindash_wrapper {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+}

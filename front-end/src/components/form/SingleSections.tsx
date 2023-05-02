@@ -1,10 +1,11 @@
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import SingleQuestion from "./SingleQuestion";
-import { Section } from "./FeedbackForm1";
+import { Section } from "./FeedbackForm";
 
 interface SingleSectionProps {
   sections: Section[];
+
   deleteQuestion: (index_section: number, index_question: number) => void;
 }
 
@@ -14,7 +15,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({
 }) => {
   return (
     <>
-      {sections.map((section, i) => {
+      {sections.map((section, i, changeHandler) => {
         return (
           <Accordion defaultActiveKey="0" key={section.id}>
             <Accordion.Item eventKey="0">

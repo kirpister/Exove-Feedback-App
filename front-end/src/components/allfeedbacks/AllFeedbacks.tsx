@@ -3,15 +3,15 @@ import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 
 const AllFeedbacks = () => {
   return (
-    <>
+    <div className="admindash_wrapper">
       <SidebarAdmin />
 
-      <div className="dash-wrapper">
-        <div style={{ color: "purple" }}>
+      <div>
+        <div style={{ color: "purple" }} className="dash-wrapper">
           <h1>All feedbacks will be here</h1>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
