@@ -55,7 +55,6 @@ const RequestFeedback: React.FC = () => {
     let userListId = [];
     if (checkedUsers.length > 1) {
       for (let user of checkedUsers) {
-        // sendList.userListId.push(user);
         userListId.push(user.id);
       }
     }
