@@ -5,9 +5,9 @@ import Login from "./pages/login/Login";
 import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
 
-import FeedbackForm1 from "./components/form/FeedbackForm1";
-import Conformation from "./components/form/Conformation";
-import AllFeedbacks from "./components/form/AllFeedbacks";
+import FeedbackForm from "./components/form/FeedbackForm";
+import Confirmation from "./components/confirm/Confirmation";
+import AllFeedbacks from "./components/allfeedbacks/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
 import { useEffect } from "react";
 import { initiateValidateSession } from "./features/authenticatedUserSlice";
@@ -31,8 +31,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Admindash />} />
-            <Route path="/feedbackform" element={<FeedbackForm1 />} />
-            <Route path="/conformation" element={<Conformation />} />
+            <Route path="/feedbackform" element={<FeedbackForm />} />
+            <Route path="/confirmation" element={<Confirmation />} />
             <Route path="/allfeedbacks" element={<AllFeedbacks />} />
           </Route>
         </Routes>

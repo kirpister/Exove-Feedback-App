@@ -7,9 +7,7 @@ import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
-
 const SidebarAdmin: React.FC = () => {
-
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
@@ -21,13 +19,12 @@ const navigate = useNavigate()
       <nav>
         <ul>
           <img className="circle" src={circle} alt="circle" />
-         
-    
+
           <li>
             <NavLink to="/feedbackform">Feedback form</NavLink>
           </li>
           <li>
-            <NavLink to="/conformation">Conformation</NavLink>
+            <NavLink to="/confirmation">Conformation</NavLink>
           </li>
           <li>
             <NavLink to="/allfeedbacks">All feedbacks</NavLink>
@@ -36,17 +33,20 @@ const navigate = useNavigate()
       </nav>
 
       <div className="bottom-div">
-        
-      <div className="avatar">
-      {userDetails.firstName.charAt(0).toUpperCase()}
-      </div>
-        <span>{userDetails.firstName} {userDetails.surName}</span>
-        
+        <div className="avatar">
+          {userDetails.firstName.charAt(0).toUpperCase()}
+        </div>
+        <span>
+          {userDetails.firstName} {userDetails.surName}
+        </span>
+
         <p
           onClick={() => {
             dispatch(initiateLogoutSession(navigate));
           }}
-        >LOG OUT</p>
+        >
+          LOG OUT
+        </p>
       </div>
     </div>
   );

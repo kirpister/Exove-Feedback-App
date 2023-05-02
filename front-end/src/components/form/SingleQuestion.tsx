@@ -1,6 +1,6 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Question } from "./FeedbackForm1";
+import { Question } from "./FeedbackForm";
 import classes from "./SingleQuestion.module.css";
 
 interface SingleQuestionProps {
@@ -16,8 +16,6 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
   index_section,
   index_question,
 }) => {
-  console.log("q", question);
-
   return (
     <ListGroup>
       <ListGroup.Item>

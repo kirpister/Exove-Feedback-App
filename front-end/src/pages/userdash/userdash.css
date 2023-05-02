@@ -1,4 +1,9 @@
+.sidebar {
+  max-width: 20vw;
+}
+
 .sidebar nav {
+
     background-color: var(--black);
     min-width: 18vw;
     max-width: 18vw;
@@ -7,6 +12,7 @@
     top: 0;
     display: block;
     font-family: var(--main-font);
+
 }
 
 main {
@@ -56,17 +62,16 @@ nav img {
   margin: 0 auto;
 }
 
-
-
 /********  USER DASHBOARD  ********/
 
 
-
 .userdash-wrapper {
+
   background: white;
   color: var(--black);
-  margin: 5% 30%;
+  /* margin: 5% 30%; */
 }
+
 
 .userdash-wrapper h2, h3,
 p {
@@ -134,10 +139,9 @@ p {
 .userdash-wrapper .user-actions {
   display: flex;
   justify-content: flex-start;
-  margin: 3rem 0 0 .2rem;
+  margin: 3rem 0 0 0.2rem;
   font-size: 1.2rem;
 }
-
 
 /******** CHECKBOXES ********/
 
