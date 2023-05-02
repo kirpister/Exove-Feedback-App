@@ -39,6 +39,9 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
   const setType = (value: QuestionType) => {
     setState({ ...state, type: value });
   };
+  const setQuestionContent = (value: string) => {
+    setState({ ...state, title: value });
+  };
   const renderQuestionOption = () => {
     let list = [<></>];
     for (let i in QuestionType) {
@@ -57,7 +60,12 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
         <form action="#" className={classes.single_form}>
           <div>
             <label htmlFor={`question${index_section}_${index_question}`}></label>
-            <input type="text" id={`question${index_section}_${index_question}`} defaultValue={question.question} />
+            <input
+              type="text"
+              id={`question${index_section}_${index_question}`}
+              defaultValue={question.question}
+              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setQuestionContent(e.target.value)}
+            />
           </div>
           <div className={classes.symbols}>
             <i className="fa-solid fa-pen"></i>

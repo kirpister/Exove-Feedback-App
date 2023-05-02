@@ -24,7 +24,7 @@ const navigate = useNavigate()
             <NavLink to="/feedbackform">Feedback form</NavLink>
           </li>
           <li>
-            <NavLink to="/selectuser">Conformation</NavLink>
+            <NavLink to="/selectuser">Create User List</NavLink>
           </li>
           <li>
             <NavLink to="/allfeedbacks">All feedbacks</NavLink>
