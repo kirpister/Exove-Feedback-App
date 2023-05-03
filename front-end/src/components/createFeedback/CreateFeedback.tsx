@@ -3,6 +3,7 @@ import { useAppSelector } from "../../app/hooks";
 
 function CreateFeedback() {
   const { sendQuestion } = useAppSelector((state) => state.feedback);
+
   const renderQuestion = () => {
     return sendQuestion.map((question, index) => {
       return (

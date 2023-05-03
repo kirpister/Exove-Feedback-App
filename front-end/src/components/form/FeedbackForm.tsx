@@ -1,11 +1,7 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
-import SingleSection from "./SingleSections";
-//import { store } from "../../app/store";
-//import getAll from "../../services/sections";
-//import { useDispatch, useSelector } from "react-redux";
+import SingleSection from "./SingleSection";
 import classes from "./Feedbackform.module.css";
-import axios from "axios";
 import { useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
 
@@ -24,8 +20,8 @@ const FeedbackForm: React.FC = () => {
   const { sections, sendQuestion } = useAppSelector((state) => state.feedback);
 
   useEffect(() => {
-    console.log(sections);
-    console.log(sendQuestion);
+    console.log("sections", sections);
+    console.log("sendQ", sendQuestion);
   }, []);
   // const loadSections = () => {
   //   axios.get<Section[]>("http://localhost:3006/sections").then((res) => {
@@ -50,7 +46,7 @@ const FeedbackForm: React.FC = () => {
     console.log("index_q", index_question);
     console.log("index_s", index_section);
     // sections[index_section].questions.splice(index_question, 1);
-    // setSections([...sections]);
+    // [...sections];
   };
 
   return (
