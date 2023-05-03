@@ -48,7 +48,8 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
     setState({ ...state, title: value });
   };
   const renderQuestionOption = () => {
-    let list = [<></>];
+    //let list = [<></>]; it gave unique "key" prop mistake
+    let list = [];
     for (let i in QuestionType) {
       list.push(
         <option value={i} key={i}>
@@ -56,6 +57,7 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
         </option>
       );
     }
+
     return list;
   };
 
@@ -81,11 +83,6 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
             />
           </div>
           <div className={classes.symbols}>
-            <i className="fa-solid fa-pen"></i>
-            <i
-              className="fa-solid fa-xmark"
-              onClick={() => deleteQuestion(index_section, index_question)}
-            ></i>
             <div className={classes.select_btn}>
               <div>
                 <label htmlFor="type"></label>

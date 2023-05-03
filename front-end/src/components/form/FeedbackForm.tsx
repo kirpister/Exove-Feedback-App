@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useEffect } from "react";
 import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import SingleSection from "./SingleSection";
 import classes from "./Feedbackform.module.css";
@@ -16,22 +16,12 @@ export interface Section {
   questions: Question[];
 }
 const FeedbackForm: React.FC = () => {
-  // const [sections, setSections] = useState<Section[]>([]);
   const { sections, sendQuestion } = useAppSelector((state) => state.feedback);
 
   useEffect(() => {
     console.log("sections", sections);
     console.log("sendQ", sendQuestion);
   }, []);
-  // const loadSections = () => {
-  //   axios.get<Section[]>("http://localhost:3006/sections").then((res) => {
-  //     setSections([...res.data]);
-  //   });
-  // };
-
-  // if (sections.length === 0) {
-  //   loadSections();
-  // }
 
   if (!sections) {
     if (sections.length > 1) {
