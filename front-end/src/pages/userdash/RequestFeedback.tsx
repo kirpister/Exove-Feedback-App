@@ -54,12 +54,10 @@ const RequestFeedback: React.FC = () => {
     axios
       .post("user/feedback_request", { userListId: userListId })
       .then((response) => {
-        console.log(response.data);
         alert("Success!");
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
         alert("Sorry, something went wrong!");
       });
   };
@@ -87,11 +85,6 @@ const RequestFeedback: React.FC = () => {
   const renderUser = (usersList: any) => {
     if (Array.isArray(usersList)) {
       return usersList.map((user) => {
-        // console.log(`current id: ${userDetails.id}`);
-
-        // if (user.id === userDetails?.id) {
-        //     return null;
-        // }
         return (
           <article className={userstyles.userlist}>
             <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
