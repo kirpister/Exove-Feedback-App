@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
@@ -6,7 +6,7 @@ import axios from "axios";
 import classes from "./userList.module.css";
 import { personalDetailType } from "../../model/types/user";
 
-interface DataType {
+export interface DataType {
   data: {
     msg: string;
     data: personalDetailType[];
@@ -17,15 +17,16 @@ interface DataType {
 const CreatedUserList: React.FC = () => {
   const [users, setUsers] = useState<personalDetailType[]>([]);
 
-  const loadUsers = () => {
+  useEffect(() => {
     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
-      setUsers(res.data);
+      console.log(res);
+      const { data, status } = res as unknown as DataType;
+      if (status === 200) {
+        setUsers(data.data);
+      }
     });
-  };
+  }, []);
   console.log("users", users);
-  if (users.length === 0) {
-    loadUsers();
-  }
 
   return (
     <>
@@ -34,7 +35,7 @@ const CreatedUserList: React.FC = () => {
       <div>
         <div className={classes.confirmation_wrapper}>
           <SelectedReviewers />
-          <AllUsersList />
+          <AllUsersList usersList={users} />
         </div>
       </div>
     </>
