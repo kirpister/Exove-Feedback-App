@@ -10,11 +10,9 @@ import { feedBackRouter } from './router/feedback';
 import { userRouter } from './router/user';
 import { errorHandler } from './middleware/errorHandler';
 import { adminRouter } from './router/admin';
-// import { authorization } from './middleware/authorization';
 import { validateRouter } from './router/validate';
 import { authenticationAdmin } from './middleware/authenticationAdmin';
 import { authenticationUser } from './middleware/authenticationUser';
-// import { logoutRouter } from './router/logout';
 
 const app = express();
 
@@ -25,10 +23,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan(':method :url :status :response-time ms '));
 app.use(cookieParser());
-// app.use('/private/*', authorization);
-// app.use('/log-in', loginRouter);
 app.use('/private/validate', validateRouter);
-// app.use('/private/logout', logoutRouter);
 app.use('/', welcomeRouter);
 app.use('/', authenRouter);
 app.use('/feedback', authenticationAdmin, feedBackRouter);
