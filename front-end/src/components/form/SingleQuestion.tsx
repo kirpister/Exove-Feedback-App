@@ -13,7 +13,7 @@ interface SingleQuestionProps {
   index_question: number;
 }
 export enum QuestionType {
-  selection = "selection",
+  select = "select",
   range = "range",
   freeString = "freeString",
 }
@@ -25,9 +25,14 @@ interface UsedQuestionType {
   title: string;
 }
 
-const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestion, index_section, index_question }) => {
+const SingleQuestion: React.FC<SingleQuestionProps> = ({
+  question,
+  deleteQuestion,
+  index_section,
+  index_question,
+}) => {
   const [state, setState] = useState<UsedQuestionType>({
-    type: QuestionType.selection,
+    type: QuestionType.select,
     title: question.question,
   });
   const [disable, setDisable] = useState<boolean>(false);
@@ -59,32 +64,51 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, deleteQuestio
       <ListGroup.Item>
         <form action="#" className={classes.single_form}>
           <div>
-            <label htmlFor={`question${index_section}_${index_question}`}></label>
+            <label
+              htmlFor={`question${index_section}_${index_question}`}
+            ></label>
             <input
-            disabled={disable}
+              disabled={disable}
+              className={classes.question_input}
               type="text"
               id={`question${index_section}_${index_question}`}
               defaultValue={question.question}
-              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setQuestionContent(e.target.value)}
+              onChange={(
+                e: React.ChangeEvent<
+                  HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+                >
+              ) => setQuestionContent(e.target.value)}
             />
           </div>
           <div className={classes.symbols}>
             <i className="fa-solid fa-pen"></i>
-            <i className="fa-solid fa-xmark" onClick={() => deleteQuestion(index_section, index_question)}></i>
-            <div>
-              <label htmlFor="type">Type</label>
-              <select
-                id="type"
-                name="type"
-                required
-                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-                  setType(e.target.value as QuestionType)
-                }
+            <i
+              className="fa-solid fa-xmark"
+              onClick={() => deleteQuestion(index_section, index_question)}
+            ></i>
+            <div className={classes.select_btn}>
+              <div>
+                <label htmlFor="type"></label>
+                <select
+                  id="type"
+                  name="type"
+                  required
+                  onChange={(
+                    e: React.ChangeEvent<
+                      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+                    >
+                  ) => setType(e.target.value as QuestionType)}
+                >
+                  {renderQuestionOption()}
+                </select>
+              </div>
+
+              <button
+                className={classes.add_btn}
+                onClick={submitAddNewQuestion}
+                disabled={disable}
               >
-                {renderQuestionOption()}
-              </select>
-              <button onClick={submitAddNewQuestion} disabled={disable}>
-                Add +
+                +
               </button>
             </div>
           </div>

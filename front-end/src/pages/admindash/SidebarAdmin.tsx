@@ -5,17 +5,18 @@ import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import classes from "./Admindash.module.css";
 
 const SidebarAdmin: React.FC = () => {
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   return (
-    <div className="sidebar">
-      <nav>
+    <div className={classes.sidebar}>
+      <nav className={classes.usernav}>
         <ul>
           <img className="circle" src={circle} alt="circle" />
 
@@ -31,13 +32,16 @@ const navigate = useNavigate()
         </ul>
       </nav>
 
-      <div className="bottom-div">
-        <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
+      <div className={classes.bottomdiv}>
+        <div className={classes.avatar}>
+          {userDetails.firstName.charAt(0).toUpperCase()}
+        </div>
         <span>
           {userDetails.firstName} {userDetails.surName}
         </span>
 
         <p
+          className={classes.logout}
           onClick={() => {
             dispatch(initiateLogoutSession(navigate));
           }}

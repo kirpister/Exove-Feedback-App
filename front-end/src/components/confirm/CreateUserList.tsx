@@ -28,7 +28,7 @@ const CreatedUserList: React.FC = () => {
   }
 
   return (
-    <div className="admindash_wrapper">
+    <>
       <SidebarAdmin />
 
       <div>
@@ -37,7 +37,7 @@ const CreatedUserList: React.FC = () => {
           <AllUsersList />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

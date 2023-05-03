@@ -52,7 +52,7 @@ const App = () => {
   } else {
     return (
       <Routes>
-        <Route path="/" element={<Login />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Login />} />
         </Route>
       </Routes>

@@ -5,7 +5,7 @@ import SidebarAdmin from '../pages/admindash/SidebarAdmin';
 const Main: React.FC = () => {
 
     return (
-      <main className="admindash_wrapper">
+      <main className="global_wrapper">
         <Outlet />
       </main>
     );
