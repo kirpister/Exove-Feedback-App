@@ -23,7 +23,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
                   <label htmlFor="section"></label>
-                  {/* <i className="fa-solid fa-chevron-down"></i> */}
+
                   <input
                     type="text"
                     className={classes.section_input}
