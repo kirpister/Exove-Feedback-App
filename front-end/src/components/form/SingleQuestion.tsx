@@ -90,6 +90,7 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
               <div>
                 <label htmlFor="type"></label>
                 <select
+                  disabled={disable}
                   id="type"
                   name="type"
                   required
