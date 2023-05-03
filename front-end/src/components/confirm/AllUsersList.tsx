@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Confirmation.module.css";
+import classes from "./userList.module.css";
 
 const AllUsersList = () => {
   return (

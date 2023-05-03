@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import SingleSection from "./SingleSections";
 //import { store } from "../../app/store";
@@ -6,6 +6,8 @@ import SingleSection from "./SingleSections";
 //import { useDispatch, useSelector } from "react-redux";
 import classes from "./Feedbackform.module.css";
 import axios from "axios";
+import { useAppSelector } from "../../app/hooks";
+import CreateFeedback from "../createFeedback/CreateFeedback";
 
 export interface Question {
   question: string;
@@ -18,45 +20,46 @@ export interface Section {
   questions: Question[];
 }
 const FeedbackForm: React.FC = () => {
-  const [sections, setSections] = useState<Section[]>([]);
+  // const [sections, setSections] = useState<Section[]>([]);
+  const { sections, sendQuestion } = useAppSelector((state) => state.feedback);
 
-  console.log("sections", sections);
+  useEffect(() => {
+    console.log(sections);
+    console.log(sendQuestion);
+  }, []);
+  // const loadSections = () => {
+  //   axios.get<Section[]>("http://localhost:3006/sections").then((res) => {
+  //     setSections([...res.data]);
+  //   });
+  // };
 
-  const loadSections = () => {
-    axios.get<Section[]>("http://localhost:3006/sections").then((res) => {
-      setSections([...res.data]);
-    });
-  };
+  // if (sections.length === 0) {
+  //   loadSections();
+  // }
 
-  if (sections.length === 0) {
-    loadSections();
+  if (!sections) {
+    if (sections.length > 1) {
+      return <p>Loading sections...</p>;
+    }
   }
 
-  if (!sections.length) {
-    return <p>Loading sections...</p>;
-  }
-  console.log(sections);
-
-  const deleteQuestion = (
-    index_section: number,
-    index_question: number
-  ): void => {
+  const deleteQuestion = (index_section: number, index_question: number): void => {
     console.log("index_q", index_question);
     console.log("index_s", index_section);
-
-    sections[index_section].questions.splice(index_question, 1);
-    setSections([...sections]);
+    // sections[index_section].questions.splice(index_question, 1);
+    // setSections([...sections]);
   };
 
   return (
-    <div className="admindash_wrapper">
+    <>
       <SidebarAdmin />
-
       <div className="dash-wrapper" style={{ color: "purple" }}>
         <SingleSection sections={sections} deleteQuestion={deleteQuestion} />
-        {/* <button onClick={() => postFeedbackForm}>Send</button> */}
+        <div>
+          <CreateFeedback/>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

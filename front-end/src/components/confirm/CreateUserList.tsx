@@ -3,7 +3,7 @@ import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import axios from "axios";
-import classes from "./Confirmation.module.css";
+import classes from "./userList.module.css";
 import { personalDetailType } from "../../model/types/user";
 
 interface DataType {
@@ -14,7 +14,7 @@ interface DataType {
   status: number;
 }
 
-const Confirmation: React.FC = () => {
+const CreatedUserList: React.FC = () => {
   const [users, setUsers] = useState<personalDetailType[]>([]);
 
   const loadUsers = () => {
@@ -41,4 +41,4 @@ const Confirmation: React.FC = () => {
   );
 };
 
-export default Confirmation;
+export default CreatedUserList;

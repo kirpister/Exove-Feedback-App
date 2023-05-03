@@ -23,7 +23,7 @@ const navigate = useNavigate()
             <NavLink to="/feedbackform">Feedback form</NavLink>
           </li>
           <li>
-            <NavLink to="/confirmation">Conformation</NavLink>
+            <NavLink to="/selectuser">Create User List</NavLink>
           </li>
           <li>
             <NavLink to="/allfeedbacks">All feedbacks</NavLink>
@@ -32,9 +32,7 @@ const navigate = useNavigate()
       </nav>
 
       <div className="bottom-div">
-        <div className="avatar">
-          {userDetails.firstName.charAt(0).toUpperCase()}
-        </div>
+        <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
         <span>
           {userDetails.firstName} {userDetails.surName}
         </span>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 import { AppDispatch } from "../app/store";
 import { UserDetails } from "../common/types/UserDetails";
 import { logoutSession } from "../services/logout";
