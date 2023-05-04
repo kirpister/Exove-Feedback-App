@@ -20,7 +20,7 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
         }
         return true
       },
-      message:'Question order must be unique or correct type'
+      message:'Question order must be unique or correct type or missing property'
     }}
   },
   requestedListBy:{type:Schema.Types.ObjectId,_id:false,default:null},

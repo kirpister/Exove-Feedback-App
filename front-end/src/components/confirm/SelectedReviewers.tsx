@@ -69,7 +69,7 @@ const SelectedReviewers: React.FC = () => {
           )}
           <button
             onClick={() => {
-              dispatch(setUpUserList(userlist.userList));
+              dispatch(setUpUserList({ listUserId: userlist.userList, requestedListBy: userlist.id }));
             }}
           >
             Confirm
