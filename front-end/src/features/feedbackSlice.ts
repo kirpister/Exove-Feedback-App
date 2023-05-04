@@ -6,14 +6,30 @@ interface PayloadTypeQuestion {
   result?: [string];
   type: QuestionType;
   title: string;
+  required?: boolean;
 }
-interface intitalStateType {
+interface FinalConfirmationType { 
+   details: {
+      questions: Array<PayloadTypeQuestion>;
+      title: string;
+    };
+    userList: Array<string>;
+    createdBy: string;
+  }
+  interface FinalPayloadType <T>{ 
+    createdBy: T,
+    tittle: T
+  }
+  interface intitalStateType {
   sections?: any;
   sendQuestion: Array<PayloadTypeQuestion>;
+  listUserId: Array<string>;
+  finalConfirm?: FinalConfirmationType;
 }
 const initialState: intitalStateType = {
   sections: [...questions.sections],
   sendQuestion: [],
+  listUserId:[]
 };
 const feedbackSlice = createSlice({
   name: "question",
@@ -28,9 +44,24 @@ const feedbackSlice = createSlice({
       };
       state.sendQuestion.push(setUpQuestion);
     },
+    setUpUserList (state,action:PayloadAction<Array<string>>){
+      state.listUserId = action.payload
+    },
+    setUpConfirmation(state,action:PayloadAction<FinalPayloadType<string>>){
+      // state.finalConfirm?.userList = state.listUserId 
+      let temp: FinalConfirmationType ={
+        createdBy:action.payload.createdBy,
+        details: {
+          questions:state.sendQuestion,
+          title: action.payload.tittle
+        },
+        userList: state.listUserId
+      } 
+      state.finalConfirm = temp
+    }
   },
 });
 
-export const { updateQuestion, getSections } = feedbackSlice.actions;
+export const { updateQuestion, getSections ,setUpConfirmation, setUpUserList} = feedbackSlice.actions;
 
 export default feedbackSlice.reducer;
