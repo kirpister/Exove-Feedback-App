@@ -10,9 +10,6 @@ import axios from "axios";
 
 
 const Userdash: React.FC = () => {
-
-
-
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
