@@ -29,7 +29,6 @@ const CreatedUserList: React.FC = () => {
       }
     });
   }, []);
-  console.log("users", users);
 
   return (
     <>
