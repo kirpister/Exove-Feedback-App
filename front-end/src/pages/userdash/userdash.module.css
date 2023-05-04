@@ -185,3 +185,20 @@ article input {
   display: flex;
   flex-wrap: wrap;
 }
+
+/* .translatebtns {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.btn {
+  padding: .1rem .4rem;
+  border: none;
+  background-color: var(--pale-pink-color);
+  margin: .3rem;
+  font-family: inherit;
+} */
+

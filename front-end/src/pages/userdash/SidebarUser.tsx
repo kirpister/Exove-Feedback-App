@@ -11,7 +11,7 @@ import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 const SidebarUser: React.FC = () => {
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );

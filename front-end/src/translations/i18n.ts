@@ -6,17 +6,19 @@ import login_en from './en/login.json';
 
 export const defaultNS = "ns1";
 export const resources = {
-    fi: {
-        login: login_fi,
-      },
     en: {
         login: login_en,
-    }
+    },
+
+    fi: {
+        login: login_fi,
+      }
 };
 
 i18next.use(initReactI18next).init({
-    lng: "en",
-    ns: ["login_fi", "login_en"],
+    returnNull: false,
+    fallbackLng: "en",
+    ns: ["login_en", "login_fi"],
     defaultNS,
     resources,
     react: {
