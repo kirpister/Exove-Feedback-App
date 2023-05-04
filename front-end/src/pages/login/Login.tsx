@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import loginstyles from "./login.module.css";
 import circle from "../../assets/circle-half.png";
-import { useNavigate } from "react-router-dom";
-import Admindash from "../admindash/Admindash";
 import { UserDetails } from "../../common/types/UserDetails";
-import { ADMIN_ROLE } from "../../common/constants";
 import { useDispatch } from "react-redux";
 import { saveUserDetails } from "../../features/authenticatedUserSlice";
+
+import { useTranslation } from "react-i18next";
+import '../../translations/i18n';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const dispatch = useDispatch();
-  let navigate = useNavigate();
+
+  const { t, i18n } = useTranslation<'login'>('login');
 
   const onsubmitHandler = (uname: string, pwd: string) => {
     return fetch("/login", {
@@ -35,29 +36,38 @@ const Login: React.FC = () => {
     setPassword(password);
   };
 
+  const setFi = () => {
+    i18n.changeLanguage('fi');
+  }
+
+  const setEn = () => {
+    i18n.changeLanguage('en');
+  }
+
   return (
+    <>
     <div className={loginstyles.wrapper}>
       <div>
         <img className="circle" src={circle} alt="circle" />
       </div>
 
       <div className={loginstyles.loginform}>
-        <h2>LOGIN</h2>
+        <h2>{t("loginheader")}</h2>
 
         <div>
-          <label htmlFor="name">Username:</label>
+          <label htmlFor="name">{t("username")}</label>
           <input
             type="text"
-            placeholder="Username"
+            placeholder={t("username")}
             onChange={(e) => userNameHandlers(e.target.value)}
           />
         </div>
 
         <div>
-          <label htmlFor="name">Password:</label>
+          <label htmlFor="name">{t("password")}</label>
           <input
             type="password"
-            placeholder="Password"
+            placeholder={t("password")}
             onChange={(e) => passwordHandlers(e.target.value)}
           />
         </div>
@@ -71,10 +81,16 @@ const Login: React.FC = () => {
               })
           }
         >
-          LOGIN
+          {t("loginbtn")}
         </button>
       </div>
     </div>
+    <>
+      <div className={loginstyles.translatebtns}>
+        <button className={loginstyles.btn} onClick={setFi}>FI</button><button className={loginstyles.btn} onClick={setEn}>EN</button>
+      </div>
+    </>
+    </>
   );
 };
 

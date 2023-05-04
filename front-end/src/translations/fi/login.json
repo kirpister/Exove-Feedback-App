@@ -1,6 +1,6 @@
 {
-    "loginh2": "Kirjaudu sisään",
+    "loginheader": "KIRJAUDU SISÄÄN",
     "username": "Käyttäjätunnus",
     "password": "Salasana",
-    "loginbtn": "Kirjaudu"
+    "loginbtn": "KIRJAUDU"
 }

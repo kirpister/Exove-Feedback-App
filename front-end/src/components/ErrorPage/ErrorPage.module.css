@@ -1,0 +1,48 @@
+.error_container {
+    background-color: var(--black);
+    background-image: url('../../assets/circle.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_container h1 {
+    color: white;
+    font-family: var(--main-font);
+    font-size: 10rem;
+    text-align: center;
+    letter-spacing: 2rem;
+}
+
+.error_container h2 {
+    color: white;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error button {
+    width: fit-content;
+    padding: .5rem 4.7rem;
+    border: 2px solid black;
+    background-color: white;
+    font-family: inherit;
+    font-weight: bold;
+    margin-top: 1.8rem;
+    border-radius: 2px;
+}
+
+.error button:hover {
+    background-color: var(--purple-color);
+    color: white;
+    border: 1.5px solid white;
+  }
