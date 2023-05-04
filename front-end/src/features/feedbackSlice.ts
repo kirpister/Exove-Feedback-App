@@ -19,19 +19,18 @@ const feedbackSlice = createSlice({
   name: "question",
   initialState,
   reducers: {
-    getSections(state, action) {
-    },
+    getSections(state, action) {},
     updateQuestion(state, action: PayloadAction<PayloadTypeQuestion>) {
       const temp = action.payload;
-      let setUpQuestion: PayloadTypeQuestion = { ...temp, order: Number(state.sendQuestion.length + 1) };
-      state.sendQuestion.push(setUpQuestion)
+      let setUpQuestion: PayloadTypeQuestion = {
+        ...temp,
+        order: Number(state.sendQuestion.length + 1),
+      };
+      state.sendQuestion.push(setUpQuestion);
     },
-    deleteQuestion(state, action) {},
-    correctQuestion(state, payload) {},
   },
 });
 
-
-export const { deleteQuestion, correctQuestion, updateQuestion, getSections } = feedbackSlice.actions;
+export const { updateQuestion, getSections } = feedbackSlice.actions;
 
 export default feedbackSlice.reducer;
