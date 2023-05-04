@@ -41,7 +41,6 @@ export const initiateValidateSession = () => {
   return async (dispatch: AppDispatch) => {
     try {
       const { status, data } = await validateSession();
-      console.log(data);
       if (status === 200) {
         dispatch(saveUserDetails(data));
       }
