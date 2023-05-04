@@ -69,7 +69,9 @@ const SelectedReviewers: React.FC = () => {
           )}
           <button
             onClick={() => {
-              dispatch(setUpUserList(userlist.userList));
+              userlist.opened
+                ? alert("not allow to create new feedback base on this list becuase it already created before")
+                : dispatch(setUpUserList({ listUserId: userlist.userList, requestedListBy: userlist.id }));
             }}
           >
             Confirm
