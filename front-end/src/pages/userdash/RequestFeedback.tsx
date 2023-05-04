@@ -36,7 +36,6 @@ const RequestFeedback: React.FC = () => {
 
   useEffect(() => {
     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
-      console.log(res);
       const { data, status } = res as unknown as DataType;
       if (status === 200) {
         setUsers(data.data);

@@ -13,8 +13,6 @@ export const validateController: RequestHandler = async (
 ) => {
   try {
     const token = req.cookies[JWT_TOKEN_COOKIE_NAME];
-    console.log('validate router')
-    console.log(token)
     if (!token) {
       return createErrMessage({ msg: 'token not found', status: StatusCode_Err.FORBIDDEN }, next);
     }
@@ -32,6 +30,7 @@ export const validateController: RequestHandler = async (
       surName: userDetails.personalDetail.surName,
       email: userDetails.personalDetail.email,
       roles: userDetails.work.roles,
+      id:userDetails.id
     };
 
     return res.status(200).json(responseToReturn);

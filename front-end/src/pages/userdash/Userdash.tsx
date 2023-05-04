@@ -16,7 +16,6 @@ const Userdash: React.FC = () => {
     useEffect(()=> { 
       axios.get('/user').then(res => {
         const { data} = res
-        console.log(data.data)
       })
     },[])
 return (
