@@ -3,7 +3,7 @@ import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import axios from "axios";
-import classes from "./userList.module.css";
+import classes from "./CreateUserList.module.css";
 import { personalDetailType } from "../../model/types/user";
 import { useAppDispatch } from "../../app/hooks";
 import { updateAllUserList } from "../../features/alluserSlicer";
@@ -35,7 +35,10 @@ const CreatedUserList: React.FC = () => {
 
       <div>
         <div className={classes.confirmation_wrapper}>
-          <SelectedReviewers />
+          <div className={classes.selected_reviewers}>
+            <SelectedReviewers />
+          </div>
+
           <AllUsersList usersList={users} />
         </div>
       </div>

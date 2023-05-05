@@ -1,0 +1,36 @@
+.selected_reviewers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(228, 228, 228);
+  width: 350px;
+  border: solid 2px silver;
+  border-radius: 5px;
+  height: 100vh;
+}
+
+.single_user {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--pale-pink-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--main-font);
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--pale-pink-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--main-font);
+  font-size: 2rem;
+  color: white;
+}
