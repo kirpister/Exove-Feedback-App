@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import feedbackSlice from "../features/feedbackSlice";
 import authenticatedUserSlicer from "../features/authenticatedUserSlice";
+import alluserSlicer from "../features/alluserSlicer";
 
 export const store = configureStore({
   reducer: {
     authenticatedUser: authenticatedUserSlicer,
     feedback: feedbackSlice,
+    allUser : alluserSlicer
   },
 });
 

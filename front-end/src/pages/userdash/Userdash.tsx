@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import axios from "axios";
 
+
+
 import { useTranslation } from "react-i18next";
 import '../../translations/i18n';
 
@@ -14,7 +16,8 @@ const Userdash: React.FC = () => {
 
 const { t } = useTranslation<('trans')>('trans');
 
-const userDetails: any = useSelector(
+
+  const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
 
@@ -24,6 +27,7 @@ const userDetails: any = useSelector(
         const { data } = res
         console.log(data.data)
       })
+
     },[])
 
 
