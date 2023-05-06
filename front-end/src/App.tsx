@@ -14,6 +14,10 @@ import { initiateValidateSession } from "./features/authenticatedUserSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import RequestFeedback from "./pages/userdash/RequestFeedback";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
+import { initiateFetchNotifications } from "./features/notificationsSlice";
+import { Notifications } from "./components/Notifications/Notifications";
+import SidebarAdmin from "./pages/admindash/SidebarAdmin";
+import SidebarUser from "./pages/userdash/SidebarUser";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -22,17 +26,31 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
+  const notifications = useAppSelector(
+    (state) => state.userNotifications.notifications
+  );
 
   if (authenticatedUser.isLoading) {
     return <p>Loading....!!</p>;
   }
 
   if (authenticatedUser.isLoggedIn) {
+    if (!notifications) {
+      dispatch(initiateFetchNotifications());
+    }
     if (authenticatedUser.userDetails?.roles.includes(ADMIN_ROLE)) {
       return (
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <SidebarAdmin />
+              </Layout>
+            }
+          >
             <Route index element={<Admindash />} />
+            <Route path="notifications" element={<Notifications />} />
             <Route path="feedbackform" element={<FeedbackForm />} />
             <Route path="selectUser" element={<CreatedUserList />} />
             {/* <Route path="confirmation" element={<CreateFeedback />} /> */}
@@ -44,8 +62,16 @@ const App = () => {
     } else {
       return (
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <SidebarUser />
+              </Layout>
+            }
+          >
             <Route index element={<Userdash />} />
+            <Route path="notifications" element={<Notifications />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>

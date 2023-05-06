@@ -21,6 +21,10 @@ const SidebarAdmin: React.FC = () => {
           <img className="circle" src={circle} alt="circle" />
 
           <li>
+            <NavLink to="/notifications">Notifications</NavLink>
+          </li>
+
+          <li>
             <NavLink to="/feedbackform">Feedback form</NavLink>
           </li>
           <li>

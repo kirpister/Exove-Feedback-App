@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import axios from "axios";
@@ -31,8 +30,6 @@ const CreatedUserList: React.FC = () => {
 
   return (
     <>
-      <SidebarAdmin />
-
       <div className={classes.wrapper}>
         <div className={classes.confirmation_wrapper}>
           <div className={classes.selected_reviewers}>

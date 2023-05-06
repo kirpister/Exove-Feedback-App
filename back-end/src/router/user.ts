@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createFeedbackUserList, deleteFeedbackRequest, getAllUser, getUser,updateUserFeedback,updateUserInfo} from '../controller/userController';
+import { createFeedbackUserList, deleteFeedbackRequest, getAllUser, getUser,updateUserFeedback,updateUserInfo,fetchNotifications} from '../controller/userController';
 const router = Router()
 
 router
@@ -9,5 +9,6 @@ router
   .post('/feedback_request',createFeedbackUserList)
   .delete('/feedback_request',deleteFeedbackRequest)
   .get('/get_all_user',getAllUser)
+  .get('/notifications',fetchNotifications)
   
 export {router as userRouter}

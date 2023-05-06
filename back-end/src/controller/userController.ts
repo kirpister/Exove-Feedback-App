@@ -3,6 +3,7 @@ import FeedbackModel from '../model/feedBackModel';
 import { ListAnswerType, UserDetailsType } from '../model/types/answer';
 import { QuestionType, Range } from '../model/types/question';
 import { userModel } from '../model/types/user';
+import notificationModel from '../model/notificationModel';
 import UserModel from '../model/userModel';
 import { createErrMessage, createSuccessMessage } from '../utils/message';
 import { StatusCode_Success, StatusCode_Err } from '../utils/statusCode';
@@ -236,7 +237,21 @@ export const createFeedbackUserList: RequestHandler = async (
       requestFeedbackId: newRequestFeedbackUser.id,
     });
     user.save();
-    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.NEW_DATA_CREATED }, res, newRequestFeedbackUser);
+
+
+    // find admin id and save notification for the admin user
+    const adminDetails = await UserModel.findOne({ 'work.roles' : { '$in' : ['admin']} }, '_id')
+    const newNotification = {userid: adminDetails?._id.toString(),message:'New feedback Request is pending for your approval '};
+    const newRequestNotification= await notificationModel.create({
+      ...newNotification,
+    });
+    newRequestNotification.save();
+
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.NEW_DATA_CREATED },
+      res,
+      newRequestFeedbackUser
+    );
   } catch (error) {
     console.error(error);
     next(error);
@@ -318,3 +333,19 @@ const checkArrayString = (list: any): boolean => {
   }
   return false;
 };
+
+export const fetchNotifications:RequestHandler = async(req, res, next) =>{
+  try {
+    const { employeeNumber } = req.body.userDetails ;
+  
+    const notifications = await notificationModel.find({userid:employeeNumber}, 'message')
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
+      res,
+      notifications
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
