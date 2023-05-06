@@ -18,7 +18,7 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log("dispatch");
+    console.log("validate user");
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
@@ -37,7 +37,7 @@ const App = () => {
             <Route path="selectUser" element={<CreatedUserList />} />
             {/* <Route path="confirmation" element={<CreateFeedback />} /> */}
             <Route path="/allfeedbacks" element={<AllFeedbacks />} />
-            <Route path="*" element={ <ErrorPage /> } />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       );
@@ -47,7 +47,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />
-            <Route path="*" element={ <ErrorPage /> } />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       );
@@ -57,7 +57,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />}>
           <Route index element={<Login />} />
-          <Route path="*" element={ <ErrorPage /> } />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     );

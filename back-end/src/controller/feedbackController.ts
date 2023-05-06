@@ -83,7 +83,7 @@ export const createFeedbackController: RequestHandler = async (req, res, next) =
       await requestUserList.save();
     }
 
-    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.REQUEST_CREATED }, res, newFeedback);
+    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.NEW_DATA_CREATED }, res, newFeedback);
   } catch (error) {
     return next(error);
   }

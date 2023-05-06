@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setUpConfirmation } from "../../features/feedbackSlice";
+import { createFeedbackAPI, setUpConfirmation } from "../../features/feedbackSlice";
 
 function CreateFeedback() {
   const { sendQuestion, listUserId, finalConfirm, sections } = useAppSelector((state) => state.feedback);
@@ -39,6 +39,17 @@ function CreateFeedback() {
         }}
       >
         create final feedback data
+      </button>
+      <button
+        onClick={() => {
+          if (finalConfirm) {
+            createFeedbackAPI(finalConfirm)
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err));
+          }
+        }}
+      >
+        send feedback to backend
       </button>
     </div>
   );
