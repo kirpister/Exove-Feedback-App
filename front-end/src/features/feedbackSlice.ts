@@ -3,14 +3,14 @@ import { FeedbackType } from "../common/types/UserDetails";
 import { QuestionType } from "../components/form/SingleQuestion";
 import questions from "../questions.json";
 import axios from "axios";
-interface PayloadTypeQuestion {
+export interface PayloadTypeQuestion {
   order?: number;
   result?: [string];
   type: QuestionType;
   title: string;
   required?: boolean;
 }
-interface FinalConfirmationType {
+export interface FinalConfirmationType {
   details: {
     questions: Array<PayloadTypeQuestion>;
     title: string;

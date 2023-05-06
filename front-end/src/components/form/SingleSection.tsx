@@ -32,7 +32,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({
               </Accordion.Header>
               <Accordion.Body>
                 {section.questions.map((question, j) => {
-                  console.log("sec_q_index", `${i}${j}`);
+                  // console.log("sec_q_index", `${i}${j}`);
 
                   return (
                     <SingleQuestion
