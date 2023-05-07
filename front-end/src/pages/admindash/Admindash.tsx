@@ -14,7 +14,6 @@ const Admindash: React.FC = () => {
   }, []);
   return (
     <main>
-      <SidebarAdmin />
       <div className={classes.dash_wrapper}>
         {
           <h2>

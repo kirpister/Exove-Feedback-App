@@ -1,10 +1,15 @@
 import React from "react";
 import Main from "../components/Main";
 
+import classes from "./Layout.module.css";
+type LayoutProps = {
+  children: JSX.Element;
+};
 
-const Layout: React.FC = () => {
+const Layout = ({ children }: LayoutProps) => {
   return (
-    <div>
+    <div className={classes.layout}>
+      {children}
       <Main />
     </div>
   );

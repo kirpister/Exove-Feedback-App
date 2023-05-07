@@ -41,7 +41,6 @@ const FeedbackForm: React.FC = () => {
 
   return (
     <>
-      <SidebarAdmin />
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} deleteQuestion={deleteQuestion} />
         <div>

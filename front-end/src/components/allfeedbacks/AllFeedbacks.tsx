@@ -1,21 +1,23 @@
 import React, { Fragment, ReactComponentElement, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { AnswerType, CreatedFeebackType, getAllFeedback } from "../../features/createdFeedbackSlicer";
+import {
+  AnswerType,
+  CreatedFeebackType,
+  getAllFeedback,
+} from "../../features/createdFeedbackSlicer";
 import { PayloadTypeQuestion } from "../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
 import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 
-
 const AllFeedbacks = () => {
-
-  const { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
-
+  const { allCreatedFeedback } = useAppSelector(
+    (state) => state.createdFeedback
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     getAllFeedback(dispatch);
   }, [dispatch]);
-
 
   const renderLitOfQuestion = (listQuestion: Array<PayloadTypeQuestion>) => {
     return listQuestion.map((item, index) => {
@@ -66,7 +68,16 @@ const AllFeedbacks = () => {
       return <div>NO Feedback List</div>;
     }
     return list.map((item, index) => {
-      const { createAt, createdBy, details, id, requestedListBy, updatedAt, userList, answers } = item;
+      const {
+        createAt,
+        createdBy,
+        details,
+        id,
+        requestedListBy,
+        updatedAt,
+        userList,
+        answers,
+      } = item;
       return (
         <div key={index}>
           <div className={classes.feedback_data}>
@@ -77,13 +88,24 @@ const AllFeedbacks = () => {
             <div>create at: {createAt}</div>
             <div>updated at : {updatedAt}</div>
             <div>List of question : </div>
-            <div>requested by the list user request with id {requestedListBy}</div>
+            <div>
+              requested by the list user request with id {requestedListBy}
+            </div>
           </div>
-          
-          <div className={classes.questions}>{renderLitOfQuestion(details.questions)}</div>
+          <div className={classes.questions}>
+            {renderLitOfQuestion(details.questions)}
+          </div>
+
+          <div className={classes.questions}>
+            {renderLitOfQuestion(details.questions)}
+          </div>
           <div>how user answer:</div>
           {answers.map((item, index) => {
-            return <div className={classes[`${index % 2 ? "type_1" : "type_2"}`]}>{renderUserAnswer(item)}</div>;
+            return (
+              <div className={classes[`${index % 2 ? "type_1" : "type_2"}`]}>
+                {renderUserAnswer(item)}
+              </div>
+            );
           })}
         </div>
       );
@@ -92,8 +114,6 @@ const AllFeedbacks = () => {
 
   return (
     <>
-      <SidebarAdmin />
-
       <div>
         <div style={{ color: "purple" }} className="dash-wrapper"></div>
         {renderAllFeedback(allCreatedFeedback)}
