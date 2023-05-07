@@ -17,7 +17,9 @@ const AllUsersList: React.FC<AllUserProps> = ({ usersList }) => {
   };
 
   return (
-    <div className={classes.all_users_list}>
+    <div 
+    className={classes.all_users_list}
+    >
       <div>
         <label htmlFor="search"></label>
         <input

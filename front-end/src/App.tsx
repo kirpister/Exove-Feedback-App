@@ -7,7 +7,7 @@ import Admindash from "./pages/admindash/Admindash";
 
 import FeedbackForm from "./components/form/FeedbackForm";
 import CreatedUserList from "./components/confirm/CreateUserList";
-import AllFeedbacks from "./components/allfeedbacks/AllFeedbacks";
+import AllFeedbacks from "./components/allfeedbacks/allFeeback/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
 import { useEffect } from "react";
 import { initiateValidateSession } from "./features/authenticatedUserSlice";
