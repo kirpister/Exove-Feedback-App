@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { personalDetailType, DataType, CheckedUser } from "../../model/types/user";
+import {
+  personalDetailType,
+  DataType,
+  CheckedUser,
+} from "../../model/types/user";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,14 +14,14 @@ import userstyles from "./userdash.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
-
 const RequestFeedback: React.FC = () => {
-  
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
   const navigate = useNavigate();
 
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
+  const userDetails: any = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
 
   useEffect(() => {
     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
@@ -46,11 +50,18 @@ const RequestFeedback: React.FC = () => {
       });
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
+  const handleCheckboxChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    user: any
+  ) => {
     const isChecked = e.target.checked;
     const userId = user.id;
 
-    console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? "checked" : "unchecked"}`);
+    console.log(
+      `User ${user.id} ${user.personalDetail.firstName} ${
+        isChecked ? "checked" : "unchecked"
+      }`
+    );
 
     if (isChecked) {
       const checkedUser: CheckedUser = {
@@ -60,7 +71,9 @@ const RequestFeedback: React.FC = () => {
 
       setCheckedUsers((prevCheckedUsers) => [...prevCheckedUsers, checkedUser]);
     } else {
-      setCheckedUsers((prevCheckedUsers) => prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId));
+      setCheckedUsers((prevCheckedUsers) =>
+        prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId)
+      );
     }
 
     console.log(checkedUsers);
@@ -71,9 +84,16 @@ const RequestFeedback: React.FC = () => {
       return usersList.map((user) => {
         return (
           <article className={userstyles.userlist}>
-            <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
+            <input
+              type="checkbox"
+              id={user.id}
+              value={user.id}
+              onChange={(e) => handleCheckboxChange(e, user)}
+            />
             <div>
-              <div className={userstyles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
+              <div className={userstyles.avatar}>
+                {userDetails.firstName.charAt(0).toUpperCase()}
+              </div>
               <span>
                 {user.personalDetail.firstName} {user.personalDetail.surName}
                 <br />

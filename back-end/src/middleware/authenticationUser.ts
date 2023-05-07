@@ -25,6 +25,7 @@ export const authenticationUser: RequestHandler = async (req, res, next) => {
     const { employeeNumber, roles } = data;
 
     req.body.userDetails = { employeeNumber, roles };
+
     // console.log('next')
     return next();
     // Almost done

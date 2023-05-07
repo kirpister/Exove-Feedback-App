@@ -3,6 +3,6 @@ import { getAllUserInformation } from '../controller/adminController';
 const router = Router()
 
 router
-.get('/',getAllUserInformation)
+  .get('/',getAllUserInformation)
   
 export {router as adminRouter}

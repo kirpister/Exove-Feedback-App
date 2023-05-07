@@ -13,7 +13,6 @@ const Admindash: React.FC = () => {
   }, []);
   return (
     <main>
-      {/* {userDetails?.roles.includes("admin") ? <SidebarAdmin /> : ""} */}
       <div className={classes.dash_wrapper}>
         {
           <h2>

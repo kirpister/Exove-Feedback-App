@@ -15,6 +15,8 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import RequestFeedback from "./pages/userdash/RequestFeedback";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import SetupUserList from "./components/confirm/step_2_modify_the_list/SetupUserList";
+import { initiateFetchNotifications } from "./features/notificationsSlice";
+import { Notifications } from "./components/Notifications/Notifications";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -23,19 +25,22 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
+  const notifications = useAppSelector((state) => state.userNotifications.notifications);
 
   if (authenticatedUser.isLoading) {
     return <p>Loading....!!</p>;
   }
 
   if (authenticatedUser.isLoggedIn) {
+    if (!notifications) {
+      dispatch(initiateFetchNotifications());
+    }
     if (authenticatedUser.userDetails?.roles.includes(ADMIN_ROLE)) {
       return (
         <Routes>
-          <Route path="/" 
-          element={<Layout />}
-          >
+          <Route path="/" element={<Layout />}>
             <Route index element={<Admindash />} />
+            <Route path="notifications" element={<Notifications />} />
             <Route path="/feedbackform" element={<FeedbackForm />} />
             <Route path="/getuserlist" element={<CreatedUserList />}>
               <Route path=":id" element={<SetupUserList />}></Route>
@@ -52,6 +57,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
+            <Route path="notifications" element={<Notifications />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>

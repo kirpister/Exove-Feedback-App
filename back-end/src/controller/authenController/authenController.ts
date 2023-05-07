@@ -14,7 +14,7 @@ export const loginController : RequestHandler  =async (req,res,next) => {
   const logInRequest = req.body;
   try {
     const authResponse = await auth(logInRequest.username, logInRequest.password);
-    const userDetails = await UserModel.findOne({
+    const userDetails = await UserModel.findById({
       _id: authResponse.employeeNumber,
     });
 
