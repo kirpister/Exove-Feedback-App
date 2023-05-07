@@ -52,13 +52,6 @@ const createdFeedbackSlicer = createSlice({
   },
 });
 
-// export const getAllFeedback = async (dispatch: AppDispatch) => {
-//   try {
-//     const { data, status } = await axios.get("/feedback");
-//     console.log(data.data);
-//     dispatch(setAllFeedback(data.data));
-//   } catch (error) {}
-// };
 
 export const getAllFeedbackAPI = () => {
   return async (dispatch: AppDispatch) => {

@@ -3,18 +3,10 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { AnswerType, CreatedFeebackType, getAllFeedbackAPI } from "../../../features/createdFeedbackSlicer";
 import { PayloadTypeQuestion } from "../../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
-import SidebarAdmin from "../../../pages/admindash/SidebarAdmin";
 import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
 
 const AllFeedbacks = () => {
   const { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    // getAllFeedback(dispatch);
-    dispatch(getAllFeedbackAPI());
-  }, [dispatch]);
-
   const renderLitOfQuestion = (listQuestion: Array<PayloadTypeQuestion>) => {
     return listQuestion.map((item, index) => {
       const { title, order, type, required, result } = item;
@@ -62,7 +54,6 @@ const AllFeedbacks = () => {
   return (
     <>
       {/* <SidebarAdmin /> */}
-
       <div>
         <div style={{ color: "purple" }} className="dash-wrapper"></div>
         {renderAllFeedback(allCreatedFeedback)}

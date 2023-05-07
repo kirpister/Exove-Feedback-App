@@ -1,6 +1,7 @@
-import { personalDetailType } from "../model/types/user";
+import { DataType, personalDetailType } from "../model/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { AppDispatch } from "../app/store";
+import axios from 'axios'
 interface UserListType {
   allUserList: Array<personalDetailType>;
   userListId: Array<string>;
@@ -23,5 +24,16 @@ const allUserSlicer = createSlice({
   },
 });
 
+
+export const getAllUserAPI = ()=> { 
+  return async (dispatch: AppDispatch) => {
+     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
+       const { data, status } = res as unknown as DataType;
+       if (status === 200) {
+         dispatch(updateAllUserList(data.data));
+       }
+     });
+  };
+}
 export const { updateAllUserList, createUserList } = allUserSlicer.actions;
 export default allUserSlicer.reducer;

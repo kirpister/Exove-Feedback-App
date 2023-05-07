@@ -18,11 +18,15 @@ import { initiateFetchNotifications } from "./features/notificationsSlice";
 import { Notifications } from "./components/Notifications/Notifications";
 import CreateFeedback from "./components/createFeedback/CreateFeedback";
 import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
+import { getAllFeedbackAPI } from "./features/createdFeedbackSlicer";
+import { getAllUserAPI } from "./features/alluserSlicer";
 
 const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(initiateValidateSession());
+    dispatch(getAllFeedbackAPI());
+    dispatch(getAllUserAPI());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
   const notifications = useAppSelector((state) => state.userNotifications.notifications);

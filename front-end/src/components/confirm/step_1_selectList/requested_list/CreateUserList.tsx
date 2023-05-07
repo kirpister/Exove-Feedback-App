@@ -11,15 +11,6 @@ import RequestUserLists from "../all_requested_user_list/RequestUserLists";
 
 
 const CreatedUserList: React.FC = () => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
-      const { data, status } = res as unknown as DataType;
-      if (status === 200) {
-        dispatch(updateAllUserList(data.data));
-      }
-    });
-  }, [dispatch]);
 
   return (
     <>

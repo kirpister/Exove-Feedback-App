@@ -27,12 +27,7 @@ const RequestUserLists: React.FC = () => {
         setRequests(data.data);
       }
     });
-    axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
-      const { data, status } = res as unknown as DataType;
-      if (status === 200) {
-        dispatch(updateAllUserList(data.data));
-      }
-    });
+ 
   }, [dispatch]);
   const processSetupUserList = (singleRequestedList: personalRequestListType) => {
     if (singleRequestedList.opened) {

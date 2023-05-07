@@ -13,24 +13,16 @@ import userstyles from "./userdash.module.css";
 
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { useAppSelector } from "../../app/hooks";
 
 const RequestFeedback: React.FC = () => {
-  const [users, setUsers] = useState<personalDetailType[]>([]);
+  const {allUserList} = useAppSelector(state => state.allUser)
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
   const navigate = useNavigate();
 
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
-
-  useEffect(() => {
-    axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
-      const { data, status } = res as unknown as DataType;
-      if (status === 200) {
-        setUsers(data.data);
-      }
-    });
-  }, []);
 
   const handleSubmit = () => {
     let userListId = [];
@@ -113,7 +105,7 @@ const RequestFeedback: React.FC = () => {
         <h2>Request feedback</h2>
         <p>Choose five colleagues to give you feedback.</p>
 
-        <div className={userstyles.users}>{renderUser(users)}</div>
+        <div className={userstyles.users}>{renderUser(allUserList)}</div>
 
         <button onClick={handleSubmit}>SUBMIT</button>
       </div>
