@@ -6,12 +6,11 @@ import classes from "./SingleSection.module.css";
 
 interface SingleSectionProps {
   sections: Section[];
-  deleteQuestion: (index_section: number, index_question: number) => void;
+  // deleteQuestion: (index_section: number, index_question: number) => void;
 }
 
 const SingleSection: React.FC<SingleSectionProps> = ({
   sections,
-  deleteQuestion,
 }) => {
   return (
     <>
@@ -38,10 +37,10 @@ const SingleSection: React.FC<SingleSectionProps> = ({
                     <SingleQuestion
                       key={`${i}${j}`}
                       question={question}
-                      deleteQuestion={deleteQuestion}
+                      // deleteQuestion={deleteQuestion}
                       index_section={i}
                       index_question={j}
-
+                    
                     />
                   );
                 })}

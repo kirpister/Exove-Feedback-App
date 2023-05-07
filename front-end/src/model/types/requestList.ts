@@ -1,7 +1,7 @@
 export interface personalRequestListType {
   id: string;
   requestUserId: string;
-  createFeedbackId: null;
+  createFeedbackId: null| string;
   opened: boolean;
   userList: Array<string>
 }

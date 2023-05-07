@@ -8,7 +8,7 @@ import classes from "./SingleQuestion.module.css";
 
 interface SingleQuestionProps {
   question: Question;
-  deleteQuestion: (index_section: number, index_question: number) => void;
+  // deleteQuestion: (index_section: number, index_question: number) => void;
   index_section: number;
   index_question: number;
 }
@@ -27,7 +27,6 @@ interface UsedQuestionType {
 
 const SingleQuestion: React.FC<SingleQuestionProps> = ({
   question,
-  deleteQuestion,
   index_section,
   index_question,
 }) => {
@@ -48,7 +47,6 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
     setState({ ...state, title: value });
   };
   const renderQuestionOption = () => {
-    //let list = [<></>]; it gave unique "key" prop mistake
     let list = [];
     for (let i in QuestionType) {
       list.push(

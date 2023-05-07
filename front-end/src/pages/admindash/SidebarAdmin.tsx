@@ -24,6 +24,9 @@ const SidebarAdmin: React.FC = () => {
             <NavLink to="/notifications">notifications</NavLink>
           </li>
           <li>
+            <NavLink to="/feedbackform">feedbackform</NavLink>
+          </li>
+          <li>
             <NavLink to="/getuserlist">Get Request User List</NavLink>
           </li>
           <li>

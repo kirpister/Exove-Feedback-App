@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import SingleSection from "./SingleSection";
 import classes from "./Feedbackform.module.css";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
+import { setUpConfirmation } from "../../features/feedbackSlice";
+import { useNavigate } from "react-router-dom";
 
 export interface Question {
   question: string;
@@ -17,11 +18,9 @@ export interface Section {
 }
 const FeedbackForm: React.FC = () => {
   const { sections, sendQuestion } = useAppSelector((state) => state.feedback);
-
-  useEffect(() => {
-    console.log("sections", sections);
-    console.log("sendQ", sendQuestion);
-  }, []);
+  const { userDetails } = useAppSelector((state) => state.authenticatedUser);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   if (!sections) {
     if (sections.length > 1) {
@@ -29,23 +28,38 @@ const FeedbackForm: React.FC = () => {
     }
   }
 
-  const deleteQuestion = (
-    index_section: number,
-    index_question: number
-  ): void => {
-    console.log("index_q", index_question);
-    console.log("index_s", index_section);
-    // sections[index_section].questions.splice(index_question, 1);
-    // [...sections];
-  };
-
   return (
     <>
       {/* <SidebarAdmin /> */}
       <div className={classes.dashwrapper}>
-        <SingleSection sections={sections} deleteQuestion={deleteQuestion} />
+        <SingleSection sections={sections} />
         <div>
-          <CreateFeedback />
+          {/* <CreateFeedback /> */}
+          <button
+            className={classes.btn}
+            onClick={() => {
+              if (userDetails) {
+                dispatch(
+                  setUpConfirmation({
+                    // createdBy: userDetails?.id,
+                    title: "giving first back",
+                  })
+                );
+              }
+              navigate("confirm");
+            }}
+          >
+            Confirm Final Feedback Form
+          </button>
+          <button
+            className={classes.btn}
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </button>
+          <div>total question have been selected: {sendQuestion.length}</div>
         </div>
       </div>
     </>

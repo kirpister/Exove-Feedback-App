@@ -1,15 +1,5 @@
-.dashwrapper {
-  /* background-color: var(--light-grey-color); */
-  padding: 1rem;
-  margin: 2rem;
-}
-
-.list-group-item {
-  background-color: green;
-}
-
 .btn {
-    width: 320px;
+    width: 220px;
     padding: .5rem;
     border: 2px solid black;
     background-color: white;

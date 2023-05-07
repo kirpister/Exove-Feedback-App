@@ -1,8 +1,5 @@
 export interface personalDetailType {
-
-
     id: string;
-
     personalDetail: { 
         id: string;
        username:string,
