@@ -58,13 +58,10 @@ const SelectedReviewers: React.FC = () => {
                 | undefined
             ) => {
               return (
-<<<<<<< HEAD
-=======
                 // <p className={classes.single_user}>
                 //   user {index} {checkeUser(item)?.personalDetail.firstName}
                 // </p>
               
->>>>>>> main
                 <article className={classes.userlist}>
                   <input type="checkbox" id={classes.id} value={classes.id} />
                   <div>

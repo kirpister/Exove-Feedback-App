@@ -38,7 +38,6 @@ const CreatedUserList: React.FC = () => {
           <div className={classes.selected_reviewers}>
             <SelectedReviewers />
           </div>
-
           <AllUsersList usersList={users} />
         </div>
       </div>
