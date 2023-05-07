@@ -1,0 +1,17 @@
+{
+    "LOGIN PAGE TRANSLATIONS": "******",
+    "loginheader": "KIRJAUDU SISÄÄN",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "loginbtn": "KIRJAUDU",
+
+    "USER SIDEBAR TRANSLATIONS": "******",
+    "lione": "Koti",
+    "litwo": "Palaute pyynnöt",
+    "lithree": "Pyydä palautetta",
+    "logout": "KIRJAUDU ULOS",
+
+    "USERDASH TRANSLATIONS": "******",
+    "greeting": "Moikka moi",
+    "date": "Tänään on"
+}

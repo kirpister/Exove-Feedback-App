@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { personalDetailType } from "../../model/types/user";
+import { personalDetailType, DataType, CheckedUser } from "../../model/types/user";
 import { useNavigate } from "react-router-dom";
 
 import SidebarUser from "./SidebarUser";
@@ -11,23 +11,9 @@ import userstyles from "./userdash.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
-interface DataType {
-  data: {
-    msg: string;
-    data: personalDetailType[];
-  };
-  status: number;
-}
-
-interface CheckedUser {
-  id: number;
-  personalDetail?: {
-    firstName?: string;
-    surName?: string;
-  };
-}
 
 const RequestFeedback: React.FC = () => {
+  
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
   const navigate = useNavigate();

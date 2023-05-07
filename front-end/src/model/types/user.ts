@@ -27,3 +27,19 @@ export interface personalDetailType {
     }
     
 }
+
+export interface DataType {
+    data: {
+      msg: string;
+      data: personalDetailType[];
+    };
+    status: number;
+  }
+  
+ export interface CheckedUser {
+    id: number;
+    personalDetail?: {
+      firstName?: string;
+      surName?: string;
+    };
+  }

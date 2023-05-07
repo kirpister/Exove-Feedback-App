@@ -1,0 +1,17 @@
+{
+    "LOGIN PAGE TRANSLATIONS": "******",
+    "loginheader": "LOGIN",
+    "username": "Username",
+    "password": "Password",
+    "loginbtn": "LOGIN",
+
+    "USER SIDEBAR TRANSLATIONS": "******",
+    "lione": "Main",
+    "litwo": "Feedback Requests",
+    "lithree": "Reguest Feedback",
+    "logout": "LOG OUT",
+
+    "USERDASH TRANSLATIONS": "******",
+    "greeting": "Hello hello",
+    "date": "Today is"
+}

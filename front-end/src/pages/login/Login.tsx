@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const dispatch = useDispatch();
 
-  const { t, i18n } = useTranslation<'login'>('login');
+  const { t, i18n } = useTranslation<'trans'>('trans');
 
   const onsubmitHandler = (uname: string, pwd: string) => {
     return fetch("/login", {
