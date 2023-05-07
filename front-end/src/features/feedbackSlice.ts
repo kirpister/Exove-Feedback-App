@@ -19,8 +19,7 @@ export interface FinalConfirmationType {
   requestedListBy: string;
 }
 interface FinalPayloadType<T> {
-  createdBy: T;
-  tittle: T;
+  title: T;
 }
 interface PayloadTypeCreateUserList<T> {
   requestedListBy: T;
@@ -63,7 +62,7 @@ const feedbackSlice = createSlice({
         let temp: FinalConfirmationType = {
           details: {
             questions: state.sendQuestion,
-            title: action.payload.tittle,
+            title: action.payload.title,
           },
           userList: state.listUserId,
           requestedListBy: state.requestedListBy,
@@ -77,11 +76,8 @@ const feedbackSlice = createSlice({
 });
 
 export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType) => {
-  console.log("call API");
-  console.log(confirmFeedback);
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
-    console.log(data);
     if (status === 201) {
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
     }

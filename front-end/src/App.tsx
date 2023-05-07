@@ -6,7 +6,6 @@ import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
 
 import FeedbackForm from "./components/form/FeedbackForm";
-import CreatedUserList from "./components/confirm/step_1_selectList/CreateUserList";
 import AllFeedbacks from "./components/allfeedbacks/allFeeback/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
 import { useEffect } from "react";
@@ -17,11 +16,12 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import SetupUserList from "./components/confirm/step_2_modify_the_list/SetupUserList";
 import { initiateFetchNotifications } from "./features/notificationsSlice";
 import { Notifications } from "./components/Notifications/Notifications";
+import CreateFeedback from "./components/createFeedback/CreateFeedback";
+import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
 
 const App = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log("validate user");
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
@@ -42,13 +42,14 @@ const App = () => {
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/feedbackform" element={<FeedbackForm />} />
-            <Route path="/getuserlist" element={<CreatedUserList />}>
-              <Route path=":id" element={<SetupUserList />}></Route>
+            <Route path="/getuserlist">
+              <Route index element={<RequestUserLists />} />
+              <Route path=":id" element={<SetupUserList />} />
+              <Route path=":id/feedbackform" element={<FeedbackForm />} />
+              <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
             </Route>
-
-            {/* <Route path="confirmation" element={<CreateFeedback />} /> */}
             <Route path="/allfeedbacks" element={<AllFeedbacks />} />
-            {/* <Route path="*" element={<ErrorPage />} /> */}
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       );

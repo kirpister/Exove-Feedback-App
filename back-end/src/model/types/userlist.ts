@@ -1,8 +1,9 @@
-import { Schema } from 'mongoose'
+import { Schema } from 'mongoose';
 
-export interface userListModel { 
-    requestUserId: Schema.Types.ObjectId,
-    userList : Array<Schema.Types.ObjectId>,
-    opened: boolean,
-    createFeedbackId?: Schema.Types.ObjectId | null
+export interface userListModel {
+  id?: string;
+  requestUserId: Schema.Types.ObjectId;
+  userList: Array<Schema.Types.ObjectId>;
+  opened: boolean;
+  createFeedbackId?: Schema.Types.ObjectId | null;
 }
