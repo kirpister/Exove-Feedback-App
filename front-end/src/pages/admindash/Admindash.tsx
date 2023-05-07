@@ -9,7 +9,6 @@ const Admindash: React.FC = () => {
   useEffect(() => {
     axios.get("/user").then((res) => {
       const { data } = res;
-      
     });
   }, []);
   return (

@@ -66,6 +66,7 @@ const Userdash: React.FC = () => {
 
   return (
     <main className={userstyles.usermain}>
+      {/* <SidebarUser /> */}
       <div className={userstyles.userdash}>
         <h2>
           {t("greeting")} {userDetails?.firstName}!

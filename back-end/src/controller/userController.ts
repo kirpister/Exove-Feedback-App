@@ -184,12 +184,16 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+<<<<<<< HEAD
+export const createFeedbackUserList: RequestHandler = async (req, res, next) => {
+=======
 export const createFeedbackUserList: RequestHandler = async (
   req,
   res,
   next
 ) => {
   console.log(req.body);
+>>>>>>> main
   const { userListId, userDetails } = req.body;
   const { employeeNumber } = userDetails;
   // 1. check that user can not suggest to give feedback for themself

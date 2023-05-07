@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./userList.module.css";
-import { personalDetailType } from "../../model/types/user";
-import SingleUser from "../User/SingleUser";
+import { personalDetailType } from "../../../model/types/user";
+import SingleUser from "../../User/SingleUser";
 
 interface AllUserProps {
   usersList: personalDetailType[];
@@ -13,11 +13,12 @@ const AllUsersList: React.FC<AllUserProps> = ({ usersList }) => {
 
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
-    <div className={classes.all_users_list}>
+    <div 
+    className={classes.all_users_list}
+    >
       <div>
         <label htmlFor="search"></label>
         <input
@@ -27,7 +28,7 @@ const AllUsersList: React.FC<AllUserProps> = ({ usersList }) => {
           onChange={searchHandler}
         ></input>
       </div>
-
+      
       {usersList.map((user) => (
         <SingleUser key={user.id} userInfo={user} />
       ))}

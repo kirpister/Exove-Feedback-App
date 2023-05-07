@@ -6,10 +6,14 @@ type LayoutProps = {
   children: JSX.Element;
 };
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = (
+  // { children }: LayoutProps
+  ) => {
   return (
-    <div className={classes.layout}>
-      {children}
+    <div
+    //  className={classes.layout}
+    >
+      {/* {children} */}
       <Main />
     </div>
   );

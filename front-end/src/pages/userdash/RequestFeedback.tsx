@@ -8,7 +8,6 @@ import {
 } from "../../model/types/user";
 import { useNavigate } from "react-router-dom";
 
-import SidebarUser from "./SidebarUser";
 
 import userstyles from "./userdash.module.css";
 

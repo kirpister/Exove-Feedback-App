@@ -21,14 +21,10 @@ const SidebarAdmin: React.FC = () => {
           <img className="circle" src={circle} alt="circle" />
 
           <li>
-            <NavLink to="/notifications">Notifications</NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/feedbackform">Feedback form</NavLink>
+            <NavLink to="/notifications">notifications</NavLink>
           </li>
           <li>
-            <NavLink to="/selectuser">Create User List</NavLink>
+            <NavLink to="/getuserlist">Get Request User List</NavLink>
           </li>
           <li>
             <NavLink to="/allfeedbacks">All feedbacks</NavLink>
@@ -37,9 +33,7 @@ const SidebarAdmin: React.FC = () => {
       </nav>
 
       <div className={classes.bottomdiv}>
-        <div className={classes.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
-        </div>
+        <div className={classes.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
         <span>
           {userDetails.firstName} {userDetails.surName}
         </span>
