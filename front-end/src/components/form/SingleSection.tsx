@@ -20,8 +20,8 @@ const SingleSection: React.FC<SingleSectionProps> = ({
 
         return (
           <Accordion defaultActiveKey="0" key={section.id}>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
+            <Accordion.Item eventKey="0" >
+              <Accordion.Header style={{ backgroundColor: 'white' }}>
                 <label htmlFor="section"></label>
 
                 <input
@@ -30,7 +30,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({
                   defaultValue={section.name}
                 />
               </Accordion.Header>
-              <Accordion.Body>
+              <Accordion.Body style={{margin: '.5rem'}}>
                 {section.questions.map((question, j) => {
                   // console.log("sec_q_index", `${i}${j}`);
 
@@ -41,6 +41,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({
                       deleteQuestion={deleteQuestion}
                       index_section={i}
                       index_question={j}
+
                     />
                   );
                 })}

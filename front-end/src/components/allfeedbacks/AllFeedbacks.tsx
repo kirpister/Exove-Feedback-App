@@ -4,12 +4,19 @@ import { AnswerType, CreatedFeebackType, getAllFeedback } from "../../features/c
 import { PayloadTypeQuestion } from "../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
 import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
+
+
 const AllFeedbacks = () => {
+
   const { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
+
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     getAllFeedback(dispatch);
   }, [dispatch]);
+
+
   const renderLitOfQuestion = (listQuestion: Array<PayloadTypeQuestion>) => {
     return listQuestion.map((item, index) => {
       const { title, order, type, required, result } = item;
@@ -23,6 +30,7 @@ const AllFeedbacks = () => {
       );
     });
   };
+
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
     const { details, finished, user } = answerDetail;
     return (
@@ -71,6 +79,7 @@ const AllFeedbacks = () => {
             <div>List of question : </div>
             <div>requested by the list user request with id {requestedListBy}</div>
           </div>
+          
           <div className={classes.questions}>{renderLitOfQuestion(details.questions)}</div>
           <div>how user answer:</div>
           {answers.map((item, index) => {

@@ -1,6 +1,7 @@
 .dashwrapper {
-  background-color: silver;
-  margin-top: 2rem;
+  /* background-color: var(--light-grey-color); */
+  padding: 1rem;
+  margin: 2rem;
 }
 
 .list-group-item {

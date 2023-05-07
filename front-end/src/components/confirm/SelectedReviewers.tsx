@@ -58,6 +58,7 @@ const SelectedReviewers: React.FC = () => {
               }
             </span>
           </h6>
+          
           {userlist.userList.map(
             (
               item: any,
@@ -79,7 +80,7 @@ const SelectedReviewers: React.FC = () => {
                 // <p className={classes.single_user}>
                 //   user {index} {checkeUser(item)?.personalDetail.firstName}
                 // </p>
-
+              
                 <article className={classes.userlist}>
                   <input type="checkbox" id={classes.id} value={classes.id} />
                   <div>
@@ -98,7 +99,7 @@ const SelectedReviewers: React.FC = () => {
               );
             }
           )}
-          <button
+          <button className={classes.btn}
             onClick={() => {
               userlist.opened
                 ? alert(

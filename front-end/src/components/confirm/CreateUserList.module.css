@@ -1,11 +1,13 @@
 .confirmation_wrapper {
   display: flex;
   flex-direction: row;
-
   justify-content: center;
-  margin: 1rem 0 1rem 0;
+  margin: 2rem;
 }
+
 .selected_reviewers {
   display: flex;
-  gap: 1px;
-}
+  flex-direction: column;
+  width: 57vw;
+  gap: .5rem;
+} 
