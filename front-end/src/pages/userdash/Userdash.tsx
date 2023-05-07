@@ -71,7 +71,7 @@ const [users, setUsers] = useState<personalDetailType[]>([]);
     
 return (
     <main className={userstyles.usermain}>
-      <SidebarUser />
+      {/* <SidebarUser /> */}
       <div className={userstyles.userdash}>
         <h2>
             {t("greeting")} {userDetails?.firstName}! 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./userList.module.css";
-import { personalDetailType } from "../../model/types/user";
-import SingleUser from "../User/SingleUser";
+import { personalDetailType } from "../../../model/types/user";
+import SingleUser from "../../User/SingleUser";
 
 interface AllUserProps {
   usersList: personalDetailType[];

@@ -6,7 +6,7 @@ import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
 
 import FeedbackForm from "./components/form/FeedbackForm";
-import CreatedUserList from "./components/confirm/CreateUserList";
+import CreatedUserList from "./components/confirm/step_1_selectList/CreateUserList";
 import AllFeedbacks from "./components/allfeedbacks/allFeeback/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ import { initiateValidateSession } from "./features/authenticatedUserSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import RequestFeedback from "./pages/userdash/RequestFeedback";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
+import SetupUserList from "./components/confirm/step_2_modify_the_list/SetupUserList";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -31,13 +32,18 @@ const App = () => {
     if (authenticatedUser.userDetails?.roles.includes(ADMIN_ROLE)) {
       return (
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" 
+          element={<Layout />}
+          >
             <Route index element={<Admindash />} />
-            <Route path="feedbackform" element={<FeedbackForm />} />
-            <Route path="selectUser" element={<CreatedUserList />} />
+            <Route path="/feedbackform" element={<FeedbackForm />} />
+            <Route path="/getuserlist" element={<CreatedUserList />}>
+              <Route path=":id" element={<SetupUserList />}></Route>
+            </Route>
+
             {/* <Route path="confirmation" element={<CreateFeedback />} /> */}
             <Route path="/allfeedbacks" element={<AllFeedbacks />} />
-            <Route path="*" element={<ErrorPage />} />
+            {/* <Route path="*" element={<ErrorPage />} /> */}
           </Route>
         </Routes>
       );

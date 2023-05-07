@@ -9,12 +9,11 @@ const Admindash: React.FC = () => {
   useEffect(() => {
     axios.get("/user").then((res) => {
       const { data } = res;
-      
     });
   }, []);
   return (
     <main>
-      <SidebarAdmin />
+      {/* {userDetails?.roles.includes("admin") ? <SidebarAdmin /> : ""} */}
       <div className={classes.dash_wrapper}>
         {
           <h2>

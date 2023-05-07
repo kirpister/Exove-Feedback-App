@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
+import SidebarAdmin from "../../../pages/admindash/SidebarAdmin";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import axios from "axios";
 import classes from "./CreateUserList.module.css";
-import { personalDetailType } from "../../model/types/user";
-import { useAppDispatch } from "../../app/hooks";
-import { updateAllUserList } from "../../features/alluserSlicer";
+import { personalDetailType } from "../../../model/types/user";
+import { useAppDispatch } from "../../../app/hooks";
+import { updateAllUserList } from "../../../features/alluserSlicer";
 
 export interface DataType {
   data: {
@@ -31,7 +31,7 @@ const CreatedUserList: React.FC = () => {
 
   return (
     <>
-      <SidebarAdmin />
+      {/* <SidebarAdmin /> */}
 
       <div className={classes.wrapper}>
         <div className={classes.confirmation_wrapper}>

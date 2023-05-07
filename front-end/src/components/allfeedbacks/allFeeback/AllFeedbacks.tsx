@@ -64,7 +64,7 @@ const AllFeedbacks = () => {
 
   return (
     <>
-      <SidebarAdmin />
+      {/* <SidebarAdmin /> */}
 
       <div>
         <div style={{ color: "purple" }} className="dash-wrapper"></div>

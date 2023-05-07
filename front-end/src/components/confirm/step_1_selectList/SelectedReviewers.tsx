@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import classes from "./SelectedReviewers.module.css";
-import { personalRequestListType } from "../../model/types/requestList";
+import { personalRequestListType } from "../../../model/types/requestList";
 import axios from "axios";
-import { personalDetailType } from "../../model/types/user";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setUpUserList } from "../../features/feedbackSlice";
-import SingleUser from "../User/SingleUser";
+import { personalDetailType } from "../../../model/types/user";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { setUpUserList } from "../../../features/feedbackSlice";
+import SingleUser from "../../User/SingleUser";
 
 export interface DataType {
   data: {
@@ -88,7 +88,7 @@ const SelectedReviewers: React.FC = () => {
                   );
             }}
           >
-            Confirm
+            Process
           </button>
         </div>
       );
