@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { createFeedbackAPI, setUpConfirmation } from "../../features/feedbackSlice";
+import styles from './createfb.module.css';
 
 function CreateFeedback() {
   const { sendQuestion, listUserId, finalConfirm, sections } = useAppSelector((state) => state.feedback);
@@ -16,31 +17,33 @@ function CreateFeedback() {
   const renderQuestion = () => {
     return sendQuestion.map((question, index) => {
       return (
-        <div>
+        <div className={styles.form_wrapper}>
+          <div className={styles.container}>
           <p>order: {question.order}</p>
           <p>
             title:
             {question.title}
           </p>
           <p>type: {question.type}</p>
+          </div>
         </div>
       );
     });
   };
   return (
     <div>
-      <h2>create feedback form</h2>
+      <h2 className={styles.header}>Create feedback form</h2>
       <div>{renderQuestion()}</div>
-      <button
+      <button className={styles.btn}
         onClick={() => {
           if (userDetails) {
             dispatch(setUpConfirmation({ createdBy: userDetails?.id, tittle: "giving first back" }));
           }
         }}
       >
-        create final feedback data
+        Create final feedback form
       </button>
-      <button
+      <button className={styles.btn}
         onClick={() => {
           if (finalConfirm) {
             createFeedbackAPI(finalConfirm)
@@ -49,7 +52,7 @@ function CreateFeedback() {
           }
         }}
       >
-        send feedback to backend
+        Send feedback to backend
       </button>
     </div>
   );

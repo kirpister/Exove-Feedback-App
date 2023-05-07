@@ -1,7 +1,29 @@
 .feedback_data { 
-    background-color: var( --pale-pink-color);
+    background-color: var( --light-grey-color);
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-right: 1.3rem;
 }
 
-.questions{
-    background-color: var( --purple-color);
+.questions {
+    border: 1px solid var(--light-grey-color);
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-right: 1.3rem;
 }
+<<<<<<< HEAD:front-end/src/components/allfeedbacks/allFeeback/allFeedback.module.css
+=======
+
+.type_1 {
+    background-color: var( --light-grey-color);
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-right: 1.3rem;
+}
+
+.type_2 {
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-right: 1.3rem;
+}
+>>>>>>> main:front-end/src/components/allfeedbacks/allFeedback.module.css

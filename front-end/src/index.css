@@ -22,6 +22,7 @@
 :root {
   --purple-color: #6712be;
   --dark-grey-color: #212121;
+  --light-grey-color: rgba(200, 200, 200, 0.2);
   --pale-pink-color: #f78da7;
   --black: rgb(8, 8, 8);
   --main-font: "Gelion Regular", sans-serif;
@@ -33,10 +34,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--main-font);
 }
-
-/* main {
-  width: 100vw;
-} */
 
 .global_wrapper {
   display: grid;

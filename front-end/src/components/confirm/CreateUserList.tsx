@@ -33,7 +33,7 @@ const CreatedUserList: React.FC = () => {
     <>
       <SidebarAdmin />
 
-      <div>
+      <div className={classes.wrapper}>
         <div className={classes.confirmation_wrapper}>
           <div className={classes.selected_reviewers}>
             <SelectedReviewers />

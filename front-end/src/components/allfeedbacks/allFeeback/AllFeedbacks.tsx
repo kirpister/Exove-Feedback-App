@@ -3,14 +3,25 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { AnswerType, CreatedFeebackType, getAllFeedback } from "../../../features/createdFeedbackSlicer";
 import { PayloadTypeQuestion } from "../../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
+<<<<<<< HEAD:front-end/src/components/allfeedbacks/allFeeback/AllFeedbacks.tsx
 import SidebarAdmin from "../../../pages/admindash/SidebarAdmin";
 import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
+=======
+import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
+
+
+>>>>>>> main:front-end/src/components/allfeedbacks/AllFeedbacks.tsx
 const AllFeedbacks = () => {
+
   const { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
+
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     getAllFeedback(dispatch);
   }, [dispatch]);
+
+
   const renderLitOfQuestion = (listQuestion: Array<PayloadTypeQuestion>) => {
     return listQuestion.map((item, index) => {
       const { title, order, type, required, result } = item;
@@ -24,7 +35,41 @@ const AllFeedbacks = () => {
       );
     });
   };
+<<<<<<< HEAD:front-end/src/components/allfeedbacks/allFeeback/AllFeedbacks.tsx
   
+=======
+
+  const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
+    const { details, finished, user } = answerDetail;
+    return (
+      <div>
+        <p>User Id: {user.id}</p>
+        <p>Name: {user.personalDetail.firstName}</p>
+        <p>user answers:</p>
+        <p>{finished ? "User finished answer" : "User have not answerd yet"}</p>
+
+        {finished
+          ? details.map((item, index) => {
+              const { answers, question } = item;
+              return (
+                <Fragment key={index}>
+                  <p>
+                    question order: {question.order}. {question.title}
+                  </p>
+                  <p>
+                    Answer:{" "}
+                    {answers.map((answer, i) => {
+                      return <Fragment key={index + i}>{answer}</Fragment>;
+                    })}
+                  </p>
+                </Fragment>
+              );
+            })
+          : ""}
+      </div>
+    );
+  };
+>>>>>>> main:front-end/src/components/allfeedbacks/AllFeedbacks.tsx
   const renderAllFeedback = (list: Array<CreatedFeebackType>) => {
     if (list.length === 0) {
       return <div>NO Feedback List</div>;
@@ -43,6 +88,7 @@ const AllFeedbacks = () => {
             <div>List of question : </div>
             <div>requested by the list user request with id {requestedListBy}</div>
           </div>
+          
           <div className={classes.questions}>{renderLitOfQuestion(details.questions)}</div>
           <div>how user answer:</div>
           {answers.map((item, index) => {
