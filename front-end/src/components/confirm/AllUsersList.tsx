@@ -13,7 +13,6 @@ const AllUsersList: React.FC<AllUserProps> = ({ usersList }) => {
 
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
@@ -29,7 +28,7 @@ const AllUsersList: React.FC<AllUserProps> = ({ usersList }) => {
           onChange={searchHandler}
         ></input>
       </div>
-
+      
       {usersList.map((user) => (
         <SingleUser key={user.id} userInfo={user} />
       ))}
