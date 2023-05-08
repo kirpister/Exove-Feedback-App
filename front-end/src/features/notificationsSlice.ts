@@ -4,12 +4,12 @@ import { Notification } from "../model/types/notification";
 import { fetchNotifications } from "../services/notification";
 
 interface NotificationsState {
-  notifications?: Notification[]
+  notifications?: Notification[];
 }
 
 const initialState: NotificationsState = {
-    notifications: undefined
-  };
+  notifications: undefined,
+};
 
 export const notificationsSlice = createSlice({
   name: "notifications",
@@ -17,6 +17,9 @@ export const notificationsSlice = createSlice({
   reducers: {
     saveNotifications(state, action) {
       state.notifications = action.payload.data;
+    },
+    resetNotifications: () => {
+      return { ...initialState };
     },
   },
 });
@@ -34,6 +37,6 @@ export const initiateFetchNotifications = () => {
   };
 };
 
-
-export const { saveNotifications } = notificationsSlice.actions;
+export const { saveNotifications, resetNotifications } =
+  notificationsSlice.actions;
 export default notificationsSlice.reducer;
