@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./btnSucces.module.css";
 interface PropsType {
-  callBack: (e: any) => void;
+  callBack: (e?: any) => void;
   name: string;
-  data:any
+  data?:any
 }
 function BtnSuccess(props: PropsType) {
   const { callBack, name,data } = props;

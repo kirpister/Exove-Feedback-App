@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from "react";
-import SidebarAdmin from "../../../../pages/admindash/SidebarAdmin";
+import React from "react";
 import AllUsersList from "../all_user_list/AllUsersList";
-import axios from "axios";
 import classes from "./CreateUserList.module.css";
-import { DataType, personalDetailType } from "../../../../model/types/user";
-import { useAppDispatch } from "../../../../app/hooks";
-import { updateAllUserList } from "../../../../features/alluserSlicer";
+
 import RequestUserLists from "../all_requested_user_list/RequestUserLists";
 
-
-
 const CreatedUserList: React.FC = () => {
-
   return (
     <>
       {/* <SidebarAdmin /> */}

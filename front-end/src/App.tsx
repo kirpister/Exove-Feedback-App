@@ -20,6 +20,7 @@ import CreateFeedback from "./components/createFeedback/CreateFeedback";
 import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
 import { getAllFeedbackAPI } from "./features/createdFeedbackSlicer";
 import { getAllUserAPI } from "./features/alluserSlicer";
+import { getAllRequestUserListAPI } from "./features/requestUserListSlicer";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ const App = () => {
     dispatch(initiateValidateSession());
     dispatch(getAllFeedbackAPI());
     dispatch(getAllUserAPI());
+    dispatch(getAllRequestUserListAPI());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
   const notifications = useAppSelector((state) => state.userNotifications.notifications);
@@ -48,7 +50,7 @@ const App = () => {
             <Route path="/feedbackform" element={<FeedbackForm />} />
             <Route path="/getuserlist">
               <Route index element={<RequestUserLists />} />
-              <Route path=":id" element={<SetupUserList />} />
+              <Route path=":id" element={<SetupUserList/>} />
               <Route path=":id/feedbackform" element={<FeedbackForm />} />
               <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
             </Route>
