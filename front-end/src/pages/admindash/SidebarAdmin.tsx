@@ -27,6 +27,9 @@ const SidebarAdmin: React.FC = () => {
             <NavLink to="/feedbackform">feedbackform</NavLink>
           </li>
           <li>
+            <NavLink to="/confirmation">Confirmation</NavLink>
+          </li>
+          <li>
             <NavLink to="/getuserlist">Get Request User List</NavLink>
           </li>
           <li>
@@ -36,7 +39,9 @@ const SidebarAdmin: React.FC = () => {
       </nav>
 
       <div className={classes.bottomdiv}>
-        <div className={classes.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
+        <div className={classes.avatar}>
+          {userDetails.firstName.charAt(0).toUpperCase()}
+        </div>
         <span>
           {userDetails.firstName} {userDetails.surName}
         </span>

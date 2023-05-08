@@ -26,8 +26,6 @@ const CreatedUserList: React.FC = () => {
   const distpacth = useAppDispatch();
   const [isActive, setIsActive] = useState<personalDetailType[]>([]);
 
-  console.log("users", users);
-
   useEffect(() => {
     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
       const { data, status } = res as unknown as DataType;
@@ -37,6 +35,7 @@ const CreatedUserList: React.FC = () => {
       }
     });
   }, []);
+  console.log("users", users);
 
   const onClickUser = (clickedUser: any) => {
     console.log("clicked", clickedUser);
