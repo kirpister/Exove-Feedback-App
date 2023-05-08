@@ -19,13 +19,13 @@ interface AllUserRequestProps {
 }
 
 const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
-  console.log("isActive", isActive);
+  // console.log("isActive", isActive);
 
   const [requests, setRequests] = useState<any[]>([]);
   let [uniqueRequests, setUniqueRequests] = useState<any[]>([]);
   const { allUserList } = useAppSelector((state) => state.allUser);
 
-  console.log("all", allUserList);
+  // console.log("all", allUserList);
   // const createListOfUser = () => {};
 
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
         }
       });
   }, []);
-  console.log("requests", requests);
+  // console.log("requests", requests);
 
   // mooving away all duplicated requests from users
   let tempArr: any = [];
@@ -57,7 +57,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
     let renderDataRequests = uniqueRequests;
     if (isActive) {
       renderDataRequests = renderDataRequests.filter((item) => {
-        return item.requestUserId == isActive.id;
+        return item.requestUserId === isActive.id;
       });
       if (!renderDataRequests.length) {
         return (

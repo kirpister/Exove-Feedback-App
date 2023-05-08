@@ -4,9 +4,8 @@ import { personalDetailType } from "../../../../model/types/user";
 import SingleUser from "../../../User/SingleUser";
 import { useAppSelector } from "../../../../app/hooks";
 
-
 const AllUsersList: React.FC = () => {
-  const {allUserList}  = useAppSelector(state => state.allUser)
+  const { allUserList } = useAppSelector((state) => state.allUser);
   const [search, setSearch] = useState("");
   //   const [userList, setUsersList] = useState([]);
 
@@ -18,7 +17,12 @@ const AllUsersList: React.FC = () => {
     <div className={classes.all_users_list}>
       <div>
         <label htmlFor="search"></label>
-        <input type="search" id="search" placeholder="Search" onChange={searchHandler}></input>
+        <input
+          type="search"
+          id="search"
+          placeholder="Search"
+          onChange={searchHandler}
+        ></input>
       </div>
 
       {allUserList.map((user) => (

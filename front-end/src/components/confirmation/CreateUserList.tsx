@@ -7,6 +7,7 @@ import classes from "./CreateUserList.module.css";
 import { personalDetailType } from "../../model/types/user";
 import { useAppDispatch } from "../../app/hooks";
 import { updateAllUserList } from "../../features/alluserSlicer";
+import { PersonalDetailType } from "../../common/types/UserDetails";
 
 export interface DataType {
   data: {
@@ -19,12 +20,14 @@ export interface DataType {
 export interface clickedUserType {
   clickedUser: Object;
   onClickUser: Function;
+  isActive: personalDetailType;
 }
 
 const CreatedUserList: React.FC = () => {
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const distpacth = useAppDispatch();
-  const [isActive, setIsActive] = useState<personalDetailType[]>([]);
+  const [isActive, setIsActive] = useState<personalDetailType>();
+
 
   useEffect(() => {
     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
@@ -35,7 +38,9 @@ const CreatedUserList: React.FC = () => {
       }
     });
   }, []);
-  console.log("users", users);
+  // console.log("users", users);
+
+
 
   const onClickUser = (clickedUser: any) => {
     console.log("clicked", clickedUser);
@@ -51,7 +56,11 @@ const CreatedUserList: React.FC = () => {
           <div className={classes.selected_reviewers}>
             {isActive ? <SelectedReviewers isActive={isActive} /> : ""}
           </div>
-          <AllUsersList usersList={users} onClickUser={onClickUser} />
+          <AllUsersList
+            usersList={users}
+            onClickUser={onClickUser}
+            isActive={isActive}
+          />
         </div>
       </div>
     </>
