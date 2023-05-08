@@ -5,15 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { setUpUserList } from "../../../../features/feedbackSlice";
 import { personalRequestListType } from "../../../../model/types/requestList";
 
-interface PropsType<T> {
+interface PropsType {
   singleRequestedList: personalRequestListType
   index: number;
 }
-function SingleUserList(props: PropsType<string>) {
+function SingleUserList(props: PropsType) {
   const { singleRequestedList, index } = props;
   const { allUserList } = useAppSelector((state) => state.allUser);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const checkeUser = (id: string) => {
     return allUserList.find((e) => e.id === id);
   };
