@@ -25,10 +25,12 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
-  const notifications = useAppSelector((state) => state.userNotifications.notifications);
+  const notifications = useAppSelector(
+    (state) => state.userNotifications.notifications
+  );
 
   if (authenticatedUser.isLoading) {
-    return <p>Loading....!!</p>;
+    return <LoadingPage />;
   }
 
   if (authenticatedUser.isLoggedIn) {
@@ -42,11 +44,15 @@ const App = () => {
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/feedbackform" element={<FeedbackForm />} />
+            <Route path="/confirmation" element={<CreatedUserList />} />
             <Route path="/getuserlist">
               <Route index element={<RequestUserLists />} />
-              <Route path=":id" element={<SetupUserList/>} />
+              <Route path=":id" element={<SetupUserList />} />
               <Route path=":id/feedbackform" element={<FeedbackForm />} />
-              <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
+              <Route
+                path=":id/feedbackform/confirm"
+                element={<CreateFeedback />}
+              />
             </Route>
             <Route path="/allfeedbacks" element={<AllFeedbacks />} />
             <Route path="*" element={<ErrorPage />} />
