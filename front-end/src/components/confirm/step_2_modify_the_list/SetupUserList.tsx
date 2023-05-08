@@ -6,30 +6,43 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "./setupUserList.module.css";
 import { setUpSelectRequestList } from "../../../features/requestUserListSlicer";
 import BtnSuccess from "../../button/success/BtnSuccess";
+import { setUpUserList } from "../../../features/feedbackSlice";
 
 function SetupUserList() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { selectedRequesList, requestList } = useAppSelector((state) => state.requestUserlist);
+  const { selectedRequesList, requestLists } = useAppSelector((state) => state.requestUserlist);
 
   const dispatch = useAppDispatch();
-
   useEffect(() => {
-    // console.log(requestList);
     if (id) {
       dispatch(setUpSelectRequestList({ id }));
     }
-  }, [dispatch, id, requestList]);
-
+  }, [dispatch, id, requestLists]);
+  const processNext = () => {
+    navigate(`/getuserlist/${id}/feedbackform`);
+    if (selectedRequesList) {
+      dispatch(
+        setUpUserList({
+          listUserId: selectedRequesList.userList,
+          requestedListBy: selectedRequesList.id,
+        })
+      );
+    }
+  };
+  const goBack = () => {
+    navigate(`/getuserlist`);
+  };
   return selectedRequesList ? (
     <div className={styles.wrapper}>
+      <h1>Step-2 modify the list</h1>
       <div className={styles.confirmation_wrapper}>
         <div className={styles.selected_reviewers}>
           <SingleUserList singleRequestedList={selectedRequesList} index={1} key={1} />
-          {/* <BtnSuccess ></BtnSuccess> */}
+          <BtnSuccess callBack={processNext} name="Process" key={id}></BtnSuccess>
+          <BtnSuccess callBack={goBack} name="Back" key={id}></BtnSuccess>
         </div>
         <AllUsersList />
-        
       </div>
     </div>
   ) : (
