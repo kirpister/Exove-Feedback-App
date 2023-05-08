@@ -28,7 +28,7 @@ export const getUser: RequestHandler = async (req, res, next) => {
     return createSuccessMessage(
       {
         msg: `get user ${user.id} success`,
-        status: StatusCode_Success.NEW_DATA_CREATED,
+        status: StatusCode_Success.REQUEST_CREATED,
       },
       res,
       user
