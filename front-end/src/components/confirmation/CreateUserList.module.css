@@ -1,0 +1,11 @@
+.confirmation_wrapper {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+}
+.selected_reviewers {
+  display: flex;
+  gap: 1px;
+}
