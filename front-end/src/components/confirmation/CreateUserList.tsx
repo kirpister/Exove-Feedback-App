@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SidebarAdmin from "../../pages/admindash/SidebarAdmin";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import axios from "axios";
@@ -23,11 +22,10 @@ export interface clickedUserType {
   isActive: personalDetailType;
 }
 
-const CreatedUserList: React.FC = () => {
+const CreateUserList: React.FC = () => {
   const [users, setUsers] = useState<personalDetailType[]>([]);
   const distpacth = useAppDispatch();
   const [isActive, setIsActive] = useState<personalDetailType>();
-
 
   useEffect(() => {
     axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
@@ -39,8 +37,6 @@ const CreatedUserList: React.FC = () => {
     });
   }, []);
   // console.log("users", users);
-
-
 
   const onClickUser = (clickedUser: any) => {
     console.log("clicked", clickedUser);
@@ -67,4 +63,4 @@ const CreatedUserList: React.FC = () => {
   );
 };
 
-export default CreatedUserList;
+export default CreateUserList;

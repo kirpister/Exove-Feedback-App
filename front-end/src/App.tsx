@@ -18,6 +18,8 @@ import { initiateFetchNotifications } from "./features/notificationsSlice";
 import { Notifications } from "./components/Notifications/Notifications";
 import CreateFeedback from "./components/createFeedback/CreateFeedback";
 import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
+import LoadingPage from "./components/LoadingPage/LoadingPage";
+import CreateUserList from "./components/confirmation/CreateUserList";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -44,7 +46,7 @@ const App = () => {
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/feedbackform" element={<FeedbackForm />} />
-            <Route path="/confirmation" element={<CreatedUserList />} />
+            <Route path="/confirmation" element={<CreateUserList />} />
             <Route path="/getuserlist">
               <Route index element={<RequestUserLists />} />
               <Route path=":id" element={<SetupUserList />} />
