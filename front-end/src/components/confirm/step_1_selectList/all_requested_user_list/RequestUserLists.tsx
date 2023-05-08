@@ -12,25 +12,18 @@ interface AllUserRequestProps {
 }
 
 const RequestUserLists: React.FC = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { requestList } = useAppSelector((state) => state.requestUserlist);
+  const { requestLists } = useAppSelector((state) => state.requestUserlist);
 
   const processSetupUserList = (singleRequestedList: personalRequestListType) => {
     if (singleRequestedList.opened) {
       return alert("not allow to create new feedback base on this list becuase it already created before");
     } else {
-      dispatch(
-        setUpUserList({
-          listUserId: singleRequestedList.userList,
-          requestedListBy: singleRequestedList.id,
-        })
-      );
       navigate(`${singleRequestedList.id}`);
     }
   };
   const renderData = () => {
-    return requestList.map((singleRequestedList, i) => {
+    return requestLists.map((singleRequestedList, i) => {
       return (
         <div key={singleRequestedList.id} className={styles.selected_reviewers}>
           <SingleUserList index={i} singleRequestedList={singleRequestedList} key={i} />
@@ -43,6 +36,7 @@ const RequestUserLists: React.FC = () => {
   return (
     <>
       <div className={styles.wrapper}>
+        <h1>Step-1 Select list of user</h1>
         <div className={styles.confirmation_wrapper}>{renderData()}</div>
       </div>
     </>

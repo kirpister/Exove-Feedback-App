@@ -49,9 +49,11 @@ const createdFeedbackSlicer = createSlice({
     setAllFeedback(state, action) {
       state.allCreatedFeedback = action.payload;
     },
+    resetAllFeedback: () => {
+      return { ...initialState };
+    },
   },
 });
-
 
 export const getAllFeedbackAPI = () => {
   return async (dispatch: AppDispatch) => {
@@ -62,5 +64,6 @@ export const getAllFeedbackAPI = () => {
   };
 };
 
-export const { setAllFeedback } = createdFeedbackSlicer.actions;
+export const { setAllFeedback, resetAllFeedback } =
+  createdFeedbackSlicer.actions;
 export default createdFeedbackSlicer.reducer;

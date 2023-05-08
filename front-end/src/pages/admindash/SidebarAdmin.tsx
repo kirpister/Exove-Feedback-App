@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import circle from "../../assets/circle-half.png";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
@@ -6,20 +6,26 @@ import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import classes from "./Admindash.module.css";
+import { getAllRequestUserListAPI } from "../../features/requestUserListSlicer";
+import { getAllFeedbackAPI } from "../../features/createdFeedbackSlicer";
+import { getAllUserAPI } from "../../features/alluserSlicer";
 
 const SidebarAdmin: React.FC = () => {
-  const userDetails: any = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
+  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+useEffect(()=> { 
+    dispatch(getAllRequestUserListAPI());
+    dispatch(getAllFeedbackAPI());
+    dispatch(getAllUserAPI());
+},[dispatch])
   return (
     <div className={classes.sidebar}>
       <nav className={classes.usernav}>
         <ul>
-          <img className="circle" src={circle} alt="circle" />
-
+          <NavLink to={"/"}>
+            <img className="circle" src={circle} alt="circle" />
+          </NavLink>
           <li>
             <NavLink to="/notifications">notifications</NavLink>
           </li>
