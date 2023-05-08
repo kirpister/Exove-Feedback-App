@@ -8,7 +8,6 @@ import classes from "./SingleQuestion.module.css";
 
 interface SingleQuestionProps {
   question: Question;
-  // deleteQuestion: (index_section: number, index_question: number) => void;
   index_section: number;
   index_question: number;
 }
