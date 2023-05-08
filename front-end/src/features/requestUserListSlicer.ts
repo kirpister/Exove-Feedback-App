@@ -17,16 +17,27 @@ const requestListSlicer = createSlice({
   name: "userlistSlicer",
   initialState,
   reducers: {
-    getALlRequestUserlist(state, action: PayloadAction<Array<personalRequestListType>>) {
+    getALlRequestUserlist(
+      state,
+      action: PayloadAction<Array<personalRequestListType>>
+    ) {
       state.requestLists = action.payload;
     },
     setUpSelectRequestList(state, action: PayloadAction<{ id: string }>) {
-      const selectList = state.requestLists.find((e) => e.id === action.payload.id);
+      const selectList = state.requestLists.find(
+        (e) => e.id === action.payload.id
+      );
       state.selectedRequesList = selectList;
     },
-    editSelectRequestList (state, action:PayloadAction<personalRequestListType>){
-        state.selectedRequesList = action.payload
-    }
+    editSelectRequestList(
+      state,
+      action: PayloadAction<personalRequestListType>
+    ) {
+      state.selectedRequesList = action.payload;
+    },
+    resetFeedbackRequestList: () => {
+      return { ...initialState };
+    },
   },
 });
 
@@ -41,5 +52,9 @@ export const getAllRequestUserListAPI = () => {
   };
 };
 
-export const { getALlRequestUserlist, setUpSelectRequestList } = requestListSlicer.actions;
+export const {
+  getALlRequestUserlist,
+  setUpSelectRequestList,
+  resetFeedbackRequestList,
+} = requestListSlicer.actions;
 export default requestListSlicer.reducer;
