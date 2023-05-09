@@ -1,4 +1,5 @@
 export interface notificationType {
-    userid: string;
+    isRead: boolean;
     message: string;
+    userid: string;
   }
