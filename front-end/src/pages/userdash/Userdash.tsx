@@ -32,6 +32,7 @@ const Userdash: React.FC = () => {
   }, []);
 
   const userInfo = () => {
+    console.log(user);
     if (user) {
       // return users.map((user) => {
       return (
