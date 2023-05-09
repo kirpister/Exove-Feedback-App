@@ -61,8 +61,9 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
       });
       if (!renderDataRequests.length) {
         return (
-          <div style={{ border: "solid 1px black" }}>
-            <h2>This user does't have list for conformation</h2>
+          <div className={classes.selected_reviewers}>
+            <h5>This user does't have list for conformation</h5>
+            <div className={classes.placeholder}></div>
             <button>Remind</button>
           </div>
         );
