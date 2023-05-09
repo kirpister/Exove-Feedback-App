@@ -16,7 +16,15 @@
   margin: 0 auto;
 }
 
+.none {
+  border: 2px solid #ff3b1c;
+  /* background-color: #ff3b1c; */
+}
+.one {
+  border: 2px solid #01bb5f;
+  /* background-color: #01bb5f; */
+}
 .isActive {
-  background-color: var(--purple-color);
-  color: white;
+  /* background-color: var(--purple-color); */
+  border: 5px solid var(--purple-color);
 }

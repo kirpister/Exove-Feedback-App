@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
 import styles from "./SingleUser1.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
@@ -9,28 +8,33 @@ interface SingleUser1Props {
   userInfo: personalDetailType;
   onClickUser: Function;
   isActive: boolean;
+  requests: any;
 }
 
 const SingleUser1: React.FC<SingleUser1Props> = ({
   userInfo,
   onClickUser,
   isActive,
+  requests,
 }) => {
+  // console.log("requests", requests);
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
 
-  //let [toggle, setToggle] = useState(false);
-  // const toggleUser = () => {
-  //   setToggle((toggle) => !toggle);
-  //   console.log("toggle", toggle);
-  // };
+  // CHECK IF THE USER HAS A LIST OF REVIEWERS
+  let listInsideCheck = "none";
+  requests.forEach((item: any) => {
+    if (item.requestUserId === userInfo.id) {
+      listInsideCheck = "one";
+    }
+  });
 
-  let toggleClassCheck = isActive ? "isActive" : "";
+  let isActiveStyle = isActive ? "isActive" : "";
 
   return (
     <article
-      className={`${styles.userlist} ${styles[toggleClassCheck]}`}
+      className={`${styles.userlist} ${styles[listInsideCheck]} ${styles[isActiveStyle]} `}
       onClick={() => {
         // console.log("userInfo", userInfo);
         onClickUser(userInfo);
