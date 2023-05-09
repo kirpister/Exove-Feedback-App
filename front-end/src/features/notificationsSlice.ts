@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { AppDispatch } from "../app/store";
 import { Notification } from "../model/types/notification";
 import { fetchNotifications } from "../services/notification";
 
 interface NotificationsState {
-  notifications?: Notification[]
+  notifications?: Notification[];
 }
 
 const initialState: NotificationsState = {
-    notifications: undefined
-  };
+  notifications: undefined,
+};
 
 export const notificationsSlice = createSlice({
   name: "notifications",
@@ -17,6 +17,19 @@ export const notificationsSlice = createSlice({
   reducers: {
     saveNotifications(state, action) {
       state.notifications = action.payload.data;
+    },
+    resetNotifications: () => {
+      return { ...initialState };
+    },
+    markNotificationAsRead: (state, action) => {
+      // const copiedState = current(state);
+      if (!state.notifications) {
+        return state;
+      }
+      const matchedNotificationIndex = state.notifications.findIndex(
+        (item) => item._id === action.payload
+      );
+      state.notifications[matchedNotificationIndex].isRead = true;
     },
   },
 });
@@ -34,6 +47,6 @@ export const initiateFetchNotifications = () => {
   };
 };
 
-
-export const { saveNotifications } = notificationsSlice.actions;
+export const { saveNotifications, resetNotifications, markNotificationAsRead } =
+  notificationsSlice.actions;
 export default notificationsSlice.reducer;

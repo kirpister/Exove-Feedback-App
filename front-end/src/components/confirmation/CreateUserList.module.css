@@ -1,0 +1,17 @@
+.confirmation_wrapper {
+  display: flex;
+
+  justify-content: center;
+  margin: 2rem;
+}
+
+.selected_reviewers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--light-grey-color);
+  width: 55vw;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  height: 100vh;
+}

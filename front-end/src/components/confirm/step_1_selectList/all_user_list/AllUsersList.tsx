@@ -22,7 +22,12 @@ const AllUsersList: React.FC = (props: PropsType) => {
     <div className={classes.all_users_list}>
       <div>
         <label htmlFor="search"></label>
-        <input type="search" id="search" placeholder="Search" onChange={searchHandler}></input>
+        <input
+          type="search"
+          id="search"
+          placeholder="Search"
+          onChange={searchHandler}
+        ></input>
       </div>
 
       {allUserList.map((user) => (

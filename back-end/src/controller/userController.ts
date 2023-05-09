@@ -241,7 +241,7 @@ export const createFeedbackUserList: RequestHandler = async (
 
     // find admin id and save notification for the admin user
     const adminDetails = await UserModel.findOne({ 'work.roles' : { '$in' : ['admin']} }, '_id')
-    const newNotification = {userid: adminDetails?._id.toString(),message:'New feedback Request is pending for your approval '};
+    const newNotification = {userid: adminDetails?._id.toString(),message:'New feedback Request is pending for your approval', isRead: false};
     const newRequestNotification= await notificationModel.create({
       ...newNotification,
     });
@@ -338,11 +338,25 @@ export const fetchNotifications:RequestHandler = async(req, res, next) =>{
   try {
     const { employeeNumber } = req.body.userDetails ;
   
-    const notifications = await notificationModel.find({userid:employeeNumber}, 'message')
+    const notifications = await notificationModel.find({userid:employeeNumber}, 'message isRead')
     return createSuccessMessage(
-      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
+      { msg: 'success', status  : StatusCode_Success.REQUEST_CREATED },
       res,
       notifications
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const markNotificationRead:RequestHandler = async(req, res, next) =>{
+  try {
+    const notificationId = req.body.id ;
+  
+    await notificationModel.findOneAndUpdate({_id:notificationId}, { isRead: true })
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
+      res
     );
   } catch (error) {
     next(error);

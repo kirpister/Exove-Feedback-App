@@ -1,0 +1,30 @@
+.userlist .avatar {
+  margin: 0;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--pale-pink-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--main-font);
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto;
+}
+
+.none {
+  border: 2px solid #ff3b1c;
+  /* background-color: #ff3b1c; */
+}
+.one {
+  border: 2px solid #01bb5f;
+  /* background-color: #01bb5f; */
+}
+.isActive {
+  /* background-color: var(--purple-color); */
+  border: 5px solid var(--purple-color);
+}

@@ -4,6 +4,11 @@ import { AppDispatch } from "../app/store";
 import { UserDetails } from "../common/types/UserDetails";
 import { logoutSession } from "../services/logout";
 import { validateSession } from "../services/validate";
+import { resetUserList } from "./alluserSlicer";
+import { resetAllFeedback } from "./createdFeedbackSlicer";
+import { resetFeedback } from "./feedbackSlice";
+import { resetNotifications } from "./notificationsSlice";
+import { resetFeedbackRequestList } from "./requestUserListSlicer";
 
 interface AuthenticatedUserState {
   userDetails: UserDetails | undefined;
@@ -56,6 +61,11 @@ export const initiateLogoutSession = (navigagte: NavigateFunction) => {
       const { status } = await logoutSession();
       if (status === 200) {
         dispatch(logout());
+        dispatch(resetNotifications());
+        dispatch(resetUserList());
+        dispatch(resetAllFeedback());
+        dispatch(resetFeedback());
+        dispatch(resetFeedbackRequestList());
         navigagte("/");
       }
     } catch (error) {
@@ -64,5 +74,6 @@ export const initiateLogoutSession = (navigagte: NavigateFunction) => {
   };
 };
 
-export const { saveUserDetails, setIsLoading, logout } = authenticatedUserSlice.actions;
+export const { saveUserDetails, setIsLoading, logout } =
+  authenticatedUserSlice.actions;
 export default authenticatedUserSlice.reducer;
