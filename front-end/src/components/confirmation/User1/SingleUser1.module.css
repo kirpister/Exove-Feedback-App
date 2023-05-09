@@ -18,4 +18,5 @@
 
 .isActive {
   background-color: var(--purple-color);
+  color: white;
 }
