@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classes from "./AllUsersList.module.css";
+import styles from "./AllUsersList.module.css";
 import { personalDetailType } from "../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
 
@@ -45,7 +45,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
   }
 
   return (
-    <div className={classes.all_users_list}>
+    <div className={styles.all_users_list}>
       <div>
         <label htmlFor="search"></label>
         <input

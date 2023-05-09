@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import classes from "./SingleUser1.module.css";
+import styles from "./SingleUser1.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
 import { personalDetailType } from "../../../model/types/user";
@@ -30,14 +30,14 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
 
   return (
     <article
-      className={`${classes.userlist} ${classes[toggleClassCheck]}`}
+      className={`${styles.userlist} ${styles[toggleClassCheck]}`}
       onClick={() => {
         // console.log("userInfo", userInfo);
         onClickUser(userInfo);
       }}
     >
       <div>
-        <div className={classes.avatar}>
+        <div className={styles.avatar}>
           {userDetails.firstName.charAt(0).toUpperCase()}
         </div>
         <span>

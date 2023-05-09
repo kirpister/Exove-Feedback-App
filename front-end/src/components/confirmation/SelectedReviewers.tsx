@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import classes from "./SelectedReviewers.module.css";
+import styles from "./SelectedReviewers.module.css";
 import { personalRequestListType } from "../../model/types/requestList";
 import axios from "axios";
 import { personalDetailType } from "../../model/types/user";
@@ -61,10 +61,10 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
       });
       if (!renderDataRequests.length) {
         return (
-          <div className={classes.selected_reviewers}>
+          <div className={styles.selected_reviewers}>
             <h5>This user does't have list for conformation</h5>
-            <div className={classes.placeholder}></div>
-            <button>Remind</button>
+            <div className={styles.placeholder}></div>
+            <button className={styles.btn}>Remind</button>
           </div>
         );
       }
@@ -72,7 +72,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
     return renderDataRequests.map((userlist, i) => {
       // console.log("userlist", userlist);
       return (
-        <div key={userlist.id} className={classes.selected_reviewers}>
+        <div key={userlist.id} className={styles.selected_reviewers}>
           <h2>list order {i + 1}</h2>
           <p>
             this list condition: {userlist.opened ? "opened" : "not opened"}
@@ -108,14 +108,14 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
             ) => {
               // console.log("item", item);
               return (
-                // <p className={classes.single_user}>
+                // <p className={styles.single_user}>
                 //   user {index} {checkeUser(item)?.personalDetail.firstName}
                 // </p>
 
-                <article className={classes.userlist}>
-                  <input type="checkbox" id={classes.id} value={classes.id} />
+                <article className={styles.userlist}>
+                  <input type="checkbox" id={styles.id} value={styles.id} />
                   <div>
-                    <div className={classes.avatar}>
+                    <div className={styles.avatar}>
                       {checkeUser(item)
                         ?.personalDetail.firstName.charAt(0)
                         .toUpperCase()}
@@ -131,6 +131,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
             }
           )}
           <button
+            className={styles.btn}
             onClick={() => {
               userlist.opened
                 ? alert(
