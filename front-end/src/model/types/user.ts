@@ -21,8 +21,8 @@ export interface personalDetailType {
         roles:Array<string>,
         startDate:string,
         projects:Array<string>
-    }
-    
+    }, 
+    selfFeedbackRequests: Array<any>
 }
 
 export interface DataType {

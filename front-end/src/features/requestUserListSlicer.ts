@@ -5,12 +5,12 @@ import { personalRequestListType } from "../model/types/requestList";
 import { useParams, useNavigate } from "react-router-dom";
 
 interface intitalStateType {
-  requestList: Array<personalRequestListType>;
+  requestLists: Array<personalRequestListType>;
   selectedRequesList?: personalRequestListType;
 }
 
 const initialState: intitalStateType = {
-  requestList: [],
+  requestLists: [],
 };
 
 const requestListSlicer = createSlice({
@@ -18,12 +18,15 @@ const requestListSlicer = createSlice({
   initialState,
   reducers: {
     getALlRequestUserlist(state, action: PayloadAction<Array<personalRequestListType>>) {
-      state.requestList = action.payload;
+      state.requestLists = action.payload;
     },
     setUpSelectRequestList(state, action: PayloadAction<{ id: string }>) {
-      const selectList = state.requestList.find((e) => e.id === action.payload.id);
+      const selectList = state.requestLists.find((e) => e.id === action.payload.id);
       state.selectedRequesList = selectList;
     },
+    editSelectRequestList (state, action:PayloadAction<personalRequestListType>){
+        state.selectedRequesList = action.payload
+    }
   },
 });
 

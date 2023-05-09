@@ -186,19 +186,17 @@ article input {
   flex-wrap: wrap;
 }
 
-/* .translatebtns {
-  position: absolute;
-  top: .5rem;
-  right: .5rem;
-  display: flex;
-  flex-direction: row;
+table {
+  margin: 3rem 0 0 0;
+  border-collapse: collapse;
+  width: 40vw;
 }
 
-.btn {
-  padding: .1rem .4rem;
-  border: none;
-  background-color: var(--pale-pink-color);
-  margin: .3rem;
-  font-family: inherit;
-} */
+td {
+  padding: 1rem;
+  font-family: var(--main-font);
+}
 
+tr:nth-child(odd) {
+  background-color: var(--light-grey-color);
+}

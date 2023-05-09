@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
 import { setUpConfirmation } from "../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
+import BtnSuccess from "../button/success/BtnSuccess";
 
 export interface Question {
   question: string;
@@ -27,38 +28,44 @@ const FeedbackForm: React.FC = () => {
       return <p>Loading sections...</p>;
     }
   }
-
+  const processNext = () => {
+    if (userDetails) {
+      dispatch(
+        setUpConfirmation({
+          title: "giving first back",
+        })
+      );
+    }
+    navigate("confirm");
+  };
+  const goBack = () => {
+    navigate(`/getuserlist`);
+  };
   return (
     <>
-  
+
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} />
         <div>
           {/* <CreateFeedback /> */}
-          <button
+          {/* <button
             className={classes.btn}
             onClick={() => {
-              if (userDetails) {
-                dispatch(
-                  setUpConfirmation({
-                    // createdBy: userDetails?.id,
-                    title: "giving first back",
-                  })
-                );
-              }
-              navigate("confirm");
+             
             }}
           >
             Confirm Final Feedback Form
-          </button>
-          <button
+          </button> */}
+          <BtnSuccess callBack={processNext} name="Confirm Final Feedback Form" key={userDetails?.id} />
+          {/* <button
             className={classes.btn}
             onClick={() => {
               navigate(-1);
             }}
           >
             Back
-          </button>
+          </button> */}
+          <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} />
           <div>total question have been selected: {sendQuestion.length}</div>
         </div>
       </div>
