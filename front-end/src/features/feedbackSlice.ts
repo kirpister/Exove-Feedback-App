@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FeedbackType } from "../common/types/UserDetails";
 import { QuestionType } from "../components/form/SingleQuestion";
 import questions from "../questions.json";
 import axios from "axios";
@@ -52,10 +51,17 @@ const feedbackSlice = createSlice({
       };
       state.sendQuestion.push(setUpQuestion);
     },
-    setUpUserList(state, action: PayloadAction<PayloadTypeCreateUserList<string>>) {
+    setUpUserList(
+      state,
+      action: PayloadAction<PayloadTypeCreateUserList<string>>
+    ) {
       const { listUserId, requestedListBy } = action.payload;
       // state.listUserId = action.payload.listUserId;
-      return { ...state, listUserId: listUserId, requestedListBy: requestedListBy };
+      return {
+        ...state,
+        listUserId: listUserId,
+        requestedListBy: requestedListBy,
+      };
     },
     setUpConfirmation(state, action: PayloadAction<FinalPayloadType<string>>) {
       if (typeof state.requestedListBy === "string") {
@@ -72,19 +78,32 @@ const feedbackSlice = createSlice({
         alert("Please insert requestList Id when you create feedback");
       }
     },
+    resetFeedback: () => {
+      return { ...initialState };
+    },
   },
 });
 
-export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType) => {
+export const createFeedbackAPI = async (
+  confirmFeedback: FinalConfirmationType
+) => {
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
     if (status === 201) {
-      alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
+      alert(
+        `feedback with requestList Id ${confirmFeedback.requestedListBy} created`
+      );
     }
   } catch (error) {
     console.log(error);
   }
 };
-export const { updateQuestion, getSections, setUpConfirmation, setUpUserList } = feedbackSlice.actions;
+export const {
+  updateQuestion,
+  getSections,
+  setUpConfirmation,
+  setUpUserList,
+  resetFeedback,
+} = feedbackSlice.actions;
 
 export default feedbackSlice.reducer;

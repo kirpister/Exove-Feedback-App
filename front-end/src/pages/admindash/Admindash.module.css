@@ -9,6 +9,19 @@
   font-family: var(--main-font);
 }
 
+.notifications {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: -21px;
+  right: -25px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: orange;
+  color: white;
+}
+
 .sidebar {
   width: 18vw;
   position: sticky;

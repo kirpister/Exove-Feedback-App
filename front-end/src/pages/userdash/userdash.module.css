@@ -15,13 +15,25 @@
   top: 0;
   display: block;
   font-family: var(--main-font);
-
 }
 
 .sidebar nav li {
   list-style-type: none;
   padding: 1rem 0 1rem 0;
   cursor: pointer;
+  color: white;
+}
+
+.notifications {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: -21px;
+  right: -25px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: orange;
   color: white;
 }
 
@@ -79,15 +91,15 @@
 
 /********  USER DASHBOARD  ********/
 
-
 .userdash {
   background: white;
   color: var(--black);
   margin: 7% 15%;
 }
 
-.userdash h3, p {
-  margin: 2rem .2rem;
+.userdash h3,
+p {
+  margin: 2rem 0.2rem;
   color: var(--black);
   font-family: var(--main-font);
 }
@@ -100,12 +112,12 @@
 
 .userdash button {
   width: fit-content;
-  padding: .5rem 4rem;
+  padding: 0.5rem 4rem;
   border: 2px solid black;
   background-color: transparent;
   font-family: inherit;
   font-weight: bold;
-  margin: 2rem .2rem;
+  margin: 2rem 0.2rem;
 }
 
 .userdash button:hover {
@@ -119,7 +131,7 @@
 }
 
 .userdash h4 {
-  margin: 5rem .2rem;
+  margin: 5rem 0.2rem;
 }
 
 .useractions {
@@ -131,7 +143,7 @@
 
 .useractions button {
   width: fit-content;
-  padding: .5rem 3rem;
+  padding: 0.5rem 3rem;
   font-weight: normal;
 }
 
@@ -141,7 +153,7 @@ article {
   position: relative;
   width: 220px;
   height: 70px;
-  margin: .5rem .5rem;
+  margin: 0.5rem 0.5rem;
   float: left;
   border: 2px solid var(--purple-color);
   box-sizing: border-box;
@@ -192,6 +204,7 @@ table {
   width: 40vw;
 }
 
+<<<<<<< HEAD
 td {
   padding: 1rem;
   font-family: var(--main-font);
@@ -200,3 +213,12 @@ td {
 tr:nth-child(odd) {
   background-color: var(--light-grey-color);
 }
+=======
+.btn {
+  padding: .1rem .4rem;
+  border: none;
+  background-color: var(--pale-pink-color);
+  margin: .3rem;
+  font-family: inherit;
+} */
+>>>>>>> c124a9d855b9d52a8e7302774d5a3e6dcf49bca1
