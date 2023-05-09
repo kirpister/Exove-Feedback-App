@@ -9,16 +9,24 @@ import classes from "./Admindash.module.css";
 import { getAllRequestUserListAPI } from "../../features/requestUserListSlicer";
 import { getAllFeedbackAPI } from "../../features/createdFeedbackSlicer";
 import { getAllUserAPI } from "../../features/alluserSlicer";
+import { Notification } from "../../model/types/notification";
 
 const SidebarAdmin: React.FC = () => {
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
+  const userDetails: any = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
+  const notifications: Notification[] | undefined = useSelector(
+    (state: RootState) => state.userNotifications.notifications
+  );
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-useEffect(()=> { 
+  useEffect(() => {
     dispatch(getAllRequestUserListAPI());
     dispatch(getAllFeedbackAPI());
     dispatch(getAllUserAPI());
-},[dispatch])
+  }, [dispatch]);
+  const unReadNotifications =
+    notifications?.filter((item) => !item.isRead).length || 0;
   return (
     <div className={classes.sidebar}>
       <nav className={classes.usernav}>
@@ -27,7 +35,14 @@ useEffect(()=> {
             <img className="circle" src={circle} alt="circle" />
           </NavLink>
           <li>
-            <NavLink to="/notifications">notifications</NavLink>
+            <NavLink to="/notifications" className={classes.notifications}>
+              <span>Notifications</span>
+              {unReadNotifications > 0 ? (
+                <span className={classes.badge}>{unReadNotifications}</span>
+              ) : (
+                ""
+              )}
+            </NavLink>
           </li>
           <li>
             <NavLink to="/feedbackform">feedbackform</NavLink>
