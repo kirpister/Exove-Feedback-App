@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppDispatch } from "../app/store";
+import { AppDispatch, store } from "../app/store";
 import axios from "axios";
 import { personalRequestListType } from "../model/types/requestList";
-import { useParams, useNavigate } from "react-router-dom";
+import { personalDetailType } from "../model/types/user";
+import alluserSlicer from "./alluserSlicer";
+import AllUsersList from "../components/confirm/step_1_selectList/all_user_list/AllUsersList";
 
 interface intitalStateType {
   requestLists: Array<personalRequestListType>;
@@ -24,9 +26,13 @@ const requestListSlicer = createSlice({
       const selectList = state.requestLists.find((e) => e.id === action.payload.id);
       state.selectedRequesList = selectList;
     },
-    editSelectRequestList (state, action:PayloadAction<personalRequestListType>){
-        state.selectedRequesList = action.payload
-    }
+    removeUserFromSelectRequestList(state, action: PayloadAction<{ id: string }>) {
+      if (state.selectedRequesList) {
+        const index = state.selectedRequesList.userList.findIndex((e) => e === action.payload.id);
+        state.selectedRequesList.userList.splice(index, 1);
+      }
+    },
+    addUserFromSelectRequestList(state, action: PayloadAction<{ id: string; allUserList: Array<personalDetailType> }>) {},
   },
 });
 
@@ -41,5 +47,6 @@ export const getAllRequestUserListAPI = () => {
   };
 };
 
-export const { getALlRequestUserlist, setUpSelectRequestList } = requestListSlicer.actions;
+export const { getALlRequestUserlist, setUpSelectRequestList, addUserFromSelectRequestList, removeUserFromSelectRequestList } =
+  requestListSlicer.actions;
 export default requestListSlicer.reducer;

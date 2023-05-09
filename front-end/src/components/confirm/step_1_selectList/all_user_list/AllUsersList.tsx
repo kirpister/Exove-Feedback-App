@@ -3,10 +3,14 @@ import classes from "./userList.module.css";
 import { personalDetailType } from "../../../../model/types/user";
 import SingleUser from "../../../User/SingleUser";
 import { useAppSelector } from "../../../../app/hooks";
+import { personalRequestListType } from "../../../../model/types/requestList";
+interface PropsType {
+  userListId?: Array<string>;
+  selectedRequesList? : personalRequestListType
+}
 
-
-const AllUsersList: React.FC = () => {
-  const {allUserList}  = useAppSelector(state => state.allUser)
+const AllUsersList: React.FC = (props: PropsType) => {
+  const { allUserList } = useAppSelector((state) => state.allUser);
   const [search, setSearch] = useState("");
   //   const [userList, setUsersList] = useState([]);
 
