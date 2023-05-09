@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import axios from "axios";
-import classes from "./CreateUserList.module.css";
+import styles from "./CreateUserList.module.css";
 import { personalDetailType } from "../../model/types/user";
 import { useAppDispatch } from "../../app/hooks";
 import { updateAllUserList } from "../../features/alluserSlicer";
@@ -48,8 +48,8 @@ const CreateUserList: React.FC = () => {
       {/* <SidebarAdmin /> */}
 
       <div>
-        <div className={classes.confirmation_wrapper}>
-          <div className={classes.selected_reviewers}>
+        <div className={styles.confirmation_wrapper}>
+          <div className={styles.selected_reviewers}>
             {isActive ? <SelectedReviewers isActive={isActive} /> : ""}
           </div>
           <AllUsersList

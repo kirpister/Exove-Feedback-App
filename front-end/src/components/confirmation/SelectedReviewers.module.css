@@ -1,14 +1,3 @@
-.selected_reviewers {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(228, 228, 228);
-  width: 350px;
-  border: solid 2px silver;
-  border-radius: 5px;
-  height: 100vh;
-}
-
 .single_user {
   width: 50px;
   height: 50px;
@@ -33,4 +22,34 @@
   font-family: var(--main-font);
   font-size: 2rem;
   color: white;
+}
+
+.selected_reviewers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder {
+  width: 250px;
+  height: 200px;
+}
+
+.btn {
+  width: 220px;
+  padding: 0.5rem;
+  border: 2px solid black;
+  background-color: white;
+  font-family: inherit;
+  font-weight: bold;
+  margin-top: 1.8rem;
+  border-radius: 2px;
+  margin: 0.5rem;
+}
+
+.btn:hover {
+  background-color: var(--purple-color);
+  color: white;
+  border: 1.5px solid var(--purple-color);
 }
