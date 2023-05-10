@@ -20,7 +20,7 @@ const AllFeedbacks = () => {
       );
     });
   };
-
+console.log(allCreatedFeedback)
   const renderAllFeedback = (list: Array<CreatedFeebackType>) => {
     if (list.length === 0) {
       return <div>NO Feedback List</div>;
