@@ -75,7 +75,7 @@ const RequestFeedback: React.FC = () => {
     if (Array.isArray(usersList)) {
       return usersList.map((user) => {
         return (
-          <article className={userstyles.userlist}>
+          <article key={user.id} className={userstyles.userlist}>
             <input
               type="checkbox"
               id={user.id}
