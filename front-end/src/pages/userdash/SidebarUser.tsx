@@ -45,7 +45,7 @@ const SidebarUser: React.FC = () => {
             <li>{t("lione")}</li>
           </NavLink>
           <NavLink to="/notifications" className={userstyles.notifications}>
-            <span>Notifications</span>
+            <li>Notifications</li>
             {unReadNotifications > 0 ? (
               <span className={userstyles.badge}>{unReadNotifications}</span>
             ) : (
@@ -56,9 +56,6 @@ const SidebarUser: React.FC = () => {
           <NavLink to="/requestfeedback">
             <li>{t("lithree")}</li>
           </NavLink>
-
-          <NavLink to="/notifications">
-            <li>Notifications</li></NavLink>
         </ul>
       </nav>
       <div className={userstyles.bottomdiv}>
