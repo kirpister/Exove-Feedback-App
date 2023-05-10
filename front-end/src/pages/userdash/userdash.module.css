@@ -204,7 +204,7 @@ table {
   width: 40vw;
 }
 
-<<<<<<< HEAD
+
 td {
   padding: 1rem;
   font-family: var(--main-font);
@@ -213,12 +213,4 @@ td {
 tr:nth-child(odd) {
   background-color: var(--light-grey-color);
 }
-=======
-.btn {
-  padding: .1rem .4rem;
-  border: none;
-  background-color: var(--pale-pink-color);
-  margin: .3rem;
-  font-family: inherit;
-} */
->>>>>>> c124a9d855b9d52a8e7302774d5a3e6dcf49bca1
+

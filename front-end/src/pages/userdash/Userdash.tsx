@@ -33,7 +33,11 @@ const Userdash: React.FC = () => {
   }, []);
 
   const userInfo = () => {
+<<<<<<< HEAD
     
+=======
+    console.log(user);
+>>>>>>> 584a064d257506bf085287dde0798b4abca92e0d
     if (user) {
       const status = user.selfFeedbackRequests[0]?.requestFeedbackId?.opened;
    

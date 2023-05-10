@@ -7,15 +7,16 @@ interface AllUserProps {
   usersList: personalDetailType[];
   onClickUser: Function;
   isActive: personalDetailType | undefined;
+  requests: any;
 }
 
 const AllUsersList: React.FC<AllUserProps> = ({
   usersList,
   onClickUser,
   isActive,
+  requests,
 }) => {
   const [search, setSearch] = useState("");
-  //   const [userList, setUsersList] = useState([]);
 
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
@@ -35,8 +36,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
 
       let searchName =
         item.personalDetail.firstName.toLowerCase().indexOf(s) > -1;
-      // console.log("1", serchDepartment);
-      // console.log("2", searchName);
 
       return serchDepartment || searchName;
     });
@@ -56,11 +55,14 @@ const AllUsersList: React.FC<AllUserProps> = ({
         ></input>
       </div>
 
+      <button className={styles.btn}>Remind All</button>
+
       {usersListSearch.map((user) => (
         <SingleUser1
           key={user.id}
           userInfo={user}
           onClickUser={onClickUser}
+          requests={requests}
           isActive={isActive !== undefined && user.id === isActive.id}
         />
       ))}

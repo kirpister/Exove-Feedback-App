@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./SelectedReviewers.module.css";
-import { personalRequestListType } from "../../model/types/requestList";
-import axios from "axios";
+//import { personalRequestListType } from "../../model/types/requestList";
+// import axios from "axios";
 import { personalDetailType } from "../../model/types/user";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setUpUserList } from "../../features/feedbackSlice";
-import SingleUser from "../User/SingleUser";
 
 export interface DataType {
   data: {
@@ -16,29 +15,33 @@ export interface DataType {
 }
 interface AllUserRequestProps {
   isActive: any;
+  requests: any;
 }
 
-const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
+const SelectedReviewers: React.FC<AllUserRequestProps> = ({
+  isActive,
+  requests,
+}) => {
   // console.log("isActive", isActive);
 
-  const [requests, setRequests] = useState<any[]>([]);
-  let [uniqueRequests, setUniqueRequests] = useState<any[]>([]);
+  // const [requests, setRequests] = useState<any[]>([]);
+  // let [uniqueRequests, setUniqueRequests] = useState<any[]>([]);
   const { allUserList } = useAppSelector((state) => state.allUser);
+  // console.log("alluserslistfromdispatch", allUserList);
 
   // console.log("all", allUserList);
-  // const createListOfUser = () => {};
 
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    axios
-      .get<personalRequestListType[]>("/feedback/requested_feedback")
-      .then((res) => {
-        const { data, status } = res as unknown as DataType;
-        if (status === 200) {
-          setRequests(data.data);
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get<personalRequestListType[]>("/feedback/requested_feedback")
+  //     .then((res) => {
+  //       const { data, status } = res as unknown as DataType;
+  //       if (status === 200) {
+  //         setRequests(data.data);
+  //       }
+  //     });
+  // }, []);
   // console.log("requests", requests);
 
   // mooving away all duplicated requests from users
@@ -51,12 +54,13 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
     }
     return false;
   }
-  uniqueRequests = requests.filter((item: any) => itemCheck(item));
+
+  let uniqueRequests = requests.filter((item: any) => itemCheck(item));
 
   const renderData = () => {
     let renderDataRequests = uniqueRequests;
     if (isActive) {
-      renderDataRequests = renderDataRequests.filter((item) => {
+      renderDataRequests = renderDataRequests.filter((item: any) => {
         return item.requestUserId === isActive.id;
       });
       if (!renderDataRequests.length) {
@@ -69,7 +73,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive }) => {
         );
       }
     }
-    return renderDataRequests.map((userlist, i) => {
+    return renderDataRequests.map((userlist: any, i: any) => {
       // console.log("userlist", userlist);
       return (
         <div key={userlist.id} className={styles.selected_reviewers}>
