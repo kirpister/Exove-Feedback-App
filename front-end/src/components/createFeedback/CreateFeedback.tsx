@@ -29,16 +29,7 @@ function CreateFeedback() {
     <div>
       <h2 className={styles.header}>Create feedback form</h2>
       <div>{renderQuestion()}</div>
-      {/* <button
-        className={styles.btn}
-        onClick={() => {
-          if (userDetails) {
-            dispatch(setUpConfirmation({  tittle: "giving first back" }));
-          }
-        }}
-      >
-        Confirm Final Feedback Form
-      </button> */}
+  
       <button
         className={styles.btn}
         onClick={() => {

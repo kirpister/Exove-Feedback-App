@@ -43,6 +43,7 @@ const FeedbackForm: React.FC = () => {
   };
   return (
     <>
+
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} />
         <div>

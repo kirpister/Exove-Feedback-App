@@ -1,6 +1,7 @@
 import { answerFeedback } from "../../features/answerFeedbackSlicer";
 
 export interface personalDetailType extends answerFeedback {
+  [x: string]: any;
   id: string;
   personalDetail: {
     id: string;
