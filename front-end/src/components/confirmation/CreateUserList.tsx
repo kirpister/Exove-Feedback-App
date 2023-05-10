@@ -51,10 +51,10 @@ const CreateUserList: React.FC = () => {
       }
     });
   }, []);
-  console.log("users111", users);
+  // console.log("users", users);
 
   const onClickUser = (clickedUser: any) => {
-    console.log("clicked", clickedUser);
+    // console.log("clicked", clickedUser);
     setIsActive(clickedUser);
   };
 

@@ -1,13 +1,24 @@
 import React, { Fragment, ReactComponentElement, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { AnswerType, CreatedFeebackType, getAllFeedbackAPI } from "../../../features/createdFeedbackSlicer";
+import {
+  AnswerType,
+  CreatedFeebackType,
+  getAllFeedbackAPI,
+} from "../../../features/createdFeedbackSlicer";
 import { PayloadTypeQuestion } from "../../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
 import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
+import Accordion from "react-bootstrap/Accordion";
 
 const AllFeedbacks = () => {
-  const { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
+  const { allCreatedFeedback } = useAppSelector(
+    (state) => state.createdFeedback
+  );
+  const { allUserList } = useAppSelector((state) => state.allUser);
+  console.log("alluserslist", allUserList);
+
   const renderLitOfQuestion = (listQuestion: Array<PayloadTypeQuestion>) => {
+    console.log("list of questions", listQuestion);
     return listQuestion.map((item, index) => {
       const { title, order, type, required, result } = item;
       return (
@@ -20,15 +31,30 @@ const AllFeedbacks = () => {
       );
     });
   };
-console.log(allCreatedFeedback)
+  console.log("allcreatedfeedbacks", allCreatedFeedback);
   const renderAllFeedback = (list: Array<CreatedFeebackType>) => {
     if (list.length === 0) {
       return <div>NO Feedback List</div>;
     }
     return list.map((item, index) => {
-      const { createAt, createdBy, details, id, requestedListBy, updatedAt, userList, answers } = item;
+      const {
+        createAt,
+        createdBy,
+        details,
+        id,
+        requestedListBy,
+        updatedAt,
+        userList,
+        answers,
+      } = item;
+
+      console.log("userlistforeachuser", userList);
+      console.log("createdBy", createdBy);
+
       return (
-        <div key={index}>
+<Accordion.Item eventKey="0" >
+          <Accordion.Header style={{ backgroundColor: 'white' }}>
+                        {/* <div key={index}> */}
           <div className={classes.feedback_data}>
             <h3>
               Feeback order: {index + 1} vs feedback ID: {id}
@@ -37,14 +63,32 @@ console.log(allCreatedFeedback)
             <div>create at: {createAt}</div>
             <div>updated at : {updatedAt}</div>
             <div>List of question : </div>
-            <div>requested by the list user request with id {requestedListBy}</div>
+            <div>
+              requested by the list user request with id {requestedListBy}
+            </div>
           </div>
-          <div className={classes.questions}>{renderLitOfQuestion(details.questions)}</div>
 
-          <div className={classes.questions}>{renderLitOfQuestion(details.questions)}</div>
+
+              </Accordion.Header>
+          <Accordion.Body>
+            
+              </Accordion.Body>
+
+          <div className={classes.questions}>
+            {renderLitOfQuestion(details.questions)}
+          </div>
+
+</Accordion.Item>
+        
+
+          {/* <div className={classes.questions}>
+            {renderLitOfQuestion(details.questions)}
+          </div> */}
           <div>how user answer:</div>
           {answers.map((item, index) => {
-            return <UserAnswerDetail answerDetail={item} index={index} key={index} />;
+            return (
+              <UserAnswerDetail answerDetail={item} index={index} key={index} />
+            );
           })}
         </div>
       );

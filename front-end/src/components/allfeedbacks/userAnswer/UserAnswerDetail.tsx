@@ -5,8 +5,8 @@ interface Propstype {
   answerDetail: AnswerType<string, number>;
   index: number;
 }
-const UserAnswerDetail = (props:Propstype) => {
-  const {answerDetail,index} = props
+const UserAnswerDetail = (props: Propstype) => {
+  const { answerDetail, index } = props;
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
     const { details, finished, user } = answerDetail;
     return (
@@ -26,11 +26,11 @@ const UserAnswerDetail = (props:Propstype) => {
                     question order: {question.order}. {question.title}
                   </p>
                   <p>
-                    Answer:{" "}
-                    
-                    {/* {answers.map((answer, i) => {
+                    AnsweRRR:{" "}
+                    {answers?.map((answer, i) => {
+                      console.log("answers111", answer);
                       return <Fragment key={index + i}>{answer}</Fragment>;
-                    })} */}
+                    })}
                   </p>
                 </Fragment>
               );
@@ -39,7 +39,11 @@ const UserAnswerDetail = (props:Propstype) => {
       </div>
     );
   };
-  return <div className={classes[`${index % 2 ? "type_1" : "type_2"}`]}>{renderUserAnswer(answerDetail)}</div>;
+  return (
+    <div className={classes[`${index % 2 ? "type_1" : "type_2"}`]}>
+      {renderUserAnswer(answerDetail)}
+    </div>
+  );
 };
 
 export default UserAnswerDetail;
