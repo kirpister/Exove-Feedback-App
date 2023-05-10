@@ -27,14 +27,20 @@ const Userdash: React.FC = () => {
     axios.get<personalDetailType[]>("/user").then((res) => {
       const { data, status } = res as unknown as DataType;
       const user = data.data;
+      console.log(user)
       setUsers({ ...user });
     });
   }, []);
 
   const userInfo = () => {
+<<<<<<< HEAD
+    
+=======
     console.log(user);
+>>>>>>> 584a064d257506bf085287dde0798b4abca92e0d
     if (user) {
-      // return users.map((user) => {
+      const status = user.selfFeedbackRequests[0]?.requestFeedbackId?.opened;
+   
       return (
         <>
           <table>
@@ -51,19 +57,19 @@ const Userdash: React.FC = () => {
                 <td>Start Date</td>
                 <td>{user.work.startDate}</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td>Feedback Requests</td>
-                <td>array</td>
-              </tr>
+                <td>{user.selfFeedbackRequests[0].requestFeedbackId.id}</td>
+              </tr> */}
               <tr>
-                <td>Feedback status?</td>
-                <td>true/false?</td>
+                <td>Feedback status</td>
+                <td>{user.selfFeedbackRequests[0].requestFeedbackId.opened } {status ? <p>Opened</p> : <p>Closed</p>}</td>
               </tr>
             </tbody>
           </table>
         </>
       );
-      // });
+      
     } else {
       return <p>Nothing?!?</p>;
     }
@@ -71,7 +77,7 @@ const Userdash: React.FC = () => {
 
   return (
     <main className={userstyles.usermain}>
-      {/* <SidebarUser /> */}
+ 
       <div className={userstyles.userdash}>
         <h2>
           {t("greeting")} {userDetails?.firstName}!

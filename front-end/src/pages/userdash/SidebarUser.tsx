@@ -57,7 +57,8 @@ const SidebarUser: React.FC = () => {
             <li>{t("lithree")}</li>
           </NavLink>
 
-          <NavLink to="/notifications">Notifications</NavLink>
+          <NavLink to="/notifications">
+            <li>Notifications</li></NavLink>
         </ul>
       </nav>
       <div className={userstyles.bottomdiv}>
