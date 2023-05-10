@@ -100,7 +100,6 @@ const RequestFeedback: React.FC = () => {
 
   return (
     <main className={userstyles.usermain}>
-      {/* <SidebarUser /> */}
       <div className={userstyles.userdash}>
         <h2>Request feedback</h2>
         <p>Choose five colleagues to give you feedback.</p>

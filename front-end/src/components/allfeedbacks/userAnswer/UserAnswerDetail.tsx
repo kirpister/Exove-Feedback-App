@@ -27,6 +27,7 @@ const UserAnswerDetail = (props:Propstype) => {
                   </p>
                   <p>
                     Answer:{" "}
+
                     {/* {answers.map((answer, i) => {
                       return <Fragment key={index + i}>{answer}</Fragment>;
                     })} */}

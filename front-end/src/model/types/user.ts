@@ -1,4 +1,8 @@
-export interface personalDetailType {
+import { answerFeedback } from "../../features/answerFeedbackSlicer";
+
+export interface personalDetailType extends answerFeedback {
+  id: string;
+  personalDetail: {
     id: string;
     personalDetail: { 
         id: string;
@@ -23,6 +27,27 @@ export interface personalDetailType {
         projects:Array<string>
     }, 
     selfFeedbackRequests: Array<any>
+    username: string;
+    firstName: string;
+    surName: string;
+    email: string;
+    phone: string;
+    password: string;
+  };
+  personal: {
+    horrific: string;
+    birthDate: string;
+    gender: string;
+    avatar: string;
+    hobbies: Array<string>;
+  };
+  work: {
+    departments: Array<string>;
+    roles: Array<string>;
+    startDate: string;
+    projects: Array<string>;
+  };
+  selfFeedbackRequests: any;
 }
 
 export interface DataType {

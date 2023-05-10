@@ -5,6 +5,8 @@ import alluserSlicer from "../features/alluserSlicer";
 import createdFeedbackSlicer from "../features/createdFeedbackSlicer";
 import notificationsSlice from "../features/notificationsSlice";
 import requestUserListSlicer from "../features/requestUserListSlicer";
+import answerFeedbackSlicer from "../features/answerFeedbackSlicer";
+
 export const store = configureStore({
   reducer: {
     authenticatedUser: authenticatedUserSlicer,
@@ -13,6 +15,7 @@ export const store = configureStore({
     createdFeedback: createdFeedbackSlicer,
     userNotifications: notificationsSlice,
     requestUserlist: requestUserListSlicer,
+    answerFeedback: answerFeedbackSlicer
   },
 });
 

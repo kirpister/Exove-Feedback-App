@@ -45,23 +45,28 @@ const SidebarUser: React.FC = () => {
             <li>{t("lione")}</li>
           </NavLink>
           <NavLink to="/notifications" className={userstyles.notifications}>
+
             <li>Notifications</li>
             {unReadNotifications > 0 ? (
               <span className={userstyles.badge}>{unReadNotifications}</span>
             ) : (
               ""
             )}
+
+            <span>Notifications</span>
+            {unReadNotifications > 0 ? <span className={userstyles.badge}>{unReadNotifications}</span> : ""}
           </NavLink>
-          <li>{t("litwo")}</li>
+          <NavLink to={"/feedbackform"}>
+            <li>{t("litwo")}</li>
+
+          </NavLink>
           <NavLink to="/requestfeedback">
             <li>{t("lithree")}</li>
           </NavLink>
         </ul>
       </nav>
       <div className={userstyles.bottomdiv}>
-        <div className={userstyles.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
-        </div>
+        <div className={userstyles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
         <span>
           {userDetails.firstName} {userDetails.surName}
         </span>

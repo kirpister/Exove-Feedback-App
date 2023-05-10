@@ -32,7 +32,7 @@ const FeedbackForm: React.FC = () => {
     if (userDetails) {
       dispatch(
         setUpConfirmation({
-          title: "giving first back",
+          title: "giving first feedback",
         })
       );
     }
