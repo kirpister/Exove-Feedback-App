@@ -37,15 +37,11 @@ const SidebarAdmin: React.FC = () => {
           <li>
             <NavLink to="/notifications" className={classes.notifications}>
               <span>Notifications</span>
-              {unReadNotifications > 0 ? (
-                <span className={classes.badge}>{unReadNotifications}</span>
-              ) : (
-                ""
-              )}
+              {unReadNotifications > 0 ? <span className={classes.badge}>{unReadNotifications}</span> : ""}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/newform">New form</NavLink>
+            <NavLink to="/feedbackform">New form</NavLink>
           </li>
           <li>
             <NavLink to="/confirmation">Confirmation</NavLink>
@@ -60,9 +56,7 @@ const SidebarAdmin: React.FC = () => {
       </nav>
 
       <div className={classes.bottomdiv}>
-        <div className={classes.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
-        </div>
+        <div className={classes.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
         <span>
           {userDetails.firstName} {userDetails.surName}
         </span>

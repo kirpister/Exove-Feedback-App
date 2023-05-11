@@ -45,7 +45,7 @@ const App = () => {
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="feedbackform" element={<FeedbackForm />} />
-            <Route path="feedbackform/confirm" element={<CreateFeedback />} />
+            {/* <Route path="feedbackform/confirm" element={<CreateFeedback />} /> */}
             <Route path="/confirmation" element={<CreateUserList />} />
             <Route path="/getuserlist">
               <Route index element={<RequestUserLists />} />
