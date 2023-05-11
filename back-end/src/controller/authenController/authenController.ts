@@ -5,7 +5,6 @@ import { StatusCode_Success, StatusCode_Err } from '../../utils/statusCode';
 import jwt from 'jsonwebtoken';
 import { auth } from './utils';
 import { AuthRequest } from '../../common/types/Request';
-import dotenv from "dotenv";
 
 export const JWT_SECRET_KEY = 'shhhhhhh';
 export const JWT_TOKEN_COOKIE_NAME = 'JWT_TOKEN_COOKIE';

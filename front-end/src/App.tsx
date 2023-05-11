@@ -27,9 +27,7 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
-  const notifications = useAppSelector(
-    (state) => state.userNotifications.notifications
-  );
+  const notifications = useAppSelector((state) => state.userNotifications.notifications);
 
   if (authenticatedUser.isLoading) {
     return <LoadingPage />;
@@ -41,25 +39,24 @@ const App = () => {
     }
     if (authenticatedUser.userDetails?.roles.includes(ADMIN_ROLE)) {
       return (
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Admindash />} />
-            <Route path="notifications" element={<Notifications />} />
-            <Route path="/feedbackform" element={<FeedbackForm />} />
-            <Route path="/confirmation" element={<CreateUserList />} />
-            <Route path="/getuserlist">
-              <Route index element={<RequestUserLists />} />
-              <Route path=":id" element={<SetupUserList />} />
-              <Route path=":id/feedbackform" element={<FeedbackForm />} />
-              <Route
-                path=":id/feedbackform/confirm"
-                element={<CreateFeedback />}
-              />
+        <>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Admindash />} />
+              <Route path="notifications" element={<Notifications />} />
+              <Route path="/feedbackform" element={<FeedbackForm />} />
+              <Route path="/confirmation" element={<CreateUserList />} />
+              <Route path="/getuserlist">
+                <Route index element={<RequestUserLists />} />
+                <Route path=":id" element={<SetupUserList />} />
+                <Route path=":id/feedbackform" element={<FeedbackForm />} />
+                <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
+              </Route>
+              <Route path="/allfeedbacks" element={<AllFeedbacks />} />
+              <Route path="*" element={<ErrorPage />} />
             </Route>
-            <Route path="/allfeedbacks" element={<AllFeedbacks />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
+          </Routes>
+        </>
       );
     } else {
       return (
