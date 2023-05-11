@@ -4,7 +4,7 @@ import { AppDispatch } from "../app/store";
 import { FinalConfirmationType, PayloadTypeQuestion } from "./feedbackSlice";
 export interface AnswerType<T, N> {
   details: Array<{
-    answers: Array<string>;
+    answer: Array<string>;
     question: {
       type: T;
       title: T;
