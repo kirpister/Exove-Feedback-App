@@ -12,7 +12,7 @@ interface SingleQuestionProps {
   index_question: number;
 }
 export enum QuestionType {
-  select = "select",
+  // select = "select",
   range = "range",
   freeString = "freeString",
 }
@@ -24,13 +24,17 @@ interface UsedQuestionType {
   title: string;
 }
 
+// 1. user get in --> one select button --> to get all the question to form. 
+// 2. after click All-Select button --> Confirm Final Feeback will shown. 
+// 3. click confirm feedback --> get notification --> 
+
 const SingleQuestion: React.FC<SingleQuestionProps> = ({
   question,
   index_section,
   index_question,
 }) => {
   const [state, setState] = useState<UsedQuestionType>({
-    type: QuestionType.select,
+    type: QuestionType.range,
     title: question.question,
   });
   const [disable, setDisable] = useState<boolean>(false);

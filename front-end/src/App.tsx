@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import Login from "./pages/login/Login";
 import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
-import AnswerFeedback from '../src/pages/userdash/feedbackform/Feedbackform'
+import AnswerFeedback from "../src/pages/userdash/feedbackform/Feedbackform";
 import FeedbackForm from "./components/form/FeedbackForm";
 import AllFeedbacks from "./components/allfeedbacks/allFeeback/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
@@ -27,9 +27,7 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
-  const notifications = useAppSelector(
-    (state) => state.userNotifications.notifications
-  );
+  const notifications = useAppSelector((state) => state.userNotifications.notifications);
 
   if (authenticatedUser.isLoading) {
     return <LoadingPage />;
@@ -50,13 +48,9 @@ const App = () => {
               <Route index element={<RequestUserLists />} />
               <Route path=":id" element={<SetupUserList />} />
               <Route path=":id/feedbackform" element={<FeedbackForm />} />
-              <Route
-                path=":id/feedbackform/confirm"
-                element={<CreateFeedback />}
-              />
+              <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
             </Route>
-            <Route path="/allfeedbacks" element={<AllFeedbacks />} />
-            <Route path="*" element={<ErrorPage />} />
+            <Route path="allfeedbacks" element={<AllFeedbacks />} />
           </Route>
         </Routes>
       );
