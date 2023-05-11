@@ -49,8 +49,8 @@ const App = () => {
             <Route path="/getuserlist">
               <Route index element={<RequestUserLists />} />
               <Route path=":id" element={<SetupUserList />} />
-              <Route path=":id/feedbackform" element={<FeedbackForm />} />
-              <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
+              {/* <Route path=":id/feedbackform" element={<FeedbackForm />} /> */}
+              {/* <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} /> */}
             </Route>
             <Route path="allfeedbacks" element={<AllFeedbacks />} />
           </Route>

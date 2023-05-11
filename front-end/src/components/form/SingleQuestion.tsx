@@ -11,9 +11,9 @@ interface SingleQuestionProps {
   question: Question;
   index_section: number;
   index_question: number;
+  order: number;
 }
 export enum QuestionType {
-  // select = "select",
   range = "range",
   freeString = "freeString",
 }
@@ -29,11 +29,12 @@ interface UsedQuestionType {
 // 2. after click All-Select button --> Confirm Final Feeback will shown.
 // 3. click confirm feedback --> get notification -->
 
-const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, index_section, index_question }) => {
+const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, index_section, index_question, order }) => {
   const { sendQuestion } = useAppSelector((state) => state.feedback);
   const [state, setState] = useState<UsedQuestionType>({
     type: QuestionType.range,
     title: question.question,
+    order,
   });
   useEffect(() => {
     const index = sendQuestion.findIndex((e) => e.title === question.question);

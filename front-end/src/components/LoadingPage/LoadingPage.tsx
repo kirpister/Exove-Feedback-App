@@ -1,18 +1,20 @@
 import React from "react";
 import Spinner from "react-bootstrap/Spinner";
+import { useAppSelector } from "../../app/hooks";
 
 const LoadingPage: React.FC = () => {
+  const { show } = useAppSelector((state) => state.loading);
   return (
     <div
       style={{
         position: "fixed",
+        zIndex: 100,
         height: "100vh",
-        // background: "black",
-        width: "100vw",
+        width: `${show ? "100vw" : "0"}`,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "blue",
+        background: "var(--pale-pink-color)",
         opacity: 0.5,
       }}
     >

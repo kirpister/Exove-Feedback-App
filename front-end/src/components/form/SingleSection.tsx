@@ -25,6 +25,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                 {section.questions.map((question, j) => {
                   return (
                     <SingleQuestion
+                      order={question.order}
                       key={`${i}${j}`}
                       question={question}
                       // deleteQuestion={deleteQuestion}
