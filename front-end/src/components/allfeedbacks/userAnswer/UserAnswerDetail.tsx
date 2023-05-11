@@ -19,7 +19,6 @@ const UserAnswerDetail = (props: Propstype) => {
 
         {details.map((item, index) => {
           const { answer, question } = item;
-          console.log(item);
           return (
             <Fragment key={index}>
               <p>

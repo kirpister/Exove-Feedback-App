@@ -17,6 +17,23 @@ export interface FinalConfirmationType {
   userList: Array<string>;
   requestedListBy: string;
 }
+const createModelQuestion = (sections: Array<{ name: string; id: number; questions: Array<{ question: string; isFreeForm: boolean }> }>) => {
+  let order = 0;
+  let returnSendQuestion: Array<PayloadTypeQuestion> = [];
+  for (let i of sections) {
+    for (let j of i.questions) {
+      order ++;
+      let tempQuestion: PayloadTypeQuestion = {
+        title: j.question,
+        type: j.isFreeForm ? QuestionType.freeString : QuestionType.range,
+        order,
+        required: true,
+      };
+      returnSendQuestion.push(tempQuestion);
+    }
+  }
+  return returnSendQuestion;
+};
 interface FinalPayloadType<T> {
   title: T;
 }
@@ -32,7 +49,8 @@ interface intitalStateType {
   requestedListBy: string | null;
 }
 const initialState: intitalStateType = {
-  sections: [...questions.sections],
+  // sections: createModelQuestion(questions.sections),
+  sections : [...questions.sections],
   sendQuestion: [],
   listUserId: [],
   requestedListBy: null,
@@ -51,6 +69,7 @@ const feedbackSlice = createSlice({
           order: Number(state.sendQuestion.length + 1),
           required: true,
         };
+        
         state.sendQuestion.push(setUpQuestion);
       } else {
         alert(`can not add question with order ${temp.title}`);
@@ -80,13 +99,7 @@ const feedbackSlice = createSlice({
       }
     },
     setUpAllQuestion(state) {
-      let order = 0;
-      state.sendQuestion = [];
-      for (let i of state.sections) {
-        for ( let j of i.questions) { 
-          console.log(j)
-        }
-      }
+     state.sendQuestion = createModelQuestion(questions.sections)
     },
     resetFeedback: () => {
       return { sections: [...questions.sections], sendQuestion: [], listUserId: [], requestedListBy: null };
@@ -104,6 +117,6 @@ export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType) 
     console.log(error);
   }
 };
-export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback ,setUpAllQuestion} = feedbackSlice.actions;
+export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback, setUpAllQuestion } = feedbackSlice.actions;
 
 export default feedbackSlice.reducer;

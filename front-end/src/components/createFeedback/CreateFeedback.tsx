@@ -3,12 +3,12 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { createFeedbackAPI, setUpConfirmation } from "../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
 import styles from "./createfb.module.css";
+import BtnSuccess from "../button/success/BtnSuccess";
 
 function CreateFeedback() {
   const { sendQuestion, listUserId, finalConfirm, sections } = useAppSelector((state) => state.feedback);
-  const { userDetails } = useAppSelector((state) => state.authenticatedUser);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const renderQuestion = () => {
     return sendQuestion.map((question, index) => {
       return (
@@ -20,6 +20,7 @@ function CreateFeedback() {
               {question.title}
             </p>
             <p>type: {question.type}</p>
+            <BtnSuccess callBack={()=>{}} name="remove" key={'1'}/>
           </div>
         </div>
       );
@@ -40,16 +41,16 @@ function CreateFeedback() {
           }
         }}
       >
-        Send feedback to backend
+        Save
       </button>
-      <button
+      {/* <button
         className={styles.btn}
         onClick={() => {
           navigate(-1);
         }}
       >
         Back
-      </button>
+      </button> */}
     </div>
   );
 }

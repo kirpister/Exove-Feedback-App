@@ -9,27 +9,20 @@ interface SingleSectionProps {
   // deleteQuestion: (index_section: number, index_question: number) => void;
 }
 
-const SingleSection: React.FC<SingleSectionProps> = ({
-  sections,
-}) => {
+const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
   return (
     <>
       {sections.map((section, i, changeHandler) => {
         return (
           <Accordion defaultActiveKey="0" key={section.id}>
-            <Accordion.Item eventKey="0" >
-              <Accordion.Header style={{ backgroundColor: 'white' }}>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header style={{ backgroundColor: "white" }}>
                 <label htmlFor="section"></label>
 
-                <input
-                  type="text"
-                  className={classes.section_input}
-                  defaultValue={section.name}
-                />
+                <input type="text" className={classes.section_input} defaultValue={section.name} />
               </Accordion.Header>
-              <Accordion.Body style={{margin: '.5rem'}}>
+              <Accordion.Body style={{ margin: ".5rem" }}>
                 {section.questions.map((question, j) => {
-                  // console.log("sec_q_index", `${i}${j}`);
                   return (
                     <SingleQuestion
                       key={`${i}${j}`}
@@ -37,7 +30,6 @@ const SingleSection: React.FC<SingleSectionProps> = ({
                       // deleteQuestion={deleteQuestion}
                       index_section={i}
                       index_question={j}
-                    
                     />
                   );
                 })}

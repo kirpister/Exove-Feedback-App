@@ -35,8 +35,8 @@ const FeedbackForm: React.FC = () => {
           title: "giving first back",
         })
       );
+      navigate("confirm");
     }
-    navigate("confirm");
   };
   const goBack = () => {
     navigate(`/getuserlist`);
@@ -46,25 +46,8 @@ const FeedbackForm: React.FC = () => {
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} />
         <div>
-          {/* <CreateFeedback /> */}
-          {/* <button
-            className={classes.btn}
-            onClick={() => {
-             
-            }}
-          >
-            Confirm Final Feedback Form
-          </button> */}
-          <BtnSuccess callBack={processNext} name="Confirm Final Feedback Form" key={userDetails?.id} />
-          {/* <button
-            className={classes.btn}
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </button> */}
-          <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} />
+          {/* <BtnSuccess callBack={processNext} name="Confirm Final Feedback Form" key={userDetails?.id} /> */}
+          {/* <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} /> */}
           <BtnSuccess
             callBack={() => {
               dispatch(setUpAllQuestion());
@@ -73,6 +56,7 @@ const FeedbackForm: React.FC = () => {
             key={userDetails?.id}
           />
           <div>total question have been selected: {sendQuestion.length}</div>
+          <CreateFeedback />
         </div>
       </div>
     </>

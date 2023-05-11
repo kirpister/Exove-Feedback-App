@@ -29,7 +29,6 @@ const Userdash: React.FC = () => {
     axios.get<personalDetailType[]>("/user").then((res) => {
       const { data, status } = res as unknown as DataType;
       const user = data.data;
-      console.log(user)
       setUsers({ ...user });
       dispatch(setFeedbackRequest(user.feedBack))
     });
