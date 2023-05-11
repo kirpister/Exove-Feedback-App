@@ -1,0 +1,45 @@
+textarea {
+    width: 400px;
+    height: 100px;
+    padding: .4rem;
+    margin: 1rem 0 1rem 1rem;
+    font-family: inherit;
+    display: block;
+    border-radius: .3rem;
+  }
+
+ .radiodiv {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+ } 
+  
+.radiodiv label {
+    padding: 1rem;
+    display: inline-block;
+    margin: 1rem 0 1rem 0;
+  }
+  
+input[type="radio"] {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 15px;
+    border: 2px solid var(--purple-color);
+    background-color: white;
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+  }
+  
+input[type="radio"]:checked { 
+    background-color: var(--pale-pink-color);
+  }
+    
+.radiodiv label span {
+    position: relative;
+    top: -10px;
+    left: 18px;
+    font-weight: bold;
+    font-family: var(--main-font);
+  }
+  

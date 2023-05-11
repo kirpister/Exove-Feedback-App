@@ -3,17 +3,24 @@ import { useAppSelector } from "../../../app/hooks";
 import { QuestionType } from "../../../components/form/SingleQuestion";
 import BtnSuccess from "../../../components/button/success/BtnSuccess";
 import axios from "axios";
+import style from "./style.module.css";
+
+
 interface AnswerFeedbackType {
   answers: Array<{ order: number; answer: Array<string | number> }>;
 }
+
 function Feedbackform() {
+
   const { feedbackRequest } = useAppSelector((state) => state.answerFeedback);
   const [answers, setAnswers] = useState<Array<{ order: number; answer: Array<string | number> }>>([]);
   const renderRadioButton = (title: string, order: number) => {
     let value = [<></>];
     for (let i = 1; i <= 5; i++) {
       value.push(
-        <label htmlFor="">
+        <div className={style.formwrapper}>
+        <div className={style.radiodiv}>
+        <label>
           <span>{i}</span>
           <input
             type="radio"
@@ -34,6 +41,8 @@ function Feedbackform() {
             }}
           />
         </label>
+        </div>
+        </div>
       );
     }
     return value;
@@ -58,17 +67,17 @@ function Feedbackform() {
             <p> feedback Id: {feedbackId.id}</p>
             <p> order: {index + 1}</p>
             <h2>{title}</h2>
-            <div>
+            <div className={style.formwrapper}>
               {questions.map((question, i) => {
                 const { order, title, type } = question;
                 return (
                   <div>
                     <label>
                       {" "}
-                      order:{order} {title}
+                      {order}. {title}
                     </label>
                     {type === QuestionType.freeString ? (
-                      <input
+                      <textarea
                         onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                           setAnswers((prev) => {
                             const temp = [...prev];
@@ -82,10 +91,10 @@ function Feedbackform() {
                             return [...temp];
                           });
                         }}
-                        type="text"
+                        
                       />
                     ) : (
-                      <div>{renderRadioButton(title, order)}</div>
+                      <div className={style.radiodiv}>{renderRadioButton(title, order)}</div>
                     )}
                   </div>
                 );

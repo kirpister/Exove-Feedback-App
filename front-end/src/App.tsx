@@ -66,7 +66,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
             {/* <Route path="feedback" element={<FeedbackForm />} /> */}
-            <Route path="feedbackform" element={<AnswerFeedback />} />
+            <Route path="/feedbackform" element={<AnswerFeedback />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />
             <Route path="*" element={<ErrorPage />} />
