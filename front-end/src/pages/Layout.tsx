@@ -9,8 +9,7 @@ type LayoutProps = {
 
 const Layout = () => (
   <div>
-    <LoadingPage />
-
+    {/* <LoadingPage /> */}
     <Main />
   </div>
 );
