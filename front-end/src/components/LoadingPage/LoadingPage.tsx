@@ -10,12 +10,13 @@ const LoadingPage: React.FC = () => {
         position: "fixed",
         zIndex: 100,
         height: "100vh",
-        width: `${show ? "100vw" : "0"}`,
+        width: `100vw`,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         background: "var(--pale-pink-color)",
         opacity: 0.5,
+        visibility:`${show?'visible':'hidden'}`
       }}
     >
       <Spinner animation="border" role="status" className="center" variant="info">

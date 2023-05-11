@@ -4,6 +4,7 @@ import questions from "../questions.json";
 import axios from "axios";
 import { AppDispatch } from "../app/store";
 import { showLoading2s } from "./loadingSlicer";
+import { NavigateFunction } from "react-router-dom";
 export interface PayloadTypeQuestion {
   order?: number;
   result?: [string];
@@ -111,15 +112,19 @@ const feedbackSlice = createSlice({
     },
     setUpConfirmation(state, action: PayloadAction<FinalPayloadType<string>>) {
       if (typeof state.requestedListBy === "string") {
-        let temp: FinalConfirmationType = {
-          details: {
-            questions: state.sendQuestion,
-            title: action.payload.title,
-          },
-          userList: state.listUserId,
-          requestedListBy: state.requestedListBy,
-        };
-        state.finalConfirm = temp;
+        if (state.sendQuestion.length > 0) {
+          let temp: FinalConfirmationType = {
+            details: {
+              questions: state.sendQuestion,
+              title: action.payload.title,
+            },
+            userList: state.listUserId,
+            requestedListBy: state.requestedListBy,
+          };
+          state.finalConfirm = temp;
+        }else{
+          alert('please add the form')
+        }
       } else {
         alert("Please insert requestList Id when you create feedback");
       }
@@ -133,13 +138,14 @@ const feedbackSlice = createSlice({
   },
 });
 
-export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType,dispatch:AppDispatch) => {
+export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, dispatch: AppDispatch, navigate: NavigateFunction) => {
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
 
     if (status === 201) {
-      showLoading2s(dispatch)
+      showLoading2s(dispatch);
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
+      navigate("/allfeedbacks");
     }
   } catch (error) {
     console.log(error);

@@ -22,7 +22,7 @@ function SingleUserList(props: PropsType) {
       <h2>list order {index + 1}</h2>
       <p>this list condition: {singleRequestedList.opened ? "opened" : "not opened"}</p>
       <h6>
-        Please confirm reviwers for{" "}
+        Please confirm reviews for{" "}
         <span>
           {checkeUser(singleRequestedList.requestUserId as string)?.personalDetail.firstName}{" "}
           {checkeUser(singleRequestedList.requestUserId as string)?.personalDetail.surName}

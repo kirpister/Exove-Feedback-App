@@ -7,12 +7,14 @@ import styles from "./setupUserList.module.css";
 import { addUserFromSelectRequestList, removeUserFromSelectRequestList, setUpSelectRequestList } from "../../../features/requestUserListSlicer";
 import BtnSuccess from "../../button/success/BtnSuccess";
 import { createFeedbackAPI, setUpUserList } from "../../../features/feedbackSlice";
+import { setUpConfirmation } from "../../../features/feedbackSlice";
+import { showLoading2s } from "../../../features/loadingSlicer";
 
 function SetupUserList() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { selectedRequesList, requestLists } = useAppSelector((state) => state.requestUserlist);
-  const { finalConfirm, sections } = useAppSelector((state) => state.feedback);
+  const { finalConfirm, sections, listUserId, requestedListBy, sendQuestion } = useAppSelector((state) => state.feedback);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -21,7 +23,6 @@ function SetupUserList() {
     }
   }, [dispatch, id, requestLists]);
   const processNext = () => {
-    // navigate(`/getuserlist/${id}/feedbackform`);
     const confirmed = window.confirm("do you want to send feedback request to those user ?");
     if (confirmed) {
       if (selectedRequesList) {
@@ -31,10 +32,10 @@ function SetupUserList() {
             requestedListBy: selectedRequesList.id,
           })
         );
-        // console.log(finalConfirm);
-        // if (finalConfirm) {
-        //   createFeedbackAPI(finalConfirm, dispatch);
-        // }
+        showLoading2s(dispatch);
+        setTimeout(() => {
+          navigate('confirm')
+        }, 2000);
       }
     }
   };

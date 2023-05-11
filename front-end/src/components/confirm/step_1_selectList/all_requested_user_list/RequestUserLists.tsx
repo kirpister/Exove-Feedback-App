@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./requestUserLists.module.css";
 import { setUpUserList } from "../../../../features/feedbackSlice";
 import BtnSuccess from "../../../button/success/BtnSuccess";
+import { showLoading2s } from "../../../../features/loadingSlicer";
 
 interface AllUserRequestProps {
   usersRequestList: personalRequestListType[];
@@ -14,12 +15,16 @@ interface AllUserRequestProps {
 const RequestUserLists: React.FC = () => {
   const navigate = useNavigate();
   const { requestLists } = useAppSelector((state) => state.requestUserlist);
-
+const dispatch = useAppDispatch()
   const processSetupUserList = (singleRequestedList: personalRequestListType) => {
     if (singleRequestedList.opened) {
       return alert("not allow to create new feedback base on this list becuase it already created before");
     } else {
-      navigate(`${singleRequestedList.id}`);
+      showLoading2s(dispatch)
+      setTimeout(() => {
+        
+        navigate(`${singleRequestedList.id}`);
+      }, 2000);
     }
   };
   const renderData = () => {
