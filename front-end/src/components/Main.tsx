@@ -7,12 +7,23 @@ import SidebarAdmin from "../pages/admindash/SidebarAdmin";
 import SidebarUser from "../pages/userdash/SidebarUser";
 
 const Main: React.FC = () => {
-  const userDetails = useAppSelector((state: RootState) => state.authenticatedUser.userDetails);
+  const userDetails = useAppSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
 
   return (
     <main className="global_wrapper">
-      {userDetails?.roles.includes(ADMIN_ROLE) ? <SidebarAdmin /> : <SidebarUser />}
-      <Outlet />
+      <div className="sidebar_wrapper">
+        {userDetails?.roles.includes(ADMIN_ROLE) ? (
+          <SidebarAdmin />
+        ) : (
+          <SidebarUser />
+        )}
+      </div>
+
+      <div className="outlet_wrapper">
+        <Outlet />
+      </div>
     </main>
   );
 };

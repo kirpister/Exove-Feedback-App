@@ -3,9 +3,13 @@ import SingleSection from "./SingleSection";
 import classes from "./Feedbackform.module.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
-import { setUpAllQuestion, setUpConfirmation } from "../../features/feedbackSlice";
+import {
+  setUpAllQuestion,
+  setUpConfirmation,
+} from "../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
 import BtnSuccess from "../button/success/BtnSuccess";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface Question {
   question: string;
@@ -25,7 +29,7 @@ const FeedbackForm: React.FC = () => {
 
   if (!sections) {
     if (sections.length > 1) {
-      return <p>Loading sections...</p>;
+      return <LoadingPage />;
     }
   }
   const processNext = () => {
@@ -55,7 +59,11 @@ const FeedbackForm: React.FC = () => {
           >
             Confirm Final Feedback Form
           </button> */}
-          <BtnSuccess callBack={processNext} name="Confirm Final Feedback Form" key={userDetails?.id} />
+          <BtnSuccess
+            callBack={processNext}
+            name="Confirm Final Feedback Form"
+            key={userDetails?.id}
+          />
           {/* <button
             className={classes.btn}
             onClick={() => {

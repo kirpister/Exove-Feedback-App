@@ -4,7 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { useAppDispatch } from "../../app/hooks";
 import { updateQuestion } from "../../features/feedbackSlice";
 import { Question } from "./FeedbackForm";
-import classes from "./SingleQuestion.module.css";
+import styles from "./SingleQuestion.module.css";
 
 interface SingleQuestionProps {
   question: Question;
@@ -24,9 +24,9 @@ interface UsedQuestionType {
   title: string;
 }
 
-// 1. user get in --> one select button --> to get all the question to form. 
-// 2. after click All-Select button --> Confirm Final Feeback will shown. 
-// 3. click confirm feedback --> get notification --> 
+// 1. user get in --> one select button --> to get all the question to form.
+// 2. after click All-Select button --> Confirm Final Feeback will shown.
+// 3. click confirm feedback --> get notification -->
 
 const SingleQuestion: React.FC<SingleQuestionProps> = ({
   question,
@@ -65,14 +65,14 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
   return (
     <ListGroup>
       <ListGroup.Item>
-        <form action="#" className={classes.single_form}>
+        <form action="#" className={styles.single_form}>
           <div>
             <label
               htmlFor={`question${index_section}_${index_question}`}
             ></label>
             <input
               disabled={disable}
-              className={classes.question_input}
+              className={styles.question_input}
               type="text"
               id={`question${index_section}_${index_question}`}
               defaultValue={question.question}
@@ -83,33 +83,33 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
               ) => setQuestionContent(e.target.value)}
             />
           </div>
-          <div className={classes.symbols}>
-            <div className={classes.select_btn}>
-              <div>
-                <label htmlFor="type"></label>
-                <select
-                  disabled={disable}
-                  id="type"
-                  name="type"
-                  required
-                  onChange={(
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-                    >
-                  ) => setType(e.target.value as QuestionType)}
-                >
-                  {renderQuestionOption()}
-                </select>
-              </div>
 
-              <button
-                className={classes.add_btn}
-                onClick={submitAddNewQuestion}
+          <div className={styles.select_btn}>
+            <div>
+              <label htmlFor="type"></label>
+              <select
                 disabled={disable}
+                className={styles.select}
+                id="type"
+                name="type"
+                required
+                onChange={(
+                  e: React.ChangeEvent<
+                    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+                  >
+                ) => setType(e.target.value as QuestionType)}
               >
-                +
-              </button>
+                {renderQuestionOption()}
+              </select>
             </div>
+
+            <button
+              className={styles.add_btn}
+              onClick={submitAddNewQuestion}
+              disabled={disable}
+            >
+              +
+            </button>
           </div>
         </form>
       </ListGroup.Item>

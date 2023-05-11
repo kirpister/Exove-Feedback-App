@@ -1,27 +1,22 @@
 .dashwrapper {
-  /* background-color: var(--light-grey-color); */
   padding: 1rem;
   margin: 2rem;
 }
 
-.list-group-item {
-  background-color: green;
+.btn {
+  width: 320px;
+  padding: 0.5rem;
+  border: 2px solid black;
+  background-color: white;
+  font-family: inherit;
+  font-weight: bold;
+  margin-top: 1.8rem;
+  border-radius: 2px;
+  margin: 0.5rem;
 }
 
-.btn {
-    width: 320px;
-    padding: .5rem;
-    border: 2px solid black;
-    background-color: white;
-    font-family: inherit;
-    font-weight: bold;
-    margin-top: 1.8rem;
-    border-radius: 2px;
-    margin: .5rem;
-  }
-  
-  .btn:hover {
-    background-color: var(--purple-color);
-    color: white;
-    border: 1.5px solid var(--purple-color);
-  }
+.btn:hover {
+  background-color: var(--purple-color);
+  color: white;
+  border: 1.5px solid var(--purple-color);
+}

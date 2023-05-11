@@ -1,0 +1,47 @@
+.sidebar {
+  width: 200px;
+  background-color: var(--black);
+  height: 100%;
+  top: 0;
+  position: fixed;
+  float: right;
+}
+
+.sidebar nav {
+  background-color: var(--black);
+  /* min-width: 18vw;
+  max-width: 18vw;
+  height: 100vh;
+  position: fixed;
+    top: 0;
+  display: block; */
+  font-family: var(--main-font);
+}
+
+.sidebar nav li {
+  list-style-type: none;
+  padding: 1rem 0 0.5rem 0;
+  cursor: pointer;
+}
+.usernav a {
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar li a {
+  text-decoration: none;
+}
+
+.notifications {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -21px;
+  right: -25px;
+  padding: 7px 7px;
+  border-radius: 50%;
+  background: var(--pale-pink-color);
+  color: white;
+}
