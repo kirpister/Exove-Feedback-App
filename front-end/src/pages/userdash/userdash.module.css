@@ -27,6 +27,7 @@
 .notifications {
   position: relative;
 }
+
 .badge {
   position: absolute;
   top: -21px;

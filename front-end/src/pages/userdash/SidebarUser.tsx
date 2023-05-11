@@ -46,6 +46,7 @@ const SidebarUser: React.FC = () => {
           </NavLink>
           <NavLink to="/notifications" className={userstyles.notifications}>
 
+
             <li>Notifications</li>
             {unReadNotifications > 0 ? (
               <span className={userstyles.badge}>{unReadNotifications}</span>
@@ -53,7 +54,6 @@ const SidebarUser: React.FC = () => {
               ""
             )}
 
-            <span>Notifications</span>
             {unReadNotifications > 0 ? <span className={userstyles.badge}>{unReadNotifications}</span> : ""}
           </NavLink>
           <NavLink to={"/feedbackform"}>
