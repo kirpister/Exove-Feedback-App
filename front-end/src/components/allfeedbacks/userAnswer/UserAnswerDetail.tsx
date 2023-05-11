@@ -26,7 +26,7 @@ const UserAnswerDetail = (props: Propstype) => {
                     question order: {question.order}. {question.title}
                   </p>
                   <p>
-                    AnsweRRR:{" "}
+                    Answer:{" "}
                     {answers?.map((answer, i) => {
                       console.log("answers111", answer);
                       return <Fragment key={index + i}>{answer}</Fragment>;

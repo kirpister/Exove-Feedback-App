@@ -52,45 +52,39 @@ const AllFeedbacks = () => {
       console.log("createdBy", createdBy);
 
       return (
-<Accordion.Item eventKey="0" >
-          <Accordion.Header style={{ backgroundColor: 'white' }}>
-                        {/* <div key={index}> */}
-          <div className={classes.feedback_data}>
-            <h3>
-              Feeback order: {index + 1} vs feedback ID: {id}
-            </h3>
-            <h2>Feedback Tittle:{details.title}</h2>
-            <div>create at: {createAt}</div>
-            <div>updated at : {updatedAt}</div>
-            <div>List of question : </div>
-            <div>
-              requested by the list user request with id {requestedListBy}
-            </div>
-          </div>
-
-
-              </Accordion.Header>
-          <Accordion.Body>
-            
-              </Accordion.Body>
-
-          <div className={classes.questions}>
-            {renderLitOfQuestion(details.questions)}
-          </div>
-
-</Accordion.Item>
-        
-
-          {/* <div className={classes.questions}>
-            {renderLitOfQuestion(details.questions)}
-          </div> */}
-          <div>how user answer:</div>
-          {answers.map((item, index) => {
-            return (
-              <UserAnswerDetail answerDetail={item} index={index} key={index} />
-            );
-          })}
-        </div>
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header style={{ backgroundColor: "white" }}>
+              {/* <div key={index}> */}
+              <div className={classes.feedback_data}>
+                <h3>
+                  Feeback order: {index + 1} vs feedback ID: {id}
+                </h3>
+                <h2>Feedback Tittle:{details.title}</h2>
+                <div>create at: {createAt}</div>
+                <div>updated at : {updatedAt}</div>
+                <div>List of question : </div>
+                <div>
+                  requested by the list user request with id {requestedListBy}
+                </div>
+              </div>
+            </Accordion.Header>
+            <Accordion.Body>
+              {/* <div className={classes.questions}>
+                {renderLitOfQuestion(details.questions)}
+              </div> */}
+              {answers?.map((item, index) => {
+                return (
+                  <UserAnswerDetail
+                    answerDetail={item}
+                    index={index}
+                    key={index}
+                  />
+                );
+              })}
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
       );
     });
   };
