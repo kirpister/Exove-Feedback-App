@@ -23,11 +23,19 @@ const AllUsersList: React.FC<AllUserProps> = ({
     // console.log(e.target.value);
   };
 
+  console.log("req", requests);
+
+  // let sortedUsersList = [];
+  // requests.sort((item: any) => {
+  //   // console.log("FFF", item);
+  //   if (item.requestUserId !== item.id) {
+  //   }
+  // });
+
   let usersListSearch = usersList;
+
   let s = search.toLowerCase();
   if (search) {
-    // console.log("search", search);
-
     usersListSearch = usersListSearch.filter((item) => {
       // console.log("item", item);
       let serchDepartment = item.work.departments.filter((dep) => {
@@ -42,7 +50,21 @@ const AllUsersList: React.FC<AllUserProps> = ({
   } else {
     usersListSearch = usersList;
   }
+  usersListSearch = usersListSearch.map((item) => {
+    let rU = requests.filter((singleRequest: any) => {
+      return singleRequest.requestUserId === item.id;
+    });
+    console.log("RU", rU);
+    return {
+      ...item,
+      requestsUsers: rU,
+    };
+  });
 
+  usersListSearch.sort((a, b) => {
+    return b.requestsUsers.length - a.requestsUsers.length;
+  });
+  console.log("search", usersListSearch);
   return (
     <div className={styles.all_users_list}>
       <div>
