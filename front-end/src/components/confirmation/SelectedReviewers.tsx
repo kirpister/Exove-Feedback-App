@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./SelectedReviewers.module.css";
 //import { personalRequestListType } from "../../model/types/requestList";
 // import axios from "axios";
 import { personalDetailType } from "../../model/types/user";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setUpUserList } from "../../features/feedbackSlice";
+import axios from "axios";
 
 export interface DataType {
   data: {
@@ -18,10 +19,18 @@ interface AllUserRequestProps {
   requests: any;
 }
 
+enum ReminderText {
+  REMIND = "Remind",
+  REMINDER_BEING_SEND = "Sending...",
+  REMINDER_SENT_SUCCESSFULLY = "Reminder sent",
+  REMINDER_SENT_ERROR = "Reminder sending failed...",
+}
+
 const SelectedReviewers: React.FC<AllUserRequestProps> = ({
   isActive,
   requests,
 }) => {
+  const [reminderText, setReminderText] = useState<string>(ReminderText.REMIND);
   // console.log("isActive", isActive);
 
   // const [requests, setRequests] = useState<any[]>([]);
@@ -30,7 +39,9 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
   // console.log("alluserslistfromdispatch", allUserList);
 
   // console.log("all", allUserList);
-
+  useEffect(() => {
+    setReminderText(ReminderText.REMIND);
+  }, [isActive.id]);
   const dispatch = useAppDispatch();
   // useEffect(() => {
   //   axios
@@ -55,6 +66,19 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
     return false;
   }
 
+  const sendReminder = async (receiverUserId: string) => {
+    setReminderText(ReminderText.REMINDER_BEING_SEND);
+    const response = await axios.post("/user/notifications/reminder", {
+      receiverUserId: receiverUserId,
+    });
+    const status = response.status;
+    if (status === 201) {
+      setReminderText(ReminderText.REMINDER_SENT_SUCCESSFULLY);
+    } else {
+      setReminderText(ReminderText.REMINDER_SENT_ERROR);
+    }
+  };
+
   let uniqueRequests = requests.filter((item: any) => itemCheck(item));
 
   const renderData = () => {
@@ -68,7 +92,16 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
           <div className={styles.selected_reviewers}>
             <h5>This user does't have list for conformation</h5>
             <div className={styles.placeholder}></div>
-            <button className={styles.btn}>Remind</button>
+            <button
+              className={styles.btn}
+              onClick={() =>
+                (reminderText === ReminderText.REMIND ||
+                  reminderText === ReminderText.REMINDER_SENT_ERROR) &&
+                sendReminder(isActive.id)
+              }
+            >
+              {reminderText}
+            </button>
           </div>
         );
       }

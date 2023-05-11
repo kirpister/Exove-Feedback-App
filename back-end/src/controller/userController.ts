@@ -150,19 +150,39 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
         if (userAnswer.answer.length === 1) {
           if (userAnswer.answer[0] in Range) {
             if (userAnswer.answer.length > 1) {
-              return createErrMessage({ msg: 'Range answer must have 1 answer ', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+              return createErrMessage(
+                {
+                  msg: 'Range answer must have 1 answer ',
+                  status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX,
+                },
+                next
+              );
             }
-            feedback.answers[userIndex].details[questionIndex].answer = userAnswer.answer;
+            feedback.answers[userIndex].details[questionIndex].answer =
+                userAnswer.answer;
           } else {
-            return createErrMessage({ msg: 'value should contain 1 value from 1 - 5', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+            return createErrMessage(
+              {
+                msg: 'value should contain 1 value from 1 - 5',
+                status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX,
+              },
+              next
+            );
           }
         }
         break;
       case QuestionType.freeString:
-        feedback.answers[userIndex].details[questionIndex].answer = userAnswer.answer;
+        feedback.answers[userIndex].details[questionIndex].answer =
+            userAnswer.answer;
         break;
       default:
-        return createErrMessage({ msg: `Unknown question type: ${question.type}`, status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+        return createErrMessage(
+          {
+            msg: `Unknown question type: ${question.type}`,
+            status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX,
+          },
+          next
+        );
       }
     }
 
@@ -179,7 +199,13 @@ export const updateUserFeedback: RequestHandler = async (req, res, next) => {
     await user.save();
     await feedback.updateOne(feedback);
     // return res.status(200).json({ msg: 'Answer updated successfully' });
-    return createSuccessMessage({ msg: 'Answer updated successfully', status: StatusCode_Success.NEW_DATA_CREATED }, res);
+    return createSuccessMessage(
+      {
+        msg: 'Answer updated successfully',
+        status: StatusCode_Success.NEW_DATA_CREATED,
+      },
+      res
+    );
   } catch (error) {
     next(error);
   }
@@ -198,7 +224,10 @@ export const createFeedbackUserList: RequestHandler = async (
     if (index !== -1) {
       console.log('go here');
       return createErrMessage(
-        { msg: 'user can not suggest request feedback list for yourself', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX },
+        {
+          msg: 'user can not suggest request feedback list for yourself',
+          status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX,
+        },
         next
       );
     }
@@ -238,11 +267,17 @@ export const createFeedbackUserList: RequestHandler = async (
     });
     user.save();
 
-
     // find admin id and save notification for the admin user
-    const adminDetails = await UserModel.findOne({ 'work.roles' : { '$in' : ['admin']} }, '_id')
-    const newNotification = {userid: adminDetails?._id.toString(),message:'New feedback Request is pending for your approval', isRead: false};
-    const newRequestNotification= await notificationModel.create({
+    const adminDetails = await UserModel.findOne(
+      { 'work.roles': { $in: ['admin'] } },
+      '_id'
+    );
+    const newNotification = {
+      userid: adminDetails?._id.toString(),
+      message: 'New feedback Request is pending for your approval',
+      isRead: false,
+    };
+    const newRequestNotification = await notificationModel.create({
       ...newNotification,
     });
     newRequestNotification.save();
@@ -261,7 +296,10 @@ export const deleteFeedbackRequest: RequestHandler = async (req, res, next) => {
   const { userDetails } = req.body;
   const { employeeNumber } = userDetails as UserDetailsType;
   if (!req.query.requestListId) {
-    return createErrMessage({ msg: 'send requestListId', status: StatusCode_Err.RESOURCE_NOT_FOUND }, next);
+    return createErrMessage(
+      { msg: 'send requestListId', status: StatusCode_Err.RESOURCE_NOT_FOUND },
+      next
+    );
   }
   try {
     const requestedUserList = await UserRequestListModel.findOne({
@@ -276,12 +314,21 @@ export const deleteFeedbackRequest: RequestHandler = async (req, res, next) => {
         next
       );
     }
-    if (requestedUserList.opened){
-      return createErrMessage({ msg: `requestlistId ${req.body.requestListId} had been opened, contact admin to delete feedback first before you can delete your "user list request"`, status: StatusCode_Err.RESOURCE_NOT_FOUND }, next);
+    if (requestedUserList.opened) {
+      return createErrMessage(
+        {
+          msg: `requestlistId ${req.body.requestListId} had been opened, contact admin to delete feedback first before you can delete your "user list request"`,
+          status: StatusCode_Err.RESOURCE_NOT_FOUND,
+        },
+        next
+      );
     }
     const user = await UserModel.findOne({ _id: employeeNumber });
     if (!user) {
-      return createErrMessage({ msg: 'can not find user', status: StatusCode_Err.RESOURCE_NOT_FOUND }, next);
+      return createErrMessage(
+        { msg: 'can not find user', status: StatusCode_Err.RESOURCE_NOT_FOUND },
+        next
+      );
     }
     if (user.selfFeedbackRequests.length >= 0) {
       const index = user.selfFeedbackRequests.findIndex(
@@ -316,7 +363,11 @@ export const deleteFeedbackRequest: RequestHandler = async (req, res, next) => {
 export const getAllUser: RequestHandler = async (req, res, next) => {
   try {
     const user = await UserModel.find({}, 'personalDetail personal work');
-    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.REQUEST_CREATED }, res, user);
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
+      res,
+      user
+    );
   } catch (error) {
     next(error);
   }
@@ -334,13 +385,16 @@ const checkArrayString = (list: any): boolean => {
   return false;
 };
 
-export const fetchNotifications:RequestHandler = async(req, res, next) =>{
+export const fetchNotifications: RequestHandler = async (req, res, next) => {
   try {
-    const { employeeNumber } = req.body.userDetails ;
-  
-    const notifications = await notificationModel.find({userid:employeeNumber}, 'message isRead')
+    const { employeeNumber } = req.body.userDetails;
+
+    const notifications = await notificationModel.find(
+      { userid: employeeNumber },
+      'message isRead'
+    );
     return createSuccessMessage(
-      { msg: 'success', status  : StatusCode_Success.REQUEST_CREATED },
+      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
       res,
       notifications
     );
@@ -349,11 +403,14 @@ export const fetchNotifications:RequestHandler = async(req, res, next) =>{
   }
 };
 
-export const markNotificationRead:RequestHandler = async(req, res, next) =>{
+export const markNotificationRead: RequestHandler = async (req, res, next) => {
   try {
-    const notificationId = req.body.id ;
-  
-    await notificationModel.findOneAndUpdate({_id:notificationId}, { isRead: true })
+    const notificationId = req.body.id;
+
+    await notificationModel.findOneAndUpdate(
+      { _id: notificationId },
+      { isRead: true }
+    );
     return createSuccessMessage(
       { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
       res
@@ -363,3 +420,29 @@ export const markNotificationRead:RequestHandler = async(req, res, next) =>{
   }
 };
 
+export const createReminderNotifications: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const { receiverUserId } = req.body;
+  try {
+    const newNotification = {
+      userid: receiverUserId,
+      message: 'Please send userlist to initiate feedback process',
+      isRead: false,
+    };
+    const newRequestNotification = await notificationModel.create({
+      ...newNotification,
+    });
+    newRequestNotification.save();
+
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.NEW_DATA_CREATED },
+      res
+    );
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
