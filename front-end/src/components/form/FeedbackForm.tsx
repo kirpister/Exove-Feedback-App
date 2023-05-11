@@ -3,7 +3,7 @@ import SingleSection from "./SingleSection";
 import classes from "./Feedbackform.module.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
-import { setUpConfirmation } from "../../features/feedbackSlice";
+import { setUpAllQuestion, setUpConfirmation } from "../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
 import BtnSuccess from "../button/success/BtnSuccess";
 
@@ -43,7 +43,6 @@ const FeedbackForm: React.FC = () => {
   };
   return (
     <>
-
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} />
         <div>
@@ -66,6 +65,13 @@ const FeedbackForm: React.FC = () => {
             Back
           </button> */}
           <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} />
+          <BtnSuccess
+            callBack={() => {
+              dispatch(setUpAllQuestion());
+            }}
+            name="Select All"
+            key={userDetails?.id}
+          />
           <div>total question have been selected: {sendQuestion.length}</div>
         </div>
       </div>

@@ -37,7 +37,7 @@ export const loginController: RequestHandler = async (req, res, next) => {
       },
       JWT_SECRET_KEY,
       {
-        expiresIn: '30m',
+        // expiresIn: '30m',
       }
     );
 

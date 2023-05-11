@@ -17,25 +17,18 @@ const UserAnswerDetail = (props: Propstype) => {
         <p>user answers:</p>
         <p>{finished ? "User finished answer" : "User have not answerd yet"}</p>
 
-        {finished
-          ? details.map((item, index) => {
-              const { answers, question } = item;
-              return (
-                <Fragment key={index}>
-                  <p>
-                    question order: {question.order}. {question.title}
-                  </p>
-                  <p>
-                    Answer:{" "}
-                    {answers?.map((answer, i) => {
-                      console.log("answers111", answer);
-                      return <Fragment key={index + i}>{answer}</Fragment>;
-                    })}
-                  </p>
-                </Fragment>
-              );
-            })
-          : ""}
+        {details.map((item, index) => {
+          const { answer, question } = item;
+          console.log(item);
+          return (
+            <Fragment key={index}>
+              <p>
+                question order: {question.order}. {question.title}:
+              </p>
+              <p>Answer is {finished ? answer[0] : "not answer yet"}</p>
+            </Fragment>
+          );
+        })}
       </div>
     );
   };

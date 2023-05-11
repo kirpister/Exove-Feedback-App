@@ -44,19 +44,20 @@ const feedbackSlice = createSlice({
     getSections(state, action) {},
     updateQuestion(state, action: PayloadAction<PayloadTypeQuestion>) {
       const temp = action.payload;
-      let setUpQuestion: PayloadTypeQuestion = {
-        ...temp,
-        order: Number(state.sendQuestion.length + 1),
-        required: true,
-      };
-      state.sendQuestion.push(setUpQuestion);
+      const index = state.sendQuestion.findIndex((e) => e.title === temp.title);
+      if (index === -1) {
+        let setUpQuestion: PayloadTypeQuestion = {
+          ...temp,
+          order: Number(state.sendQuestion.length + 1),
+          required: true,
+        };
+        state.sendQuestion.push(setUpQuestion);
+      } else {
+        alert(`can not add question with order ${temp.title}`);
+      }
     },
-    setUpUserList(
-      state,
-      action: PayloadAction<PayloadTypeCreateUserList<string>>
-    ) {
+    setUpUserList(state, action: PayloadAction<PayloadTypeCreateUserList<string>>) {
       const { listUserId, requestedListBy } = action.payload;
-      // state.listUserId = action.payload.listUserId;
       return {
         ...state,
         listUserId: listUserId,
@@ -78,32 +79,31 @@ const feedbackSlice = createSlice({
         alert("Please insert requestList Id when you create feedback");
       }
     },
+    setUpAllQuestion(state) {
+      let order = 0;
+      state.sendQuestion = [];
+      for (let i of state.sections) {
+        for ( let j of i.questions) { 
+          console.log(j)
+        }
+      }
+    },
     resetFeedback: () => {
-      return { ...initialState };
+      return { sections: [...questions.sections], sendQuestion: [], listUserId: [], requestedListBy: null };
     },
   },
 });
 
-export const createFeedbackAPI = async (
-  confirmFeedback: FinalConfirmationType
-) => {
+export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType) => {
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
     if (status === 201) {
-      alert(
-        `feedback with requestList Id ${confirmFeedback.requestedListBy} created`
-      );
+      alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
     }
   } catch (error) {
     console.log(error);
   }
 };
-export const {
-  updateQuestion,
-  getSections,
-  setUpConfirmation,
-  setUpUserList,
-  resetFeedback,
-} = feedbackSlice.actions;
+export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback ,setUpAllQuestion} = feedbackSlice.actions;
 
 export default feedbackSlice.reducer;
