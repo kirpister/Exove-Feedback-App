@@ -40,6 +40,8 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, index_section
     const index = sendQuestion.findIndex((e) => e.title === question.question);
     if (index !== -1) {
       setDisable(true);
+    } else {
+      setDisable(false);
     }
   }, [sendQuestion, question]);
   const [disable, setDisable] = useState<boolean>(false);

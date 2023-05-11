@@ -24,10 +24,7 @@ function FinalConfirm() {
   };
   return (
     <div>
-      <div>
-        <div>List of user: </div>
-        {selectedRequesList && <SingleUserList singleRequestedList={selectedRequesList} index={1} buttonName={"remove"} />}
-      </div>
+      <div>{selectedRequesList && <SingleUserList singleRequestedList={selectedRequesList} index={1} buttonName={"remove"} />}</div>
       <hr />
       <div>
         <BtnSuccess

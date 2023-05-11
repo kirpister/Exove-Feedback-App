@@ -39,21 +39,26 @@ const createSendAllQuestion = (sections: Array<{ name: string; id: number; quest
 };
 const restoreSendFeedback = () => {
   let sendQuestion = localStorage.getItem("sendquestion");
-  if (sendQuestion) {
+  if (sendQuestion !== null) {
     return JSON.parse(sendQuestion);
   }
   return [];
 };
 const setUpSectionWithOrder = () => {
-  let order = 0;
-  let temp = [...questions.sections];
-  for (let i of temp) {
-    for (let j of i.questions) {
-      order++;
-      j.order = order;
+  let sections = localStorage.getItem("section");
+  if (sections !== null) {
+    return JSON.parse(sections);
+  } else {
+    let order = 0;
+    let temp = [...questions.sections];
+    for (let i of temp) {
+      for (let j of i.questions) {
+        order++;
+        j.order = order;
+      }
     }
+    return temp;
   }
-  return temp;
 };
 interface FinalPayloadType<T> {
   title: T;
@@ -87,11 +92,12 @@ const feedbackSlice = createSlice({
       if (index === -1) {
         let setUpQuestion: PayloadTypeQuestion = {
           ...temp,
-          order: Number(state.sendQuestion.length + 1),
+          // order: Number(state.sendQuestion.length + 1),
+          order: temp.order,
           required: true,
         };
         for (let i of state.sections) {
-          for (let j of i.question) {
+          for (let j of i.questions) {
             if (j.order === temp.order) {
               j.question = temp.title;
             }
@@ -122,8 +128,8 @@ const feedbackSlice = createSlice({
             requestedListBy: state.requestedListBy,
           };
           state.finalConfirm = temp;
-        }else{
-          alert('please add the form')
+        } else {
+          alert("please add the form");
         }
       } else {
         alert("Please insert requestList Id when you create feedback");
@@ -132,8 +138,20 @@ const feedbackSlice = createSlice({
     setUpSelectAllQuestion(state) {
       state.sendQuestion = createSendAllQuestion(state.sections);
     },
+    removeSendQuestion(state, action: PayloadAction<{ order: number }>) {
+      const sendQuestionLocal = localStorage.getItem("sendquestion");
+      if (sendQuestionLocal !== null) {
+        let data = JSON.parse(sendQuestionLocal);
+        let index = data.findIndex((e: { order: number }) => Number(e.order) === Number(action.payload.order));
+        if (index !== -1) {
+          data.splice(index, 1);
+          localStorage.setItem("sendquestion", JSON.stringify(data));
+          state.sendQuestion = restoreSendFeedback()
+        }
+      }
+    },
     resetFeedback: () => {
-      return { sections: [...questions.sections], sendQuestion: [], listUserId: [], requestedListBy: null };
+      return { sections: setUpSectionWithOrder(), sendQuestion: restoreSendFeedback(), listUserId: [], requestedListBy: null };
     },
   },
 });
@@ -141,7 +159,6 @@ const feedbackSlice = createSlice({
 export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, dispatch: AppDispatch, navigate: NavigateFunction) => {
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
-
     if (status === 201) {
       showLoading2s(dispatch);
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
@@ -151,6 +168,7 @@ export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, 
     console.log(error);
   }
 };
-export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback, setUpSelectAllQuestion } = feedbackSlice.actions;
+export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback, setUpSelectAllQuestion, removeSendQuestion } =
+  feedbackSlice.actions;
 
 export default feedbackSlice.reducer;
