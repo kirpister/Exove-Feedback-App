@@ -50,21 +50,25 @@ const AllUsersList: React.FC<AllUserProps> = ({
   } else {
     usersListSearch = usersList;
   }
+
+  // Adding userRequest property to the usersListSearch = usersList
   usersListSearch = usersListSearch.map((item) => {
-    let rU = requests.filter((singleRequest: any) => {
+    let requestedUserList = requests.filter((singleRequest: any) => {
       return singleRequest.requestUserId === item.id;
     });
-    console.log("RU", rU);
+    // console.log("RUL", requestedUserList);
     return {
       ...item,
-      requestsUsers: rU,
+      userRequest: requestedUserList,
     };
   });
 
-  usersListSearch.sort((a, b) => {
-    return b.requestsUsers.length - a.requestsUsers.length;
-  });
   console.log("search", usersListSearch);
+  // Sorting function to display users with list for conformation inside first.
+  usersListSearch.sort((a, b) => {
+    return b.userRequest.length - a.userRequest.length;
+  });
+
   return (
     <div className={styles.all_users_list}>
       <div>
