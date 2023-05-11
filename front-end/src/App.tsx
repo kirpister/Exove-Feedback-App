@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import Login from "./pages/login/Login";
 import Userdash from "./pages/userdash/Userdash";
 import Admindash from "./pages/admindash/Admindash";
-
+import AnswerFeedback from "../src/pages/userdash/feedbackform/Feedbackform";
 import FeedbackForm from "./components/form/FeedbackForm";
 import AllFeedbacks from "./components/allfeedbacks/allFeeback/AllFeedbacks";
 import { ADMIN_ROLE } from "./common/constants";
@@ -39,30 +39,28 @@ const App = () => {
     }
     if (authenticatedUser.userDetails?.roles.includes(ADMIN_ROLE)) {
       return (
-        <>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Admindash />} />
-              <Route path="notifications" element={<Notifications />} />
-              <Route path="/feedbackform" element={<FeedbackForm />} />
-              <Route path="/confirmation" element={<CreateUserList />} />
-              <Route path="/getuserlist">
-                <Route index element={<RequestUserLists />} />
-                <Route path=":id" element={<SetupUserList />} />
-                <Route path=":id/feedbackform" element={<FeedbackForm />} />
-                <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
-              </Route>
-              <Route path="/allfeedbacks" element={<AllFeedbacks />} />
-              <Route path="*" element={<ErrorPage />} />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Admindash />} />
+            <Route path="notifications" element={<Notifications />} />
+            <Route path="/confirmation" element={<CreateUserList />} />
+            <Route path="/getuserlist">
+              <Route index element={<RequestUserLists />} />
+              <Route path=":id" element={<SetupUserList />} />
+              <Route path=":id/feedbackform" element={<FeedbackForm />} />
+              <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
             </Route>
-          </Routes>
-        </>
+            <Route path="allfeedbacks" element={<AllFeedbacks />} />
+          </Route>
+        </Routes>
       );
     } else {
       return (
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
+            {/* <Route path="feedback" element={<FeedbackForm />} /> */}
+            <Route path="feedbackform" element={<AnswerFeedback />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />
             <Route path="*" element={<ErrorPage />} />
