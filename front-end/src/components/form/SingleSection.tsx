@@ -15,8 +15,6 @@ const SingleSection: React.FC<SingleSectionProps> = ({
   return (
     <>
       {sections.map((section, i, changeHandler) => {
-        console.log("section_id", section.id);
-
         return (
           <Accordion defaultActiveKey="0" key={section.id}>
             <Accordion.Item eventKey="0" >
@@ -32,7 +30,6 @@ const SingleSection: React.FC<SingleSectionProps> = ({
               <Accordion.Body style={{margin: '.5rem'}}>
                 {section.questions.map((question, j) => {
                   // console.log("sec_q_index", `${i}${j}`);
-
                   return (
                     <SingleQuestion
                       key={`${i}${j}`}

@@ -5,8 +5,8 @@ interface Propstype {
   answerDetail: AnswerType<string, number>;
   index: number;
 }
-const UserAnswerDetail = (props:Propstype) => {
-  const {answerDetail,index} = props
+const UserAnswerDetail = (props: Propstype) => {
+  const { answerDetail, index } = props;
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
     const { details, finished, user } = answerDetail;
     return (
@@ -17,9 +17,10 @@ const UserAnswerDetail = (props:Propstype) => {
         <p>user answers:</p>
         <p>{finished ? "User finished answer" : "User have not answerd yet"}</p>
 
+
         {finished
           ? details.map((item, index) => {
-              const { answers, question } = item;
+              const { answer, question } = item;
               return (
                 <Fragment key={index}>
                   <p>
@@ -36,6 +37,25 @@ const UserAnswerDetail = (props:Propstype) => {
               );
             })
           : ""}
+
+        {details.map((item, index) => {
+          const { answer, question } = item;
+          console.log(item);
+          return (
+            <Fragment key={index}>
+              <p>
+                question order: {question.order}. {question.title}:
+              </p>
+              <p>
+                Answer is{" "}
+                {
+                  finished ? answer[0] : "not answer yet"
+                }
+              </p>
+            </Fragment>
+          );
+        })}
+
       </div>
     );
   };
