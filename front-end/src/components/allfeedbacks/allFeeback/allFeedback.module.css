@@ -1,5 +1,5 @@
 .feedback_data { 
-    background-color: var( --light-grey-color);
+    /* background-color: var( --light-grey-color); */
     padding: 1rem;
     margin-top: 2rem;
     margin-right: 1.3rem;
@@ -11,3 +11,9 @@
     margin-top: 2rem;
     margin-right: 1.3rem;
 }
+
+h2, h3 {
+    font-family: var(--main-font);
+    color: var(--purple-color);
+}
+

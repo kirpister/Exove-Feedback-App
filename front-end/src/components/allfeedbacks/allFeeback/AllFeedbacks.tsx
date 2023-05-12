@@ -52,21 +52,21 @@ const AllFeedbacks = () => {
       console.log("createdBy", createdBy);
 
       return (
-        <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0" style={{ margin: "3rem" }}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header style={{ backgroundColor: "white" }}>
+            <Accordion.Header style={{ padding: "2rem" }}>
               {/* <div key={index}> */}
               <div className={classes.feedback_data}>
                 <h3>
                   Feeback order: {index + 1} vs feedback ID: {id}
                 </h3>
-                <h2>Feedback Tittle:{details.title}</h2>
-                <div>create at: {createAt}</div>
-                <div>updated at : {updatedAt}</div>
-                <div>List of question : </div>
-                <div>
+                <h2>Feedback Title:{details.title}</h2>
+                <p>Created at: {createAt}</p>
+                <p>Updated at : {updatedAt}</p>
+                <p>List of questions : </p>
+                <p>
                   requested by the list user request with id {requestedListBy}
-                </div>
+                </p>
               </div>
             </Accordion.Header>
             <Accordion.Body>

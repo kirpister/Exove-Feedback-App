@@ -35,6 +35,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--main-font);
 }
+
 nav .circle {
   width: 100px;
   margin-left: -2rem;
@@ -47,7 +48,7 @@ nav .circle {
 }
 
 .outlet_wrapper {
-  margin-left: 200px;
+  margin-left: 22%;
   height: 100vh;
 }
 

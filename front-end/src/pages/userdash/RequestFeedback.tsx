@@ -75,7 +75,7 @@ const RequestFeedback: React.FC = () => {
     if (Array.isArray(usersList)) {
       return usersList.map((user) => {
         return (
-          <article className={userstyles.userlist}>
+          <article key={user.id} className={userstyles.userlist}>
             <input
               type="checkbox"
               id={user.id}
@@ -100,7 +100,6 @@ const RequestFeedback: React.FC = () => {
 
   return (
     <main className={userstyles.usermain}>
-      {/* <SidebarUser /> */}
       <div className={userstyles.userdash}>
         <h2>Request feedback</h2>
         <p>Choose five colleagues to give you feedback.</p>

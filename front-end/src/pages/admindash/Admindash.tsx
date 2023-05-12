@@ -4,6 +4,7 @@ import { RootState } from "../../app/store";
 import SidebarAdmin from "./SidebarAdmin";
 import classes from "./Admindash.module.css";
 import axios from "axios";
+import TranslataBtn from "../../components/TranslateBtn/TranslataBtn";
 const Admindash: React.FC = () => {
   const userDetails = useSelector((state: RootState) => state.authenticatedUser.userDetails);
   useEffect(() => {
@@ -12,6 +13,7 @@ const Admindash: React.FC = () => {
     });
   }, []);
   return (
+  
     <main>
       <div className={classes.dash_wrapper}>
         {
@@ -21,6 +23,7 @@ const Admindash: React.FC = () => {
         }
       </div>
     </main>
+  
   );
 };
 

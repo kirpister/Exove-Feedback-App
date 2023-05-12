@@ -45,15 +45,15 @@ const Userdash: React.FC = () => {
           <table>
             <tbody>
               <tr>
-                <td>Employee</td>
+                <td>{t("tdemployee")}</td>
                 <td>{user.personalDetail.firstName}</td>
               </tr>
               <tr>
-                <td>Department</td>
+                <td>{t("tddepartment")}</td>
                 <td>{user.work.departments}</td>
               </tr>
               <tr>
-                <td>Start Date</td>
+                <td>{t("tdstart")}</td>
                 <td>{user.work.startDate}</td>
               </tr>
               {/* <tr>
@@ -61,7 +61,7 @@ const Userdash: React.FC = () => {
                 <td>{user.selfFeedbackRequests[0].requestFeedbackId.id}</td>
               </tr> */}
               <tr>
-                <td>Feedback status</td>
+                <td>{t("tdstatus")}</td>
                 <td>
                   {user.selfFeedbackRequests[0]?.requestFeedbackId.opened}{" "}
                   {status ? <p>Opened</p> : <p>Closed</p>}

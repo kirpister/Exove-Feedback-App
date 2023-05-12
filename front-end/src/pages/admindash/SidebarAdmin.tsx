@@ -10,8 +10,13 @@ import { getAllRequestUserListAPI } from "../../features/requestUserListSlicer";
 import { getAllFeedbackAPI } from "../../features/createdFeedbackSlicer";
 import { getAllUserAPI } from "../../features/alluserSlicer";
 import { Notification } from "../../model/types/notification";
+import { useTranslation } from "react-i18next";
+import "../../translations/i18n";
 
 const SidebarAdmin: React.FC = () => {
+
+  const { t } = useTranslation<"trans">("trans");
+
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
@@ -36,7 +41,7 @@ const SidebarAdmin: React.FC = () => {
           </NavLink>
           <li>
             <NavLink to="/notifications" className={styles.notifications}>
-              <span>Notifications</span>
+              <span>{t("notifs")}</span>
               {unReadNotifications > 0 ? (
                 <span className={styles.badge}>{unReadNotifications}</span>
               ) : (
@@ -45,16 +50,16 @@ const SidebarAdmin: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/feedbackform">New form</NavLink>
+            <NavLink to="/feedbackform">{t("newform")}</NavLink>
           </li>
           <li>
-            <NavLink to="/confirmation">Confirmation</NavLink>
+            <NavLink to="/confirmation">{t("confirmation")}</NavLink>
           </li>
           <li>
             <NavLink to="/getuserlist">Get Request User List</NavLink>
           </li>
           <li>
-            <NavLink to="/allfeedbacks">All feedbacks</NavLink>
+            <NavLink to="/allfeedbacks">{t("allfbs")}</NavLink>
           </li>
         </ul>
       </nav>

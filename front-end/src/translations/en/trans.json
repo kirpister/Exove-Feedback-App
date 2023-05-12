@@ -8,10 +8,30 @@
     "USER SIDEBAR TRANSLATIONS": "******",
     "lione": "Main",
     "litwo": "Feedback Requests",
-    "lithree": "Reguest Feedback",
+    "lithree": "Request Feedback",
     "logout": "LOG OUT",
 
     "USERDASH TRANSLATIONS": "******",
     "greeting": "Hello hello",
-    "date": "Today is"
+    "date": "Today is",
+    "tdemployee": "Employee",
+    "tddepartment": "Department",
+    "tdstart": "Start Date",
+    "tdstatus": "Feedback Status",
+
+    "ADMIN SIDEBAR TRANSLATIONS": "******",
+    "notifs": "Notifications",
+    "newform": "Create New Form",
+    "confirmation": "Confirmation",
+    "allfbs": "All Feedbacks",
+    
+    "FEEDBACK INSTRUCTIONS TRANSLATIONS": "*******",
+    "feedbackheader": "Assessment",
+    "scale": "The scale is as follows:",
+    "scale1": "1 - Performs fully below expectations",
+    "scale2": "2 - Performs partially under expectations",
+    "scale3": "3 - Performs on the expected level, nothing to complain",
+    "scale4": "4 - Performance exceeds expectations, in your view the person in doing more than you think is expected on the job type or lever the person is currently working on",
+    "scale5": "5 - Performance exceeds expectations fully in this area, person is performing on the next level and should be promoted to a higher level to a more demanding role",
+    "instruction": "We collect feedback yearly. This is an essential tool for developing as professionals for all of us so please fill this form carefully. Especially open comments are much appreciated!"
 }
