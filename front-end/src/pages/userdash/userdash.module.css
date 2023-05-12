@@ -32,10 +32,13 @@
   position: absolute;
   top: -21px;
   right: -25px;
-  padding: 5px 10px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
-  background: orange;
+  background: var(--pale-pink-color);
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .usernav img {
@@ -213,4 +216,3 @@ td {
 tr:nth-child(odd) {
   background-color: var(--light-grey-color);
 }
-
