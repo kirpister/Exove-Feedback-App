@@ -11,8 +11,8 @@ type LayoutProps = {
 
 const Layout = () => (
   <div>
-    <TranslataBtn />
     <LoadingPage />
+    <TranslataBtn />
     <Main />
   </div>
 );
