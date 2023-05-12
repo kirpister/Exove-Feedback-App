@@ -21,6 +21,7 @@ import RequestUserLists from "./components/confirm/step_1_selectList/all_request
 import LoadingPage from "./components/LoadingPage/LoadingPage";
 import CreateUserList from "./components/confirmation/CreateUserList";
 import FinalConfirm from "./components/confirm/step_3_finalconfirm/FinalConfirm";
+import SingleUserFeedback from "./components/allfeedbacks/singleFeedback/SingleUserFeedback";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,9 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
-  const notifications = useAppSelector((state) => state.userNotifications.notifications);
+  const notifications = useAppSelector(
+    (state) => state.userNotifications.notifications
+  );
 
   if (authenticatedUser.isLoading) {
     return <LoadingPage />;
@@ -54,6 +57,10 @@ const App = () => {
               <Route path=":id/confirm" element={<FinalConfirm />} />
             </Route>
             <Route path="allfeedbacks" element={<AllFeedbacks />} />
+            <Route
+              path="allfeedbacks/:singlerecipe"
+              element={<SingleUserFeedback />}
+            />
           </Route>
         </Routes>
       );
