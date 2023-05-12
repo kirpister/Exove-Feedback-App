@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QuestionType } from "../components/form/SingleQuestion";
 import questions from "../questions.json";
 import axios from "axios";
+import { AppDispatch } from "../app/store";
+import { showLoading2s } from "./loadingSlicer";
+import { NavigateFunction } from "react-router-dom";
 export interface PayloadTypeQuestion {
   order?: number;
   result?: [string];
@@ -17,6 +20,46 @@ export interface FinalConfirmationType {
   userList: Array<string>;
   requestedListBy: string;
 }
+const createSendAllQuestion = (sections: Array<{ name: string; id: number; questions: Array<{ question: string; isFreeForm: boolean }> }>) => {
+  let order = 0;
+  let returnSendQuestion: Array<PayloadTypeQuestion> = [];
+  for (let i of sections) {
+    for (let j of i.questions) {
+      order++;
+      let tempQuestion: PayloadTypeQuestion = {
+        title: j.question,
+        type: j.isFreeForm ? QuestionType.freeString : QuestionType.range,
+        order,
+        required: true,
+      };
+      returnSendQuestion.push(tempQuestion);
+    }
+  }
+  return returnSendQuestion;
+};
+const restoreSendFeedback = () => {
+  let sendQuestion = localStorage.getItem("sendquestion");
+  if (sendQuestion !== null) {
+    return JSON.parse(sendQuestion);
+  }
+  return [];
+};
+const setUpSectionWithOrder = () => {
+  let sections = localStorage.getItem("section");
+  if (sections !== null) {
+    return JSON.parse(sections);
+  } else {
+    let order = 0;
+    let temp = [...questions.sections];
+    for (let i of temp) {
+      for (let j of i.questions) {
+        order++;
+        j.order = order;
+      }
+    }
+    return temp;
+  }
+};
 interface FinalPayloadType<T> {
   title: T;
 }
@@ -32,8 +75,9 @@ interface intitalStateType {
   requestedListBy: string | null;
 }
 const initialState: intitalStateType = {
-  sections: [...questions.sections],
-  sendQuestion: [],
+  // sections: createSendAllQuestion(questions.sections),
+  sections: setUpSectionWithOrder(),
+  sendQuestion: restoreSendFeedback(),
   listUserId: [],
   requestedListBy: null,
 };
@@ -48,9 +92,17 @@ const feedbackSlice = createSlice({
       if (index === -1) {
         let setUpQuestion: PayloadTypeQuestion = {
           ...temp,
-          order: Number(state.sendQuestion.length + 1),
+          // order: Number(state.sendQuestion.length + 1),
+          order: temp.order,
           required: true,
         };
+        for (let i of state.sections) {
+          for (let j of i.questions) {
+            if (j.order === temp.order) {
+              j.question = temp.title;
+            }
+          }
+        }
         state.sendQuestion.push(setUpQuestion);
       } else {
         alert(`can not add question with order ${temp.title}`);
@@ -66,44 +118,57 @@ const feedbackSlice = createSlice({
     },
     setUpConfirmation(state, action: PayloadAction<FinalPayloadType<string>>) {
       if (typeof state.requestedListBy === "string") {
-        let temp: FinalConfirmationType = {
-          details: {
-            questions: state.sendQuestion,
-            title: action.payload.title,
-          },
-          userList: state.listUserId,
-          requestedListBy: state.requestedListBy,
-        };
-        state.finalConfirm = temp;
+        if (state.sendQuestion.length > 0) {
+          let temp: FinalConfirmationType = {
+            details: {
+              questions: state.sendQuestion,
+              title: action.payload.title,
+            },
+            userList: state.listUserId,
+            requestedListBy: state.requestedListBy,
+          };
+          state.finalConfirm = temp;
+        } else {
+          alert("please add the form");
+        }
       } else {
         alert("Please insert requestList Id when you create feedback");
       }
     },
-    setUpAllQuestion(state) {
-      let order = 0;
-      state.sendQuestion = [];
-      for (let i of state.sections) {
-        for ( let j of i.questions) { 
-          console.log(j)
+    setUpSelectAllQuestion(state) {
+      state.sendQuestion = createSendAllQuestion(state.sections);
+    },
+    removeSendQuestion(state, action: PayloadAction<{ order: number }>) {
+      const sendQuestionLocal = localStorage.getItem("sendquestion");
+      if (sendQuestionLocal !== null) {
+        let data = JSON.parse(sendQuestionLocal);
+        let index = data.findIndex((e: { order: number }) => Number(e.order) === Number(action.payload.order));
+        if (index !== -1) {
+          data.splice(index, 1);
+          localStorage.setItem("sendquestion", JSON.stringify(data));
+          state.sendQuestion = restoreSendFeedback()
         }
       }
     },
     resetFeedback: () => {
-      return { sections: [...questions.sections], sendQuestion: [], listUserId: [], requestedListBy: null };
+      return { sections: setUpSectionWithOrder(), sendQuestion: restoreSendFeedback(), listUserId: [], requestedListBy: null };
     },
   },
 });
 
-export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType) => {
+export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, dispatch: AppDispatch, navigate: NavigateFunction) => {
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
     if (status === 201) {
+      showLoading2s(dispatch);
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
+      navigate("/allfeedbacks");
     }
   } catch (error) {
     console.log(error);
   }
 };
-export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback ,setUpAllQuestion} = feedbackSlice.actions;
+export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback, setUpSelectAllQuestion, removeSendQuestion } =
+  feedbackSlice.actions;
 
 export default feedbackSlice.reducer;

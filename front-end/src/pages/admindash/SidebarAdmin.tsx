@@ -45,7 +45,7 @@ const SidebarAdmin: React.FC = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/newform">New form</NavLink>
+            <NavLink to="/feedbackform">New form</NavLink>
           </li>
           <li>
             <NavLink to="/confirmation">Confirmation</NavLink>

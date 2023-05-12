@@ -4,16 +4,18 @@ import classes from "./Feedbackform.module.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
 import {
-  setUpAllQuestion,
   setUpConfirmation,
+  setUpSelectAllQuestion,
 } from "../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
 import BtnSuccess from "../button/success/BtnSuccess";
+import { showLoading2s } from "../../features/loadingSlicer";
 import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface Question {
   question: string;
   isFreeForm: boolean;
+  order: number;
 }
 
 export interface Section {
@@ -39,8 +41,8 @@ const FeedbackForm: React.FC = () => {
           title: "giving first back",
         })
       );
+      navigate("confirm");
     }
-    navigate("confirm");
   };
   const goBack = () => {
     navigate(`/getuserlist`);
@@ -73,14 +75,18 @@ const FeedbackForm: React.FC = () => {
             Back
           </button> */}
           <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} />
+          {/* <BtnSuccess callBack={processNext} name="Confirm Final Feedback Form" key={userDetails?.id} /> */}
+          {/* <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} /> */}
           <BtnSuccess
             callBack={() => {
-              dispatch(setUpAllQuestion());
+              showLoading2s(dispatch);
+              dispatch(setUpSelectAllQuestion());
             }}
             name="Select All"
             key={userDetails?.id}
           />
           <div>total question have been selected: {sendQuestion.length}</div>
+          <CreateFeedback />
         </div>
       </div>
     </>

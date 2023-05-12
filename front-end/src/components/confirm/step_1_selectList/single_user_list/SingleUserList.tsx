@@ -4,6 +4,8 @@ import styles from "./singleUser.module.css";
 import { useNavigate } from "react-router-dom";
 import { setUpUserList } from "../../../../features/feedbackSlice";
 import { personalRequestListType } from "../../../../model/types/requestList";
+import BtnSuccess from "../../../button/success/BtnSuccess";
+import BtnError from "../../../button/error/BtnError";
 
 interface PropsType {
   singleRequestedList: personalRequestListType;
@@ -19,10 +21,10 @@ function SingleUserList(props: PropsType) {
   };
   return (
     <>
-      <h2>list order {index + 1}</h2>
+      {/* <h2>list order </h2> */}
       <p>this list condition: {singleRequestedList.opened ? "opened" : "not opened"}</p>
       <h6>
-        Please confirm reviwers for{" "}
+        Please confirm reviews for{" "}
         <span>
           {checkeUser(singleRequestedList.requestUserId as string)?.personalDetail.firstName}{" "}
           {checkeUser(singleRequestedList.requestUserId as string)?.personalDetail.surName}
@@ -39,13 +41,12 @@ function SingleUserList(props: PropsType) {
                 <br />
               </span>
               {buttonName && callBack ? (
-                <button
-                  onClick={() => {
+                <BtnError
+                  callBack={() => {
                     callBack(item);
                   }}
-                >
-                  {buttonName}
-                </button>
+                  name="remove"
+                />
               ) : (
                 ""
               )}

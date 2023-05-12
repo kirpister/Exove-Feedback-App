@@ -24,13 +24,18 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                   className={styles.section_input}
                   defaultValue={section.name}
                 />
+                <input
+                  type="text"
+                  className={styles.section_input}
+                  defaultValue={section.name}
+                />
               </Accordion.Header>
-              <Accordion.Body style={{ margin: ".1rem" }}>
+              <Accordion.Body style={{ margin: ".2rem" }}>
                 {section.questions.map((question, j) => {
-                  // console.log("sec_q_index", `${i}${j}`);
                   return (
                     <div className={styles.questions}>
                       <SingleQuestion
+                        order={question.order}
                         key={`${i}${j}`}
                         question={question}
                         // deleteQuestion={deleteQuestion}
