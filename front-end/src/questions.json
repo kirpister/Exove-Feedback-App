@@ -12,27 +12,27 @@
         {
           "question": "The person aims to improve the quality of the end result beyond expressed requirements",
           "isFreeForm": false,
-          "order": 1
+          "order": 2
         },
         {
           "question": "The person is living by the company values (passion, expertise, openness and care)",
           "isFreeForm": false,
-          "order": 1
+          "order": 3
         },
         {
           "question": "The person is aligned with company best practices",
           "isFreeForm": false,
-          "order": 1
+          "order": 4
         },
         {
           "question": "The person delivers quality even with limited resources (time, resources, information, guidance)",
           "isFreeForm": false,
-          "order": 1
+          "order": 5
         },
         {
           "question": "Feedback about the person's quality focus",
           "isFreeForm": true,
-          "order": 1
+          "order": 6
         }
       ]
     },
@@ -43,32 +43,32 @@
         {
           "question": "The person is willingly helping others",
           "isFreeForm": false,
-          "order": 1
+          "order": 7
         },
         {
           "question": "The person takes other people's views into consideration",
           "isFreeForm": false,
-          "order": 1
+          "order": 8
         },
         {
           "question": "The person isn't afraid to ask for help from others",
           "isFreeForm": false,
-          "order": 1
+          "order": 9
         },
         {
           "question": "The person has a good attitude towards all the aspects of their work",
           "isFreeForm": false,
-          "order": 1
+          "order": 10
         },
         {
           "question": "The person shares knowledge openly to others",
           "isFreeForm": false,
-          "order": 1
+          "order": 11
         },
         {
           "question": "Other feedback about the persons people skills",
           "isFreeForm": true,
-          "order": 1
+          "order": 12
         }
       ]
     },
@@ -79,37 +79,37 @@
         {
           "question": "The person has good prioritisation skills",
           "isFreeForm": false,
-          "order": 1
+          "order": 13
         },
         {
           "question": "The person can see our work from the client's perspective (note: the client can be internal)",
           "isFreeForm": false,
-          "order": 1
+          "order": 14
         },
         {
           "question": "The person has a positive attitude",
           "isFreeForm": false,
-          "order": 1
+          "order": 15
         },
         {
           "question": "The person has a proactive way to take things forward",
           "isFreeForm": false,
-          "order": 1
+          "order": 16
         },
         {
           "question": "The person is productive working independently",
           "isFreeForm": false,
-          "order": 1
+          "order": 17
         },
         {
           "question": "The person can take good care of personal workload by prioritizing and delegating",
           "isFreeForm": false,
-          "order": 1
+          "order": 18
         },
         {
           "question": "Other feedback about self-guidance",
           "isFreeForm": true,
-          "order": 1
+          "order": 19
         }
       ]
     },
@@ -120,27 +120,27 @@
         {
           "question": "The person takes responsibility naturally",
           "isFreeForm": false,
-          "order": 1
+          "order": 20
         },
         {
           "question": "The person can inspire others to perform better",
           "isFreeForm": false,
-          "order": 1
+          "order": 21
         },
         {
           "question": "The person improves the team they are a part of",
           "isFreeForm": false,
-          "order": 1
+          "order": 22
         },
         {
           "question": "You can always rely on the person to deliver",
           "isFreeForm": false,
-          "order": 1
+          "order": 23
         },
         {
           "question": "Other feedback about leadership",
           "isFreeForm": true,
-          "order": 1
+          "order": 24
         }
       ]
     },
@@ -151,32 +151,32 @@
         {
           "question": "The person is capable to learn new things fast",
           "isFreeForm": false,
-          "order": 1
+          "order": 25
         },
         {
           "question": "The person is interested in developing themselves and their skills",
           "isFreeForm": false,
-          "order": 1
+          "order": 26
         },
         {
           "question": "The person sees change as an opportunity instead of a threat",
           "isFreeForm": false,
-          "order": 1
+          "order": 27
         },
         {
           "question": "The person is ready to adopt new different working methods",
           "isFreeForm": false,
-          "order": 1
+          "order": 28
         },
         {
           "question": "The person is able to handle change and uncertainty",
           "isFreeForm": false,
-          "order": 1
+          "order": 29
         },
         {
           "question": "Other feedback about readiness for change",
           "isFreeForm": true,
-          "order": 1
+          "order": 30
         }
       ]
     },
@@ -187,22 +187,22 @@
         {
           "question": "The person has good problem-solving skills",
           "isFreeForm": false,
-          "order": 1
+          "order": 31
         },
         {
           "question": "The person can provide multiple options with pros and cons on how to solve a problem",
           "isFreeForm": false,
-          "order": 1
+          "order": 32
         },
         {
           "question": "The person can foresee and prevent negative outcomes of solutions and decisions",
           "isFreeForm": false,
-          "order": 1
+          "order": 33
         },
         {
           "question": "Other feedback about creativity",
           "isFreeForm": true,
-          "order": 1
+          "order":34
         }
       ]
     },
@@ -214,12 +214,12 @@
         {
           "question": "The person's personal strengths are:",
           "isFreeForm": true,
-          "order": 1
+          "order": 35
         },
         {
           "question": "The person should improve in:",
           "isFreeForm": true,
-          "order": 1
+          "order": 36
         }
       ]
     },
@@ -230,32 +230,32 @@
         {
           "question": "The person produces high quality product",
           "isFreeForm": false,
-          "order": 1
+          "order": 37
         },
         {
           "question": "The person aims to improve the quality of the end result beyond expressed requirements",
           "isFreeForm": false,
-          "order": 1
+          "order": 38
         },
         {
           "question": "The person is living by the company values (passion, expertise, openness and care)",
           "isFreeForm": false,
-          "order": 1
+          "order": 39
         },
         {
           "question": "The person is aligned with company best practices",
           "isFreeForm": false,
-          "order": 1
+          "order": 40
         },
         {
           "question": "The person delivers quality even with limited resources (time, resources, information, guidance)",
           "isFreeForm": false,
-          "order": 1
+          "order": 41
         },
         {
           "question": "Feedback about the person's quality focus",
           "isFreeForm": true,
-          "order": 1
+          "order": 42
         }
       ]
     }

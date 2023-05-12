@@ -38,17 +38,16 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, index_section
   });
   useEffect(() => {
     const index = sendQuestion.findIndex((e) => e.order === order);
-    if (!index) {
+    if (index !== -1) {
       setDisable(true);
     } else {
       setDisable(false);
     }
-  }, [sendQuestion,order]);
+  }, [sendQuestion, order]);
   const [disable, setDisable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const submitAddNewQuestion = () => {
     setDisable(true);
-    console.log(state);
     dispatch(updateQuestion(state));
   };
   const setType = (value: QuestionType) => {
