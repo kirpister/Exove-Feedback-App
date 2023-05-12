@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../app/hooks";
 import { QuestionType } from "../../../components/form/SingleQuestion";
 import BtnSuccess from "../../../components/button/success/BtnSuccess";
 import axios from "axios";
-import style from "./style.module.css";
+import styles from "./styles.module.css";
 import { useTranslation } from "react-i18next";
 
 
@@ -23,8 +23,8 @@ function Feedbackform() {
     let value = [<></>];
     for (let i = 1; i <= 5; i++) {
       value.push(
-        <div className={style.formwrapper}>
-        <div className={style.radiodiv}>
+        <div className={styles.formwrapper}>
+        <div className={styles.radiodiv}>
         <label>
           <span>{i}</span>
           <input
@@ -70,13 +70,13 @@ function Feedbackform() {
         const { questions, title } = feedbackId.details;
         return (
           <>
-          <div className={style.wrapper}>
+          <div className={styles.wrapper}>
              <h2>{title}</h2>
             <p> {finished ? "finished" : "not finished"}</p>
             <p> feedback Id: {feedbackId.id}</p>
             <p> order: {index + 1}</p>
          
-            <div className={style.formwrapper}>
+            <div className={styles.formwrapper}>
               {questions.map((question, i) => {
                 const { order, title, type } = question;
                 return (
@@ -86,7 +86,7 @@ function Feedbackform() {
                       {order}. {title}
                     </label>
                     {type === QuestionType.freeString ? (
-                      <textarea className={style.textarea}
+                      <textarea className={styles.textarea}
                         onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                           setAnswers((prev) => {
                             const temp = [...prev];
@@ -103,7 +103,7 @@ function Feedbackform() {
                         
                       />
                     ) : (
-                      <div className={style.radiodiv}>{renderRadioButton(title, order)}</div>
+                      <div className={styles.radiodiv}>{renderRadioButton(title, order)}</div>
                     )}
                   </div>
                 );
@@ -128,7 +128,7 @@ function Feedbackform() {
   };
   return <div>
           <h2>{t("feedbackheader")}</h2>
-          <div className={style.instructions}>
+          <div className={styles.instructions}>
           <p>{t("instruction")}</p>
           <p>{t("scale")}</p>
           <p>{t("scale1")}</p>

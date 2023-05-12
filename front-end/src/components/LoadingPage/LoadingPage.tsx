@@ -9,6 +9,7 @@ const LoadingPage: React.FC = () => {
       style={{
         position: "fixed",
         zIndex: 100,
+        top:0,
         height: "100vh",
         width: `100vw`,
         display: "flex",
