@@ -1,3 +1,8 @@
 .type_1{
-    background-color: var( --pale-pink-color);
+    background-color: var( --light-grey-color);
+    padding: 1rem;
+}
+
+.type_2 {
+    padding: 1rem;
 }

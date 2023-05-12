@@ -1,8 +1,24 @@
-textarea {
+h2 {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.instructions {
+    padding: 2rem;
+    height: fit-content;
+    background-color: var(--light-grey-color);
+    width: 95%;
+}
+
+.wrapper {
+    margin-top: 3rem;
+}
+
+.textarea {
     width: 400px;
     height: 100px;
     padding: .4rem;
-    margin: 1rem 0 1rem 1rem;
+    margin: 1.5rem 0 1rem 1rem;
     font-family: inherit;
     display: block;
     border-radius: .3rem;
@@ -42,4 +58,8 @@ input[type="radio"]:checked {
     font-weight: bold;
     font-family: var(--main-font);
   }
+
+hr {
+    margin: 2rem;
+}
   

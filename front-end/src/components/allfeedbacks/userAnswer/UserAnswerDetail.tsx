@@ -40,18 +40,12 @@ const UserAnswerDetail = (props: Propstype) => {
 
         {details.map((item, index) => {
           const { answer, question } = item;
-          console.log(item);
           return (
             <Fragment key={index}>
               <p>
                 question order: {question.order}. {question.title}:
               </p>
-              <p>
-                Answer is{" "}
-                {
-                  finished ? answer[0] : "not answer yet"
-                }
-              </p>
+              <p>Answer is {finished ? answer[0] : "not answer yet"}</p>
             </Fragment>
           );
         })}
@@ -59,7 +53,11 @@ const UserAnswerDetail = (props: Propstype) => {
       </div>
     );
   };
-  return <div className={classes[`${index % 2 ? "type_1" : "type_2"}`]}>{renderUserAnswer(answerDetail)}</div>;
+  return (
+    <div className={classes[`${index % 2 ? "type_1" : "type_2"}`]}>
+      {renderUserAnswer(answerDetail)}
+    </div>
+  );
 };
 
 export default UserAnswerDetail;

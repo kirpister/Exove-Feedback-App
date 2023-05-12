@@ -23,37 +23,37 @@ const Userdash: React.FC = () => {
 
   const [user, setUsers] = useState<personalDetailType>();
 
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
+  const userDetails: any = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
   const dispatch = useAppDispatch();
   useEffect(() => {
     axios.get<personalDetailType[]>("/user").then((res) => {
       const { data, status } = res as unknown as DataType;
       const user = data.data;
-      console.log(user)
       setUsers({ ...user });
-      dispatch(setFeedbackRequest(user.feedBack))
+      dispatch(setFeedbackRequest(user.feedBack));
     });
   }, [dispatch]);
 
   const userInfo = () => {
-
     if (user) {
       const status = user.selfFeedbackRequests[0]?.requestFeedbackId?.opened;
-   
+
       return (
         <>
           <table>
             <tbody>
               <tr>
-                <td>Employee</td>
+                <td>{t("tdemployee")}</td>
                 <td>{user.personalDetail.firstName}</td>
               </tr>
               <tr>
-                <td>Department</td>
+                <td>{t("tddepartment")}</td>
                 <td>{user.work.departments}</td>
               </tr>
               <tr>
-                <td>Start Date</td>
+                <td>{t("tdstart")}</td>
                 <td>{user.work.startDate}</td>
               </tr>
               {/* <tr>
@@ -61,14 +61,16 @@ const Userdash: React.FC = () => {
                 <td>{user.selfFeedbackRequests[0].requestFeedbackId.id}</td>
               </tr> */}
               <tr>
-                <td>Feedback status</td>
-                <td>{user.selfFeedbackRequests[0].requestFeedbackId.opened } {status ? <p>Opened</p> : <p>Closed</p>}</td>
+                <td>{t("tdstatus")}</td>
+                <td>
+                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened}{" "}
+                  {status ? <p>Opened</p> : <p>Closed</p>}
+                </td>
               </tr>
             </tbody>
           </table>
         </>
       );
-      
     } else {
       return <p>Nothing?!?</p>;
     }
@@ -76,7 +78,6 @@ const Userdash: React.FC = () => {
 
   return (
     <main className={userstyles.usermain}>
- 
       <div className={userstyles.userdash}>
         <h2>
           {t("greeting")} {userDetails?.firstName}!

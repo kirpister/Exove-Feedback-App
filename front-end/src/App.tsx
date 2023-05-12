@@ -20,6 +20,7 @@ import CreateFeedback from "./components/createFeedback/CreateFeedback";
 import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
 import CreateUserList from "./components/confirmation/CreateUserList";
+import FinalConfirm from "./components/confirm/step_3_finalconfirm/FinalConfirm";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -43,12 +44,14 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
+            <Route path="feedbackform" element={<FeedbackForm />} />
+            {/* <Route path="feedbackform/confirm" element={<CreateFeedback />} /> */}
             <Route path="/confirmation" element={<CreateUserList />} />
             <Route path="/getuserlist">
               <Route index element={<RequestUserLists />} />
               <Route path=":id" element={<SetupUserList />} />
-              <Route path=":id/feedbackform" element={<FeedbackForm />} />
-              <Route path=":id/feedbackform/confirm" element={<CreateFeedback />} />
+              {/* <Route path=":id/feedbackform" element={<FeedbackForm />} /> */}
+              <Route path=":id/confirm" element={<FinalConfirm />} />
             </Route>
             <Route path="allfeedbacks" element={<AllFeedbacks />} />
           </Route>

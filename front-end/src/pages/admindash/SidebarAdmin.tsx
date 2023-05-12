@@ -1,17 +1,22 @@
 import React, { useEffect } from "react";
 import circle from "../../assets/circle-half.png";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import classes from "./Admindash.module.css";
+import styles from "./SidebarAdmin.module.css";
 import { getAllRequestUserListAPI } from "../../features/requestUserListSlicer";
 import { getAllFeedbackAPI } from "../../features/createdFeedbackSlicer";
 import { getAllUserAPI } from "../../features/alluserSlicer";
 import { Notification } from "../../model/types/notification";
+import { useTranslation } from "react-i18next";
+import "../../translations/i18n";
 
 const SidebarAdmin: React.FC = () => {
+
+  const { t } = useTranslation<"trans">("trans");
+
   const userDetails: any = useSelector(
     (state: RootState) => state.authenticatedUser.userDetails
   );
@@ -28,47 +33,49 @@ const SidebarAdmin: React.FC = () => {
   const unReadNotifications =
     notifications?.filter((item) => !item.isRead).length || 0;
   return (
-    <div className={classes.sidebar}>
-      <nav className={classes.usernav}>
+    <div className={styles.sidebar}>
+      <nav className={styles.usernav}>
         <ul>
           <NavLink to={"/"}>
             <img className="circle" src={circle} alt="circle" />
           </NavLink>
           <li>
-            <NavLink to="/notifications" className={classes.notifications}>
-              <span>Notifications</span>
+            <NavLink to="/notifications" className={styles.notifications}>
+              <span>{t("notifs")}</span>
               {unReadNotifications > 0 ? (
-                <span className={classes.badge}>{unReadNotifications}</span>
+                <span className={styles.badge}>{unReadNotifications}</span>
               ) : (
                 ""
               )}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/feedbackform">feedbackform</NavLink>
+            <NavLink to="/feedbackform">{t("newform")}</NavLink>
           </li>
           <li>
-            <NavLink to="/confirmation">Confirmation</NavLink>
+            <NavLink to="/confirmation">{t("confirmation")}</NavLink>
           </li>
           <li>
             <NavLink to="/getuserlist">Get Request User List</NavLink>
           </li>
           <li>
-            <NavLink to="/allfeedbacks">All feedbacks</NavLink>
+            <NavLink to="/allfeedbacks">{t("allfbs")}</NavLink>
           </li>
         </ul>
       </nav>
 
-      <div className={classes.bottomdiv}>
-        <div className={classes.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
+      <div className="bottomdiv">
+        <div className="bottom_avatar">
+          <div className="avatar">
+            {userDetails.firstName.charAt(0).toUpperCase()}
+          </div>
+          <span>
+            {userDetails.firstName} {userDetails.surName}
+          </span>
         </div>
-        <span>
-          {userDetails.firstName} {userDetails.surName}
-        </span>
 
         <p
-          className={classes.logout}
+          className="logout"
           onClick={() => {
             dispatch(initiateLogoutSession(navigate));
           }}

@@ -45,16 +45,16 @@ const SidebarUser: React.FC = () => {
             <li>{t("lione")}</li>
           </NavLink>
           <NavLink to="/notifications" className={userstyles.notifications}>
-
-
-            <li>Notifications</li>
-            {unReadNotifications > 0 ? (
+             <li>Notifications</li>
+              {unReadNotifications > 0 ? (
               <span className={userstyles.badge}>{unReadNotifications}</span>
             ) : (
               ""
             )}
 
+
             {unReadNotifications > 0 ? <span className={userstyles.badge}>{unReadNotifications}</span> : ""}
+
           </NavLink>
           <NavLink to={"/feedbackform"}>
             <li>{t("litwo")}</li>
@@ -65,14 +65,18 @@ const SidebarUser: React.FC = () => {
           </NavLink>
         </ul>
       </nav>
-      <div className={userstyles.bottomdiv}>
-        <div className={userstyles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
-        <span>
-          {userDetails.firstName} {userDetails.surName}
-        </span>
+      <div className="bottomdiv">
+        <div className="bottom_avatar">
+          <div className="avatar">
+            {userDetails.firstName.charAt(0).toUpperCase()}
+          </div>
+          <span>
+            {userDetails.firstName} {userDetails.surName}
+          </span>
+        </div>
 
         <p
-          className={userstyles.logout}
+          className="logout"
           onClick={() => {
             dispatch(initiateLogoutSession(navigate));
           }}

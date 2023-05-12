@@ -23,11 +23,19 @@ const AllUsersList: React.FC<AllUserProps> = ({
     // console.log(e.target.value);
   };
 
+  console.log("req", requests);
+
+  // let sortedUsersList = [];
+  // requests.sort((item: any) => {
+  //   // console.log("FFF", item);
+  //   if (item.requestUserId !== item.id) {
+  //   }
+  // });
+
   let usersListSearch = usersList;
+
   let s = search.toLowerCase();
   if (search) {
-    // console.log("search", search);
-
     usersListSearch = usersListSearch.filter((item) => {
       // console.log("item", item);
       let serchDepartment = item.work.departments.filter((dep) => {
@@ -42,6 +50,24 @@ const AllUsersList: React.FC<AllUserProps> = ({
   } else {
     usersListSearch = usersList;
   }
+
+  // Adding userRequest property to the usersListSearch = usersList
+  usersListSearch = usersListSearch.map((item) => {
+    let requestedUserList = requests.filter((singleRequest: any) => {
+      return singleRequest.requestUserId === item.id;
+    });
+    // console.log("RUL", requestedUserList);
+    return {
+      ...item,
+      userRequest: requestedUserList,
+    };
+  });
+
+  console.log("search", usersListSearch);
+  // Sorting function to display users with list for conformation inside first.
+  usersListSearch.sort((a, b) => {
+    return b.userRequest.length - a.userRequest.length;
+  });
 
   return (
     <div className={styles.all_users_list}>

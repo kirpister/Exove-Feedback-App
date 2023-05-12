@@ -13,5 +13,25 @@
 
     "USERDASH TRANSLATIONS": "******",
     "greeting": "Moikka moi",
-    "date": "Tänään on"
+    "date": "Tänään on",
+    "tdemployee": "Työntekijä",
+    "tddepartment": "Osasto",
+    "tdstart": "Aloitus päivä",
+    "tdstatus": "Palautteen tila",
+
+    "ADMIN SIDEBAR TRANSLATIONS": "******",
+    "notifs": "Ilmoitukset",
+    "newform": "Luo uusi lomake",
+    "confirmation": "Vahvistukset",
+    "allfbs": "Kaikki palautteet",
+    
+    "FEEDBACK INSTRUCTIONS TRANSLATIONS": "*******",
+    "feedbackheader": "Arviointi",
+    "scale": "Pisteytys seuraavanlaisesti",
+    "scale1": "1 - Suoriutuu alle vaaditun tason",
+    "scale2": "2 - Suoriutuu osittain alle vaaditun tason",
+    "scale3": "3 - Suoriutuu odotusten mukaisesti, ei valitettavaa",
+    "scale4": "4 - Suoriutuu yli odotusten, mielestäsi henkilö tekee enemmäin kuin työnkuva tai tehtävän taso olettaa",
+    "scale5": "5 - Suoriutuu täydellisesti tehtävistään ja paremminkin, suosittelisin ylennystä haastavampiin tehtäviin",
+    "instruction": "Keräämme palautetta vuosittain. Tämä on tärkeä työkalu meille kehittääksemme ammattitaitoamme joten täytä lomake huolella. Erityisesti vapaat kommentit ovat hyvin toivottuja!"
 }

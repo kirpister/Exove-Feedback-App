@@ -6,12 +6,16 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "./setupUserList.module.css";
 import { addUserFromSelectRequestList, removeUserFromSelectRequestList, setUpSelectRequestList } from "../../../features/requestUserListSlicer";
 import BtnSuccess from "../../button/success/BtnSuccess";
-import { setUpUserList } from "../../../features/feedbackSlice";
+import { createFeedbackAPI, setUpUserList } from "../../../features/feedbackSlice";
+import { setUpConfirmation } from "../../../features/feedbackSlice";
+import { showLoading2s } from "../../../features/loadingSlicer";
 
 function SetupUserList() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { selectedRequesList, requestLists } = useAppSelector((state) => state.requestUserlist);
+  const { finalConfirm, sections, listUserId, requestedListBy, sendQuestion } = useAppSelector((state) => state.feedback);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (id) {
@@ -19,19 +23,25 @@ function SetupUserList() {
     }
   }, [dispatch, id, requestLists]);
   const processNext = () => {
-    navigate(`/getuserlist/${id}/feedbackform`);
-    if (selectedRequesList) {
-      dispatch(
-        setUpUserList({
-          listUserId: selectedRequesList.userList,
-          requestedListBy: selectedRequesList.id,
-        })
-      );
+    const confirmed = window.confirm("do you want to send feedback request to those user ?");
+    if (confirmed) {
+      if (selectedRequesList) {
+        dispatch(
+          setUpUserList({
+            listUserId: selectedRequesList.userList,
+            requestedListBy: selectedRequesList.id,
+          })
+        );
+        showLoading2s(dispatch);
+        setTimeout(() => {
+          navigate('confirm')
+        }, 2000);
+      }
     }
   };
   const goBack = () => {
-    const confirmed = window.confirm('do you want to go back')
-    confirmed && navigate(`/getuserlist`)
+    const confirmed = window.confirm("do you want to go back");
+    confirmed && navigate(`/getuserlist`);
   };
   const removeUserFromThelist = (id: string) => {
     dispatch(removeUserFromSelectRequestList({ id }));
@@ -43,10 +53,10 @@ function SetupUserList() {
       <div className={styles.confirmation_wrapper}>
         <div className={styles.selected_reviewers}>
           <SingleUserList singleRequestedList={selectedRequesList} index={1} key={id} buttonName={"remove"} callBack={removeUserFromThelist} />
-          <BtnSuccess callBack={processNext} name="Process" key={id} />
+          <BtnSuccess callBack={processNext} name="Send Feedback Request" key={id} />
           <BtnSuccess callBack={goBack} name="Back" key={id} />
         </div>
-        <AllUsersList/>
+        <AllUsersList />
       </div>
     </div>
   ) : (

@@ -36,7 +36,69 @@ body {
   font-family: var(--main-font);
 }
 
+nav .circle {
+  width: 100px;
+  margin-left: -2rem;
+
+  padding-bottom: 3rem;
+}
 .global_wrapper {
+  /* display: grid;
+  grid-template-columns: 0.5fr 2fr; */
+}
+
+.outlet_wrapper {
+  margin-left: 22%;
+  height: 100vh;
+}
+
+.sidebar_wrapper {
+  /* float: left;
+  height: 100vh; */
+}
+
+main {
+  width: 100%;
+}
+
+/* User Avatar and LogOut button */
+.bottomdiv {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 3rem;
+  margin-bottom: 2rem;
+}
+
+.bottom_avatar {
   display: grid;
-  grid-template-columns: 0.5fr 2fr;
+  gap: 0.5rem;
+}
+
+.bottomdiv span {
+  color: white;
+  font-family: var(--main-font);
+  margin: 0 auto;
+}
+
+.bottomdiv .logout {
+  color: white;
+  cursor: pointer;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--pale-pink-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--main-font);
+  font-size: 2rem;
+  color: white;
+  margin: 0 auto;
 }
