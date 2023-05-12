@@ -34,59 +34,61 @@ const SidebarAdmin: React.FC = () => {
   const unReadNotifications =
     notifications?.filter((item) => !item.isRead).length || 0;
   return (
-    <div className={styles.sidebar}>
-      <nav className={styles.usernav}>
-        <ul>
-          <NavLink to={"/"}>
-            <img className="circle" src={circle} alt="circle" />
-          </NavLink>
-          <NavLink to="/">
-            <li>{t("main")}</li>
-          </NavLink>
-          <li>
-            <NavLink to="/notifications" className={styles.notifications}>
-              <span>{t("notifs")}</span>
-              {unReadNotifications > 0 ? (
-                <span className={styles.badge}>{unReadNotifications}</span>
-              ) : (
-                ""
-              )}
+    <div>
+      <div className={styles.sidebar}>
+        <nav className={styles.usernav}>
+          <ul>
+            <NavLink to={"/"}>
+              <img className="circle" src={circle} alt="circle" />
             </NavLink>
-          </li>
-          <li>
-            <NavLink to="/feedbackform">{t("newform")}</NavLink>
-          </li>
-          <li>
-            <NavLink to="/confirmation">{t("confirmation")}</NavLink>
-          </li>
-          <li>
-            <NavLink to="/getuserlist">Get Request User List</NavLink>
-          </li>
-          <li>
-            <NavLink to="/allfeedbacks">{t("allfbs")}</NavLink>
-          </li>
-        </ul>
-      </nav>
-
-      <div className="bottomdiv">
-        <div className="bottom_avatar">
-          <div className="avatar">
-            {userDetails.firstName.charAt(0).toUpperCase()}
+            <NavLink to="/">
+              <li>{t("main")}</li>
+            </NavLink>
+            <li>
+              <NavLink to="/notifications" className={styles.notifications}>
+                <span>{t("notifs")}</span>
+                {unReadNotifications > 0 ? (
+                  <span className={styles.badge}>{unReadNotifications}</span>
+                ) : (
+                  ""
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/feedbackform">{t("newform")}</NavLink>
+            </li>
+            <li>
+              <NavLink to="/confirmation">{t("confirmation")}</NavLink>
+            </li>
+            <li>
+              <NavLink to="/getuserlist">Get Request User List</NavLink>
+            </li>
+            <li>
+              <NavLink to="/allfeedbacks">{t("allfbs")}</NavLink>
+            </li>
+          </ul>
+        </nav>
+        <div className="bottomdiv">
+          <div className="bottom_avatar">
+            <div className="avatar">
+              {userDetails.firstName.charAt(0).toUpperCase()}
+            </div>
+            <span>
+              {userDetails.firstName} {userDetails.surName}
+            </span>
           </div>
-          <span>
-            {userDetails.firstName} {userDetails.surName}
-          </span>
-        </div>
 
-        <p
-          className="logout"
-          onClick={() => {
-            dispatch(initiateLogoutSession(navigate));
-          }}
-        >
-          LOG OUT
-        </p>
+          <p
+            className="logout"
+            onClick={() => {
+              dispatch(initiateLogoutSession(navigate));
+            }}
+          >
+            {t("logout")}
+          </p>
+        </div>
       </div>
+
       <TranslataBtn />
     </div>
   );
