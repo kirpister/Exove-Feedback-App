@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AllUsersList.module.css";
-import { personalDetailType } from "../../model/types/user";
+import { personalDetailType } from "../../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
 
 interface AllUserProps {
@@ -22,8 +22,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
     setSearch(e.target.value);
     // console.log(e.target.value);
   };
-
-  console.log("req", requests);
 
   // let sortedUsersList = [];
   // requests.sort((item: any) => {

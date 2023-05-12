@@ -29,7 +29,6 @@ const AllUsersList: React.FC = (props: PropsType) => {
           onChange={searchHandler}
         ></input>
       </div>
-
       {allUserList.map((user) => (
         <SingleUser key={user.id} userInfo={user} />
       ))}

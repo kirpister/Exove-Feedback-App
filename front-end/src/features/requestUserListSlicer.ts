@@ -4,7 +4,7 @@ import axios from "axios";
 import { personalRequestListType } from "../model/types/requestList";
 import { personalDetailType } from "../model/types/user";
 import alluserSlicer from "./alluserSlicer";
-import AllUsersList from "../components/confirm/step_1_selectList/all_user_list/AllUsersList";
+import AllUsersList from "../components/confirm/step_2_modify_the_list/all_userlist_to_select/AllUsersList";
 
 interface intitalStateType {
   requestLists: Array<personalRequestListType>;
@@ -63,9 +63,4 @@ export const getAllRequestUserListAPI = () => {
 
 export const { getALlRequestUserlist, setUpSelectRequestList, addUserFromSelectRequestList, removeUserFromSelectRequestList,resetFeedbackRequestList } =
   requestListSlicer.actions;
-// export const {
-//   getALlRequestUserlist,
-//   setUpSelectRequestList,
-//   resetFeedbackRequestList,
-// } = requestListSlicer.actions;
 export default requestListSlicer.reducer;

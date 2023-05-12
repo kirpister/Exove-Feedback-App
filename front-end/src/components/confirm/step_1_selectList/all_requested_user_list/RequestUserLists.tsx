@@ -1,6 +1,6 @@
 import React from "react";
 import { personalRequestListType } from "../../../../model/types/requestList";
-import SingleUserList from "../single_user_list/SingleUserList";
+import SingleUserList from "../../step_2_modify_the_list/single_user_list/SingleUserList";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import styles from "./requestUserLists.module.css";
@@ -8,9 +8,9 @@ import { setUpUserList } from "../../../../features/feedbackSlice";
 import BtnSuccess from "../../../button/success/BtnSuccess";
 import { showLoading2s } from "../../../../features/loadingSlicer";
 
-interface AllUserRequestProps {
-  usersRequestList: personalRequestListType[];
-}
+// interface AllUserRequestProps {
+//   usersRequestList: personalRequestListType[];
+// }
 
 const RequestUserLists: React.FC = () => {
   const navigate = useNavigate();

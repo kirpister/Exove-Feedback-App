@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./SingleUser1.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
-import { personalDetailType } from "../../../model/types/user";
+import { personalDetailType } from "../../../../model/types/user";
+import { useAppSelector } from "../../../../app/hooks";
 
 interface SingleUser1Props {
   userInfo: personalDetailType;
@@ -11,16 +10,9 @@ interface SingleUser1Props {
   requests: any;
 }
 
-const SingleUser1: React.FC<SingleUser1Props> = ({
-  userInfo,
-  onClickUser,
-  isActive,
-  requests,
-}) => {
+const SingleUser1: React.FC<SingleUser1Props> = ({ userInfo, onClickUser, isActive, requests }) => {
   // console.log("requests", requests);
-  const userDetails: any = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
+  const userDetails: any = useAppSelector((state) => state.authenticatedUser.userDetails);
 
   // CHECK IF THE USER HAS A LIST OF REVIEWERS
   let listInsideCheck = "none";
@@ -41,9 +33,7 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
       }}
     >
       <div>
-        <div className={styles.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
-        </div>
+        <div className={styles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
         <span>
           {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
           <br />

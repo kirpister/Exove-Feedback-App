@@ -7,6 +7,8 @@ import { personalDetailType } from "../../model/types/user";
 
 interface SingleUserProps {
   userInfo: personalDetailType;
+  button?:string,
+  callBack? : VoidFunction
 }
 
 const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
