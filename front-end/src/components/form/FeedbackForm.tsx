@@ -3,15 +3,19 @@ import SingleSection from "./SingleSection";
 import classes from "./Feedbackform.module.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import CreateFeedback from "../createFeedback/CreateFeedback";
-import {  setUpConfirmation, setUpSelectAllQuestion } from "../../features/feedbackSlice";
+import {
+  setUpConfirmation,
+  setUpSelectAllQuestion,
+} from "../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
 import BtnSuccess from "../button/success/BtnSuccess";
 import { showLoading2s } from "../../features/loadingSlicer";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 export interface Question {
   question: string;
   isFreeForm: boolean;
-  order:number
+  order: number;
 }
 
 export interface Section {
@@ -27,7 +31,7 @@ const FeedbackForm: React.FC = () => {
 
   if (!sections) {
     if (sections.length > 1) {
-      return <p>Loading sections...</p>;
+      return <LoadingPage />;
     }
   }
   const processNext = () => {
@@ -48,11 +52,34 @@ const FeedbackForm: React.FC = () => {
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} />
         <div>
+          {/* <CreateFeedback /> */}
+          {/* <button
+            className={classes.btn}
+            onClick={() => {
+             
+            }}
+          >
+            Confirm Final Feedback Form
+          </button> */}
+          <BtnSuccess
+            callBack={processNext}
+            name="Confirm Final Feedback Form"
+            key={userDetails?.id}
+          />
+          {/* <button
+            className={classes.btn}
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Back
+          </button> */}
+          <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} />
           {/* <BtnSuccess callBack={processNext} name="Confirm Final Feedback Form" key={userDetails?.id} /> */}
           {/* <BtnSuccess callBack={goBack} name="Go Back" key={userDetails?.id} /> */}
           <BtnSuccess
             callBack={() => {
-              showLoading2s(dispatch)
+              showLoading2s(dispatch);
               dispatch(setUpSelectAllQuestion());
             }}
             name="Select All"

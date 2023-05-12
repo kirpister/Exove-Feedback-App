@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import circle from "../../assets/circle-half.png";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { initiateLogoutSession } from "../../features/authenticatedUserSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import classes from "./Admindash.module.css";
+import styles from "./SidebarAdmin.module.css";
 import { getAllRequestUserListAPI } from "../../features/requestUserListSlicer";
 import { getAllFeedbackAPI } from "../../features/createdFeedbackSlicer";
 import { getAllUserAPI } from "../../features/alluserSlicer";
@@ -28,16 +28,20 @@ const SidebarAdmin: React.FC = () => {
   const unReadNotifications =
     notifications?.filter((item) => !item.isRead).length || 0;
   return (
-    <div className={classes.sidebar}>
-      <nav className={classes.usernav}>
+    <div className={styles.sidebar}>
+      <nav className={styles.usernav}>
         <ul>
           <NavLink to={"/"}>
             <img className="circle" src={circle} alt="circle" />
           </NavLink>
           <li>
-            <NavLink to="/notifications" className={classes.notifications}>
+            <NavLink to="/notifications" className={styles.notifications}>
               <span>Notifications</span>
-              {unReadNotifications > 0 ? <span className={classes.badge}>{unReadNotifications}</span> : ""}
+              {unReadNotifications > 0 ? (
+                <span className={styles.badge}>{unReadNotifications}</span>
+              ) : (
+                ""
+              )}
             </NavLink>
           </li>
           <li>
@@ -55,14 +59,18 @@ const SidebarAdmin: React.FC = () => {
         </ul>
       </nav>
 
-      <div className={classes.bottomdiv}>
-        <div className={classes.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
-        <span>
-          {userDetails.firstName} {userDetails.surName}
-        </span>
+      <div className="bottomdiv">
+        <div className="bottom_avatar">
+          <div className="avatar">
+            {userDetails.firstName.charAt(0).toUpperCase()}
+          </div>
+          <span>
+            {userDetails.firstName} {userDetails.surName}
+          </span>
+        </div>
 
         <p
-          className={classes.logout}
+          className="logout"
           onClick={() => {
             dispatch(initiateLogoutSession(navigate));
           }}
