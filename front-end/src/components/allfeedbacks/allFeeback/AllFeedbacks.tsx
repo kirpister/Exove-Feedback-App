@@ -52,7 +52,7 @@ const AllFeedbacks = () => {
       console.log("createdBy", createdBy);
 
       return (
-        <Accordion defaultActiveKey="0" style={{ margin: "3rem" }}>
+        <Accordion defaultActiveKey="1" style={{ margin: "3rem" }}>
           <Accordion.Item eventKey="0">
             <Accordion.Header style={{ padding: "2rem" }}>
               {/* <div key={index}> */}
