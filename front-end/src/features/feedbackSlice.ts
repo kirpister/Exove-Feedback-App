@@ -88,11 +88,10 @@ const feedbackSlice = createSlice({
     getSections(state, action) {},
     updateQuestion(state, action: PayloadAction<PayloadTypeQuestion>) {
       const temp = action.payload;
-      const index = state.sendQuestion.findIndex((e) => e.title === temp.title);
+      const index = state.sendQuestion.findIndex((e) => e.order === temp.order);
       if (index === -1) {
         let setUpQuestion: PayloadTypeQuestion = {
           ...temp,
-          // order: Number(state.sendQuestion.length + 1),
           order: temp.order,
           required: true,
         };
