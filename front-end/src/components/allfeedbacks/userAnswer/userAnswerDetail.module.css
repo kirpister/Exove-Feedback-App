@@ -1,8 +1,41 @@
-.type_1{
-    background-color: var( --light-grey-color);
-    padding: 1rem;
+.type_1 {
+  background-color: var(--light-grey-color);
 }
 
 .type_2 {
-    padding: 1rem;
+  background-color: white;
+}
+
+.single_user_feedback {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  padding: 0.2rem;
+  /* border: 2px solid black; */
+  background-color: white;
+  font-family: inherit;
+  font-weight: bold;
+  margin: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.btn:hover {
+  background-color: var(--purple-color);
+  color: white;
+  border: 1.5px solid var(--purple-color);
+}
+
+.link {
+  text-decoration: none;
+  color: grey;
+}
+.username {
+  width: 10rem;
 }
