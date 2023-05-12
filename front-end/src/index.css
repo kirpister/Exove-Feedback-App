@@ -101,3 +101,7 @@ main {
   color: white;
   margin: 0 auto;
 }
+
+.accordion-button {
+  background-color: green;
+}
