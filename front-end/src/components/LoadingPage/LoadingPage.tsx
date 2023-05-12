@@ -15,7 +15,7 @@ const LoadingPage: React.FC = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "var(--pale-pink-color)",
+        background: "white",
         opacity: 0.5,
         visibility:`${show?'visible':'hidden'}`
       }}

@@ -8,7 +8,7 @@
 
 .sidebar nav {
   background-color: var(--black);
-  min-width: 18vw;
+  min-width: 15vw;
   max-width: 18vw;
   height: 100vh;
   position: fixed;
@@ -95,7 +95,7 @@
 .userdash {
   background: white;
   color: var(--black);
-  margin: 7% 15%;
+  margin: 7% 7%;
 }
 
 .userdash h3,

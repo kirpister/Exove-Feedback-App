@@ -222,42 +222,6 @@
           "order":1
         }
       ]
-    },
-    {
-      "name": "Quality focus",
-      "id": 8,
-      "questions": [
-        {
-          "question": "The person produces high quality product",
-          "isFreeForm": false,
-          "order":1
-        },
-        {
-          "question": "The person aims to improve the quality of the end result beyond expressed requirements",
-          "isFreeForm": false,
-          "order":1
-        },
-        {
-          "question": "The person is living by the company values (passion, expertise, openness and care)",
-          "isFreeForm": false,
-          "order":1
-        },
-        {
-          "question": "The person is aligned with company best practices",
-          "isFreeForm": false,
-          "order":1
-        },
-        {
-          "question": "The person delivers quality even with limited resources (time, resources, information, guidance)",
-          "isFreeForm": false,
-          "order":1
-        },
-        {
-          "question": "Feedback about the person's quality focus",
-          "isFreeForm": true,
-          "order":1
-        }
-      ]
     }
   ]
 }

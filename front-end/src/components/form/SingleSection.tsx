@@ -18,12 +18,6 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
             <Accordion.Item eventKey="0">
               <Accordion.Header style={{ backgroundColor: "white" }}>
                 <label htmlFor="section"></label>
-
-                <input
-                  type="text"
-                  className={styles.section_input}
-                  defaultValue={section.name}
-                />
                 <input
                   type="text"
                   className={styles.section_input}

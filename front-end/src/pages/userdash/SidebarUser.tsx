@@ -42,10 +42,10 @@ const SidebarUser: React.FC = () => {
             <img className="circle" src={circle} alt="circle" />
           </NavLink>
           <NavLink to="/">
-            <li>{t("lione")}</li>
+            <li>{t("main")}</li>
           </NavLink>
           <NavLink to="/notifications" className={userstyles.notifications}>
-             <li>Notifications</li>
+             <li>{t("notifs")}</li>
               {unReadNotifications > 0 ? (
               <span className={userstyles.badge}>{unReadNotifications}</span>
             ) : (
@@ -57,11 +57,11 @@ const SidebarUser: React.FC = () => {
 
           </NavLink>
           <NavLink to={"/feedbackform"}>
-            <li>{t("litwo")}</li>
+            <li>{t("givefb")}</li>
 
           </NavLink>
           <NavLink to="/requestfeedback">
-            <li>{t("lithree")}</li>
+            <li>{t("reqfb")}</li>
           </NavLink>
         </ul>
       </nav>

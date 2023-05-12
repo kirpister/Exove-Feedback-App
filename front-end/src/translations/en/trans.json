@@ -6,9 +6,9 @@
     "loginbtn": "LOGIN",
 
     "USER SIDEBAR TRANSLATIONS": "******",
-    "lione": "Main",
-    "litwo": "Feedback Requests",
-    "lithree": "Request Feedback",
+    "main": "Main",
+    "givefb": "Give Feedback",
+    "reqfb": "Request Feedback",
     "logout": "LOG OUT",
 
     "USERDASH TRANSLATIONS": "******",

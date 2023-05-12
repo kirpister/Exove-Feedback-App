@@ -3,7 +3,7 @@
   padding: 0;
   overscroll-behavior: none;
   box-sizing: border-box;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 
 @font-face {
@@ -76,7 +76,7 @@ main {
 
 .bottom_avatar {
   display: grid;
-  gap: 0.5rem;
+  gap: .5rem;
 }
 
 .bottomdiv span {

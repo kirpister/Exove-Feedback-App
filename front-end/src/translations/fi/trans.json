@@ -6,9 +6,9 @@
     "loginbtn": "KIRJAUDU",
 
     "USER SIDEBAR TRANSLATIONS": "******",
-    "lione": "Koti",
-    "litwo": "Palaute pyynnöt",
-    "lithree": "Pyydä palautetta",
+    "main": "Koti",
+    "givefb": "Palaute pyynnöt",
+    "reqfb": "Pyydä palautetta",
     "logout": "KIRJAUDU ULOS",
 
     "USERDASH TRANSLATIONS": "******",
