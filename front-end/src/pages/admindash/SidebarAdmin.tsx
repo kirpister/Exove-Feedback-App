@@ -12,9 +12,9 @@ import { getAllUserAPI } from "../../features/alluserSlicer";
 import { Notification } from "../../model/types/notification";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
+import TranslataBtn from "../../components/TranslateBtn/TranslataBtn";
 
 const SidebarAdmin: React.FC = () => {
-
   const { t } = useTranslation<"trans">("trans");
 
   const userDetails: any = useSelector(
@@ -30,6 +30,7 @@ const SidebarAdmin: React.FC = () => {
     dispatch(getAllFeedbackAPI());
     dispatch(getAllUserAPI());
   }, [dispatch]);
+
   const unReadNotifications =
     notifications?.filter((item) => !item.isRead).length || 0;
   return (
@@ -38,6 +39,9 @@ const SidebarAdmin: React.FC = () => {
         <ul>
           <NavLink to={"/"}>
             <img className="circle" src={circle} alt="circle" />
+          </NavLink>
+          <NavLink to="/">
+            <li>{t("main")}</li>
           </NavLink>
           <li>
             <NavLink to="/notifications" className={styles.notifications}>
@@ -83,6 +87,7 @@ const SidebarAdmin: React.FC = () => {
           LOG OUT
         </p>
       </div>
+      <TranslataBtn />
     </div>
   );
 };
