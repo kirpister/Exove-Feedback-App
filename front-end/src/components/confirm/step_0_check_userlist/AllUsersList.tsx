@@ -36,7 +36,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
   // });
 
   let usersListSearch = usersList;
-
   let s = search.toLowerCase();
   if (search) {
     usersListSearch = usersListSearch.filter((item) => {

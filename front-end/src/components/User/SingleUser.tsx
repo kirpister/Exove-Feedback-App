@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import classes from "./SingleUser.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
@@ -15,13 +14,19 @@ interface SingleUserProps {
 }
 
 const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
-  const { selectedRequesList } = useAppSelector((state) => state.requestUserlist);
+  const userDetails: any = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
+  const { selectedRequesList } = useAppSelector(
+    (state) => state.requestUserlist
+  );
   const { allUserList } = useAppSelector((state) => state.allUser);
   const dispatch = useAppDispatch();
   const checkDisable = () => {
     if (selectedRequesList) {
-      const index = selectedRequesList.userList.findIndex((id) => id === userInfo.id);
+      const index = selectedRequesList.userList.findIndex(
+        (id) => id === userInfo.id
+      );
       if (index !== -1) {
         return true;
       }
@@ -32,26 +37,26 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
     dispatch(addUserFromSelectRequestList({ allUserList, id: userInfo.id }));
   };
   return (
-    <NavLink to="#">
-      <article className={classes.userlist}>
-        <div>
-          <div className={classes.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
-          <span>
-            {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-            <br />
-            {userInfo.work.departments[0]}
-          </span>
-          <BtnSuccess
-            callBack={() => {
-              addNewUserToSelectedUserList(userInfo.id);
-            }}
-            name="add"
-            width="auto"
-            disabled={checkDisable()}
-          />
+    <article className={classes.userlist}>
+      <div>
+        <div className={classes.avatar}>
+          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
         </div>
-      </article>
-    </NavLink>
+        <span>
+          {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
+          <br />
+          {userInfo.work.departments[0]}
+        </span>
+        <BtnSuccess
+          callBack={() => {
+            addNewUserToSelectedUserList(userInfo.id);
+          }}
+          name="❮❮"
+          width="auto"
+          disabled={checkDisable()}
+        />
+      </div>
+    </article>
   );
 };
 

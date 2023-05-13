@@ -6,7 +6,7 @@ import { useAppSelector } from "../../../../app/hooks";
 import { personalRequestListType } from "../../../../model/types/requestList";
 interface PropsType {
   userListId?: Array<string>;
-  selectedRequesList? : personalRequestListType
+  selectedRequesList?: personalRequestListType;
 }
 
 const AllUsersList: React.FC = (props: PropsType) => {
@@ -17,6 +17,23 @@ const AllUsersList: React.FC = (props: PropsType) => {
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
   };
+
+  let usersListSearch = allUserList;
+  let s = search.toLowerCase();
+  if (search) {
+    usersListSearch = usersListSearch.filter((item) => {
+      let serchDepartment = item.work.departments.filter((dep) => {
+        return dep.toLowerCase().indexOf(s) > -1;
+      }).length;
+
+      let searchName =
+        item.personalDetail.firstName.toLowerCase().indexOf(s) > -1;
+
+      return serchDepartment || searchName;
+    });
+  } else {
+    usersListSearch = allUserList;
+  }
 
   return (
     <div className={classes.all_users_list}>
@@ -29,7 +46,7 @@ const AllUsersList: React.FC = (props: PropsType) => {
           onChange={searchHandler}
         ></input>
       </div>
-      {allUserList.map((user) => (
+      {usersListSearch.map((user) => (
         <SingleUser key={user.id} userInfo={user} />
       ))}
     </div>
