@@ -21,7 +21,7 @@ const AllUsersList: React.FC = (props: PropsType) => {
   return (
     <div className={classes.all_users_list}>
       <div>
-        <label htmlFor="search"></label>
+        {/* <label htmlFor="search"></label> */}
         <input
           type="search"
           id="search"
