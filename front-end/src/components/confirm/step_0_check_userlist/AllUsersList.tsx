@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./AllUsersList.module.css";
 import { personalDetailType } from "../../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
@@ -74,7 +74,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
   return (
     <div className={styles.all_users_list}>
       <div>
-        <label htmlFor="search"></label>
         <input
           type="search"
           id="search"
@@ -92,7 +91,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
         }}
         ref={todoWrapper}
       >
-        <div className={styles.all_users_list1}>
+        <div className={styles.scrolled_users}>
           {usersListSearch.map((user) => (
             <SingleUser1
               key={user.id}

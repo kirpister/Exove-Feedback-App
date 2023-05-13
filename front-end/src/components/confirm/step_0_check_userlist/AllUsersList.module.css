@@ -10,7 +10,7 @@
   padding: 0.5rem;
 }
 
-.all_users_list1 {
+.scrolled_users {
   display: flex;
   flex-direction: column;
   margin-right: 0.5rem;

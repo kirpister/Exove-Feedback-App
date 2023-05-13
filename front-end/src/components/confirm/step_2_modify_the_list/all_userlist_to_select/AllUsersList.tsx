@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import classes from "./userList.module.css";
 import { personalDetailType } from "../../../../model/types/user";
 import SingleUser from "../../../User/SingleUser";
 import { useAppSelector } from "../../../../app/hooks";
 import { personalRequestListType } from "../../../../model/types/requestList";
+import { useScrollbar } from "../../../../app/use-scrollbar";
 interface PropsType {
   userListId?: Array<string>;
   selectedRequesList?: personalRequestListType;
@@ -14,6 +15,10 @@ const AllUsersList: React.FC = (props: PropsType) => {
   const [search, setSearch] = useState("");
   //   const [userList, setUsersList] = useState([]);
 
+  const todoWrapper = useRef(null);
+
+  const hasScroll = allUserList.length > 5;
+  useScrollbar(todoWrapper, hasScroll);
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
   };
@@ -38,17 +43,27 @@ const AllUsersList: React.FC = (props: PropsType) => {
   return (
     <div className={classes.all_users_list}>
       <div>
-        {/* <label htmlFor="search"></label> */}
         <input
           type="search"
           id="search"
           placeholder="Search"
           onChange={searchHandler}
         ></input>
+        <div
+          style={{
+            marginRight: "1px",
+            height: hasScroll ? "600px" : "auto",
+            minHeight: "50px",
+          }}
+          ref={todoWrapper}
+        >
+          <div className={classes.scrolled_users}>
+            {usersListSearch.map((user) => (
+              <SingleUser key={user.id} userInfo={user} />
+            ))}
+          </div>
+        </div>
       </div>
-      {usersListSearch.map((user) => (
-        <SingleUser key={user.id} userInfo={user} />
-      ))}
     </div>
   );
 };
