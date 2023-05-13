@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import AllUsersList from "../step_1_selectList/all_user_list/AllUsersList";
-import SingleUserList from "../step_1_selectList/single_user_list/SingleUserList";
+import AllUsersList from "./all_userlist_to_select/AllUsersList";
+import SingleUserList from "./single_user_list/SingleUserList";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./setupUserList.module.css";
-import { addUserFromSelectRequestList, removeUserFromSelectRequestList, setUpSelectRequestList } from "../../../features/requestUserListSlicer";
+import { removeUserFromSelectRequestList, setUpSelectRequestList } from "../../../features/requestUserListSlicer";
 import BtnSuccess from "../../button/success/BtnSuccess";
-import { createFeedbackAPI, setUpUserList } from "../../../features/feedbackSlice";
-import { setUpConfirmation } from "../../../features/feedbackSlice";
+import { setUpUserList } from "../../../features/feedbackSlice";
 import { showLoading2s } from "../../../features/loadingSlicer";
 
 function SetupUserList() {
@@ -34,7 +33,7 @@ function SetupUserList() {
         );
         showLoading2s(dispatch);
         setTimeout(() => {
-          navigate('confirm')
+          navigate("confirm");
         }, 2000);
       }
     }

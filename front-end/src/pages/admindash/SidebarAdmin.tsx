@@ -47,19 +47,15 @@ const SidebarAdmin: React.FC = () => {
             <li>
               <NavLink to="/notifications" className={styles.notifications}>
                 <span>{t("notifs")}</span>
-                {unReadNotifications > 0 ? (
-                  <span className={styles.badge}>{unReadNotifications}</span>
-                ) : (
-                  ""
-                )}
+                {unReadNotifications > 0 ? <span className={styles.badge}>{unReadNotifications}</span> : ""}
               </NavLink>
             </li>
             <li>
               <NavLink to="/feedbackform">{t("newform")}</NavLink>
             </li>
-            <li>
-              <NavLink to="/confirmation">{t("confirmation")}</NavLink>
-            </li>
+            {/* <li>
+              <NavLink to="/getuserlist">{t("confirmation")}</NavLink>
+            </li> */}
             <li>
               <NavLink to="/getuserlist">Get Request User List</NavLink>
             </li>
@@ -70,9 +66,7 @@ const SidebarAdmin: React.FC = () => {
         </nav>
         <div className="bottomdiv">
           <div className="bottom_avatar">
-            <div className="avatar">
-              {userDetails.firstName.charAt(0).toUpperCase()}
-            </div>
+            <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
             <span>
               {userDetails.firstName} {userDetails.surName}
             </span>

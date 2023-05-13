@@ -46,18 +46,12 @@ const restoreSendFeedback = () => {
 };
 const setUpSectionWithOrder = () => {
   let sections = localStorage.getItem("section");
+  console.log(sections);
   if (sections !== null) {
     return JSON.parse(sections);
   } else {
-    let order = 0;
-    let temp = [...questions.sections];
-    for (let i of temp) {
-      for (let j of i.questions) {
-        order++;
-        j.order = order;
-      }
-    }
-    return temp;
+    console.log("section");
+    return [...questions.sections];
   }
 };
 interface FinalPayloadType<T> {
@@ -88,11 +82,10 @@ const feedbackSlice = createSlice({
     getSections(state, action) {},
     updateQuestion(state, action: PayloadAction<PayloadTypeQuestion>) {
       const temp = action.payload;
-      const index = state.sendQuestion.findIndex((e) => e.title === temp.title);
+      const index = state.sendQuestion.findIndex((e) => e.order === temp.order);
       if (index === -1) {
         let setUpQuestion: PayloadTypeQuestion = {
           ...temp,
-          // order: Number(state.sendQuestion.length + 1),
           order: temp.order,
           required: true,
         };
@@ -136,7 +129,21 @@ const feedbackSlice = createSlice({
       }
     },
     setUpSelectAllQuestion(state) {
-      state.sendQuestion = createSendAllQuestion(state.sections);
+      if (state.sendQuestion.length === 0) {
+        state.sendQuestion = createSendAllQuestion(state.sections);
+      } else {
+        let excludeAlreadySendQuestions: Array<PayloadTypeQuestion> = [];
+        for (let i of createSendAllQuestion(state.sections)) {
+          for (let j of state.sendQuestion) {
+            if (i.order !== j.order) {
+              excludeAlreadySendQuestions.push(i);
+            } else {
+              excludeAlreadySendQuestions.push(j);
+            }
+          }
+        }
+        state.sendQuestion = [...excludeAlreadySendQuestions];
+      }
     },
     removeSendQuestion(state, action: PayloadAction<{ order: number }>) {
       const sendQuestionLocal = localStorage.getItem("sendquestion");
@@ -146,7 +153,12 @@ const feedbackSlice = createSlice({
         if (index !== -1) {
           data.splice(index, 1);
           localStorage.setItem("sendquestion", JSON.stringify(data));
-          state.sendQuestion = restoreSendFeedback()
+          state.sendQuestion = restoreSendFeedback();
+        }
+      } else {
+        let index = state.sendQuestion.findIndex((e) => Number(e.order) === Number(action.payload.order));
+        if (index !== -1) {
+          state.sendQuestion.splice(index, 1);
         }
       }
     },

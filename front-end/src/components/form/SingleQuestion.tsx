@@ -29,26 +29,21 @@ interface UsedQuestionType {
 // 2. after click All-Select button --> Confirm Final Feeback will shown.
 // 3. click confirm feedback --> get notification -->
 
-const SingleQuestion: React.FC<SingleQuestionProps> = ({
-  question,
-  index_section,
-  index_question,
-  order,
-}) => {
+const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, index_section, index_question, order }) => {
   const { sendQuestion } = useAppSelector((state) => state.feedback);
   const [state, setState] = useState<UsedQuestionType>({
-    type: QuestionType.range,
+    type: question.isFreeForm ? QuestionType.freeString : QuestionType.range,
     title: question.question,
     order,
   });
   useEffect(() => {
-    const index = sendQuestion.findIndex((e) => e.title === question.question);
+    const index = sendQuestion.findIndex((e) => e.order === order);
     if (index !== -1) {
       setDisable(true);
     } else {
       setDisable(false);
     }
-  }, [sendQuestion, question]);
+  }, [sendQuestion, order]);
   const [disable, setDisable] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const submitAddNewQuestion = () => {
@@ -79,20 +74,14 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
       <ListGroup.Item>
         <form action="#" className={styles.single_form}>
           <div>
-            <label
-              htmlFor={`question${index_section}_${index_question}`}
-            ></label>
+            <label htmlFor={`question${index_section}_${index_question}`}></label>
             <input
               disabled={disable}
               className={styles.question_input}
               type="text"
               id={`question${index_section}_${index_question}`}
               defaultValue={question.question}
-              onChange={(
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-                >
-              ) => setQuestionContent(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setQuestionContent(e.target.value)}
             />
           </div>
           <div className={styles.symbols}>
@@ -104,21 +93,16 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({
                   id="type"
                   name="type"
                   required
-                  onChange={(
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-                    >
-                  ) => setType(e.target.value as QuestionType)}
+                  defaultValue={question.isFreeForm ? QuestionType.freeString : QuestionType.range}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+                    setType(e.target.value as QuestionType)
+                  }
                 >
                   {renderQuestionOption()}
                 </select>
               </div>
 
-              <button
-                className={styles.add_btn}
-                onClick={submitAddNewQuestion}
-                disabled={disable}
-              >
+              <button className={styles.add_btn} onClick={submitAddNewQuestion} disabled={disable}>
                 +
               </button>
             </div>

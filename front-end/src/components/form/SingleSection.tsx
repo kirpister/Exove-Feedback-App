@@ -32,7 +32,6 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                         order={question.order}
                         key={`${i}${j}`}
                         question={question}
-                        // deleteQuestion={deleteQuestion}
                         index_section={i}
                         index_question={j}
                       />

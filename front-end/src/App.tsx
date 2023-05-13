@@ -16,10 +16,9 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import SetupUserList from "./components/confirm/step_2_modify_the_list/SetupUserList";
 import { initiateFetchNotifications } from "./features/notificationsSlice";
 import { Notifications } from "./components/Notifications/Notifications";
-import CreateFeedback from "./components/createFeedback/CreateFeedback";
 import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
-import CreateUserList from "./components/confirmation/CreateUserList";
+import CreateUserList from "./components/confirm/step_0_check_userlist/CreateUserList";
 import FinalConfirm from "./components/confirm/step_3_finalconfirm/FinalConfirm";
 import SingleUserFeedback from "./components/allfeedbacks/singleFeedback/SingleUserFeedback";
 
@@ -29,9 +28,7 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
-  const notifications = useAppSelector(
-    (state) => state.userNotifications.notifications
-  );
+  const notifications = useAppSelector((state) => state.userNotifications.notifications);
 
   if (authenticatedUser.isLoading) {
     return <LoadingPage />;
@@ -48,19 +45,14 @@ const App = () => {
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="feedbackform" element={<FeedbackForm />} />
-            {/* <Route path="feedbackform/confirm" element={<CreateFeedback />} /> */}
-            <Route path="/confirmation" element={<CreateUserList />} />
+            {/* <Route path="/getuserlist" element={<CreateUserList />} /> */}
             <Route path="/getuserlist">
-              <Route index element={<RequestUserLists />} />
+              <Route index element={<CreateUserList />} />
               <Route path=":id" element={<SetupUserList />} />
-              {/* <Route path=":id/feedbackform" element={<FeedbackForm />} /> */}
               <Route path=":id/confirm" element={<FinalConfirm />} />
             </Route>
             <Route path="allfeedbacks" element={<AllFeedbacks />} />
-            <Route
-              path="allfeedbacks/:singlerecipe"
-              element={<SingleUserFeedback />}
-            />
+            <Route path="allfeedbacks/:singlerecipe" element={<SingleUserFeedback />} />
           </Route>
         </Routes>
       );

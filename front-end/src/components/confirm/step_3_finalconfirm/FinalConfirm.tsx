@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SetupUserList from "../step_2_modify_the_list/SetupUserList";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import SingleUserList from "../step_1_selectList/single_user_list/SingleUserList";
+import SingleUserList from "../step_2_modify_the_list/single_user_list/SingleUserList";
 import BtnSuccess from "../../button/success/BtnSuccess";
 import { createFeedbackAPI, setUpConfirmation } from "../../../features/feedbackSlice";
 import { useNavigate } from "react-router-dom";
