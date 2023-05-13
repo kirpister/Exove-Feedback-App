@@ -30,7 +30,6 @@ const CreateUserList: React.FC = () => {
 
   return (
     <>
-      <h4>Please select the user in the left</h4>
       <div>
         <div className={styles.confirmation_wrapper}>
           <div className={styles.selected_reviewers}>

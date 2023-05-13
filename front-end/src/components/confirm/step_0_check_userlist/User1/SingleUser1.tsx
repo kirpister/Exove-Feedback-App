@@ -39,15 +39,18 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
         onClickUser(userInfo);
       }}
     >
-      <div>
+      <div className={styles.single_user_card}>
         <div className={styles.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
+          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
         </div>
-        <span>
-          {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-          <br />
-          {userInfo.work.departments[0]}
-        </span>
+        <div className={styles.name_department}>
+          <span>
+            {userInfo.personalDetail.firstName}{" "}
+            {userInfo.personalDetail.surName}
+            <br />
+          </span>
+          <p> {userInfo.work.departments[0]}</p>
+        </div>
       </div>
     </article>
   );
