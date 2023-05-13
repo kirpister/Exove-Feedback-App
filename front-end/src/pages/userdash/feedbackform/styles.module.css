@@ -1,6 +1,6 @@
 h2 {
     margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .instructions {
@@ -12,6 +12,7 @@ h2 {
 
 .wrapper {
     margin-top: 3rem;
+    margin-left: 7%;
 }
 
 .textarea {

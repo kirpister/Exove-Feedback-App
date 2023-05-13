@@ -90,6 +90,10 @@
   margin: 0 auto;
 }
 
+.avatar img {
+  width: 1.5rem;
+}
+
 /********  USER DASHBOARD  ********/
 
 .userdash {
@@ -150,33 +154,33 @@ p {
 
 /******** CHECKBOXES ********/
 
-article {
+.userlist article {
   position: relative;
   width: 220px;
   height: 70px;
   margin: 0.5rem 0.5rem;
-  float: left;
+  /* float: left; */
   border: 2px solid var(--purple-color);
   box-sizing: border-box;
   font-family: var(--main-font);
 }
 
-article img {
+.userlist article img {
   width: 50px;
   border-radius: 50%;
 }
 
-article div {
-  width: 100%;
-  height: 100%;
+.userlist {
+  width: 220px;
+  height: 70px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   line-height: 1.3;
   transition: 0.5s ease;
 }
 
-article input {
+.userlist article input {
   position: absolute;
   top: 0;
   left: 0;

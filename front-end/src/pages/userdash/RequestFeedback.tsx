@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import userimg from '../../assets/user.png';
 
 import {
   personalDetailType,
@@ -84,12 +85,12 @@ const RequestFeedback: React.FC = () => {
             />
             <div>
               <div className={userstyles.avatar}>
-                {userDetails.firstName.charAt(0).toUpperCase()}
+              <img src={userimg} alt=""/>
               </div>
               <span>
                 {user.personalDetail.firstName} {user.personalDetail.surName}
                 <br />
-                {user.work.roles[0]}
+                {user.work.departments}
               </span>
             </div>
           </article>

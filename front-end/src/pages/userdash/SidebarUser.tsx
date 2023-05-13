@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import userstyles from "./userdash.module.css";
 import circle from "../../assets/circle-half.png";
+import user from '../../assets/user.png';
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "../../app/hooks";
@@ -68,7 +69,8 @@ const SidebarUser: React.FC = () => {
       <div className="bottomdiv">
         <div className="bottom_avatar">
           <div className="avatar">
-            {userDetails.firstName.charAt(0).toUpperCase()}
+            {/* {userDetails.firstName.charAt(0).toUpperCase()} */}
+            <img src={user} />
           </div>
           <span>
             {userDetails.firstName} {userDetails.surName}

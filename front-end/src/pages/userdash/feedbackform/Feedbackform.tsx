@@ -126,7 +126,7 @@ function Feedbackform() {
       <>you have no feedback request </>;
     }
   };
-  return <div>
+  return <div className={styles.wrapper}>
           <h2>{t("feedbackheader")}</h2>
           <div className={styles.instructions}>
           <p>{t("instruction")}</p>
