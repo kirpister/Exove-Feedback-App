@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction,  } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AppDispatch } from "../app/store";
 import { FinalConfirmationType, PayloadTypeQuestion } from "./feedbackSlice";
+import { showLoading2s } from "./loadingSlicer";
 export interface AnswerType<T, N> {
   details: Array<{
     answer: Array<string>;
@@ -65,6 +66,19 @@ export const getAllFeedbackAPI = () => {
   };
 };
 
-export const { setAllFeedback, resetAllFeedback } =
-  createdFeedbackSlicer.actions;
+export const deleteFeedbackAPI = (feedbackId: string) => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const { data, status } = await axios.delete(`/feedback?feedbackId=${feedbackId}`);
+      if (status === 200) {
+        alert(`${data.msg}`);
+      }
+      showLoading2s(dispatch);
+      await dispatch(getAllFeedbackAPI());
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+export const { setAllFeedback, resetAllFeedback } = createdFeedbackSlicer.actions;
 export default createdFeedbackSlicer.reducer;
