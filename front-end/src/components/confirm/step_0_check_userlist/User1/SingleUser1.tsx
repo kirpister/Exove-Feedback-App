@@ -10,9 +10,16 @@ interface SingleUser1Props {
   requests: any;
 }
 
-const SingleUser1: React.FC<SingleUser1Props> = ({ userInfo, onClickUser, isActive, requests }) => {
+const SingleUser1: React.FC<SingleUser1Props> = ({
+  userInfo,
+  onClickUser,
+  isActive,
+  requests,
+}) => {
   // console.log("requests", requests);
-  const userDetails: any = useAppSelector((state) => state.authenticatedUser.userDetails);
+  const userDetails: any = useAppSelector(
+    (state) => state.authenticatedUser.userDetails
+  );
 
   // CHECK IF THE USER HAS A LIST OF REVIEWERS
   let listInsideCheck = "none";
@@ -32,13 +39,18 @@ const SingleUser1: React.FC<SingleUser1Props> = ({ userInfo, onClickUser, isActi
         onClickUser(userInfo);
       }}
     >
-      <div>
-        <div className={styles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
-        <span>
-          {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-          <br />
-          {userInfo.work.departments[0]}
-        </span>
+      <div className={styles.single_user_card}>
+        <div className={styles.avatar}>
+          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
+        </div>
+        <div className={styles.name_department}>
+          <span>
+            {userInfo.personalDetail.firstName}{" "}
+            {userInfo.personalDetail.surName}
+            <br />
+          </span>
+          <p> {userInfo.work.departments[0]}</p>
+        </div>
       </div>
     </article>
   );
