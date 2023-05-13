@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./AllUsersList.module.css";
 import { personalDetailType } from "../../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
+import { useScrollbar } from "../../../app/use-scrollbar";
 
 interface AllUserProps {
   usersList: personalDetailType[];
@@ -17,6 +18,10 @@ const AllUsersList: React.FC<AllUserProps> = ({
   requests,
 }) => {
   const [search, setSearch] = useState("");
+  const todoWrapper = useRef(null);
+
+  const hasScroll = usersList.length > 5;
+  useScrollbar(todoWrapper, hasScroll);
 
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
@@ -80,16 +85,26 @@ const AllUsersList: React.FC<AllUserProps> = ({
       </div>
 
       <button className={styles.btn}>Remind All</button>
-
-      {usersListSearch.map((user) => (
-        <SingleUser1
-          key={user.id}
-          userInfo={user}
-          onClickUser={onClickUser}
-          requests={requests}
-          isActive={isActive !== undefined && user.id === isActive.id}
-        />
-      ))}
+      <div
+        style={{
+          marginRight: "1px",
+          height: hasScroll ? "600px" : "auto",
+          minHeight: "50px",
+        }}
+        ref={todoWrapper}
+      >
+        <div className={styles.all_users_list1}>
+          {usersListSearch.map((user) => (
+            <SingleUser1
+              key={user.id}
+              userInfo={user}
+              onClickUser={onClickUser}
+              requests={requests}
+              isActive={isActive !== undefined && user.id === isActive.id}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
