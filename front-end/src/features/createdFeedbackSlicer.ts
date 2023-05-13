@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction,  } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AppDispatch } from "../app/store";
 import { FinalConfirmationType, PayloadTypeQuestion } from "./feedbackSlice";

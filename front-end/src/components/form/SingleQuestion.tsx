@@ -1,11 +1,10 @@
-import React, { FormEvent, FormEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ListGroup from "react-bootstrap/ListGroup";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { updateQuestion } from "../../features/feedbackSlice";
 import { Question } from "./FeedbackForm";
 import styles from "./SingleQuestion.module.css";
-import { useSelector } from "react-redux";
 
 interface SingleQuestionProps {
   question: Question;
@@ -72,9 +71,11 @@ const SingleQuestion: React.FC<SingleQuestionProps> = ({ question, index_section
   return (
     <ListGroup>
       <ListGroup.Item>
-        <form action="#" className={styles.single_form}>
+        <form action="#"
+         className={styles.single_form}
+         >
           <div>
-            <label htmlFor={`question${index_section}_${index_question}`}></label>
+            {/* <label htmlFor={`question${index_section}_${index_question}`}></label> */}
             <input
               disabled={disable}
               className={styles.question_input}
