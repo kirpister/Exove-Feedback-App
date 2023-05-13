@@ -8,13 +8,13 @@
 }
 
 .sidebar nav {
-  background-color: var(--black);
-  /* min-width: 18vw;
+  /* background-color: var(--black);
+  min-width: 15vw;
   max-width: 18vw;
   height: 100vh;
   position: fixed;
-    top: 0;
-  display: block; */
+  top: 0; */
+  display: block;
   font-family: var(--main-font);
 }
 
@@ -40,8 +40,11 @@
   position: absolute;
   top: -21px;
   right: -25px;
-  padding: 7px 7px;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background: var(--pale-pink-color);
   color: white;
+  display: flex;
+  justify-content: center;
 }

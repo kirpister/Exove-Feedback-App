@@ -9,6 +9,7 @@ import { PayloadTypeQuestion } from "../../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
 import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
 import Accordion from "react-bootstrap/Accordion";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const AllFeedbacks = () => {
   const { allCreatedFeedback } = useAppSelector(
@@ -52,21 +53,22 @@ const AllFeedbacks = () => {
       console.log("createdBy", createdBy);
 
       return (
-        <Accordion defaultActiveKey="1" style={{ margin: "3rem" }}>
+        <Accordion defaultActiveKey="1" style={{ margin: "0.5rem" }}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header style={{ padding: "2rem" }}>
+            <Accordion.Header>
               {/* <div key={index}> */}
               <div className={classes.feedback_data}>
-                <h3>
+                {/* <h3>
                   Feeback order: {index + 1} vs feedback ID: {id}
                 </h3>
                 <h2>Feedback Title:{details.title}</h2>
                 <p>Created at: {createAt}</p>
                 <p>Updated at : {updatedAt}</p>
-                <p>List of questions : </p>
-                <p>
+                <p>List of questions : </p> */}
+                <h3>
                   requested by the list user request with id {requestedListBy}
-                </p>
+                </h3>
+                <button className={classes.btn}>Graph</button>
               </div>
             </Accordion.Header>
             <Accordion.Body>
@@ -75,11 +77,15 @@ const AllFeedbacks = () => {
               </div> */}
               {answers?.map((item, index) => {
                 return (
-                  <UserAnswerDetail
-                    answerDetail={item}
-                    index={index}
-                    key={index}
-                  />
+                  <ListGroup>
+                    <ListGroup.Item>
+                      <UserAnswerDetail
+                        answerDetail={item}
+                        index={index}
+                        key={index}
+                      />
+                    </ListGroup.Item>
+                  </ListGroup>
                 );
               })}
             </Accordion.Body>

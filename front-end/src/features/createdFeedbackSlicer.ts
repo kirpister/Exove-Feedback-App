@@ -13,6 +13,7 @@ export interface AnswerType<T, N> {
     };
   }>;
   user: {
+    [x: string]: any;
     id: T;
     personalDetail: {
       email: T;

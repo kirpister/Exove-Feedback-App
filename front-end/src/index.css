@@ -39,7 +39,6 @@ body {
 nav .circle {
   width: 100px;
   margin-left: -2rem;
-
   padding-bottom: 3rem;
 }
 
@@ -68,7 +67,7 @@ main {
 
 .bottom_avatar {
   display: grid;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .bottomdiv span {
@@ -93,4 +92,8 @@ main {
   font-size: 2rem;
   color: white;
   margin: 0 auto;
+}
+
+.accordion-button {
+  background-color: green;
 }
