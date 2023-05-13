@@ -14,7 +14,7 @@ export const getUser: RequestHandler = async (req, res, next) => {
   const { employeeNumber } = userDetails as UserDetailsType;
   try {
     const user = await UserModel.findOne({ _id: employeeNumber })
-      .populate('selfFeedbackRequests.requestFeedbackId', { opened: 1 })
+      .populate('selfFeedbackRequests.requestFeedbackId', { opened: 1, userList:1,createdAt:1 })
       .populate('feedBack.feedbackId', { details: 1 });
     if (!user) {
       return createErrMessage(
