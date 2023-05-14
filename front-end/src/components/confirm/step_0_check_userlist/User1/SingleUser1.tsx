@@ -44,12 +44,12 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
           {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
         </div>
         <div className={styles.name_department}>
-          <span>
+          
             {userInfo.personalDetail.firstName}{" "}
             {userInfo.personalDetail.surName}
             <br />
-          </span>
-          <p> {userInfo.work.departments[0]}</p>
+       
+          {userInfo.work.departments[0]}
         </div>
       </div>
     </article>
