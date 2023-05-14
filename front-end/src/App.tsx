@@ -60,6 +60,11 @@ const App = () => {
               element={<SingleUserFeedback />}
             />
             <Route path="allfeedbacks/:analytics" element={<Analytics />} />
+            <Route
+              path="allfeedbacks/:singlefeedback"
+              element={<SingleUserFeedback />}
+            />
+            <Route path="/answer" element={<AnswerFeedback />} />
           </Route>
         </Routes>
       );

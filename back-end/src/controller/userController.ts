@@ -215,14 +215,16 @@ export const createFeedbackUserList: RequestHandler = async (
   res,
   next
 ) => {
-  console.log(req.body);
   const { userListId, userDetails } = req.body;
   const { employeeNumber } = userDetails;
+  // 1. check user list have to >5:
+  if (userListId.length < 5) {
+    return createErrMessage({ msg: 'userlist length < 5 ', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+  }
   // 1. check that user can not suggest to give feedback for themself
   if (checkArrayString(userListId) && typeof employeeNumber === 'string') {
     const index = userListId.findIndex((e: string) => e === employeeNumber);
     if (index !== -1) {
-      console.log('go here');
       return createErrMessage(
         {
           msg: 'user can not suggest request feedback list for yourself',
@@ -419,6 +421,32 @@ export const markNotificationRead: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteNotification: RequestHandler = async (req, res, next) => {
+  try {
+    const notificationId = req.body.id;
+
+    const notification = await notificationModel.findOneAndDelete(
+      { _id: notificationId }
+    );
+
+    if (!notification) {
+      return createErrMessage(
+        {
+          msg: `can not find notification ${notificationId}`,
+          status: StatusCode_Err.RESOURCE_NOT_FOUND,
+        },
+        next
+      );
+    }
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
+      res
+    );
+  } catch (error) {
+    next(error);
+  }
+}
 
 export const createReminderNotifications: RequestHandler = async (
   req,

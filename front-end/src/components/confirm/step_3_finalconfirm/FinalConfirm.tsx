@@ -18,23 +18,25 @@ function FinalConfirm() {
   const { finalConfirm } = useAppSelector((state) => state.feedback);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (finalConfirm) {
-      createFeedbackAPI(finalConfirm, dispatch, navigate);
-    }
-  }, [finalConfirm, dispatch, navigate]);
+  // useEffect(() => {
+  //   if (finalConfirm) {
+  //     createFeedbackAPI(finalConfirm, dispatch, navigate);
+  //   }
+  // }, [finalConfirm, dispatch, navigate]);
   const sendToBackend = () => {
+    dispatch(
+      setUpConfirmation({
+        title: `send feedback to is user Id: ^${selectedRequesList?.requestUserId}^`,
+      })
+    );
     const confirm = window.confirm(
       "are you sure to sent feedback request to those users"
     );
-    if (confirm) {
-      dispatch(
-        setUpConfirmation({
-          title: `send feedback to is user Id: ^${selectedRequesList?.requestUserId}^`,
-        })
-      );
+    if (confirm && finalConfirm) {
+      createFeedbackAPI(finalConfirm, dispatch, navigate);
     }
   };
+
   return (
     <div className={styles.final_conformation}>
       <div className={styles.final_list}>
@@ -52,7 +54,13 @@ function FinalConfirm() {
           callBack={() => {
             sendToBackend();
           }}
-          name="send to users"
+          name="Send To Users"
+        />
+        <BtnSuccess
+          callBack={() => {
+            navigate(-1);
+          }}
+          name="Back"
         />
       </div>
     </div>

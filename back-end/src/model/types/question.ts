@@ -17,5 +17,6 @@ order : number,
 title:string,
 type: QuestionType,
 result?:  Array<string> // in case of selection 
-required : boolean
+section:string,
+required : boolean,
 }

@@ -11,6 +11,7 @@ interface SingleQuestionProps {
   index_section: number;
   index_question: number;
   order: number;
+  section:string
 }
 export enum QuestionType {
   range = "range",
