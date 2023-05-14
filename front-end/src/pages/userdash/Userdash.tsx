@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 import { useAppDispatch } from "../../app/hooks";
 import { setFeedbackRequest } from "../../features/answerFeedbackSlicer";
+import { setAllRequestFeedback } from "../../features/requestFeedback";
 export interface DataType {
   data: {
     msg: string;
@@ -23,9 +24,7 @@ const Userdash: React.FC = () => {
 
   const [user, setUsers] = useState<personalDetailType>();
 
-  const userDetails: any = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
+  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
   const dispatch = useAppDispatch();
   useEffect(() => {
     axios.get<personalDetailType[]>("/user").then((res) => {
@@ -33,6 +32,7 @@ const Userdash: React.FC = () => {
       const user = data.data;
       setUsers({ ...user });
       dispatch(setFeedbackRequest(user.feedBack));
+      dispatch(setAllRequestFeedback(user.selfFeedbackRequests));
     });
   }, [dispatch]);
 
@@ -63,8 +63,7 @@ const Userdash: React.FC = () => {
               <tr>
                 <td>{t("tdstatus")}</td>
                 <td>
-                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened}{" "}
-                  {status ? <p>Opened</p> : <p>Closed</p>}
+                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened} {status ? <p>Opened</p> : <p>Closed</p>}
                 </td>
               </tr>
             </tbody>
@@ -87,10 +86,6 @@ const Userdash: React.FC = () => {
         </p>
         <div>{userInfo()}</div>
       </div>
-      {/* <div className={userstyles.translatebtns}>
-        <button className={userstyles.btn}>FI</button>
-        <button className={userstyles.btn}>EN</button>
-      </div> */}
     </main>
   );
 };

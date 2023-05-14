@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import AllUsersList from "../step_1_selectList/all_user_list/AllUsersList";
-import SingleUserList from "../step_1_selectList/single_user_list/SingleUserList";
+import AllUsersList from "./all_userlist_to_select/AllUsersList";
+import SingleUserList from "./single_user_list/SingleUserList";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./setupUserList.module.css";
-import { addUserFromSelectRequestList, removeUserFromSelectRequestList, setUpSelectRequestList } from "../../../features/requestUserListSlicer";
+import {
+  removeUserFromSelectRequestList,
+  setUpSelectRequestList,
+} from "../../../features/requestUserListSlicer";
 import BtnSuccess from "../../button/success/BtnSuccess";
-import { createFeedbackAPI, setUpUserList } from "../../../features/feedbackSlice";
-import { setUpConfirmation } from "../../../features/feedbackSlice";
+import { setUpUserList } from "../../../features/feedbackSlice";
 import { showLoading2s } from "../../../features/loadingSlicer";
 
 function SetupUserList() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { selectedRequesList, requestLists } = useAppSelector((state) => state.requestUserlist);
-  const { finalConfirm, sections, listUserId, requestedListBy, sendQuestion } = useAppSelector((state) => state.feedback);
+  const { selectedRequesList, requestLists } = useAppSelector(
+    (state) => state.requestUserlist
+  );
+  const { finalConfirm, sections, listUserId, requestedListBy, sendQuestion } =
+    useAppSelector((state) => state.feedback);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -23,7 +28,9 @@ function SetupUserList() {
     }
   }, [dispatch, id, requestLists]);
   const processNext = () => {
-    const confirmed = window.confirm("do you want to send feedback request to those user ?");
+    const confirmed = window.confirm(
+      "do you want to send feedback request to those user ?"
+    );
     if (confirmed) {
       if (selectedRequesList) {
         dispatch(
@@ -34,7 +41,7 @@ function SetupUserList() {
         );
         showLoading2s(dispatch);
         setTimeout(() => {
-          navigate('confirm')
+          navigate("confirm");
         }, 2000);
       }
     }
@@ -48,12 +55,22 @@ function SetupUserList() {
     console.log(id);
   };
   return selectedRequesList ? (
-    <div className={styles.wrapper}>
-      <h1>Step-2 modify the list</h1>
+    <div>
+      {/* <h1>Step-2 modify the list</h1> */}
       <div className={styles.confirmation_wrapper}>
         <div className={styles.selected_reviewers}>
-          <SingleUserList singleRequestedList={selectedRequesList} index={1} key={id} buttonName={"remove"} callBack={removeUserFromThelist} />
-          <BtnSuccess callBack={processNext} name="Send Feedback Request" key={id} />
+          <SingleUserList
+            singleRequestedList={selectedRequesList}
+            index={1}
+            key={id}
+            buttonName={"remove"}
+            callBack={removeUserFromThelist}
+          />
+          <BtnSuccess
+            callBack={processNext}
+            name="Send Feedback Request"
+            key={id}
+          />
           <BtnSuccess callBack={goBack} name="Back" key={id} />
         </div>
         <AllUsersList />

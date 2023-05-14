@@ -49,8 +49,13 @@ nav .circle {
 }
 
 main {
-  width: 100%;
+  height: 100%;
 }
+
+/* main {
+>>>>>>> 45ea84ae6a5a14863a81c9a580be49f09479721c
+  width: 100%;
+} */
 
 /* User Avatar and LogOut button */
 .bottomdiv {

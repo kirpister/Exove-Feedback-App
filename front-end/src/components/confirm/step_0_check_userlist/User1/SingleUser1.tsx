@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./SingleUser1.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
-import { personalDetailType } from "../../../model/types/user";
+import { personalDetailType } from "../../../../model/types/user";
+import { useAppSelector } from "../../../../app/hooks";
 
 interface SingleUser1Props {
   userInfo: personalDetailType;
@@ -18,8 +17,8 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
   requests,
 }) => {
   // console.log("requests", requests);
-  const userDetails: any = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
+  const userDetails: any = useAppSelector(
+    (state) => state.authenticatedUser.userDetails
   );
 
   // CHECK IF THE USER HAS A LIST OF REVIEWERS
@@ -40,15 +39,18 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
         onClickUser(userInfo);
       }}
     >
-      <div>
+      <div className={styles.single_user_card}>
         <div className={styles.avatar}>
-          {userDetails.firstName.charAt(0).toUpperCase()}
+          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
         </div>
-        <span>
-          {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-          <br />
-          {userInfo.work.departments[0]}
-        </span>
+        <div className={styles.name_department}>
+          <span>
+            {userInfo.personalDetail.firstName}{" "}
+            {userInfo.personalDetail.surName}
+            <br />
+          </span>
+          <p> {userInfo.work.departments[0]}</p>
+        </div>
       </div>
     </article>
   );

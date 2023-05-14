@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./AllUsersList.module.css";
-import { personalDetailType } from "../../model/types/user";
+import { personalDetailType } from "../../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
+import { useScrollbar } from "../../../app/use-scrollbar";
 
 interface AllUserProps {
   usersList: personalDetailType[];
@@ -18,22 +19,17 @@ const AllUsersList: React.FC<AllUserProps> = ({
 }) => {
   const [search, setSearch] = useState("");
 
+  const todoWrapper = useRef(null);
+
+  const hasScroll = usersList.length > 5;
+  useScrollbar(todoWrapper, hasScroll);
+
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
     // console.log(e.target.value);
   };
 
-  console.log("req", requests);
-
-  // let sortedUsersList = [];
-  // requests.sort((item: any) => {
-  //   // console.log("FFF", item);
-  //   if (item.requestUserId !== item.id) {
-  //   }
-  // });
-
   let usersListSearch = usersList;
-
   let s = search.toLowerCase();
   if (search) {
     usersListSearch = usersListSearch.filter((item) => {
@@ -72,7 +68,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
   return (
     <div className={styles.all_users_list}>
       <div>
-        <label htmlFor="search"></label>
         <input
           type="search"
           id="search"
@@ -82,16 +77,26 @@ const AllUsersList: React.FC<AllUserProps> = ({
       </div>
 
       <button className={styles.btn}>Remind All</button>
-
-      {usersListSearch.map((user) => (
-        <SingleUser1
-          key={user.id}
-          userInfo={user}
-          onClickUser={onClickUser}
-          requests={requests}
-          isActive={isActive !== undefined && user.id === isActive.id}
-        />
-      ))}
+      <div
+        style={{
+          marginRight: "1px",
+          height: hasScroll ? "600px" : "auto",
+          minHeight: "50px",
+        }}
+        ref={todoWrapper}
+      >
+        <div className={styles.scrolled_users}>
+          {usersListSearch.map((user) => (
+            <SingleUser1
+              key={user.id}
+              userInfo={user}
+              onClickUser={onClickUser}
+              requests={requests}
+              isActive={isActive !== undefined && user.id === isActive.id}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

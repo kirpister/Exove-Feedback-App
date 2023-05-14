@@ -47,14 +47,6 @@ function CreateFeedback() {
       <div>{renderQuestion()}</div>
 
       <BtnSuccess
-        // className={styles.btn}
-        // onClick={() => {
-        //   if (finalConfirm) {
-        //     createFeedbackAPI(finalConfirm)
-        //       .then((res) => console.log(res))
-        //       .catch((err) => console.log(err));
-        //   }
-        // }}
         callBack={() => {
           showLoading2s(dispatch);
           sendQuestion &&
@@ -65,24 +57,13 @@ function CreateFeedback() {
       />
       <BtnSuccess
         callBack={() => {
-          // localStorage.clear();
-          localStorage.removeItem("sendquestion");
-          localStorage.removeItem("section");
+          localStorage.clear();
           showLoading2s(dispatch);
-          setTimeout(() => {
-            dispatch(resetFeedback());
-          }, 2000);
+          window.location.reload();
+          // dispatch(resetFeedback());
         }}
         name="reset"
       />
-      {/* <button
-        className={styles.btn}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </button> */}
     </div>
   );
 }

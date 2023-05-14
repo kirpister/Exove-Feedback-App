@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SelectedReviewers.module.css";
-//import { personalRequestListType } from "../../model/types/requestList";
-// import axios from "axios";
-import { personalDetailType } from "../../model/types/user";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setUpUserList } from "../../features/feedbackSlice";
+import { personalDetailType } from "../../../model/types/user";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import axios from "axios";
+import { personalRequestListType } from "../../../model/types/requestList";
+import { showLoading2s } from "../../../features/loadingSlicer";
+import { useNavigate } from "react-router-dom";
+import BtnSuccess from "../../button/success/BtnSuccess";
 
 export interface DataType {
   data: {
@@ -31,40 +32,21 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
   requests,
 }) => {
   const [reminderText, setReminderText] = useState<string>(ReminderText.REMIND);
-  // console.log("isActive", isActive);
-
-  // const [requests, setRequests] = useState<any[]>([]);
-  // let [uniqueRequests, setUniqueRequests] = useState<any[]>([]);
   const { allUserList } = useAppSelector((state) => state.allUser);
-  // console.log("alluserslistfromdispatch", allUserList);
+  const navigate = useNavigate();
 
-  // console.log("all", allUserList);
   useEffect(() => {
     setReminderText(ReminderText.REMIND);
   }, [isActive.id]);
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   axios
-  //     .get<personalRequestListType[]>("/feedback/requested_feedback")
-  //     .then((res) => {
-  //       const { data, status } = res as unknown as DataType;
-  //       if (status === 200) {
-  //         setRequests(data.data);
-  //       }
-  //     });
-  // }, []);
-  // console.log("requests", requests);
-
-  // mooving away all duplicated requests from users
   let tempArr: any = [];
-  function itemCheck(item: any) {
-    // console.log("item", item);
+  const itemCheck = (item: any) => {
     if (tempArr.indexOf(item.requestUserId) === -1) {
       tempArr.push(item.requestUserId);
       return true;
     }
     return false;
-  }
+  };
 
   const sendReminder = async (receiverUserId: string) => {
     setReminderText(ReminderText.REMINDER_BEING_SEND);
@@ -81,6 +63,20 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
 
   let uniqueRequests = requests.filter((item: any) => itemCheck(item));
 
+  const processSetupUserList = (
+    singleRequestedList: personalRequestListType
+  ) => {
+    if (singleRequestedList.opened) {
+      return alert(
+        "not allow to create new feedback base on this list becuase it already created before"
+      );
+    } else {
+      showLoading2s(dispatch);
+      setTimeout(() => {
+        navigate(`${singleRequestedList.id}`);
+      }, 2000);
+    }
+  };
   const renderData = () => {
     let renderDataRequests = uniqueRequests;
     if (isActive) {
@@ -90,7 +86,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
       if (!renderDataRequests.length) {
         return (
           <div className={styles.selected_reviewers}>
-            <h5>This user does't have list for conformation</h5>
+            <h5>This user does't have list for conformation </h5>
             <div className={styles.placeholder}></div>
             <button
               className={styles.btn}
@@ -143,15 +139,10 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
                 | null
                 | undefined
             ) => {
-              // console.log("item", item);
               return (
-                // <p className={styles.single_user}>
-                //   user {index} {checkeUser(item)?.personalDetail.firstName}
-                // </p>
-
                 <article className={styles.userlist}>
-                  <input type="checkbox" id={styles.id} value={styles.id} />
-                  <div>
+                  {/* <input type="checkbox" id={styles.id} value={styles.id} /> */}
+                  <div className={styles.single_user_card}>
                     <div className={styles.avatar}>
                       {checkeUser(item)
                         ?.personalDetail.firstName.charAt(0)
@@ -160,30 +151,18 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
                     <span>
                       {checkeUser(item)?.personalDetail.firstName}{" "}
                       {checkeUser(item)?.personalDetail.surName}
-                      <br />
+                      {/* <br /> */}
                     </span>
                   </div>
                 </article>
               );
             }
           )}
-          <button
-            className={styles.btn}
-            onClick={() => {
-              userlist.opened
-                ? alert(
-                    "not allow to create new feedback base on this list becuase it already created before"
-                  )
-                : dispatch(
-                    setUpUserList({
-                      listUserId: userlist.userList,
-                      requestedListBy: userlist.id,
-                    })
-                  );
-            }}
-          >
-            Confirm
-          </button>
+          <BtnSuccess
+            callBack={processSetupUserList}
+            name={"Process"}
+            data={userlist}
+          />
         </div>
       );
     });
