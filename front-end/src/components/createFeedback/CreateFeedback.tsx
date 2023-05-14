@@ -1,18 +1,14 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
-  createFeedbackAPI,
   removeSendQuestion,
-  resetFeedback,
-  setUpConfirmation,
 } from "../../features/feedbackSlice";
-import { useNavigate } from "react-router-dom";
 import styles from "./createfb.module.css";
 import BtnSuccess from "../button/success/BtnSuccess";
 import { showLoading2s } from "../../features/loadingSlicer";
 
 function CreateFeedback() {
-  const { sendQuestion, listUserId, finalConfirm, sections } = useAppSelector(
+  const { sendQuestion,  sections } = useAppSelector(
     (state) => state.feedback
   );
   const dispatch = useAppDispatch();

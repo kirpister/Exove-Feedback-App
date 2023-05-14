@@ -37,36 +37,15 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
     dispatch(addUserFromSelectRequestList({ allUserList, id: userInfo.id }));
   };
   return (
-<<<<<<< HEAD
-    <NavLink to="#">
-      <article className={classes.userlist}>
-        <div>
-          <div className={classes.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
-          <span>
-            {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-            <br />
-            {userInfo.work.departments[0]}-{userInfo.work.roles[0]}
-            <br />
-          </span>
-          <BtnSuccess
-            callBack={() => {
-              addNewUserToSelectedUserList(userInfo.id);
-            }}
-            name="add"
-            width="auto"
-            disabled={checkDisable()}
-          />
-=======
     <article className={classes.userlist}>
       <div>
         <div className={classes.avatar}>
           {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
->>>>>>> main
         </div>
         <span>
           {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
           <br />
-          {userInfo.work.departments[0]}
+          {userInfo.work.departments[0]} - { userInfo.work.roles[0]}
         </span>
         <BtnSuccess
           callBack={() => {
