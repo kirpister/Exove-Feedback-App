@@ -53,6 +53,7 @@ const App = () => {
             </Route>
             <Route path="allfeedbacks" element={<AllFeedbacks />} />
             <Route path="allfeedbacks/:singlerecipe" element={<SingleUserFeedback />} />
+            <Route path="/answer" element={<AnswerFeedback />} />
           </Route>
         </Routes>
       );

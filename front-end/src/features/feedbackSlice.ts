@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios";
 import { AppDispatch } from "../app/store";
 import { showLoading2s } from "./loadingSlicer";
 import { NavigateFunction } from "react-router-dom";
+import { getAllFeedbackAPI } from "./createdFeedbackSlicer";
 export interface PayloadTypeQuestion {
   order?: number;
   result?: [string];
@@ -175,10 +176,10 @@ export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, 
     if (status === 201) {
       showLoading2s(dispatch);
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
+      await dispatch(getAllFeedbackAPI());
       navigate("/allfeedbacks");
     }
   } catch (error) {
-    console.log(error);
     if (error instanceof AxiosError) {
       alert(error?.response?.data.err.msg);
     }

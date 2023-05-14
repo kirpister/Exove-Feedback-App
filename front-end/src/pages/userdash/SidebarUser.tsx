@@ -51,14 +51,11 @@ const SidebarUser: React.FC = () => {
             ) : (
               ""
             )}
-
-
             {unReadNotifications > 0 ? <span className={userstyles.badge}>{unReadNotifications}</span> : ""}
 
           </NavLink>
           <NavLink to={"/feedbackform"}>
             <li>{t("givefb")}</li>
-
           </NavLink>
           <NavLink to="/requestfeedback">
             <li>{t("reqfb")}</li>
