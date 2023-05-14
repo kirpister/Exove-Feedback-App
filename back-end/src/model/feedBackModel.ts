@@ -7,6 +7,9 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
     title: { type: String, required: true },
     questions:{type: Array <Question>, required:true ,validate : { 
       validator:(questions:Question[])=> { 
+        if ( questions.length ===0){
+          return false
+        }
         const orders : number[] = []
         for ( const question of questions){
           if (question.type in QuestionType){
@@ -20,7 +23,7 @@ const feedbackSchema:Schema = new Schema<feedBackModel>({
         }
         return true
       },
-      message:'Question order must be unique or correct type or missing property'
+      message:'Question order must be unique or correct type or missing property or question length is empty'
     }}
   },
   requestedListBy:{type:Schema.Types.ObjectId,_id:false,default:null},
