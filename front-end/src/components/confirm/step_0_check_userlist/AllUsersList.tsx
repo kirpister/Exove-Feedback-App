@@ -18,6 +18,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
   requests,
 }) => {
   const [search, setSearch] = useState("");
+
   const todoWrapper = useRef(null);
 
   const hasScroll = usersList.length > 5;
@@ -27,13 +28,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
     setSearch(e.target.value);
     // console.log(e.target.value);
   };
-
-  // let sortedUsersList = [];
-  // requests.sort((item: any) => {
-  //   // console.log("FFF", item);
-  //   if (item.requestUserId !== item.id) {
-  //   }
-  // });
 
   let usersListSearch = usersList;
   let s = search.toLowerCase();

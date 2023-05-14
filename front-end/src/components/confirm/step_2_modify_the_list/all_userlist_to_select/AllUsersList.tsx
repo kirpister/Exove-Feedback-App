@@ -19,6 +19,7 @@ const AllUsersList: React.FC = (props: PropsType) => {
 
   const hasScroll = allUserList.length > 5;
   useScrollbar(todoWrapper, hasScroll);
+
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
   };
@@ -52,7 +53,7 @@ const AllUsersList: React.FC = (props: PropsType) => {
         <div
           style={{
             marginRight: "1px",
-            height: hasScroll ? "600px" : "auto",
+            height: hasScroll ? "650px" : "auto",
             minHeight: "50px",
           }}
           ref={todoWrapper}

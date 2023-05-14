@@ -43,7 +43,7 @@ nav .circle {
 }
 
 .outlet_wrapper {
-  margin-left: 10%;
+  margin-left: 15%;
   height: 100%;
 }
 
@@ -95,20 +95,4 @@ nav .circle {
 
 .accordion-button {
   background-color: green;
-}
-
-.App
-  .os-theme-dark
-  > .os-scrollbar-vertical
-  > .os-scrollbar-track
-  > .os-scrollbar-handle {
-  max-width: 5px;
-  min-width: 5px;
-}
-
-.App .os-theme-dark > .os-scrollbar-vertical {
-  background: rgb(221, 221, 221);
-  max-width: 7px;
-  padding: 1px;
-  border-radius: 15px;
 }
