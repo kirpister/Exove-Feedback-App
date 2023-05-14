@@ -41,24 +41,15 @@ nav .circle {
   margin-left: -2rem;
   padding-bottom: 3rem;
 }
-.global_wrapper {
-  /* display: grid;
-  grid-template-columns: 0.5fr 2fr; */
-}
 
 .outlet_wrapper {
   margin-left: 15%;
-  height: 100vh;
+  height: 100%;
 }
 
-.sidebar_wrapper {
-  /* float: left;
-  height: 100vh; */
-}
-
-main {
+/* main {
   width: 100%;
-}
+} */
 
 /* User Avatar and LogOut button */
 .bottomdiv {
