@@ -35,51 +35,59 @@ const SidebarUser: React.FC = () => {
     notifications?.filter((item) => !item.isRead).length || 0;
 
   return (
-    <div className={userstyles.sidebar}>
-      <nav className={userstyles.usernav}>
-        <ul>
-          <NavLink to={"/"}>
-            <img className="circle" src={circle} alt="circle" />
-          </NavLink>
-          <NavLink to="/">
-            <li>{t("main")}</li>
-          </NavLink>
-          <NavLink to="/notifications" className={userstyles.notifications}>
-             <li>{t("notifs")}</li>
-              {unReadNotifications > 0 ? (
-              <span className={userstyles.badge}>{unReadNotifications}</span>
-            ) : (
-              ""
-            )}
-            {unReadNotifications > 0 ? <span className={userstyles.badge}>{unReadNotifications}</span> : ""}
-
-          </NavLink>
-          <NavLink to={"/feedbackform"}>
-            <li>{t("givefb")}</li>
-          </NavLink>
-          <NavLink to="/requestfeedback">
-            <li>{t("reqfb")}</li>
-          </NavLink>
-        </ul>
-      </nav>
-      <div className="bottomdiv">
-        <div className="bottom_avatar">
-          <div className="avatar">
-            {userDetails.firstName.charAt(0).toUpperCase()}
+    <div>
+      <div className="sidebar">
+        <nav className="usernav">
+          <ul>
+            <NavLink to={"/"}>
+              <img className="circle" src={circle} alt="circle" />
+            </NavLink>
+            <li>
+              <NavLink to="/">{t("main")}</NavLink>
+            </li>
+            <li>
+              <NavLink to="/notifications" className="notifications">
+                <span>{t("notifs")}</span>
+                {unReadNotifications > 0 ? (
+                  <span className="badge">{unReadNotifications}</span>
+                ) : (
+                  ""
+                )}
+                {/* {unReadNotifications > 0 ? (
+                  <span className="badge">{unReadNotifications}</span>
+                ) : (
+                  ""
+                )} */}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/feedbackform"}>{t("givefb")}</NavLink>
+            </li>
+            <li>
+              {" "}
+              <NavLink to="/requestfeedback">{t("reqfb")}</NavLink>
+            </li>
+          </ul>
+        </nav>
+        <div className="bottomdiv">
+          <div className="bottom_avatar">
+            <div className="avatar">
+              {userDetails.firstName.charAt(0).toUpperCase()}
+            </div>
+            <span>
+              {userDetails.firstName} {userDetails.surName}
+            </span>
           </div>
-          <span>
-            {userDetails.firstName} {userDetails.surName}
-          </span>
-        </div>
 
-        <p
-          className="logout"
-          onClick={() => {
-            dispatch(initiateLogoutSession(navigate));
-          }}
-        >
-          {t("logout")}
-        </p>
+          <p
+            className="logout"
+            onClick={() => {
+              dispatch(initiateLogoutSession(navigate));
+            }}
+          >
+            {t("logout")}
+          </p>
+        </div>
       </div>
       <TranslataBtn />
     </div>

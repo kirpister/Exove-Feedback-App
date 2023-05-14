@@ -17,8 +17,12 @@ import TranslataBtn from "../../components/TranslateBtn/TranslataBtn";
 const SidebarAdmin: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
 
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
-  const notifications: Notification[] | undefined = useSelector((state: RootState) => state.userNotifications.notifications);
+  const userDetails: any = useSelector(
+    (state: RootState) => state.authenticatedUser.userDetails
+  );
+  const notifications: Notification[] | undefined = useSelector(
+    (state: RootState) => state.userNotifications.notifications
+  );
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -27,22 +31,27 @@ const SidebarAdmin: React.FC = () => {
     dispatch(getAllUserAPI());
   }, [dispatch]);
 
-  const unReadNotifications = notifications?.filter((item) => !item.isRead).length || 0;
+  const unReadNotifications =
+    notifications?.filter((item) => !item.isRead).length || 0;
   return (
     <div>
-      <div className={styles.sidebar}>
-        <nav className={styles.usernav}>
+      <div className="sidebar">
+        <nav className="usernav">
           <ul>
             <NavLink to={"/"}>
               <img className="circle" src={circle} alt="circle" />
             </NavLink>
-            <li><NavLink to="/">
-              {t("main")}
-            </NavLink></li>
             <li>
-              <NavLink to="/notifications" className={styles.notifications}>
+              <NavLink to="/">{t("main")}</NavLink>
+            </li>
+            <li>
+              <NavLink to="/notifications" className="notifications">
                 <span>{t("notifs")}</span>
-                {unReadNotifications > 0 ? <span className={styles.badge}>{unReadNotifications}</span> : ""}
+                {unReadNotifications > 0 ? (
+                  <span className="badge">{unReadNotifications}</span>
+                ) : (
+                  ""
+                )}
               </NavLink>
             </li>
             <li>
@@ -64,7 +73,9 @@ const SidebarAdmin: React.FC = () => {
         </nav>
         <div className="bottomdiv">
           <div className="bottom_avatar">
-            <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
+            <div className="avatar">
+              {userDetails.firstName.charAt(0).toUpperCase()}
+            </div>
             <span>
               {userDetails.firstName} {userDetails.surName}
             </span>
