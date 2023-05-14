@@ -35,6 +35,7 @@ export interface CreatedFeebackType extends FinalConfirmationType {
   };
   createAt: string;
   updatedAt: string;
+  userInfo: any;
   answers: Array<AnswerType<string, number>>;
 }
 interface initialStateType {
@@ -69,7 +70,9 @@ export const getAllFeedbackAPI = () => {
 export const deleteFeedbackAPI = (feedbackId: string) => {
   return async (dispatch: AppDispatch) => {
     try {
-      const { data, status } = await axios.delete(`/feedback?feedbackId=${feedbackId}`);
+      const { data, status } = await axios.delete(
+        `/feedback?feedbackId=${feedbackId}`
+      );
       if (status === 200) {
         alert(`${data.msg}`);
       }
@@ -80,5 +83,6 @@ export const deleteFeedbackAPI = (feedbackId: string) => {
     }
   };
 };
-export const { setAllFeedback, resetAllFeedback } = createdFeedbackSlicer.actions;
+export const { setAllFeedback, resetAllFeedback } =
+  createdFeedbackSlicer.actions;
 export default createdFeedbackSlicer.reducer;
