@@ -1,5 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { deleteNotification, markNotificationAsRead } from "../../features/notificationsSlice";
+import {
+  deleteNotification,
+  markNotificationAsRead,
+} from "../../features/notificationsSlice";
+import styles from "./Notification.module.css";
 
 export const Notifications = () => {
   const onMarkNotificationRead = (notificationId: string) => {
@@ -29,14 +33,17 @@ export const Notifications = () => {
   const notifications = useAppSelector(
     (state) => state.userNotifications.notifications
   );
+
   if (notifications?.length) {
     return (
-      <div>
+      <div className={styles.notifications_wrapper}>
         {notifications.map((notification) => (
-          <div>
-            <p>{notification.message}</p>
+          <div className={styles.all_notifications}>
+            <p className={styles.message}>{notification.message}</p>
+
             {!notification.isRead && (
               <button
+                className={styles.note_btn}
                 onClick={() =>
                   onMarkNotificationRead(notification._id)
                     .then((res) => res.json())
@@ -45,20 +52,22 @@ export const Notifications = () => {
                     })
                 }
               >
-                Mark as read
+                <i className="fa-solid fa-check"></i>
               </button>
             )}
+
             <button
-                onClick={() =>
-                  onDeleteNotification(notification._id)
-                    .then((res) => res.json())
-                    .then((res) => {
-                      dispatch(deleteNotification(notification._id));
-                    })
-                }
-              >
-                Delete
-              </button>
+              className={styles.note_btn}
+              onClick={() =>
+                onDeleteNotification(notification._id)
+                  .then((res) => res.json())
+                  .then((res) => {
+                    dispatch(deleteNotification(notification._id));
+                  })
+              }
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
           </div>
         ))}
       </div>
