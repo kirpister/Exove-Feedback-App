@@ -29,9 +29,7 @@ const App = () => {
     dispatch(initiateValidateSession());
   }, [dispatch]);
   const authenticatedUser = useAppSelector((state) => state.authenticatedUser);
-  const notifications = useAppSelector(
-    (state) => state.userNotifications.notifications
-  );
+  const notifications = useAppSelector((state) => state.userNotifications.notifications);
 
   if (authenticatedUser.isLoading) {
     return <LoadingPage />;
@@ -53,16 +51,11 @@ const App = () => {
               <Route path=":id" element={<SetupUserList />} />
               <Route path=":id/confirm" element={<FinalConfirm />} />
             </Route>
-            <Route path="allfeedbacks" element={<AllFeedbacks />} />
-            <Route
-              path="allfeedbacks/:singlefeedback"
-              element={<SingleUserFeedback />}
-            />
-            <Route path="allfeedbacks/:analytics" element={<Analytics />} />
-            <Route
-              path="allfeedbacks/:singlefeedback"
-              element={<SingleUserFeedback />}
-            />
+            <Route path="/allfeedbacks">
+              <Route index element={<AllFeedbacks />} />
+              <Route path=":singlefeedback" element={<SingleUserFeedback />} />
+              <Route path=":singlefeedback/analytics" element={<Analytics />} />
+            </Route>
             <Route path="/answer" element={<AnswerFeedback />} />
           </Route>
         </Routes>
