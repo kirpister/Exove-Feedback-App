@@ -420,6 +420,32 @@ export const markNotificationRead: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const deleteNotification: RequestHandler = async (req, res, next) => {
+  try {
+    const notificationId = req.body.id;
+
+    const notification = await notificationModel.findOneAndDelete(
+      { _id: notificationId }
+    );
+
+    if (!notification) {
+      return createErrMessage(
+        {
+          msg: `can not find notification ${notificationId}`,
+          status: StatusCode_Err.RESOURCE_NOT_FOUND,
+        },
+        next
+      );
+    }
+    return createSuccessMessage(
+      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
+      res
+    );
+  } catch (error) {
+    next(error);
+  }
+}
+
 export const createReminderNotifications: RequestHandler = async (
   req,
   res,

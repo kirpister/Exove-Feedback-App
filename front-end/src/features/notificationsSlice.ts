@@ -31,6 +31,16 @@ export const notificationsSlice = createSlice({
       );
       state.notifications[matchedNotificationIndex].isRead = true;
     },
+    deleteNotification: (state, action) => {
+      // const copiedState = current(state);
+      if (!state.notifications) {
+        return state;
+      }
+      const matchedNotificationIndex = state.notifications.findIndex(
+        (item) => item._id === action.payload
+      );
+      state.notifications.splice(matchedNotificationIndex,1);
+    },
   },
 });
 
@@ -47,6 +57,6 @@ export const initiateFetchNotifications = () => {
   };
 };
 
-export const { saveNotifications, resetNotifications, markNotificationAsRead } =
+export const { saveNotifications, resetNotifications, markNotificationAsRead, deleteNotification } =
   notificationsSlice.actions;
 export default notificationsSlice.reducer;
