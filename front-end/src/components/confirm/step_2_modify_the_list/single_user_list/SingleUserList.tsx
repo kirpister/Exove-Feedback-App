@@ -20,24 +20,39 @@ function SingleUserList(props: PropsType) {
     return allUserList.find((e) => e.id === id);
   };
   return (
-    <>
+    <div className={styles.selected_reviewers}>
       {/* <h2>list order </h2> */}
-      <p>this list condition: {singleRequestedList.opened ? "opened" : "not opened"}</p>
-      <h6>
+      {/* <p>
+        this list condition:{" "}
+        {singleRequestedList.opened ? "opened" : "not opened"}
+      </p> */}
+      <h3>
         Please confirm reviews for{" "}
         <span>
-          {checkeUser(singleRequestedList.requestUserId as string)?.personalDetail.firstName}{" "}
-          {checkeUser(singleRequestedList.requestUserId as string)?.personalDetail.surName}
-        </span>
-      </h6>
+          {
+            checkeUser(singleRequestedList.requestUserId as string)
+              ?.personalDetail.firstName
+          }{" "}
+          {
+            checkeUser(singleRequestedList.requestUserId as string)
+              ?.personalDetail.surName
+          }
+        </span>{" "}
+        or modify the list.
+      </h3>
       {singleRequestedList.userList.map((item: any, index: number) => {
         return (
           <article className={styles.userlist}>
             <input type="checkbox" id={styles.id} value={styles.id} />
             <div>
-              <div className={styles.avatar}>{checkeUser(item)?.personalDetail.firstName.charAt(0).toUpperCase()}</div>
+              <div className={styles.avatar}>
+                {checkeUser(item)
+                  ?.personalDetail.firstName.charAt(0)
+                  .toUpperCase()}
+              </div>
               <span>
-                {checkeUser(item)?.personalDetail.firstName} {checkeUser(item)?.personalDetail.surName}
+                {checkeUser(item)?.personalDetail.firstName}{" "}
+                {checkeUser(item)?.personalDetail.surName}
                 <br />
               </span>
               {buttonName && callBack ? (
@@ -45,7 +60,7 @@ function SingleUserList(props: PropsType) {
                   callBack={() => {
                     callBack(item);
                   }}
-                  name="remove"
+                  name="⨯"
                 />
               ) : (
                 ""
@@ -54,7 +69,7 @@ function SingleUserList(props: PropsType) {
           </article>
         );
       })}
-    </>
+    </div>
   );
 }
 

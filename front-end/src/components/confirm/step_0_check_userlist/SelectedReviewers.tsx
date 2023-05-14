@@ -141,8 +141,8 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
             ) => {
               return (
                 <article className={styles.userlist}>
-                  <input type="checkbox" id={styles.id} value={styles.id} />
-                  <div>
+                  {/* <input type="checkbox" id={styles.id} value={styles.id} /> */}
+                  <div className={styles.single_user_card}>
                     <div className={styles.avatar}>
                       {checkeUser(item)
                         ?.personalDetail.firstName.charAt(0)
@@ -151,7 +151,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
                     <span>
                       {checkeUser(item)?.personalDetail.firstName}{" "}
                       {checkeUser(item)?.personalDetail.surName}
-                      <br />
+                      {/* <br /> */}
                     </span>
                   </div>
                 </article>

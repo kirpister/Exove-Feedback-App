@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./AllUsersList.module.css";
 import { personalDetailType } from "../../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
@@ -18,6 +18,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
   requests,
 }) => {
   const [search, setSearch] = useState("");
+
   const todoWrapper = useRef(null);
 
   const hasScroll = usersList.length > 5;
@@ -28,15 +29,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
     // console.log(e.target.value);
   };
 
-  // let sortedUsersList = [];
-  // requests.sort((item: any) => {
-  //   // console.log("FFF", item);
-  //   if (item.requestUserId !== item.id) {
-  //   }
-  // });
-
   let usersListSearch = usersList;
-
   let s = search.toLowerCase();
   if (search) {
     usersListSearch = usersListSearch.filter((item) => {
@@ -75,7 +68,6 @@ const AllUsersList: React.FC<AllUserProps> = ({
   return (
     <div className={styles.all_users_list}>
       <div>
-        <label htmlFor="search"></label>
         <input
           type="search"
           id="search"
@@ -93,7 +85,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
         }}
         ref={todoWrapper}
       >
-        <div className={styles.all_users_list1}>
+        <div className={styles.scrolled_users}>
           {usersListSearch.map((user) => (
             <SingleUser1
               key={user.id}
