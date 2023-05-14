@@ -215,14 +215,16 @@ export const createFeedbackUserList: RequestHandler = async (
   res,
   next
 ) => {
-  console.log(req.body);
   const { userListId, userDetails } = req.body;
   const { employeeNumber } = userDetails;
+  // 1. check user list have to >5:
+  if (userListId.length < 5) {
+    return createErrMessage({ msg: 'userlist length < 5 ', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+  }
   // 1. check that user can not suggest to give feedback for themself
   if (checkArrayString(userListId) && typeof employeeNumber === 'string') {
     const index = userListId.findIndex((e: string) => e === employeeNumber);
     if (index !== -1) {
-      console.log('go here');
       return createErrMessage(
         {
           msg: 'user can not suggest request feedback list for yourself',
