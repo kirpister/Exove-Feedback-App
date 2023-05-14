@@ -27,11 +27,6 @@ const Admindash: React.FC = () => {
   );
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   axios.get("/user").then((res) => {
-  //     const { data } = res;
-  //   });
-  // }, []);
   useEffect(() => {
     axios.get<personalDetailType[]>("/user").then((res) => {
       const { data, status } = res as unknown as DataType;
@@ -40,7 +35,7 @@ const Admindash: React.FC = () => {
       dispatch(setFeedbackRequest(user.feedBack));
     });
   }, [dispatch]);
-  console.log("USER", user);
+  // console.log("USER", user);
 
   const userInfo = () => {
     if (user) {

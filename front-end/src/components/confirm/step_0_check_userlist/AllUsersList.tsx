@@ -80,7 +80,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
       <div
         style={{
           marginRight: "1px",
-          height: hasScroll ? "600px" : "auto",
+          height: hasScroll ? "650px" : "auto",
           minHeight: "50px",
         }}
         ref={todoWrapper}
