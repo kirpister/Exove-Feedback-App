@@ -11,7 +11,7 @@ const UserAnswerDetail = (props: Propstype) => {
   const { answerDetail, index } = props;
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
     const { details, finished, user } = answerDetail;
-    console.log("USER", user);
+    // console.log("USER", user);
     return (
       <Link to={`${index}`} className={classes.link}>
         <div className={classes.single_user_feedback}>
