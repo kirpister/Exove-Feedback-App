@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { QuestionType } from "../components/form/SingleQuestion";
 import questions from "../questions.json";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { AppDispatch } from "../app/store";
 import { showLoading2s } from "./loadingSlicer";
 import { NavigateFunction } from "react-router-dom";
+import { getAllFeedbackAPI } from "./createdFeedbackSlicer";
 export interface PayloadTypeQuestion {
   order?: number;
   result?: [string];
   type: QuestionType;
   title: string;
   required?: boolean;
+  section?: string;
 }
 export interface FinalConfirmationType {
   details: {
@@ -30,6 +32,7 @@ const createSendAllQuestion = (sections: Array<{ name: string; id: number; quest
         title: j.question,
         type: j.isFreeForm ? QuestionType.freeString : QuestionType.range,
         order,
+        section: i.name,
         required: true,
       };
       returnSendQuestion.push(tempQuestion);
@@ -46,11 +49,9 @@ const restoreSendFeedback = () => {
 };
 const setUpSectionWithOrder = () => {
   let sections = localStorage.getItem("section");
-  console.log(sections);
   if (sections !== null) {
     return JSON.parse(sections);
   } else {
-    console.log("section");
     return [...questions.sections];
   }
 };
@@ -86,7 +87,7 @@ const feedbackSlice = createSlice({
       if (index === -1) {
         let setUpQuestion: PayloadTypeQuestion = {
           ...temp,
-          order: temp.order,
+          // order: temp.order,
           required: true,
         };
         for (let i of state.sections) {
@@ -169,15 +170,19 @@ const feedbackSlice = createSlice({
 });
 
 export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, dispatch: AppDispatch, navigate: NavigateFunction) => {
+  showLoading2s(dispatch);
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
     if (status === 201) {
       showLoading2s(dispatch);
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
+      await dispatch(getAllFeedbackAPI());
       navigate("/allfeedbacks");
     }
   } catch (error) {
-    console.log(error);
+    if (error instanceof AxiosError) {
+      alert(error?.response?.data.err.msg);
+    }
   }
 };
 export const { updateQuestion, getSections, setUpConfirmation, setUpUserList, resetFeedback, setUpSelectAllQuestion, removeSendQuestion } =

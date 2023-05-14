@@ -8,9 +8,6 @@ import { setUpUserList } from "../../../../features/feedbackSlice";
 import BtnSuccess from "../../../button/success/BtnSuccess";
 import { showLoading2s } from "../../../../features/loadingSlicer";
 
-// interface AllUserRequestProps {
-//   usersRequestList: personalRequestListType[];
-// }
 
 const RequestUserLists: React.FC = () => {
   const navigate = useNavigate();

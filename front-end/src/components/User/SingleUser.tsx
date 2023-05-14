@@ -45,7 +45,7 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
         <span>
           {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
           <br />
-          {userInfo.work.departments[0]}
+          {userInfo.work.departments[0]} - { userInfo.work.roles[0]}
         </span>
         <BtnSuccess
           callBack={() => {

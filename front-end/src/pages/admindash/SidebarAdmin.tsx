@@ -17,12 +17,8 @@ import TranslataBtn from "../../components/TranslateBtn/TranslataBtn";
 const SidebarAdmin: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
 
-  const userDetails: any = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
-  const notifications: Notification[] | undefined = useSelector(
-    (state: RootState) => state.userNotifications.notifications
-  );
+  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
+  const notifications: Notification[] | undefined = useSelector((state: RootState) => state.userNotifications.notifications);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -31,8 +27,7 @@ const SidebarAdmin: React.FC = () => {
     dispatch(getAllUserAPI());
   }, [dispatch]);
 
-  const unReadNotifications =
-    notifications?.filter((item) => !item.isRead).length || 0;
+  const unReadNotifications = notifications?.filter((item) => !item.isRead).length || 0;
   return (
     <div>
       <div className={styles.sidebar}>
@@ -61,6 +56,9 @@ const SidebarAdmin: React.FC = () => {
             </li>
             <li>
               <NavLink to="/allfeedbacks">{t("allfbs")}</NavLink>
+            </li>
+            <li>
+              <NavLink to="/answer">{t("givefb")}</NavLink>
             </li>
           </ul>
         </nav>

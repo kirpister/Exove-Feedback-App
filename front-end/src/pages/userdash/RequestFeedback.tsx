@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import { CheckedUser } from "../../model/types/user";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,10 @@ const RequestFeedback: React.FC = () => {
         navigate("/");
       })
       .catch((error) => {
-        alert("Sorry, something went wrong!");
+        if (error instanceof AxiosError){
+          // alert("Sorry, something went wrong!");
+          alert(error.response?.data.err.msg)
+        }
       });
   };
 

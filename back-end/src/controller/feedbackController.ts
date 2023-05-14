@@ -1,5 +1,5 @@
 import { NextFunction, RequestHandler } from 'express';
-import { Schema } from 'mongoose';
+import { STATES, Schema } from 'mongoose';
 import FeedbackModel from '../model/feedBackModel';
 import UserModel from '../model/userModel';
 import { createErrMessage, createSuccessMessage } from '../utils/message';
@@ -35,21 +35,13 @@ export const getFeedbackController: RequestHandler = async (req, res, next) => {
       );
     }
     // return res.status(200).json({feedBack})
-    return createSuccessMessage(
-      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
-      res,
-      feedBack
-    );
+    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.REQUEST_CREATED }, res, feedBack);
   } catch (error) {
     next(error);
   }
 };
 
-export const createFeedbackController: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const createFeedbackController: RequestHandler = async (req, res, next) => {
   const { details, userList, requestedListBy, userDetails } = req.body;
   const { employeeNumber: createdBy, roles } = userDetails as UserDetailsType;
   // 1. get user token
@@ -62,8 +54,18 @@ export const createFeedbackController: RequestHandler = async (
       createdBy,
       userList,
     });
-    // 2.1 check that requestList user exist ?
+    // 2.1 check that userlist have length > 0
+    if (userList) {
+      if (userList.length === 0) {
+        return createErrMessage({ msg: 'user list is empty', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+      }
+      if (userList.length < 7) {
+        return createErrMessage({ msg: 'user list have at least 7 people ', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX }, next);
+      }
+    }
+    // 2.1 check that requestList user exist vs feedback user
     let requestUserList;
+
     if (requestedListBy) {
       requestUserList = await UserRequestListModel.findOne({
         _id: requestedListBy,
@@ -98,6 +100,8 @@ export const createFeedbackController: RequestHandler = async (
       );
     }
     const feedbackId = newFeedback.id;
+    let pmRole = 0;
+    let cmRole = 0;
     // 2.3 check userlist exist ?
     for (const userId of userList) {
       const user = await UserModel.findOne({ _id: userId });
@@ -109,6 +113,16 @@ export const createFeedbackController: RequestHandler = async (
           },
           next
         );
+      else {
+        user.work.roles.includes('PM') && pmRole++;
+        user.work.roles.includes('CM') && cmRole++;
+      }
+    }
+    if (cmRole === 0 || pmRole === 0) {
+      return createErrMessage(
+        { msg: 'user list must include both Project manager and CM ', status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX },
+        next
+      );
     }
     // 2.5 save new feedback
     await newFeedback.save();
@@ -146,21 +160,13 @@ export const createFeedbackController: RequestHandler = async (
       newRequestNotification.save();
     }
 
-    return createSuccessMessage(
-      { msg: 'success', status: StatusCode_Success.NEW_DATA_CREATED },
-      res,
-      newFeedback
-    );
+    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.NEW_DATA_CREATED }, res, newFeedback);
   } catch (error) {
     return next(error);
   }
 };
 
-export const deleteFeedbackController: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const deleteFeedbackController: RequestHandler = async (req, res, next) => {
   const feedbackId = req.query.feedbackId;
   try {
     const feedback = await FeedbackModel.findOne({ _id: feedbackId });
@@ -197,40 +203,24 @@ export const deleteFeedbackController: RequestHandler = async (
     await removeFeedbackFromUsers(feedback.id, userListAsString, next);
     // remove feedback request
     await feedback.deleteOne();
-    if (feedback)
-      return createSuccessMessage(
-        { msg: 'success delete', status: StatusCode_Success.REQUEST_CREATED },
-        res
-      );
+    if (feedback) return createSuccessMessage({ msg: 'success delete', status: StatusCode_Success.REQUEST_CREATED }, res);
   } catch (error) {
     next(error);
   }
 };
 
-export const getFeedbackRequestController: RequestHandler = async (
-  req,
-  res,
-  next
-) => {
+export const getFeedbackRequestController: RequestHandler = async (req, res, next) => {
   try {
     const requestFeedBackList = await UserRequestListModel.find();
     // .populate('requestUserId',{personalDetail:1})
     // .populate('userList',{personalDetail:3})
-    return createSuccessMessage(
-      { msg: 'success', status: StatusCode_Success.REQUEST_CREATED },
-      res,
-      requestFeedBackList
-    );
+    return createSuccessMessage({ msg: 'success', status: StatusCode_Success.REQUEST_CREATED }, res, requestFeedBackList);
   } catch (error) {
     next(error);
   }
 };
 
-async function removeFeedbackFromUsers(
-  feedbackId: Schema.Types.ObjectId,
-  userList: string[],
-  next: NextFunction
-) {
+async function removeFeedbackFromUsers(feedbackId: Schema.Types.ObjectId, userList: string[], next: NextFunction) {
   // Loop through each user and remove the feedback from their list
   for (const userId of userList) {
     const user = await UserModel.findOne({ _id: userId });
