@@ -16,7 +16,7 @@ import ErrorPage from "./components/ErrorPage/ErrorPage";
 import SetupUserList from "./components/confirm/step_2_modify_the_list/SetupUserList";
 import { initiateFetchNotifications } from "./features/notificationsSlice";
 import { Notifications } from "./components/Notifications/Notifications";
-import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
+// import RequestUserLists from "./components/confirm/step_1_selectList/all_requested_user_list/RequestUserLists";
 import LoadingPage from "./components/LoadingPage/LoadingPage";
 import CreateUserList from "./components/confirm/step_0_check_userlist/CreateUserList";
 import FinalConfirm from "./components/confirm/step_3_finalconfirm/FinalConfirm";
@@ -48,7 +48,6 @@ const App = () => {
             <Route index element={<Admindash />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="feedbackform" element={<FeedbackForm />} />
-            {/* <Route path="/getuserlist" element={<CreateUserList />} /> */}
             <Route path="/getuserlist">
               <Route index element={<CreateUserList />} />
               <Route path=":id" element={<SetupUserList />} />
@@ -73,7 +72,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
-            {/* <Route path="feedback" element={<FeedbackForm />} /> */}
             <Route path="/feedbackform" element={<AnswerFeedback />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />

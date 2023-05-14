@@ -1,17 +1,16 @@
 .userlist .avatar {
-  margin: 0;
+  margin: .5rem;
 }
 
 .single_user_card {
   display: flex;
-  justify-content: left;
-  gap: 1.5rem;
-  margin-left: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: .3rem;
 }
-
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: var(--pale-pink-color);
   display: flex;
@@ -30,7 +29,7 @@
   border: 2px solid #01bb5f;
 }
 .isActive {
-  border: 5px solid var(--purple-color);
+  border: 3px solid var(--purple-color);
 }
 
 .name_department {

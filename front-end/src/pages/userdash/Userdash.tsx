@@ -86,10 +86,6 @@ const Userdash: React.FC = () => {
         </p>
         <div>{userInfo()}</div>
       </div>
-      {/* <div className={userstyles.translatebtns}>
-        <button className={userstyles.btn}>FI</button>
-        <button className={userstyles.btn}>EN</button>
-      </div> */}
     </main>
   );
 };

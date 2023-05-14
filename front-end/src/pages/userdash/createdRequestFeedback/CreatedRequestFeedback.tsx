@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { setFeedbackRequest } from "../../../features/answerFeedbackSlicer";
 import BtnError from "../../../components/button/error/BtnError";
 import { deleteRequestFeedbackAPI } from "../../../features/requestFeedback";
+import styles from './createRequestFeedback.module.css';
 
 function CreatedRequestFeedback() {
   const { selfFeedbackRequests } = useAppSelector((state) => state.requestFeedback);
@@ -28,13 +29,13 @@ function CreatedRequestFeedback() {
         );
       });
     }
-    return <>You have no self request feedback</>;
+    return <p>You have no self request feedback</p>;
   };
   const deleteRequestFeedback = (id: string) => {
     const confirm = window.confirm("are you sure to delete ?");
     confirm && dispatch(deleteRequestFeedbackAPI(id));
   };
-  return <div>{renderRequestFeeback()}</div>;
+  return <div className={styles.requestwrapper}>{renderRequestFeeback()}</div>;
 }
 
 export default CreatedRequestFeedback;

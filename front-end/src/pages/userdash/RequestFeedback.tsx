@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 
-import { personalDetailType, DataType, CheckedUser } from "../../model/types/user";
+import { CheckedUser } from "../../model/types/user";
 import { useNavigate } from "react-router-dom";
 
 import userstyles from "./userdash.module.css";
@@ -67,14 +67,16 @@ const RequestFeedback: React.FC = () => {
         return (
           <article key={user.id} className={userstyles.userlist}>
             <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
-            <div>
-              <div className={userstyles.avatar}>{userDetails.firstName.charAt(0).toUpperCase()}</div>
+            {/* <div> */}
+
+              <div className={userstyles.avatar}>{user.personalDetail.firstName.charAt(0).toUpperCase()}</div>
+
               <span>
                 {user.personalDetail.firstName} {user.personalDetail.surName}
                 <br />
-                {user.work.roles[0]}
+                {user.work.departments}
               </span>
-            </div>
+              {/* </div> */}
           </article>
         );
       });
