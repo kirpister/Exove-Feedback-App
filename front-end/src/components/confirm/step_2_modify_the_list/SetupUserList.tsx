@@ -17,6 +17,7 @@ function SetupUserList() {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
+    console.log(sendQuestion)
     if (id) {
       dispatch(setUpSelectRequestList({ id }));
     }

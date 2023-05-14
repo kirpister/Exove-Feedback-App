@@ -34,6 +34,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
                         question={question}
                         index_section={i}
                         index_question={j}
+                        section= { section.name}
                       />
                     </div>
                   );
