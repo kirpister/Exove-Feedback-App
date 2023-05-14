@@ -36,9 +36,9 @@ const SidebarAdmin: React.FC = () => {
             <NavLink to={"/"}>
               <img className="circle" src={circle} alt="circle" />
             </NavLink>
-            <NavLink to="/">
-              <li>{t("main")}</li>
-            </NavLink>
+            <li><NavLink to="/">
+              {t("main")}
+            </NavLink></li>
             <li>
               <NavLink to="/notifications" className={styles.notifications}>
                 <span>{t("notifs")}</span>

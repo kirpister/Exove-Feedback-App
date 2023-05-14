@@ -52,10 +52,14 @@ main {
   height: 100%;
 }
 
-/* main {
->>>>>>> 45ea84ae6a5a14863a81c9a580be49f09479721c
-  width: 100%;
-} */
+li a:hover {
+  color: var(--pale-pink-color);
+  cursor: pointer;
+}
+
+li a.active {
+  color: var(--pale-pink-color) !important;
+}
 
 /* User Avatar and LogOut button */
 .bottomdiv {
