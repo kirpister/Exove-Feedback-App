@@ -74,7 +74,7 @@ const Chart = (props: Propstype) => {
     // },
     // {
     //   subject: "Creativity",
-    //   A: 3,
+    //   A: 0,
     //   // fullMark: 5,
     // },
   ]);
@@ -150,9 +150,10 @@ const Chart = (props: Propstype) => {
       const average = sum / temp.length;
       averages.push({ subject: temp[0][i].subject, A: average });
     }
-    setData(averages);
+    setData([...averages]);
   };
   useEffect(() => {
+    console.log(answers)
     setData(setUpSubject());
     setUpData();
   }, [answers]);
@@ -172,6 +173,3 @@ const Chart = (props: Propstype) => {
 
 export default Chart;
 
-// 1. run loop for all answer
-// 2. check average of each section for each user
-// 3. combine all the user average
