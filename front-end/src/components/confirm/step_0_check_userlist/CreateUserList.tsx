@@ -35,7 +35,9 @@ const CreateUserList: React.FC = () => {
           {isActive ? (
             <SelectedReviewers isActive={isActive} requests={requestLists} />
           ) : (
-            ""
+            <div>
+              <h3>Click to the user on the left to see the results</h3>
+            </div>
           )}
         </div>
         <AllUsersList
