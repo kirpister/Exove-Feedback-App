@@ -6,6 +6,8 @@ import axios from "axios";
 import styles from "./styles.module.css";
 import { useTranslation } from "react-i18next";
 
+import { Accordion } from 'react-bootstrap';
+
 
 
 interface AnswerFeedbackType {
@@ -70,63 +72,69 @@ function Feedbackform() {
 
         const { questions, title } = feedbackId.details;
         return (
-          <>
-          <div>
-             <h2>{title}</h2>
-             <div className={styles.finishdiv} style={{ backgroundColor: finished ? '#64e764' : '#FA2A55' }}>
-              {finished ? 'Finished' : 'Not Finished'}
-            </div>
-            {/* <p> feedback Id: {feedbackId.id}</p> */}
-            {/* <p> order: {index + 1}</p> */}
-         
-            <div>
-              {questions.map((question, i) => {
-                const { order, title, type } = question;
-                return (
-                  <div>
-                    <label className={styles.questionlabel}>
-                      {" "}
-                      <span className={styles.numberspan}>{order}.</span> {title}
-                    </label>
-                    {type === QuestionType.freeString ? (
-                      <textarea className={styles.textarea}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-                          setAnswers((prev) => {
-                            const temp = [...prev];
-                            const currentValue = e.target.value;
-                            const index = temp.findIndex((e) => e.order === order);
-                            if (index !== -1) {
-                              temp[index].answer = [currentValue];
-                            } else {
-                              temp.push({ order, answer: [currentValue] });
-                            }
-                            return [...temp];
-                          });
-                        }}
-                        
-                      />
-                    ) : (
-                      <div className={styles.radiodiv}>{renderRadioButton(title, order)}</div>
-                    )}
-                  </div>
-                );
-              })}
-              {!finished && (
-                <BtnSuccess
-                  name="submit"
-                  callBack={() => {
-                    submitAnswer(feedbackId.id,answers)
-                  }}
-                  key={index}
-                />
-              )}
-            </div>
-            <hr />
-          </div></>
+
+          <Accordion defaultActiveKey="1" style={{ margin: ".5rem", width: "95%" }}>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header> 
+              <>
+              <div className={styles.accordionheader}>
+                <h2>{title}</h2>
+                <div className={styles.finishdiv} style={{ backgroundColor: finished ? '#64e764' : '#FA2A55' }}>
+                  {finished ? 'Finished' : 'Not Finished'}
+                  </div></div></>
+            </Accordion.Header>
+
+            <Accordion.Body>
+
+                <div>
+                  {questions.map((question, i) => {
+                    const { order, title, type } = question;
+                    return (
+                      <div key={order}>
+                        <label className={styles.questionlabel}>
+                          <span className={styles.numberspan}>{order}.</span> {title}
+                        </label>
+                        {type === QuestionType.freeString ? (
+                          <textarea
+                            className={styles.textarea}
+                            onChange={(e) => {
+                              setAnswers((prev) => {
+                                const temp = [...prev];
+                                const currentValue = e.target.value;
+                                const index = temp.findIndex((e) => e.order === order);
+                                if (index !== -1) {
+                                  temp[index].answer = [currentValue];
+                                } else {
+                                  temp.push({ order, answer: [currentValue] });
+                                }
+                                return [...temp];
+                              });
+                            }}
+                          />
+                        ) : (
+                          <div className={styles.radiodiv}>{renderRadioButton(title, order)}</div>
+                        )}
+                      </div>
+                    );
+                  })}
+                  {!finished && (
+                    <BtnSuccess
+                      name="submit"
+                      callBack={() => {
+                        submitAnswer(feedbackId.id, answers);
+                      }}
+                      key={index}
+                    />
+                  )}
+                </div>
+            </Accordion.Body>
+          </Accordion.Item>
+          </Accordion>
+     
         );
       });
     } else {
-      <>you have no feedback request </>;
+      <p>You currently have no feedback requests!</p>;
     }
   };
   return <div className={styles.wrapper}>
