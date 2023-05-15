@@ -170,6 +170,7 @@ const feedbackSlice = createSlice({
 });
 
 export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, dispatch: AppDispatch, navigate: NavigateFunction) => {
+  console.log('call api')
   showLoading2s(dispatch);
   try {
     const { data, status } = await axios.post("/feedback", confirmFeedback);
