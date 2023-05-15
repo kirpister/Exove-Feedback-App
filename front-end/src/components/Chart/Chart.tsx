@@ -80,10 +80,7 @@ const Chart = (props: Propstype) => {
   ]);
 
   const { createdBy, feedbackTo, answers, details } = props;
-  const calculateAverage = (sum: number, total: number) => {
-    Number(sum / total).toFixed(2);
-  };
-  const addSum = () => {};
+
   const setUpSubject = () => {
     let returnData: Array<DataType> = [];
     let section: string = "";
@@ -106,43 +103,54 @@ const Chart = (props: Propstype) => {
         }
       | any
   ) => {
-    let eachUserAverage: Array<DataType> = [];
+    let eachUserAverage: Array<DataType> = [...data];
     let total = 0;
     let count = 0;
-    let testSubject = "";
+    let testSubject = answer.details[0].question.section;
     if (answer.finished) {
       for (let i of answer.details) {
-        if (i.question.type === QuestionType.range) {
-          if (i.question.section !== testSubject) {
-            testSubject = i.question.section;
+        if (i.question.section === testSubject) {
+          if (i.question.type === QuestionType.range) {
             total += Number(i.answer[0]);
             count++;
-          } else {
-            let average = Number(total / count).toFixed(2);
-            for (let i of eachUserAverage) {
-              if (i.subject === testSubject) {
-                i.A = Number(average);
-              }
-            }
-            total = 0;
-            count = 0;
-            testSubject = "";
           }
+        } else {
+          let average = Number((total / count).toFixed(2));
+          let temp: DataType = {
+            subject: testSubject,
+            A: average,
+          };
+          eachUserAverage.push(temp);
+          total = 0;
+          count = 0;
+          testSubject = i.question.section;
         }
       }
-      console.log("each user average");
-      console.log(eachUserAverage);
+      console.log("average");
       return eachUserAverage;
     }
     return false;
   };
   const setUpData = () => {
+    let temp: any = [];
     if (answers) {
       for (let i of answers) {
-        let temp = i;
-        averageEachUser(temp);
+        if (averageEachUser(i) !== false) {
+          temp.push(averageEachUser(i));
+        }
       }
     }
+    const averages = [];
+    // Calculate average for each subject
+    for (let i = 0; i < temp[0].length; i++) {
+      let sum = 0;
+      for (let j = 0; j < temp.length; j++) {
+        sum += temp[j][i]?.A;
+      }
+      const average = sum / temp.length;
+      averages.push({ subject: temp[0][i].subject, A: average });
+    }
+    setData(averages);
   };
   useEffect(() => {
     setData(setUpSubject());
@@ -154,7 +162,7 @@ const Chart = (props: Propstype) => {
       <RadarChart cx={300} cy={250} outerRadius={150} width={550} height={550} data={data}>
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
-        <PolarRadiusAxis angle={38.6} domain={[0, 5]} />
+        <PolarRadiusAxis angle={32} domain={[0, 5]} />
         <Radar name="Employee" dataKey="A" stroke="#6712be" fill="#6712be" fillOpacity={0.4} />
         <Legend />
       </RadarChart>
