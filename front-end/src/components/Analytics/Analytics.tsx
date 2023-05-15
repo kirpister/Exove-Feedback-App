@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import Chart from "../Chart/Chart";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import BtnSuccess from "../button/success/BtnSuccess";
+import { goBackRouter } from "../../services/helper";
+import { useAppDispatch } from "../../app/hooks";
 const Analytics = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const id = useParams;
   return (
     <div>
@@ -24,7 +27,8 @@ const Analytics = () => {
       <div>
         <BtnSuccess
           callBack={() => {
-            navigate(-1);
+            // navigate(-1);
+            goBackRouter(dispatch, navigate);
           }}
           name="Back"
         />

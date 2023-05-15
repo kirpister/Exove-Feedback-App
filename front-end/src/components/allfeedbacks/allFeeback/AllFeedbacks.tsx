@@ -8,6 +8,7 @@ import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
 import Accordion from "react-bootstrap/Accordion";
 import ListGroup from "react-bootstrap/ListGroup";
 import BtnError from "../../button/error/BtnError";
+import { goNextRouter } from "../../../services/helper";
 
 const AllFeedbacks = () => {
   let { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
@@ -71,7 +72,8 @@ const AllFeedbacks = () => {
                 <button
                   className={classes.btn}
                   onClick={() => {
-                    navigate(`${id}/analytics`, { state: { ...item, feedbackTo: userResult } });
+                    // navigate(`${id}/analytics`, { state: { ...item, feedbackTo: userResult } });
+                    goNextRouter(dispatch,navigate,`${id}/analytics`,{...item,feedbackTo:userResult})
                   }}
                 >
                   Graph
