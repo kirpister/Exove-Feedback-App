@@ -10,8 +10,8 @@ import {
 import { PayloadTypeQuestion } from "../../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
 import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
-import Accordion from "react-bootstrap/Accordion";
-import ListGroup from "react-bootstrap/ListGroup";
+import { Accordion, ListGroup } from "react-bootstrap";
+// import ListGroup from "react-bootstrap/ListGroup";
 import BtnError from "../../button/error/BtnError";
 import { goNextRouter } from "../../../services/helper";
 
@@ -20,23 +20,6 @@ const AllFeedbacks = () => {
   const dispatch = useAppDispatch();
   const { allUserList } = useAppSelector((state) => state.allUser);
   const navigate = useNavigate();
-  console.log("alluserslist", allUserList);
-  console.log("allcreatedFeedback", allCreatedFeedback);
-
-  // const renderLitOfQuestion = (listQuestion: Array<PayloadTypeQuestion>) => {
-  //   // console.log("list of questions", listQuestion);
-  //   return listQuestion.map((item, index) => {
-  //     const { title, order, type, required, result } = item;
-  //     return (
-  //       <div key={index}>
-  //         <p>order: {order}</p>
-  //         <p>question: {title}</p>
-  //         <p>type : {type}</p>
-  //         <p>result in case type question is "Selection"</p>
-  //       </div>
-  //     );
-  //   });
-  // };
   const deleteFeedback = (feedbackId: string) => {
     const confirm = window.confirm(
       `are you sure to delete this feedback ? all the user's answers will be removed !`

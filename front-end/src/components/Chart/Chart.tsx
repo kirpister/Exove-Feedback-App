@@ -74,7 +74,7 @@ const Chart = (props: Propstype) => {
     // },
     // {
     //   subject: "Creativity",
-    //   A: 3,
+    //   A: 0,
     //   // fullMark: 5,
     // },
   ]);
@@ -126,7 +126,6 @@ const Chart = (props: Propstype) => {
           testSubject = i.question.section;
         }
       }
-      console.log("average");
       return eachUserAverage;
     }
     return false;
@@ -142,23 +141,27 @@ const Chart = (props: Propstype) => {
     }
     const averages = [];
     // Calculate average for each subject
-    for (let i = 0; i < temp[0].length; i++) {
-      let sum = 0;
-      for (let j = 0; j < temp.length; j++) {
-        sum += temp[j][i]?.A;
+    if (temp.length > 0) {
+      for (let i = 0; i < temp[0].length; i++) {
+        let sum = 0;
+        for (let j = 0; j < temp.length; j++) {
+          sum += temp[j][i]?.A;
+        }
+        const average = sum / temp.length;
+        averages.push({ subject: temp[0][i].subject, A: average });
       }
-      const average = sum / temp.length;
-      averages.push({ subject: temp[0][i].subject, A: average });
     }
-    setData(averages);
+    setData([...averages]);
   };
   useEffect(() => {
+    console.log(answers);
     setData(setUpSubject());
     setUpData();
   }, [answers]);
   return (
     <>
       <h1>Chart's feedback data to {feedbackTo.personalDetail.firstName}</h1>
+      {data.length === 0 && <h1>no feedback </h1>}
       <RadarChart cx={300} cy={250} outerRadius={150} width={550} height={550} data={data}>
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
@@ -171,7 +174,3 @@ const Chart = (props: Propstype) => {
 };
 
 export default Chart;
-
-// 1. run loop for all answer
-// 2. check average of each section for each user
-// 3. combine all the user average

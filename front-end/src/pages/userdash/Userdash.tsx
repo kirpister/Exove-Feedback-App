@@ -8,7 +8,7 @@ import axios from "axios";
 import { personalDetailType } from "../../model/types/user";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setFeedbackRequest } from "../../features/answerFeedbackSlicer";
 import { setAllRequestFeedback } from "../../features/requestFeedback";
 export interface DataType {
@@ -24,7 +24,7 @@ const Userdash: React.FC = () => {
 
   const [user, setUsers] = useState<personalDetailType>();
 
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
+  const {userDetails} = useAppSelector((state) => state.authenticatedUser);
   const dispatch = useAppDispatch();
   useEffect(() => {
     axios.get<personalDetailType[]>("/user").then((res) => {

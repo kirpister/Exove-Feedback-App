@@ -7,11 +7,11 @@ import { goBackRouter } from "../../../services/helper";
 // import classes from "./Singlefeedback.module.css";
 //import ListGroup from "react-bootstrap/ListGroup";
 
-// interface Propstype {
-//   answerDetail: any;
-//   index: number;
-// }
-const SingleUserFeedback = (props: any) => {
+interface Propstype {
+  answerDetail?: any;
+  index?: number;
+}
+const SingleUserFeedback = (props: Propstype) => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,8 +21,6 @@ const SingleUserFeedback = (props: any) => {
 
   const renderUserAnswer = (answerDetailData: any) => {
     const { details, finished, user } = answerDetailData;
-    // console.log("USER", user);
-
     return (
       <div>
         {/* <p>order number {index}</p>
@@ -49,13 +47,15 @@ const SingleUserFeedback = (props: any) => {
   };
   return (
     <div>
-      {renderUserAnswer(answerDetail)}
-      <BtnSuccess
-        callBack={() => {
-          goBackRouter(dispatch, navigate);
-        }}
-        name="Back"
-      />
+      {renderUserAnswer(answerDetail ? answerDetail : props.answerDetail)}
+      {answerDetail && (
+        <BtnSuccess
+          callBack={() => {
+            goBackRouter(dispatch, navigate);
+          }}
+          name="Back"
+        />
+      )}
     </div>
   );
 };
