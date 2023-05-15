@@ -1,8 +1,9 @@
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis } from "recharts";
-import { CreatedFeebackType } from "../../features/createdFeedbackSlicer";
+import { AnswerType, CreatedFeebackType } from "../../features/createdFeedbackSlicer";
 import { personalDetailType } from "../../model/types/user";
 import { useEffect, useState } from "react";
 import { QuestionType } from "../form/SingleQuestion";
+import { stringify } from "querystring";
 
 const data = [
   {
@@ -96,48 +97,57 @@ const Chart = (props: Propstype) => {
     return returnData;
   };
 
-  const averageEachUser = (answer: {
-    details: Array<{ answer: Array<string>; question: { order: number; section: string; title: string; type: QuestionType }; finished: boolean }>;
-  }) => {
+  const averageEachUser = (
+    answer:
+      | {
+          details: Array<{ answer: Array<string>; question: { order: number; section: string; title: string; type: QuestionType } }>;
+          finished: boolean;
+          user: any;
+        }
+      | any
+  ) => {
     let eachUserAverage: Array<DataType> = [];
     let total = 0;
     let count = 0;
-    let subject = "";
-    for (let i of answer.details) {
-      if (i.question.type === QuestionType.range) {
-        if (i.question.section !== subject) {
-          subject = i.question.section;
-          total += Number(i.answer[0]);
-          count++;
-        } else {
-          
-        }
-      }
-    }
-    return eachUserAverage;
-  };
-  const setUpData = () => {
-    let average: Array<DataType> = [...data];
-    if (answers) {
-      let sum: number = 0;
-      let total: number = 0;
-      let section = "";
-      for (let answer of answers) {
-        if (answer.finished) {
-          total++;
-          for (let eachDetail of answer.details) {
-            if (eachDetail.answer[0]) {
-              console.log(eachDetail.answer);
+    let testSubject = "";
+    if (answer.finished) {
+      for (let i of answer.details) {
+        if (i.question.type === QuestionType.range) {
+          if (i.question.section !== testSubject) {
+            testSubject = i.question.section;
+            total += Number(i.answer[0]);
+            count++;
+          } else {
+            let average = Number(total / count).toFixed(2);
+            for (let i of eachUserAverage) {
+              if (i.subject === testSubject) {
+                i.A = Number(average);
+              }
             }
+            total = 0;
+            count = 0;
+            testSubject = "";
           }
         }
       }
+      console.log("each user average");
+      console.log(eachUserAverage);
+      return eachUserAverage;
     }
-    return data;
+    return false;
+  };
+  const setUpData = () => {
+    if (answers) {
+      for (let i of answers) {
+        let temp = i;
+        averageEachUser(temp);
+      }
+    }
   };
   useEffect(() => {
     setData(setUpSubject());
-  }, [setData]);
+    setUpData();
+  }, [answers]);
   return (
     <>
       <h1>Chart's feedback data to {feedbackTo.personalDetail.firstName}</h1>
