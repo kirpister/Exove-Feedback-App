@@ -54,6 +54,7 @@ function Feedbackform() {
   };
 
   const submitAnswer = (feedbackId: string, data: any) => {
+    console.log({answers:data})
     axios
       .patch(`user/feedback?feedbackId=${feedbackId}`, {answers: data })
       .then((res) => {

@@ -1,12 +1,7 @@
 import React, { Fragment, ReactComponentElement, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { Link } from "react-router-dom";
-import {
-  AnswerType,
-  CreatedFeebackType,
-  deleteFeedbackAPI,
-  getAllFeedbackAPI,
-} from "../../../features/createdFeedbackSlicer";
+import { Link, useNavigate } from "react-router-dom";
+import { AnswerType, CreatedFeebackType, deleteFeedbackAPI, getAllFeedbackAPI } from "../../../features/createdFeedbackSlicer";
 import { PayloadTypeQuestion } from "../../../features/feedbackSlice";
 import classes from "./allFeedback.module.css";
 import UserAnswerDetail from "../userAnswer/UserAnswerDetail";
@@ -18,6 +13,7 @@ const AllFeedbacks = () => {
   let { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
   const dispatch = useAppDispatch();
   const { allUserList } = useAppSelector((state) => state.allUser);
+  const navigate = useNavigate();
   console.log("alluserslist", allUserList);
   console.log("allcreatedFeedback", allCreatedFeedback);
 
@@ -36,9 +32,7 @@ const AllFeedbacks = () => {
   //   });
   // };
   const deleteFeedback = (feedbackId: string) => {
-    const confirm = window.confirm(
-      `are you sure to delete this feedback ? all the user's answers will be removed !`
-    );
+    const confirm = window.confirm(`are you sure to delete this feedback ? all the user's answers will be removed !`);
     confirm && dispatch(deleteFeedbackAPI(feedbackId));
   };
   const renderAllFeedback = (list: Array<CreatedFeebackType>) => {
@@ -46,21 +40,12 @@ const AllFeedbacks = () => {
       return <div>NO Feedback List</div>;
     }
     return list.map((item, index) => {
-      const {
-        createAt,
-        createdBy,
-        details,
-        id,
-        requestedListBy,
-        updatedAt,
-        userList,
-        answers,
-      } = item;
+      const { createAt, createdBy, details, id, requestedListBy, updatedAt, userList, answers } = item;
 
       const regex = /\^([\w-]+)\^/;
       const userId = details.title.match(regex)![1];
       let userResult = allUserList.find((user) => user.id === userId);
-
+      
       return (
         <Accordion defaultActiveKey="1" style={{ margin: "0.3rem" }}>
           <Accordion.Item eventKey="0">
@@ -73,9 +58,7 @@ const AllFeedbacks = () => {
                 {/* <h2>Feedback Title:{details.title}</h2> */}
                 <h3>
                   {" "}
-                  {userResult?.personalDetail.firstName}{" "}
-                  {userResult?.personalDetail.surName} from{" "}
-                  {userResult?.work.departments[0]} department
+                  {userResult?.personalDetail.firstName} {userResult?.personalDetail.surName} from {userResult?.work.departments[0]} department
                 </h3>
                 {/* <p>Created at: {createAt}</p>
                 <p>Updated at : {updatedAt}</p>
@@ -83,9 +66,17 @@ const AllFeedbacks = () => {
                 {/* <h3>
                   requested by the list user request with id {requestedListBy}
                 </h3> */}
-                <Link to={`${id}`} className={classes.link}>
-                  <button className={classes.btn}>Graph</button>
-                </Link>
+                {/* <Link to={`${id}/analytics`} className={classes.link}> */}
+
+                <button
+                  className={classes.btn}
+                  onClick={() => {
+                    navigate(`${id}/analytics`, { state: { ...item, feedbackTo: userResult } });
+                  }}
+                >
+                  Graph
+                </button>
+                {/* </Link> */}
               </div>
             </Accordion.Header>
             <Accordion.Body>
@@ -96,11 +87,7 @@ const AllFeedbacks = () => {
                 return (
                   <ListGroup>
                     <ListGroup.Item>
-                      <UserAnswerDetail
-                        answerDetail={item}
-                        index={index}
-                        key={index}
-                      />
+                      <UserAnswerDetail answerDetail={item} index={index} key={index} />
                     </ListGroup.Item>
                   </ListGroup>
                 );
