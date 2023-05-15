@@ -1,7 +1,17 @@
- .wrapper h2 {
+.wrapper h2 {
     margin: 0 0 2rem 0;
     font-weight: bold;
     text-transform: capitalize;
+}
+
+.accordionheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordionheader h2 {
+  margin-bottom: -2rem;
 }
 
 .formwrapper {
@@ -13,19 +23,22 @@
     margin-left: 2.5rem;
 }
 
+/* Question number */
 .numberspan {
   font-weight: 600;
   font-size: 1.3rem;
 }
 
+/* Displays the status of feedback */
 .finishdiv {
   width: fit-content;
   padding: .6rem;
-  margin: 1rem 0 1.5rem 0;
+  margin: 2rem 0 0 1rem;
   color: white;
   font-weight: bold;
 }
 
+/* Feedback instructions */
 .instructions {
     padding: 2rem;
     margin: 1rem 0 2rem .5rem;
@@ -34,15 +47,17 @@
     width: 95%;
 }
 
-label {
+/* Question */
+.questionlabel {
   font-family: var(--main-font);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 500;
 }
 
+/* Background of the questions */
 .questionlabel {
   background-color: var(--light-grey-color);
-  width: 95%;
+  width: 100%;
   padding: 1rem;
 }
 
@@ -56,13 +71,15 @@ label {
     border-radius: .3rem;
   }
 
+/* Radiobuttons */
+
  .radiodiv {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: center;
- } 
-  
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+} 
+
 .radiodiv label {
     padding: 1rem;
     display: inline-block;
@@ -85,7 +102,7 @@ input[type="radio"]:checked {
     
 .radiodiv label span {
     position: relative;
-    top: 30px;
+    top: 28px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +110,4 @@ input[type="radio"]:checked {
     font-family: var(--main-font);
   }
 
-hr {
-    margin: 2rem;
-}
   
