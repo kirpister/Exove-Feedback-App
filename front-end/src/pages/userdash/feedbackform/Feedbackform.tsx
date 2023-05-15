@@ -75,13 +75,12 @@ function Feedbackform() {
 
           <Accordion defaultActiveKey="1" style={{ margin: ".5rem", width: "95%" }}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header> 
-              <>
-              <div className={styles.accordionheader}>
+            <Accordion.Header className={styles.accordionheader}> 
+            <div>
                 <h2>{title}</h2>
                 <div className={styles.finishdiv} style={{ backgroundColor: finished ? '#64e764' : '#FA2A55' }}>
                   {finished ? 'Finished' : 'Not Finished'}
-                  </div></div></>
+            </div></div>
             </Accordion.Header>
 
             <Accordion.Body>

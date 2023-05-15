@@ -1,5 +1,5 @@
 .wrapper h2 {
-    margin: 0 0 2rem 0;
+    margin: 0 0 2rem 1rem;
     font-weight: bold;
     text-transform: capitalize;
 }
@@ -8,10 +8,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.accordionheader h2 {
-  margin-bottom: -2rem;
 }
 
 .formwrapper {
@@ -33,7 +29,7 @@
 .finishdiv {
   width: fit-content;
   padding: .6rem;
-  margin: 2rem 0 0 1rem;
+  margin: 1.5rem 0 0 1rem;
   color: white;
   font-weight: bold;
 }
