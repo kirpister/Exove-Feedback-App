@@ -24,7 +24,7 @@ const UserAnswerDetail = (props: Propstype) => {
           </div>
 
           {/* <p>user answers:</p> */}
-          <p>Answer: {finished ? "User finished answer" : "User have not answerd yet"}</p>
+          <p>{finished ? "User has finished feedback" : "User has not given feedback yet"}</p>
           <button className={classes.btn}>
             <i className="fa-regular fa-bell"></i>
           </button>

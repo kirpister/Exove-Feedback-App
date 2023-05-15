@@ -7,7 +7,7 @@
 
     "USER SIDEBAR TRANSLATIONS": "******",
     "main": "Koti",
-    "givefb": "Palaute pyynnöt",
+    "givefb": "Anna palautetta",
     "reqfb": "Pyydä palautetta",
     "logout": "KIRJAUDU ULOS",
 
@@ -33,5 +33,10 @@
     "scale3": "3 - Suoriutuu odotusten mukaisesti, ei valitettavaa",
     "scale4": "4 - Suoriutuu yli odotusten, mielestäsi henkilö tekee enemmäin kuin työnkuva tai tehtävän taso olettaa",
     "scale5": "5 - Suoriutuu täydellisesti tehtävistään ja paremminkin, suosittelisin ylennystä haastavampiin tehtäviin",
-    "instruction": "Keräämme palautetta vuosittain. Tämä on tärkeä työkalu meille kehittääksemme ammattitaitoamme joten täytä lomake huolella. Erityisesti vapaat kommentit ovat hyvin toivottuja!"
+    "instruction": "Keräämme palautetta vuosittain. Tämä on tärkeä työkalu meille kehittääksemme ammattitaitoamme joten täytä lomake huolella. Erityisesti vapaat kommentit ovat hyvin toivottuja!",
+
+    "REQUEST FEEDBACK TRANSLATIONS": "********",
+    "header": "Pyydä palautetta",
+    "reqparagraph": "Valitse viisi kollegaa joilta haluat palautetta.",
+    "subbtn": "LÄHETÄ"
 }

@@ -57,12 +57,12 @@ const SidebarAdmin: React.FC = () => {
             <li>
               <NavLink to="/feedbackform">{t("newform")}</NavLink>
             </li>
-            {/* <li>
-              <NavLink to="/getuserlist">{t("confirmation")}</NavLink>
-            </li> */}
             <li>
-              <NavLink to="/getuserlist">Get Request User List</NavLink>
+              <NavLink to="/getuserlist">{t("confirmation")}</NavLink>
             </li>
+            {/* <li>
+              <NavLink to="/getuserlist">Get Request User List</NavLink>
+            </li> */}
             <li>
               <NavLink to="/allfeedbacks">{t("allfbs")}</NavLink>
             </li>
