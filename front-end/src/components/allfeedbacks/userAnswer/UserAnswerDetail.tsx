@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AnswerType } from "../../../features/createdFeedbackSlicer";
 import classes from "./userAnswerDetail.module.css";
 import ListGroup from "react-bootstrap/ListGroup";
+
 interface Propstype {
   answerDetail: AnswerType<string, number>;
   index: number;
@@ -10,10 +11,14 @@ interface Propstype {
 const UserAnswerDetail = (props: Propstype) => {
   const { answerDetail, index } = props;
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
-    const { details, finished, user } = answerDetail;
+    const { finished, user } = answerDetail;
     // console.log("USER", user);
     return (
-      <Link to={`${index}`} className={classes.link}>
+      <Link
+        to={`${index}`}
+        className={classes.link}
+        state={{ answerDetail, index }}
+      >
         <div className={classes.single_user_feedback}>
           {/* <p>order number {index}</p>
         <p>User Id: {user.id}</p> */}
@@ -24,40 +29,14 @@ const UserAnswerDetail = (props: Propstype) => {
           </div>
 
           {/* <p>user answers:</p> */}
-          <p>{finished ? "User has finished feedback" : "User has not given feedback yet"}</p>
+          <p>
+            {finished
+              ? "User has finished feedback"
+              : "User has not given feedback yet"}
+          </p>
           <button className={classes.btn}>
             <i className="fa-regular fa-bell"></i>
           </button>
-          {/* {finished
-          ? details.map((item, index) => {
-              const { answer, question } = item;
-              return (
-                <Fragment key={index}>
-                  <p>
-                    question order: {question.order}. {question.title}
-                  </p>
-                  <p>
-                    Answer:{" "}
-                    {answers.map((answer, i) => {
-                      return <Fragment key={index + i}>{answer}</Fragment>;
-                    })} 
-                  </p>
-                </Fragment>
-              );
-            })
-          : ""} */}
-
-          {/* {details.map((item, index) => {
-          const { answer, question } = item;
-          return (
-            <Fragment key={index}>
-              <p>
-                question order: {question.order}. {question.title}:
-              </p>
-              <p>Answer is {finished ? answer[0] : "not answer yet"}</p>
-            </Fragment>
-          );
-        })} */}
         </div>
       </Link>
     );
