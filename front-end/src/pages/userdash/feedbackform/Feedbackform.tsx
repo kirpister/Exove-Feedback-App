@@ -71,20 +71,22 @@ function Feedbackform() {
         const { questions, title } = feedbackId.details;
         return (
           <>
-          <div className={styles.wrapper}>
+          <div>
              <h2>{title}</h2>
-            <p> {finished ? "finished" : "not finished"}</p>
-            <p> feedback Id: {feedbackId.id}</p>
-            <p> order: {index + 1}</p>
+             <div className={styles.finishdiv} style={{ backgroundColor: finished ? '#64e764' : '#FA2A55' }}>
+              {finished ? 'Finished' : 'Not Finished'}
+            </div>
+            {/* <p> feedback Id: {feedbackId.id}</p> */}
+            {/* <p> order: {index + 1}</p> */}
          
-            <div className={styles.formwrapper}>
+            <div>
               {questions.map((question, i) => {
                 const { order, title, type } = question;
                 return (
                   <div>
-                    <label>
+                    <label className={styles.questionlabel}>
                       {" "}
-                      {order}. {title}
+                      <span className={styles.numberspan}>{order}.</span> {title}
                     </label>
                     {type === QuestionType.freeString ? (
                       <textarea className={styles.textarea}
@@ -128,7 +130,7 @@ function Feedbackform() {
     }
   };
   return <div className={styles.wrapper}>
-          <h2>{t("feedbackheader")}</h2>
+          <h2 className={styles.headerh2}>{t("feedbackheader")}</h2>
           <div className={styles.instructions}>
           <p>{t("instruction")}</p>
           <p>{t("scale")}</p>
@@ -140,6 +142,7 @@ function Feedbackform() {
 
           </div>
           
+          <div className={styles.formwrapper}></div>
           {renderFeedback()}</div>;
 }
 
