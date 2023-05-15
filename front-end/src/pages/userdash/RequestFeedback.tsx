@@ -9,10 +9,13 @@ import userstyles from "./userdash.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useAppSelector } from "../../app/hooks";
+import { useTranslation } from "react-i18next";
+import "../../translations/i18n";
 import CreatedRequestFeedback from "./createdRequestFeedback/CreatedRequestFeedback";
 import BtnSuccess from "../../components/button/success/BtnSuccess";
 
 const RequestFeedback: React.FC = () => {
+  const { t } = useTranslation<"trans">("trans");
   const { allUserList } = useAppSelector((state) => state.allUser);
   const { selfFeedbackRequests } = useAppSelector((state) => state.requestFeedback);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
@@ -35,7 +38,6 @@ const RequestFeedback: React.FC = () => {
       })
       .catch((error) => {
         if (error instanceof AxiosError){
-          // alert("Sorry, something went wrong!");
           alert(error.response?.data.err.msg)
         }
       });
@@ -45,7 +47,7 @@ const RequestFeedback: React.FC = () => {
     const isChecked = e.target.checked;
     const userId = user.id;
 
-    console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? "checked" : "unchecked"}`);
+    // console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? "checked" : "unchecked"}`);
 
     if (isChecked) {
       const checkedUser: CheckedUser = {
@@ -58,7 +60,7 @@ const RequestFeedback: React.FC = () => {
       setCheckedUsers((prevCheckedUsers) => prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId));
     }
 
-    console.log(checkedUsers);
+    // console.log(checkedUsers);
   };
 
   const renderUser = (usersList: any) => {
@@ -86,11 +88,11 @@ const RequestFeedback: React.FC = () => {
   return (
     <main className={userstyles.usermain}>
       <div className={userstyles.userdash}>
-        <h2>Request feedback</h2>
-        <p>Choose five colleagues to give you feedback.</p>
+        <h2>{t("header")}</h2>
+        <p>{t("reqparagraph")}</p>
         <div className={userstyles.users}>{renderUser(allUserList)}</div>
         {/* <button onClick={handleSubmit}>SUBMIT</button> */}
-        <BtnSuccess callBack={handleSubmit} name="SUBMIT" disabled={selfFeedbackRequests.length > 0 ? true : false} />
+        <BtnSuccess callBack={handleSubmit} name={t("subbtn")} disabled={selfFeedbackRequests.length > 0 ? true : false} />
       </div>
       {/* here is requested feedback which is created */}
       <div>

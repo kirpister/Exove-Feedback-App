@@ -30,6 +30,10 @@
   --bold-font: "Gelion Bold", sans-serif;
 }
 
+h2 {
+  letter-spacing: 2px;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -105,7 +109,7 @@ li a.active {
 
 /* User and Admin dashs styling */
 .sidebar {
-  width: 200px;
+  width: 220px;
   background-color: var(--black);
   height: 100%;
   top: 0;
