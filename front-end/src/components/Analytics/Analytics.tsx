@@ -6,12 +6,11 @@ const Analytics = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const id = useParams;
-  console.log(state);
   return (
     <div>
       <Chart
         key={id.name}
-        answers={state.answer}
+        answers={state.answers}
         createAt={state.createAt}
         details={state.details}
         id={state.id}
