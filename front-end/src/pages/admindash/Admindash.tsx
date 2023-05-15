@@ -8,6 +8,7 @@ import { personalDetailType } from "../../model/types/user";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../app/hooks";
 import { setFeedbackRequest } from "../../features/answerFeedbackSlicer";
+import { showLoading2s } from "../../features/loadingSlicer";
 
 export interface DataType {
   data: {

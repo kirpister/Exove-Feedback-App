@@ -1,5 +1,8 @@
 import React, { Fragment } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import BtnSuccess from "../../button/success/BtnSuccess";
+import { useDispatch } from "react-redux";
+import { goBackRouter } from "../../../services/helper";
 //import { AnswerType } from "../../../features/createdFeedbackSlicer";
 // import classes from "./Singlefeedback.module.css";
 //import ListGroup from "react-bootstrap/ListGroup";
@@ -10,7 +13,8 @@ import { useLocation } from "react-router-dom";
 // }
 const SingleUserFeedback = (props: any) => {
   const location = useLocation();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { answerDetail } = location.state;
 
   // console.log("AnswerDetail", answerDetail);
@@ -25,8 +29,7 @@ const SingleUserFeedback = (props: any) => {
         <p>User Id: {user.id}</p> */}
         <div>
           <h3>
-            This feedback was done by {user.personalDetail.firstName}{" "}
-            {user.personalDetail.surName}
+            This feedback was done by {user.personalDetail.firstName} {user.personalDetail.surName}
           </h3>
         </div>
 
@@ -44,7 +47,17 @@ const SingleUserFeedback = (props: any) => {
       </div>
     );
   };
-  return <div>{renderUserAnswer(answerDetail)}</div>;
+  return (
+    <div>
+      {renderUserAnswer(answerDetail)}
+      <BtnSuccess
+        callBack={() => {
+          goBackRouter(dispatch, navigate);
+        }}
+        name="Back"
+      />
+    </div>
+  );
 };
 
 export default SingleUserFeedback;
