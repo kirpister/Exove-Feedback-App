@@ -134,7 +134,7 @@ function Feedbackform() {
         );
       });
     } else {
-      <p>You currently have no feedback requests!</p>;
+      return <p>You currently have no feedback requests!</p>;
     }
   };
   return <div className={styles.wrapper}>

@@ -453,11 +453,11 @@ export const createReminderNotifications: RequestHandler = async (
   res,
   next
 ) => {
-  const { receiverUserId } = req.body;
+  const { receiverUserId, msg } = req.body;
   try {
     const newNotification = {
       userid: receiverUserId,
-      message: 'Please send userlist to initiate feedback process',
+      message: msg,
       isRead: false,
     };
     const newRequestNotification = await notificationModel.create({

@@ -50,6 +50,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
     setReminderText(ReminderText.REMINDER_BEING_SEND);
     const response = await axios.post("/user/notifications/reminder", {
       receiverUserId: receiverUserId,
+      msg: 'Please send userlist to initiate feedback process'
     });
     const status = response.status;
     if (status === 201) {
