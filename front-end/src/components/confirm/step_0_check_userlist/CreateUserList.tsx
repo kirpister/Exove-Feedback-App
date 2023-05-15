@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AllUsersList from "./AllUsersList";
 import SelectedReviewers from "./SelectedReviewers";
 import styles from "./CreateUserList.module.css";
 import { personalDetailType } from "../../../model/types/user";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { showLoading2s } from "../../../features/loadingSlicer";
 
 export interface DataType {
   data: {
@@ -23,11 +24,10 @@ const CreateUserList: React.FC = () => {
   const [isActive, setIsActive] = useState<personalDetailType>();
   const { allUserList } = useAppSelector((state) => state.allUser);
   const { requestLists } = useAppSelector((state) => state.requestUserlist);
-
+  const dispatch = useAppDispatch();
   const onClickUser = (clickedUser: any) => {
     setIsActive(clickedUser);
   };
-
   return (
     <>
       <div className={styles.confirmation_wrapper}>
@@ -40,12 +40,7 @@ const CreateUserList: React.FC = () => {
             </div>
           )}
         </div>
-        <AllUsersList
-          usersList={allUserList}
-          onClickUser={onClickUser}
-          isActive={isActive}
-          requests={requestLists}
-        />
+        <AllUsersList usersList={allUserList} onClickUser={onClickUser} isActive={isActive} requests={requestLists} />
       </div>
     </>
   );

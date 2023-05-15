@@ -14,6 +14,8 @@ import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 import { getAllUserAPI } from "../../features/alluserSlicer";
 import { Notification } from "../../model/types/notification";
+import { getAllRequestUserListAPI } from "../../features/requestUserListSlicer";
+import { getAllFeedbackAPI } from "../../features/createdFeedbackSlicer";
 
 const SidebarUser: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
