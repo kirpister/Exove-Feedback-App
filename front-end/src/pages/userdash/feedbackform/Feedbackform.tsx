@@ -78,7 +78,7 @@ function Feedbackform() {
         let userResult = allUserList.find((user) => user.id === userId);
 
         return (
-          <Accordion defaultActiveKey="1" style={{ margin: "1rem" }}>
+          <Accordion defaultActiveKey="1" style={{ margin: ".5rem" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <div className={styles.accordionheader}>
@@ -91,7 +91,7 @@ function Feedbackform() {
                   <div
                     className={styles.finishdiv}
                     style={{
-                      backgroundColor: finished ? "#64e764" : "#FA2A55",
+                      backgroundColor: finished ? "#01bb5f" : "#ff3b1c",
                     }}
                   >
                     {finished ? "Finished" : "Not Finished"}

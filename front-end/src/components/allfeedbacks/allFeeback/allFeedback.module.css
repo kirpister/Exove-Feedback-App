@@ -20,6 +20,8 @@ h2,
 h3 {
   font-family: var(--main-font);
   color: var(--purple-color);
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .btn {
@@ -29,7 +31,7 @@ h3 {
   background-color: white;
   font-family: inherit;
   font-weight: bold;
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 .btn:hover {

@@ -64,7 +64,7 @@ const AllFeedbacks = () => {
       let userResult = allUserList.find((user) => user.id === userId);
 
       return (
-        <Accordion defaultActiveKey="1" style={{ margin: "1rem" }}>
+        <Accordion defaultActiveKey="1" style={{ margin: ".5rem" }}>
           <Accordion.Item eventKey="0">
             <Accordion.Header>
               {/* <div key={index}> */}

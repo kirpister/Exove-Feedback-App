@@ -34,8 +34,10 @@
 
 /* Displays the status of feedback */
 .finishdiv {
-  width: fit-content;
-  padding: 0.6rem;
+  width: 7rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
   /* margin: 2rem 0 0 1rem; */
   color: white;
   font-weight: bold;
