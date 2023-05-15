@@ -1,0 +1,17 @@
+.btn {
+    width: 220px;
+    padding: .5rem;
+    border: 2px solid black;
+    background-color: white;
+    font-family: inherit;
+    font-weight: bold;
+    margin-top: 1.8rem;
+    border-radius: 2px;
+    margin: .5rem;
+  }
+  
+  .btn:hover {
+    background-color: var(--purple-color);
+    color: white;
+    border: 1.5px solid var(--purple-color);
+  }

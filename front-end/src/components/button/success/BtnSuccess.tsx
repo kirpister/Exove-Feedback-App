@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./btnSucces.module.css";
 interface PropsType {
-  callBack: (e?: any) => void;
+  callBack?: (e?: any) => void;
   name: string;
   data?: any;
   width?: string;
@@ -12,7 +12,7 @@ function BtnSuccess(props: PropsType) {
   return (
     <button
       className={styles.btn}
-      onClick={() => callBack(data)}
+      onClick={() => callBack && callBack(data)}
       style={{
         width: `${width ? width + "" : ""}`,
       }}
