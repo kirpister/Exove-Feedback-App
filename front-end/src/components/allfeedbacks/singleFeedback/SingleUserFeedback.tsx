@@ -6,6 +6,7 @@ import { goBackRouter } from "../../../services/helper";
 //import { AnswerType } from "../../../features/createdFeedbackSlicer";
 // import classes from "./Singlefeedback.module.css";
 //import ListGroup from "react-bootstrap/ListGroup";
+import styles from './Singlefeedback.module.css';
 
 interface Propstype {
   answerDetail?: any;
@@ -22,12 +23,12 @@ const SingleUserFeedback = (props: Propstype) => {
   const renderUserAnswer = (answerDetailData: any) => {
     const { details, finished, user } = answerDetailData;
     return (
-      <div>
+      <div className={styles.feedbackwrapper}>
         {/* <p>order number {index}</p>
         <p>User Id: {user.id}</p> */}
         <div>
-          <h3>
-            This feedback was done by {user.personalDetail.firstName} {user.personalDetail.surName}
+          <h3 className={styles.h3header}>
+            This feedback was given by {user.personalDetail.firstName} {user.personalDetail.surName}
           </h3>
         </div>
 
@@ -35,10 +36,11 @@ const SingleUserFeedback = (props: Propstype) => {
           const { answer, question } = item;
           return (
             <Fragment key={index}>
-              <p>
-                {question.order}. {question.title}:
-              </p>
-              <p>Answer is {finished ? answer[0] : "not answer yet"}</p>
+              <>
+              <div className={styles.question}><p>
+                <p className={styles.number}>{question.order}.</p> {question.title}:</p></div>
+              <p>Answer is {finished ? answer[0] : "Feedback has not been given yet"}.</p>
+              </>
             </Fragment>
           );
         })}
@@ -46,14 +48,14 @@ const SingleUserFeedback = (props: Propstype) => {
     );
   };
   return (
-    <div>
+    <div className={styles.wrapper}>
       {renderUserAnswer(answerDetail ? answerDetail : props.answerDetail)}
       {answerDetail && (
         <BtnSuccess
           callBack={() => {
             goBackRouter(dispatch, navigate);
           }}
-          name="Back"
+          name="Go Back"
         />
       )}
     </div>

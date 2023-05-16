@@ -1,13 +1,7 @@
 .wrapper h2 {
-<<<<<<< HEAD
-    margin: 0 0 2rem 1rem;
-    font-weight: bold;
-    text-transform: capitalize;
-=======
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
   font-weight: bold;
   text-transform: capitalize;
->>>>>>> 3912e427d55da874eb83a325d7f5d3161947c440
 }
 
 .accordionheader {
@@ -18,14 +12,11 @@
   width: 100%;
 }
 
-<<<<<<< HEAD
-=======
 .accordionheader h3 {
   margin: 0 !important;
   padding: 0 !important;
 }
 
->>>>>>> 3912e427d55da874eb83a325d7f5d3161947c440
 .formwrapper {
   margin-left: 2rem;
 }
@@ -43,17 +34,11 @@
 
 /* Displays the status of feedback */
 .finishdiv {
-<<<<<<< HEAD
-  width: fit-content;
-  padding: .6rem;
-  margin: 1.5rem 0 0 1rem;
-=======
+  margin: .2rem 0 0 1.5rem;
   width: 7rem;
-  padding: 0.5rem;
+  padding: .5rem;
   display: flex;
   justify-content: center;
-  /* margin: 2rem 0 0 1rem; */
->>>>>>> 3912e427d55da874eb83a325d7f5d3161947c440
   color: white;
   font-weight: bold;
 }
@@ -61,7 +46,7 @@
 /* Feedback instructions */
 .instructions {
   padding: 2rem;
-  margin: 1rem 0 2rem 0.5rem;
+  margin: 3rem 0 3rem 0.5rem;
   height: fit-content;
   background-color: var(--light-grey-color);
   width: 95%;
@@ -86,7 +71,7 @@
   height: 100px;
   padding: 0.4rem;
   margin: 2rem 0 2rem 1rem;
-  font-family: inherit;
+  font-family: var(--main-font);
   display: block;
   border-radius: 0.3rem;
 }

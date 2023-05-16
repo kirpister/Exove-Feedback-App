@@ -1,0 +1,23 @@
+.feedbackwrapper {
+    margin-left: 5%;
+}
+
+.h3header {
+    margin-bottom: 3rem !important;
+}
+
+.question {
+    background-color: var(--light-grey-color);
+    width: 80%;
+    padding-top: .5rem;
+    padding-left: .5rem;
+}
+
+.number {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.wrapper button {
+    margin: 2rem 0 2rem 3.5rem;
+}

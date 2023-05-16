@@ -105,8 +105,7 @@
   margin: 7% 7%;
 }
 
-.userdash h3,
-p {
+.userdash p {
   margin: 2rem 0.2rem;
   color: var(--black);
   font-family: var(--main-font);
