@@ -12,14 +12,14 @@
 
 .all_users_list input {
   margin: 0.5rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
   border: 1px solid grey;
   border-radius: 0.3rem;
-  width: 220px;
+  width: 15rem;
   font-family: var(--main-font);
 }
 .scrolled_users {
   display: flex;
   flex-direction: column;
-  margin-right: 0.5rem;
+  margin-right: 0.6rem;
 }

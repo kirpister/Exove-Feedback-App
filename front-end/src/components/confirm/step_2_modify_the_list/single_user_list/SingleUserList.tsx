@@ -1,11 +1,13 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
-import styles from "./singleUser.module.css";
+import styles from "./singleUserList.module.css";
 import { useNavigate } from "react-router-dom";
 import { setUpUserList } from "../../../../features/feedbackSlice";
 import { personalRequestListType } from "../../../../model/types/requestList";
+import BtnSmall from "../../../button/small/BtnSmall";
 import BtnSuccess from "../../../button/success/BtnSuccess";
-import BtnError from "../../../button/error/BtnError";
+// import BtnSuccess from "../../../button/success/BtnSuccess";
+// import BtnError from "../../../button/error/BtnError";
 
 interface PropsType {
   singleRequestedList: personalRequestListType;
@@ -20,7 +22,7 @@ function SingleUserList(props: PropsType) {
     return allUserList.find((e) => e.id === id);
   };
   return (
-    <div className={styles.selected_reviewers}>
+    <div className={styles.list_wrapper}>
       {/* <h2>list order </h2> */}
       {/* <p>
         this list condition:{" "}
@@ -42,21 +44,25 @@ function SingleUserList(props: PropsType) {
       </h3>
       {singleRequestedList.userList.map((item: any, index: number) => {
         return (
-          <article className={styles.userlist}>
-            <input type="checkbox" id={styles.id} value={styles.id} />
+          <article className={styles.single_user_card}>
+            {/* <input type="checkbox" id={styles.id} value={styles.id} /> */}
             {/* <div> */}
+            <div className={styles.avatar_wrapper}>
               <div className={styles.avatar}>
                 {checkeUser(item)
                   ?.personalDetail.firstName.charAt(0)
                   .toUpperCase()}
               </div>
+            </div>
+
+            <div className={styles.span_btn}>
               <span>
                 {checkeUser(item)?.personalDetail.firstName}{" "}
                 {checkeUser(item)?.personalDetail.surName}
                 <br />
               </span>
               {buttonName && callBack ? (
-                <BtnError
+                <BtnSmall
                   callBack={() => {
                     callBack(item);
                   }}
@@ -65,7 +71,8 @@ function SingleUserList(props: PropsType) {
               ) : (
                 ""
               )}
-            {/* </div> */}
+              {/* </div> */}
+            </div>
           </article>
         );
       })}

@@ -1,4 +1,4 @@
-.selected_reviewers {
+.list_wrapper {
   margin: 3rem;
   display: flex;
   flex-direction: column;
@@ -7,32 +7,29 @@
   height: 100%;
 }
 
-.selected_reviewers h3 {
+.list_wrapper h3 {
   margin-bottom: 2rem !important;
   margin-top: -3rem !important;
   text-align: center;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: var(--pale-pink-color);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: var(--main-font);
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: white;
-}
-
-.placeholder {
-  width: 250px;
-  height: 100px;
+  margin-right: 1rem;
 }
 
 .btn {
-  width: 220px;
+  /* width: 220px; */
+  width: auto;
   padding: 0.5rem;
   border: 2px solid black;
   background-color: white;
@@ -40,7 +37,9 @@
   font-weight: bold;
   margin-top: 1.8rem;
   border-radius: 2px;
-  margin: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 .btn:hover {
@@ -48,10 +47,28 @@
   color: white;
   border: 1.5px solid var(--purple-color);
 }
-.userlist {
-  display: flex;
-  justify-content: left;
-  gap: 1.5rem;
-  margin-left: 0.5rem;
+
+.single_user_card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: start;
   width: 14rem;
+}
+
+.single_user_card span {
+  display: flex;
+  justify-content: center;
+  padding: 0 !important;
+  margin-left: 0;
+}
+
+.span_btn {
+  display: flex;
+  justify-content: space-between;
+}
+.avatar_wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: start;
 }
