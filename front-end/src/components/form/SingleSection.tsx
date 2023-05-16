@@ -14,7 +14,7 @@ const SingleSection: React.FC<SingleSectionProps> = ({ sections }) => {
     <>
       {sections.map((section, i, changeHandler) => {
         return (
-          <Accordion defaultActiveKey="0" key={section.id}>
+          <Accordion defaultActiveKey="0" key={section.id} style={{margin: "1rem"}}>
             <Accordion.Item eventKey="0">
               <Accordion.Header style={{ backgroundColor: "white" }}>
                 <label htmlFor="section"></label>

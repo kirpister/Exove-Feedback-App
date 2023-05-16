@@ -160,8 +160,8 @@ const Chart = (props: Propstype) => {
   }, [answers]);
   return (
     <>
-      <h1>Chart's feedback data to {feedbackTo.personalDetail.firstName}</h1>
-      {data.length === 0 && <h1>no feedback </h1>}
+      <h1>Chart feedback data to {feedbackTo.personalDetail.firstName}</h1>
+      {data.length === 0 && <h1>No feedback available</h1>}
       <RadarChart cx={300} cy={250} outerRadius={150} width={550} height={550} data={data}>
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
