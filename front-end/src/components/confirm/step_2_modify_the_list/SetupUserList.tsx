@@ -71,7 +71,7 @@ function SetupUserList() {
             name="Send Feedback Request"
             key={id}
           />
-          <BtnSuccess callBack={goBack} name="Back" key={id} />
+          <BtnSuccess callBack={goBack} name="Go Back" key={id} />
         </div>
         <AllUsersList />
       </div>

@@ -30,7 +30,7 @@ const CreateUserList: React.FC = () => {
   };
   return (
     <>
-      <div className={styles.confirmation_wrapper}>
+      <div className={styles.confirmation_wrapper} style={{margin: "1rem"}}>
         <div className={styles.selected_reviewers}>
           {isActive ? (
             <SelectedReviewers isActive={isActive} requests={requestLists} />

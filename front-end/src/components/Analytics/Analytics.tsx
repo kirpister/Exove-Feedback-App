@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../app/hooks";
 import PdfDownload from "../Chart/pdf_download/pdf_download/PdfDownload";
 import SingleUserFeedback from "../allfeedbacks/singleFeedback/SingleUserFeedback";
 import { Accordion, ListGroup } from "react-bootstrap";
+import styles from './Analytics.module.css';
 
 const Analytics = () => {
   const [show, setShow] = useState(false);
@@ -17,8 +18,8 @@ const Analytics = () => {
   const renderSingleAnswers = (eventKey: boolean) => {
     return state.answers.map((item: any, index: number) => {
       return (
-        <Accordion.Item eventKey={`${eventKey ? 0 : index + 1}`}>
-          <Accordion.Header>Answer from {item.user.personalDetail.firstName}</Accordion.Header>
+        <Accordion.Item eventKey={`${eventKey ? 0 : index + 1}`} style={{margin: "1rem"}}>
+          <Accordion.Header>Feedback from {item.user.personalDetail.firstName} {item.user.personalDetail.surName}.</Accordion.Header>
           <Accordion.Body>
             <ListGroup>
               <ListGroup.Item>
@@ -31,7 +32,7 @@ const Analytics = () => {
     });
   };
   return (
-    <div>
+    <div className={styles.wrapper}>
       <PdfDownload
         chartElement={<Chart {...state} key={id} />}
         tableElement={<Accordion defaultActiveKey={["0"]}>{renderSingleAnswers(show)}</Accordion>}
@@ -43,7 +44,7 @@ const Analytics = () => {
           // navigate(-1);
           goBackRouter(dispatch, navigate);
         }}
-        name="Back"
+        name="Go Back"
       />
     </div>
   );

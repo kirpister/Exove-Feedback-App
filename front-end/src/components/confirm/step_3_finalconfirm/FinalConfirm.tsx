@@ -49,7 +49,7 @@ function FinalConfirm() {
           callBack={() => {
             navigate(-1);
           }}
-          name="Back"
+          name="Go Back"
         />
       </div>
     </div>

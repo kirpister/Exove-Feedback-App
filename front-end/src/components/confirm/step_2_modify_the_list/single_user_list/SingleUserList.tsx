@@ -44,7 +44,7 @@ function SingleUserList(props: PropsType) {
         return (
           <article className={styles.userlist}>
             <input type="checkbox" id={styles.id} value={styles.id} />
-            <div>
+            {/* <div> */}
               <div className={styles.avatar}>
                 {checkeUser(item)
                   ?.personalDetail.firstName.charAt(0)
@@ -60,12 +60,12 @@ function SingleUserList(props: PropsType) {
                   callBack={() => {
                     callBack(item);
                   }}
-                  name="⨯"
+                  name="X"
                 />
               ) : (
                 ""
               )}
-            </div>
+            {/* </div> */}
           </article>
         );
       })}
