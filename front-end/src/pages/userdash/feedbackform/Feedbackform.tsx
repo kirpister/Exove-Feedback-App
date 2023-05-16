@@ -13,6 +13,7 @@ interface AnswerFeedbackType {
 }
 
 function Feedbackform() {
+  const [loading, setLoading] = useState<Boolean>(false);
   const { t } = useTranslation<"trans">("trans");
   const { feedbackRequest } = useAppSelector((state) => state.answerFeedback);
   const { allUserList } = useAppSelector((state) => state.allUser);
@@ -58,6 +59,7 @@ function Feedbackform() {
     return value;
   };
 
+
   const submitAnswer = (feedbackId: string, data: any) => {
     console.log({ answers: data });
     axios
@@ -68,6 +70,7 @@ function Feedbackform() {
       .catch((err) => console.log(err));
   };
   const renderFeedback = () => {
+
     if (feedbackRequest.length > 0) {
       return feedbackRequest.map((request, index) => {
         const { feedbackId, finished } = request;
@@ -78,6 +81,7 @@ function Feedbackform() {
         let userResult = allUserList.find((user) => user.id === userId);
 
         return (
+
           <Accordion defaultActiveKey="1" style={{ margin: ".5rem" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
@@ -99,6 +103,7 @@ function Feedbackform() {
                 </div>
               </Accordion.Header>
               <Accordion.Body>
+
                 <div>
                   {questions.map((question, i) => {
                     const { order, title, type } = question;
@@ -137,23 +142,29 @@ function Feedbackform() {
                   })}
                   {!finished && (
                     <BtnSuccess
-                      name="submit"
+                      name="SUBMIT"
                       callBack={() => {
+                        setLoading(true);
                         submitAnswer(feedbackId.id, answers);
+                        setLoading(false);
+                        alert("Success!")
                       }}
                       key={index}
+                     
                     />
                   )}
                 </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
+          
         );
       });
     } else {
-      return <p>You currently have no feedback requests!</p>;
+      return <p>You currently have no feedback requests!</p> 
     }
   };
+
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.headerh2}>{t("feedbackheader")}</h2>

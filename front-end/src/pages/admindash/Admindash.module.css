@@ -59,7 +59,7 @@ p {
 article {
   position: relative;
   width: 220px;
-  height: 65px;
+  height: 70px;
   margin: 0.5rem 0.5rem;
   float: left;
   border: 2px solid var(--purple-color);

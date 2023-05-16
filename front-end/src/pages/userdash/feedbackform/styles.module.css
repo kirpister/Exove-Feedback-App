@@ -1,5 +1,5 @@
 .wrapper h2 {
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0;
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -34,11 +34,11 @@
 
 /* Displays the status of feedback */
 .finishdiv {
+  margin: .2rem 0 0 1.5rem;
   width: 7rem;
-  padding: 0.5rem;
+  padding: .5rem;
   display: flex;
   justify-content: center;
-  /* margin: 2rem 0 0 1rem; */
   color: white;
   font-weight: bold;
 }
@@ -46,7 +46,7 @@
 /* Feedback instructions */
 .instructions {
   padding: 2rem;
-  margin: 1rem 0 2rem 0.5rem;
+  margin: 3rem 0 3rem 0.5rem;
   height: fit-content;
   background-color: var(--light-grey-color);
   width: 95%;
@@ -71,7 +71,7 @@
   height: 100px;
   padding: 0.4rem;
   margin: 2rem 0 2rem 1rem;
-  font-family: inherit;
+  font-family: var(--main-font);
   display: block;
   border-radius: 0.3rem;
 }
