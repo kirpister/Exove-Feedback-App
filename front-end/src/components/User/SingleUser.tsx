@@ -47,7 +47,9 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
           <br />
           {userInfo.work.departments[0]} - { userInfo.work.roles[0]}
         </span>
+        
         <BtnSuccess
+          className={classes.btn2}
           callBack={() => {
             addNewUserToSelectedUserList(userInfo.id);
           }}

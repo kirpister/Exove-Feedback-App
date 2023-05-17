@@ -28,7 +28,7 @@ const AllFeedbacks = () => {
   };
   const renderAllFeedback = (list: Array<CreatedFeebackType>) => {
     if (list.length === 0) {
-      return <div>NO Feedback List</div>;
+      return <div>No Feedback List</div>;
     }
     return list.map((item, index) => {
       const {
