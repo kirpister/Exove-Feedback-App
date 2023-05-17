@@ -40,8 +40,6 @@ const UserAnswerDetail = (props: Propstype) => {
   };
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
     const { finished, user } = answerDetail;
-    console.log("USERRRR", user);
-    console.log("finished", finished);
 
     return (
       <div

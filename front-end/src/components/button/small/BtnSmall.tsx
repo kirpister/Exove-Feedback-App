@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./btnSmall.module.css";
 interface PropsType {
   callBack: (e?: any) => void;
-  name: string;
+  name: any;
   data?: any;
   disabled?: boolean;
 }

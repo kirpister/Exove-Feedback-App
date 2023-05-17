@@ -197,6 +197,10 @@ article input {
   cursor: pointer;
 }
 
+.userlist {
+  display: flex;
+}
+
 .userlist input[type="checkbox"]:checked ~ div {
   background-color: var(--purple-color);
   color: white;
@@ -207,6 +211,7 @@ article input {
   width: 70vw;
   height: fit-content;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 

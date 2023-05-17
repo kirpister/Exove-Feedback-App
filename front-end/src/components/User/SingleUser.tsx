@@ -7,7 +7,7 @@ import BtnSuccess from "../button/success/BtnSuccess";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addUserFromSelectRequestList } from "../../features/requestUserListSlicer";
 import BtnSmall from "../button/small/BtnSmall";
-// import arrow form "../../assets/angles-right-solid.svg";
+import arrow from "../../assets/angles-right-solid.svg";
 
 interface SingleUserProps {
   userInfo: personalDetailType;
@@ -53,7 +53,7 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
           addNewUserToSelectedUserList(userInfo.id);
         }}
         // name="❮❮"
-        name="››"
+        name={<img src={arrow} className={classes.img} />}
         disabled={checkDisable()}
       />
     </article>
