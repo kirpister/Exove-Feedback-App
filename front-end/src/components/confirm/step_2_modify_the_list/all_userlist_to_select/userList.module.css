@@ -1,4 +1,5 @@
 .all_users_list {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;

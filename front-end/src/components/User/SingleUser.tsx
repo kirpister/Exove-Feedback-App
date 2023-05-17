@@ -1,9 +1,6 @@
 import React from "react";
 import styles from "./SingleUser.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
 import { personalDetailType } from "../../model/types/user";
-import BtnSuccess from "../button/success/BtnSuccess";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addUserFromSelectRequestList } from "../../features/requestUserListSlicer";
 import BtnSmall from "../button/small/BtnSmall";

@@ -13,13 +13,7 @@ interface PropsType {
   selfFeedbackRequests?: Array<string>;
 }
 function SingleUserList(props: PropsType) {
-  const {
-    singleRequestedList,
-    index,
-    buttonName,
-    callBack,
-    selfFeedbackRequests,
-  } = props;
+  const { singleRequestedList, buttonName, callBack } = props;
   const { allUserList } = useAppSelector((state) => state.allUser);
   const checkeUser = (id: string) => {
     return allUserList.find((e) => e.id === id);
@@ -54,7 +48,7 @@ function SingleUserList(props: PropsType) {
                 {checkeUser(item)?.personalDetail.firstName}{" "}
                 {checkeUser(item)?.personalDetail.surName}
                 <br />
-                {checkeUser(item)?.work.departments[0]},
+                {checkeUser(item)?.work.departments[0]},{" "}
                 {checkeUser(item)?.work.roles[0]}
               </span>
               {buttonName && callBack ? (
@@ -68,7 +62,6 @@ function SingleUserList(props: PropsType) {
               ) : (
                 ""
               )}
-              {/* </div> */}
             </article>
           );
         })}
