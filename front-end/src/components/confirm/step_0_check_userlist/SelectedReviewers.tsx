@@ -82,7 +82,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
       if (!renderDataRequests.length) {
         return (
           <div className={styles.selected_reviewers}>
-            <h5>This user does't have list for conformation </h5>
+            <h5>This user does't have a list for confirmation </h5>
             <div className={styles.placeholder}></div>
             <button
               className={styles.btn}
