@@ -23,10 +23,10 @@ const AllUsersList: React.FC<AllUserProps> = ({
   const [search, setSearch] = useState("");
   const [reminderText, setReminderText] = useState<string>(ReminderText.REMIND);
 
-  const todoWrapper = useRef(null);
+  const listWrapper = useRef(null);
 
   const hasScroll = usersList.length > 5;
-  useScrollbar(todoWrapper, hasScroll);
+  useScrollbar(listWrapper, hasScroll);
 
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
@@ -127,7 +127,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
           height: hasScroll ? "650px" : "auto",
           minHeight: "50px",
         }}
-        ref={todoWrapper}
+        ref={listWrapper}
       >
         <div className={styles.scrolled_users}>
           {usersListSearch.map((user) => (

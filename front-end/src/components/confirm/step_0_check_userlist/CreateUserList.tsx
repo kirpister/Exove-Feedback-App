@@ -30,7 +30,13 @@ const CreateUserList: React.FC = () => {
   };
   return (
     <>
-      <div className={styles.confirmation_wrapper} style={{margin: "1rem"}}>
+      <div className={styles.confirmation_wrapper} style={{ margin: "1rem" }}>
+        <AllUsersList
+          usersList={allUserList}
+          onClickUser={onClickUser}
+          isActive={isActive}
+          requests={requestLists}
+        />
         <div className={styles.selected_reviewers}>
           {isActive ? (
             <SelectedReviewers isActive={isActive} requests={requestLists} />
@@ -40,7 +46,6 @@ const CreateUserList: React.FC = () => {
             </div>
           )}
         </div>
-        <AllUsersList usersList={allUserList} onClickUser={onClickUser} isActive={isActive} requests={requestLists} />
       </div>
     </>
   );

@@ -57,6 +57,7 @@ function SetupUserList() {
   return selectedRequesList ? (
     <div>
       <div className={styles.confirmation_wrapper}>
+        <AllUsersList />
         <div className={styles.selected_reviewers}>
           <SingleUserList
             singleRequestedList={selectedRequesList}
@@ -72,7 +73,6 @@ function SetupUserList() {
           />
           <BtnSuccess callBack={goBack} name="Go Back" key={id} />
         </div>
-        <AllUsersList />
       </div>
     </div>
   ) : (
