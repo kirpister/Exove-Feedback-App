@@ -3,6 +3,8 @@ import axios from "axios";
 import { AppDispatch } from "../app/store";
 import { FinalConfirmationType, PayloadTypeQuestion } from "./feedbackSlice";
 import { showLoading2s } from "./loadingSlicer";
+import { personalRequestListType } from "../model/types/requestList";
+import { getPersonalDetailAPI } from "./authenticatedUserSlice";
 
 interface initialStateType {
   selfFeedbackRequests: Array<{
@@ -11,6 +13,8 @@ interface initialStateType {
       createdAt: string;
       opened: boolean;
       userList: Array<string>;
+      requestUserId: string;
+      createFeedbackId: null | string;
     };
   }>;
 }
@@ -32,26 +36,27 @@ const createdRequestFeedbackSlicer = createSlice({
             createdAt: string;
             opened: boolean;
             userList: Array<string>;
+            requestUserId: string;
+            createFeedbackId: null | string;
           };
         }>
       >
     ) {
-        state.selfFeedbackRequests = action.payload
+      state.selfFeedbackRequests = action.payload;
     },
   },
 });
 
-
-export const deleteRequestFeedbackAPI = (id:string)=> { 
-  return async (dispatch :AppDispatch)=> { 
-    const {data,status} = await axios.delete(`user/feedback_request?requestListId=${id}`);
-    if ( status ===200){
-      showLoading2s(dispatch)
-      alert('success delete')
+export const deleteRequestFeedbackAPI = (id: string) => {
+  return async (dispatch: AppDispatch) => {
+    const { data, status } = await axios.delete(`user/feedback_request?requestListId=${id}`);
+    if (status === 200) {
+      showLoading2s(dispatch);
+      alert("success delete");
+      dispatch(getPersonalDetailAPI());
     }
-  }
-}
+  };
+};
 
-
-export const {setAllRequestFeedback} = createdRequestFeedbackSlicer.actions
-export default createdRequestFeedbackSlicer.reducer
+export const { setAllRequestFeedback } = createdRequestFeedbackSlicer.actions;
+export default createdRequestFeedbackSlicer.reducer;

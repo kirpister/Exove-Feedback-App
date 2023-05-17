@@ -22,7 +22,7 @@ const allUserSlicer = createSlice({
       state.userListId = action.payload;
     },
     resetUserList: () => {
-      return { ...initialState };
+      return { ...initialState};
     },
   },
 });
@@ -37,6 +37,6 @@ export const getAllUserAPI = () => {
     });
   };
 };
-export const { updateAllUserList, createUserList, resetUserList } =
-  allUserSlicer.actions;
+
+export const { updateAllUserList, createUserList, resetUserList } = allUserSlicer.actions;
 export default allUserSlicer.reducer;

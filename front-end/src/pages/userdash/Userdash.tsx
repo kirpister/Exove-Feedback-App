@@ -11,6 +11,7 @@ import "../../translations/i18n";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { setFeedbackRequest } from "../../features/answerFeedbackSlicer";
 import { setAllRequestFeedback } from "../../features/requestFeedback";
+import { getPersonalDetailAPI } from "../../features/authenticatedUserSlice";
 export interface DataType {
   data: {
     msg: string;
@@ -22,20 +23,7 @@ export interface DataType {
 const Userdash: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
 
-  const [user, setUsers] = useState<personalDetailType>();
-
-  const {userDetails} = useAppSelector((state) => state.authenticatedUser);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    axios.get<personalDetailType[]>("/user").then((res) => {
-      const { data, status } = res as unknown as DataType;
-      const user = data.data;
-      setUsers({ ...user });
-      dispatch(setFeedbackRequest(user.feedBack));
-      dispatch(setAllRequestFeedback(user.selfFeedbackRequests));
-    });
-  }, [dispatch]);
-
+  const { userDetails, personalDetails: user } = useAppSelector((state) => state.authenticatedUser);
   const userInfo = () => {
     if (user) {
       const status = user.selfFeedbackRequests[0]?.requestFeedbackId?.opened;

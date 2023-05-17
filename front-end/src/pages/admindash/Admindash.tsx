@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import SidebarAdmin from "./SidebarAdmin";
+import React from "react";
 import styles from "./Admindash.module.css";
-import axios from "axios";
 import { personalDetailType } from "../../model/types/user";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../app/hooks";
-import { setFeedbackRequest } from "../../features/answerFeedbackSlicer";
-import { showLoading2s } from "../../features/loadingSlicer";
+import {  useAppSelector } from "../../app/hooks";
 
 export interface DataType {
   data: {
@@ -20,28 +14,10 @@ export interface DataType {
 
 const Admindash: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
-
-  const [user, setUsers] = useState<personalDetailType>();
-
-  const userDetails = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    axios.get<personalDetailType[]>("/user").then((res) => {
-      const { data, status } = res as unknown as DataType;
-      const user = data.data;
-      setUsers({ ...user });
-      dispatch(setFeedbackRequest(user.feedBack));
-    });
-  }, [dispatch]);
-  // console.log("USER", user);
-
+  const { userDetails, personalDetails: user } = useAppSelector((state) => state.authenticatedUser);
   const userInfo = () => {
     if (user) {
       const status = user.selfFeedbackRequests[0]?.requestFeedbackId?.opened;
-
       return (
         <>
           <table>
@@ -65,8 +41,7 @@ const Admindash: React.FC = () => {
               <tr>
                 <td>{t("tdstatus")}</td>
                 <td>
-                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened}{" "}
-                  {status ? <p>Opened</p> : <p>Closed</p>}
+                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened} {status ? <p>Opened</p> : <p>Closed</p>}
                 </td>
               </tr>
             </tbody>
@@ -95,8 +70,3 @@ const Admindash: React.FC = () => {
 
 export default Admindash;
 
-// {
-//   <h2>
-//     Welcome {userDetails?.firstName} !! You have {userDetails?.roles.join(", ")} roles
-//   </h2>
-// }

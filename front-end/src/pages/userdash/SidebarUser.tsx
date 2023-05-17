@@ -50,11 +50,7 @@ const SidebarUser: React.FC = () => {
             <li>
               <NavLink to="/notifications" className="notifications">
                 <span>{t("notifs")}</span>
-                {unReadNotifications > 0 ? (
-                  <span className="badge">{unReadNotifications}</span>
-                ) : (
-                  ""
-                )}
+                {unReadNotifications > 0 ? <span className="badge">{unReadNotifications}</span> : ""}
                 {/* {unReadNotifications > 0 ? (
                   <span className="badge">{unReadNotifications}</span>
                 ) : (
@@ -63,7 +59,7 @@ const SidebarUser: React.FC = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to={"/feedbackform"}>{t("givefb")}</NavLink>
+              <NavLink to={"/answer"}>{t("givefb")}</NavLink>
             </li>
             <li>
               {" "}
@@ -73,9 +69,7 @@ const SidebarUser: React.FC = () => {
         </nav>
         <div className="bottomdiv">
           <div className="bottom_avatar">
-            <div className="avatar">
-              {userDetails.firstName.charAt(0).toUpperCase()}
-            </div>
+            <div className="avatar">{userDetails.firstName.charAt(0).toUpperCase()}</div>
             <span>
               {userDetails.firstName} {userDetails.surName}
             </span>
