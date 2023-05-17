@@ -1,13 +1,23 @@
-.userlist .avatar {
-  margin: .5rem;
-}
-
 .single_user_card {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: .3rem;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 15rem;
 }
+
+.single_user_card .avatar {
+  margin: 0rem;
+}
+
+.single_user_card span {
+  display: flex;
+  /* /* justify-content: center; */
+  align-items: center;
+  padding: 0;
+  width: 9rem;
+  margin: 0 auto;
+}
+
 .avatar {
   width: 40px;
   height: 40px;
@@ -19,7 +29,6 @@
   font-family: var(--main-font);
   font-size: 1.5rem;
   color: white;
-  margin: 0 auto;
 }
 
 .none {

@@ -8,6 +8,7 @@ import { showLoading2s } from "../../../features/loadingSlicer";
 import { useNavigate } from "react-router-dom";
 import BtnSuccess from "../../button/success/BtnSuccess";
 import { getAllRequestUserListAPI } from "../../../features/requestUserListSlicer";
+import { ReminderText } from "../../../common/types/Reminder";
 
 export interface DataType {
   data: {
@@ -21,14 +22,10 @@ interface AllUserRequestProps {
   requests: any;
 }
 
-enum ReminderText {
-  REMIND = "Remind",
-  REMINDER_BEING_SEND = "Sending...",
-  REMINDER_SENT_SUCCESSFULLY = "Reminder sent",
-  REMINDER_SENT_ERROR = "Reminder sending failed...",
-}
-
-const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }) => {
+const SelectedReviewers: React.FC<AllUserRequestProps> = ({
+  isActive,
+  requests,
+}) => {
   const [reminderText, setReminderText] = useState<string>(ReminderText.REMIND);
   const { allUserList } = useAppSelector((state) => state.allUser);
   const navigate = useNavigate();
@@ -50,7 +47,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
     setReminderText(ReminderText.REMINDER_BEING_SEND);
     const response = await axios.post("/user/notifications/reminder", {
       receiverUserId: receiverUserId,
-      msg: 'Please send userlist to initiate feedback process'
+      msg: "Please send userlist to initiate feedback process",
     });
     const status = response.status;
     if (status === 201) {
@@ -62,9 +59,13 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
 
   let uniqueRequests = requests.filter((item: any) => itemCheck(item));
 
-  const processSetupUserList = (singleRequestedList: personalRequestListType) => {
+  const processSetupUserList = (
+    singleRequestedList: personalRequestListType
+  ) => {
     if (singleRequestedList.opened) {
-      return alert("not allow to create new feedback base on this list becuase it already created before");
+      return alert(
+        "not allow to create new feedback base on this list becuase it already created before"
+      );
     } else {
       showLoading2s(dispatch);
       setTimeout(() => {
@@ -85,7 +86,11 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
             <div className={styles.placeholder}></div>
             <button
               className={styles.btn}
-              onClick={() => (reminderText === ReminderText.REMIND || reminderText === ReminderText.REMINDER_SENT_ERROR) && sendReminder(isActive.id)}
+              onClick={() =>
+                (reminderText === ReminderText.REMIND ||
+                  reminderText === ReminderText.REMINDER_SENT_ERROR) &&
+                sendReminder(isActive.id)
+              }
             >
               {reminderText}
             </button>
@@ -97,15 +102,21 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
       // console.log("userlist", userlist);
       return (
         <div key={userlist.id} className={styles.selected_reviewers}>
-          <h2>list order</h2>
-          <p>this list condition: {userlist.opened ? "opened" : "not opened"}</p>
-          <h6>
+          {/* <h2>list order</h2>
+          <p>this list condition: {userlist.opened ? "opened" : "not opened"}</p> */}
+          <h3>
             Please confirm reviwers for{" "}
             <span>
-              {checkeUser(userlist.requestUserId as string)?.personalDetail.firstName}{" "}
-              {checkeUser(userlist.requestUserId as string)?.personalDetail.surName}
+              {
+                checkeUser(userlist.requestUserId as string)?.personalDetail
+                  .firstName
+              }{" "}
+              {
+                checkeUser(userlist.requestUserId as string)?.personalDetail
+                  .surName
+              }
             </span>
-          </h6>
+          </h3>
           {userlist.userList.map(
             (
               item: any,
@@ -113,7 +124,10 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
                 | string
                 | number
                 | boolean
-                | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+                | React.ReactElement<
+                    any,
+                    string | React.JSXElementConstructor<any>
+                  >
                 | React.ReactFragment
                 | React.ReactPortal
                 | null
@@ -123,9 +137,14 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
                 <article className={styles.userlist}>
                   {/* <input type="checkbox" id={styles.id} value={styles.id} /> */}
                   <div className={styles.single_user_card}>
-                    <div className={styles.avatar}>{checkeUser(item)?.personalDetail.firstName.charAt(0).toUpperCase()}</div>
+                    <div className={styles.avatar}>
+                      {checkeUser(item)
+                        ?.personalDetail.firstName.charAt(0)
+                        .toUpperCase()}
+                    </div>
                     <span>
-                      {checkeUser(item)?.personalDetail.firstName} {checkeUser(item)?.personalDetail.surName}
+                      {checkeUser(item)?.personalDetail.firstName}{" "}
+                      {checkeUser(item)?.personalDetail.surName}
                       {/* <br /> */}
                     </span>
                   </div>
@@ -133,7 +152,11 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({ isActive, requests }
               );
             }
           )}
-          <BtnSuccess callBack={processSetupUserList} name={"Process"} data={userlist} />
+          <BtnSuccess
+            callBack={processSetupUserList}
+            name={"Process"}
+            data={userlist}
+          />
         </div>
       );
     });

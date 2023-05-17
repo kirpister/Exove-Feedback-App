@@ -3,12 +3,15 @@ import styles from "./AllUsersList.module.css";
 import { personalDetailType } from "../../../model/types/user";
 import SingleUser1 from "./User1/SingleUser1";
 import { useScrollbar } from "../../../app/use-scrollbar";
+import { personalRequestListType } from "../../../model/types/requestList";
+import { ReminderText } from "../../../common/types/Reminder";
+import axios from "axios";
 
 interface AllUserProps {
   usersList: personalDetailType[];
   onClickUser: Function;
   isActive: personalDetailType | undefined;
-  requests: any;
+  requests: personalRequestListType[];
 }
 
 const AllUsersList: React.FC<AllUserProps> = ({
@@ -18,6 +21,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
   requests,
 }) => {
   const [search, setSearch] = useState("");
+  const [reminderText, setReminderText] = useState<string>(ReminderText.REMIND);
 
   const todoWrapper = useRef(null);
 
@@ -65,6 +69,24 @@ const AllUsersList: React.FC<AllUserProps> = ({
     return b.userRequest.length - a.userRequest.length;
   });
 
+  const sendReminder = async (receiverUserIds: string[]) => {
+    setReminderText(ReminderText.REMINDER_BEING_SEND);
+    try {
+      receiverUserIds.forEach(async (userId) => {
+        const response = await axios.post("/user/notifications/reminder", {
+          receiverUserId: userId,
+          msg: "Please send userlist to initiate feedback process",
+        });
+        if (response.status !== 201) {
+          throw new Error("Failed");
+        }
+      });
+      setReminderText(ReminderText.REMINDER_SENT_SUCCESSFULLY);
+    } catch {
+      setReminderText(ReminderText.REMINDER_SENT_ERROR);
+    }
+  };
+
   return (
     <div className={styles.all_users_list}>
       <div>
@@ -76,7 +98,29 @@ const AllUsersList: React.FC<AllUserProps> = ({
         ></input>
       </div>
 
-      <button className={styles.btn}>Remind All</button>
+      <button
+        className={styles.btn}
+        onClick={() => {
+          const userList = [...usersListSearch];
+          const usersToBeReminded = userList.filter((user) => {
+            const matchedUser = requests.find(
+              (item) => item.requestUserId === user.id
+            );
+            if (!matchedUser) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          sendReminder(
+            usersToBeReminded.map((user) => {
+              return user.id;
+            })
+          );
+        }}
+      >
+        {reminderText === ReminderText.REMIND ? "Remind all" : reminderText}
+      </button>
       <div
         style={{
           marginRight: "1px",

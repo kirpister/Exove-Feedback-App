@@ -59,7 +59,6 @@ function Feedbackform() {
     return value;
   };
 
-
   const submitAnswer = (feedbackId: string, data: any) => {
     console.log({ answers: data });
     axios
@@ -70,7 +69,6 @@ function Feedbackform() {
       .catch((err) => console.log(err));
   };
   const renderFeedback = () => {
-
     if (feedbackRequest.length > 0) {
       return feedbackRequest.map((request, index) => {
         const { feedbackId, finished } = request;
@@ -81,7 +79,6 @@ function Feedbackform() {
         let userResult = allUserList.find((user) => user.id === userId);
 
         return (
-
           <Accordion defaultActiveKey="1" style={{ margin: ".5rem" }}>
             <Accordion.Item eventKey="0">
               <Accordion.Header>
@@ -103,7 +100,6 @@ function Feedbackform() {
                 </div>
               </Accordion.Header>
               <Accordion.Body>
-
                 <div>
                   {questions.map((question, i) => {
                     const { order, title, type } = question;
@@ -147,21 +143,19 @@ function Feedbackform() {
                         setLoading(true);
                         submitAnswer(feedbackId.id, answers);
                         setLoading(false);
-                        alert("Success!")
+                        alert("Success!");
                       }}
                       key={index}
-                     
                     />
                   )}
                 </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          
         );
       });
     } else {
-      return <p>You currently have no feedback requests!</p> 
+      return <p>You currently have no feedback requests!</p>;
     }
   };
 

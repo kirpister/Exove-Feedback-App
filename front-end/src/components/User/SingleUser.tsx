@@ -6,6 +6,7 @@ import { personalDetailType } from "../../model/types/user";
 import BtnSuccess from "../button/success/BtnSuccess";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addUserFromSelectRequestList } from "../../features/requestUserListSlicer";
+import BtnSmall from "../button/small/BtnSmall";
 
 interface SingleUserProps {
   userInfo: personalDetailType;
@@ -37,27 +38,24 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
     dispatch(addUserFromSelectRequestList({ allUserList, id: userInfo.id }));
   };
   return (
-    <article className={classes.userlist}>
-      <div>
-        <div className={classes.avatar}>
-          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
-        </div>
-        <span>
-          {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-          <br />
-          {userInfo.work.departments[0]} - { userInfo.work.roles[0]}
-        </span>
-        
-        <BtnSuccess
-          className={classes.btn2}
-          callBack={() => {
-            addNewUserToSelectedUserList(userInfo.id);
-          }}
-          name="❮❮"
-          width="auto"
-          disabled={checkDisable()}
-        />
+
+    <article className={classes.single_user_card}>
+      <div className={classes.avatar}>
+        {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
+
       </div>
+      <span>
+        {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
+        <br />
+        {userInfo.work.departments[0]}, {userInfo.work.roles[0]}
+      </span>
+      <BtnSmall
+        callBack={() => {
+          addNewUserToSelectedUserList(userInfo.id);
+        }}
+        name="❮❮"
+        disabled={checkDisable()}
+      />
     </article>
   );
 };

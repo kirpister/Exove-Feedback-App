@@ -15,10 +15,10 @@ const AllUsersList: React.FC = (props: PropsType) => {
   const [search, setSearch] = useState("");
   //   const [userList, setUsersList] = useState([]);
 
-  const todoWrapper = useRef(null);
+  const listWrapper = useRef(null);
 
   const hasScroll = allUserList.length > 5;
-  useScrollbar(todoWrapper, hasScroll);
+  useScrollbar(listWrapper, hasScroll);
 
   const searchHandler = (e: any) => {
     setSearch(e.target.value);
@@ -53,10 +53,9 @@ const AllUsersList: React.FC = (props: PropsType) => {
         <div
           style={{
             marginRight: "1px",
-            height: hasScroll ? "650px" : "auto",
-            minHeight: "50px",
+            height: hasScroll ? "700px" : "auto",
           }}
-          ref={todoWrapper}
+          ref={listWrapper}
         >
           <div className={classes.scrolled_users}>
             {usersListSearch.map((user) => (

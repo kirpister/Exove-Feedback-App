@@ -56,7 +56,6 @@ function SetupUserList() {
   };
   return selectedRequesList ? (
     <div>
-      {/* <h1>Step-2 modify the list</h1> */}
       <div className={styles.confirmation_wrapper}>
         <div className={styles.selected_reviewers}>
           <SingleUserList
