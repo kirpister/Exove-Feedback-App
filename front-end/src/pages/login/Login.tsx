@@ -4,11 +4,11 @@ import Spinner from "react-bootstrap/Spinner";
 import loginstyles from "./login.module.css";
 import circle from "../../assets/circle-half.png";
 import { UserDetails } from "../../common/types/UserDetails";
-import { useDispatch } from "react-redux";
-import { saveUserDetails } from "../../features/authenticatedUserSlice";
+import { initiateFetchingUserPersonalDetails, saveUserDetails } from "../../features/authenticatedUserSlice";
 
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
+import { useAppDispatch } from "../../app/hooks";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { t, i18n } = useTranslation<"trans">("trans");
 
@@ -90,6 +90,7 @@ const Login: React.FC = () => {
                 .then((res: UserDetails) => {
                   setLoading(false);
                   dispatch(saveUserDetails(res));
+                  dispatch(initiateFetchingUserPersonalDetails())
                 })
                 .catch((e) => {
                   setLoading(false);
