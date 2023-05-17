@@ -2,6 +2,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
   align-items: center;
   background-color: transparent;
   border: solid 2px var(--light-grey-color);
@@ -22,5 +23,6 @@
 .scrolled_users {
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
   margin-right: 0.6rem;
 }
