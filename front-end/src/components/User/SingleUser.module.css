@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   width: 15rem;
+  height: 3.5rem;
 }
 
 .single_user_card .avatar {
@@ -29,4 +30,3 @@
 .img {
   width: 15px;
 }
-
