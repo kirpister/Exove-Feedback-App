@@ -39,9 +39,11 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
     dispatch(addUserFromSelectRequestList({ allUserList, id: userInfo.id }));
   };
   return (
+
     <article className={classes.single_user_card}>
       <div className={classes.avatar}>
         {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
+
       </div>
       <span>
         {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}

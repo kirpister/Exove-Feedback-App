@@ -6,6 +6,7 @@ interface PropsType {
   data?: any;
   width?: string;
   disabled?: boolean;
+  className?: string; 
 }
 function BtnSuccess(props: PropsType) {
   const { callBack, name, data, width, disabled } = props;

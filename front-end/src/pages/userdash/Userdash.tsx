@@ -56,14 +56,10 @@ const Userdash: React.FC = () => {
                 <td>{t("tdstart")}</td>
                 <td>{user.work.startDate}</td>
               </tr>
-              {/* <tr>
-                <td>Feedback Requests</td>
-                <td>{user.selfFeedbackRequests[0].requestFeedbackId.id}</td>
-              </tr> */}
               <tr>
                 <td>{t("tdstatus")}</td>
                 <td>
-                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened} {status ? <p>Opened</p> : <p>Closed</p>}
+                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened} {status ? "Opened" : "Closed"}
                 </td>
               </tr>
             </tbody>

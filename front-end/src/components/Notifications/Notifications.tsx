@@ -73,6 +73,6 @@ export const Notifications = () => {
       </div>
     );
   } else {
-    return <p> No notifications found</p>;
+    return <p style={{marginLeft: "3rem"}}> No notifications found</p>;
   }
 };

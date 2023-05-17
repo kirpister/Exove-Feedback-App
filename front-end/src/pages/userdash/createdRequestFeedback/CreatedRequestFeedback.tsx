@@ -14,13 +14,14 @@ function CreatedRequestFeedback() {
     if (selfFeedbackRequests.length > 0) {
       return selfFeedbackRequests.map((selfFeedbackRequest, index) => {
         return (
-          <div key={index}>
-            list {index + 1}
+         
+          <div className={styles.list} key={index}>
+            <p style={{fontWeight: "bold"}}>List #{index + 1}</p>
             {selfFeedbackRequest.requestFeedbackId.opened}
             {selfFeedbackRequest.requestFeedbackId.userList.map(
               (userId, index_1) => {
                 return (
-                  <p key={index_1}>
+                  <p className={styles.listP} key={index_1}>
                     {
                       allUserList.find((e) => e.id === userId)?.personalDetail
                         .firstName
@@ -36,6 +37,7 @@ function CreatedRequestFeedback() {
               name="Delete "
             />
           </div>
+        
         );
       });
     }

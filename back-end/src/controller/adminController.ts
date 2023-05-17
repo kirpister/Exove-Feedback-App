@@ -6,7 +6,7 @@ import { StatusCode_Success } from '../utils/statusCode'
 export const getAllUserInformation : RequestHandler =async(req,res,next)=> { 
   try {
     const listUser= await UserModel.find()
-    return createSuccessMessage({msg:'success',status:StatusCode_Success.REQUEST_CREATED},res,listUser)
+    return createSuccessMessage({msg:'Success!',status:StatusCode_Success.REQUEST_CREATED},res,listUser)
   } catch (error) {
     next(error)
   }
