@@ -23,7 +23,7 @@ export interface AnswerType<T, N> {
       surName: T;
     };
   };
-  finished: boolean;
+  finished: boolean | number;
 }
 export interface CreatedFeebackType extends FinalConfirmationType {
   id: string;
