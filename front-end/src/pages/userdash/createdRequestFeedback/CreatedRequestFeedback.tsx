@@ -15,7 +15,7 @@ function CreatedRequestFeedback() {
       return selfFeedbackRequests.map((selfFeedbackRequest, index) => {
         return (
           <div key={index}>
-            <p>Your Request List have {selfFeedbackRequest.requestFeedbackId.opened ? " " : "not"} opened yet</p>
+            <p>Your request list has {selfFeedbackRequest.requestFeedbackId.opened ? " " : "not"} opened yet</p>
             {selfFeedbackRequest.requestFeedbackId.userList.map((userId, index_1) => {
               return (
                 <tr>

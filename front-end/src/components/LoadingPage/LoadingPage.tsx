@@ -16,7 +16,7 @@ const LoadingPage: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         background: "white",
-        opacity: 0.5,
+        opacity: 0.8,
         visibility:`${show?'visible':'hidden'}`
       }}
     >
