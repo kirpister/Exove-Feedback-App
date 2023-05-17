@@ -211,7 +211,7 @@ article input {
   width: 70vw;
   height: fit-content;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 

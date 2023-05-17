@@ -51,7 +51,7 @@ const FeedbackForm: React.FC = () => {
     <>
       <div className={classes.dashwrapper}>
         <SingleSection sections={sections} />
-        <div>
+        <div className={classes.btnDiv}>
           <BtnSuccess
             callBack={() => {
               showLoading2s(dispatch);
@@ -60,9 +60,10 @@ const FeedbackForm: React.FC = () => {
             name="Select All"
             key={userDetails?.id}
           />
-          <div>total question have been selected: {sendQuestion.length}</div>
+          <p style={{marginTop: "1rem", fontSize: "1.3rem"}}>Total questions selected: {sendQuestion.length}</p>
+          </div>
           <CreateFeedback />
-        </div>
+        
       </div>
     </>
   );

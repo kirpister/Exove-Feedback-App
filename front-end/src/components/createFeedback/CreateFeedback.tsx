@@ -16,17 +16,16 @@ function CreateFeedback() {
       return (
         <div className={styles.form_wrapper}>
           <div className={styles.container}>
-            <p>order: {question.order}</p>
+            <p>#: {question.order}</p>
             <p>
-              title:
-              {question.title}
+              Title: {question.title}
             </p>
-            <p>type: {question.type}</p>
+            <p>Type: {question.type}</p>
             <BtnSuccess
               callBack={() => {
                 question.order && dispatch(removeSendQuestion({ order: question.order }));
               }}
-              name="remove"
+              name="Remove"
               key={"1"}
             />
           </div>
@@ -36,9 +35,9 @@ function CreateFeedback() {
   };
   return (
     <div>
-      <h2 className={styles.header}>Create feedback form</h2>
+      <h3 className={styles.header}>Selected questions</h3>
       <div>{renderQuestion()}</div>
-
+      <div className={styles.buttonsDiv}>
       <BtnSuccess
         callBack={() => {
           showLoading2s(dispatch);
@@ -54,8 +53,9 @@ function CreateFeedback() {
           window.location.reload();
           // dispatch(resetFeedback());
         }}
-        name="reset"
+        name="Reset"
       />
+      </div>
     </div>
   );
 }
