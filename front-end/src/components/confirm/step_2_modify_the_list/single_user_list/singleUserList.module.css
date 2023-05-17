@@ -25,6 +25,16 @@
   font-size: 1.5rem;
   color: white;
 }
+.avatar_wrapper {
+  width: 41px;
+  height: 41px;
+}
+
+.user_btn {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 1rem;
+}
 
 .btn {
   /* width: 220px; */
@@ -49,14 +59,15 @@
 
 .single_user_card {
   display: flex;
-  justify-content: space-between;
+  grid-auto-flow: row;
+  justify-content: left;
   width: 15rem;
   height: 4rem;
 }
 
 .single_user_card span {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   padding: 0 !important;
   margin-left: 0;
 }

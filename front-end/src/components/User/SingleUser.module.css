@@ -1,6 +1,7 @@
 .single_user_card {
   display: flex;
-  justify-content: space-between;
+  grid-auto-flow: row;
+  justify-content: left;
   width: 15rem;
   height: 4rem;
 }
@@ -10,6 +11,7 @@
 }
 .single_user_card span {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 .avatar {
@@ -24,7 +26,21 @@
   font-size: 1.5rem;
   color: white;
 }
+.avatar_wrapper {
+  width: 41px;
+  height: 41px;
+}
 
 .img {
   width: 15px;
+}
+.user_btn {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0.3rem;
+}
+
+.avatar_wrapper {
+  width: 41px;
+  height: 41px;
 }

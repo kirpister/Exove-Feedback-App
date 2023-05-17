@@ -38,30 +38,36 @@ function SingleUserList(props: PropsType) {
         {singleRequestedList.userList.map((item: any, index: number) => {
           return (
             <article className={styles.single_user_card}>
-              <div className={styles.avatar}>
-                {checkeUser(item)
-                  ?.personalDetail.firstName.charAt(0)
-                  .toUpperCase()}
+              <div className={styles.avatar_wrapper}>
+                <div className={styles.avatar}>
+                  {checkeUser(item)
+                    ?.personalDetail.firstName.charAt(0)
+                    .toUpperCase()}
+                </div>
               </div>
-
-              <span>
-                {checkeUser(item)?.personalDetail.firstName}{" "}
-                {checkeUser(item)?.personalDetail.surName}
-                <br />
-                {checkeUser(item)?.work.departments[0]},{" "}
-                {checkeUser(item)?.work.roles[0]}
-              </span>
-              {buttonName && callBack ? (
-                <BtnSmall
-                  callBack={() => {
-                    callBack(item);
-                  }}
-                  // name="X"
-                  name={<img src={del} alt="delete" className={styles.img} />}
-                />
-              ) : (
-                ""
-              )}
+              <div className={styles.user_btn}>
+                <span>
+                  <div>
+                    {checkeUser(item)?.personalDetail.firstName}{" "}
+                    {checkeUser(item)?.personalDetail.surName}
+                  </div>
+                  <div>
+                    {checkeUser(item)?.work.departments[0]},{" "}
+                    {checkeUser(item)?.work.roles[0]}
+                  </div>
+                </span>
+                {buttonName && callBack ? (
+                  <BtnSmall
+                    callBack={() => {
+                      callBack(item);
+                    }}
+                    // name="X"
+                    name={<img src={del} alt="delete" className={styles.img} />}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
             </article>
           );
         })}

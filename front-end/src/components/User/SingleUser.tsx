@@ -34,22 +34,31 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
   };
   return (
     <article className={styles.single_user_card}>
-      <div className={styles.avatar}>
-        {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
+      <div className={styles.avatar_wrapper}>
+        <div className={styles.avatar}>
+          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
+        </div>
       </div>
-      <span>
-        {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-        <br />
-        {userInfo.work.departments[0]}, {userInfo.work.roles[0]}
-      </span>
-      <BtnSmall
-        callBack={() => {
-          addNewUserToSelectedUserList(userInfo.id);
-        }}
-        // name="❮❮"
-        name={<img src={arrow} alt="arrow" className={styles.img} />}
-        disabled={checkDisable()}
-      />
+
+      <div className={styles.user_btn}>
+        <span>
+          <div>
+            {userInfo.personalDetail.firstName}{" "}
+            {userInfo.personalDetail.surName}
+          </div>
+          <div>
+            {userInfo.work.departments[0]}, {userInfo.work.roles[0]}
+          </div>
+        </span>
+        <BtnSmall
+          callBack={() => {
+            addNewUserToSelectedUserList(userInfo.id);
+          }}
+          // name="❮❮"
+          name={<img src={arrow} alt="arrow" className={styles.img} />}
+          disabled={checkDisable()}
+        />
+      </div>
     </article>
   );
 };
