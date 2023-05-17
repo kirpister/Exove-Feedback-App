@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import classes from "./userList.module.css";
-import { personalDetailType } from "../../../../model/types/user";
 import SingleUser from "../../../User/SingleUser";
 import { useAppSelector } from "../../../../app/hooks";
 import { personalRequestListType } from "../../../../model/types/requestList";
@@ -13,10 +12,7 @@ interface PropsType {
 const AllUsersList: React.FC = (props: PropsType) => {
   const { allUserList } = useAppSelector((state) => state.allUser);
   const [search, setSearch] = useState("");
-  //   const [userList, setUsersList] = useState([]);
-
   const listWrapper = useRef(null);
-
   const hasScroll = allUserList.length > 5;
   useScrollbar(listWrapper, hasScroll);
 

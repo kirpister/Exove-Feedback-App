@@ -300,7 +300,6 @@ export const createFeedbackUserList: RequestHandler = async (
       newRequestFeedbackUser
     );
   } catch (error) {
-    console.error(error);
     next(error);
   }
 };

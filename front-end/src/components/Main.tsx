@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { RootState } from "../app/store";
 import { ADMIN_ROLE } from "../common/constants";
 import SidebarAdmin from "../pages/admindash/SidebarAdmin";
 import SidebarUser from "../pages/userdash/SidebarUser";
 import { getAllRequestUserListAPI } from "../features/requestUserListSlicer";
 import { getAllFeedbackAPI } from "../features/createdFeedbackSlicer";
 import { getAllUserAPI } from "../features/alluserSlicer";
+import { getPersonalDetailAPI } from "../features/authenticatedUserSlice";
+import { showLoading2s } from "../features/loadingSlicer";
 
 const Main: React.FC = () => {
   const { userDetails } = useAppSelector((state) => state.authenticatedUser);
-  const { notifications } = useAppSelector((state) => state.userNotifications);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log('outlet')
+    showLoading2s(dispatch)
     dispatch(getAllRequestUserListAPI());
     dispatch(getAllFeedbackAPI());
     dispatch(getAllUserAPI());
+    dispatch(getPersonalDetailAPI());
   }, [dispatch]);
   return (
     <main className="global_wrapper">

@@ -5,6 +5,10 @@ import { RootState } from "../../app/store";
 import { personalDetailType } from "../../model/types/user";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setFeedbackRequest } from "../../features/answerFeedbackSlicer";
+import { setAllRequestFeedback } from "../../features/requestFeedback";
+import { getPersonalDetailAPI } from "../../features/authenticatedUserSlice";
 export interface DataType {
   data: {
     msg: string;
@@ -16,10 +20,7 @@ export interface DataType {
 const Userdash: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
 
-  const personalDetails = useSelector(
-    (state: RootState) => state.authenticatedUser.personalDetails
-  );
-
+  const { userDetails, personalDetails } = useAppSelector((state) => state.authenticatedUser);
   const userInfo = () => {
     if (personalDetails) {
       const status = personalDetails.selfFeedbackRequests[0]?.requestFeedbackId?.opened;

@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios, { AxiosError } from "axios";
-
 import { CheckedUser } from "../../model/types/user";
 import { useNavigate } from "react-router-dom";
 
 import userstyles from "./userdash.module.css";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 import CreatedRequestFeedback from "./createdRequestFeedback/CreatedRequestFeedback";
 import BtnSuccess from "../../components/button/success/BtnSuccess";
+import { getPersonalDetailAPI } from "../../features/authenticatedUserSlice";
 
 const RequestFeedback: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
   const { allUserList } = useAppSelector((state) => state.allUser);
   const { selfFeedbackRequests } = useAppSelector((state) => state.requestFeedback);
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
-  const navigate = useNavigate();
-
-  const userDetails: any = useSelector((state: RootState) => state.authenticatedUser.userDetails);
-
+  
+  const dispatch = useAppDispatch();
   const handleSubmit = () => {
     let userListId = [];
     if (checkedUsers.length > 1) {
@@ -30,25 +25,24 @@ const RequestFeedback: React.FC = () => {
         userListId.push(user.id);
       }
     }
-    axios
-      .post("user/feedback_request", { userListId: userListId })
-      .then((response) => {
-        alert("Success!");
-        navigate("/");
-      })
-      .catch((error) => {
-        if (error instanceof AxiosError){
-          alert(error.response?.data.err.msg)
-        }
-      });
+    const confirm = window.confirm("are you sure you want to send ?");
+    confirm &&
+      axios
+        .post("user/feedback_request", { userListId: userListId })
+        .then((response) => {
+          alert("Success!");
+          dispatch(getPersonalDetailAPI());
+        })
+        .catch((error) => {
+          if (error instanceof AxiosError) {
+            alert(error.response?.data.err.msg);
+          }
+        });
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
     const isChecked = e.target.checked;
     const userId = user.id;
-
-    // console.log(`User ${user.id} ${user.personalDetail.firstName} ${isChecked ? "checked" : "unchecked"}`);
-
     if (isChecked) {
       const checkedUser: CheckedUser = {
         id: userId,
@@ -59,8 +53,6 @@ const RequestFeedback: React.FC = () => {
     } else {
       setCheckedUsers((prevCheckedUsers) => prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId));
     }
-
-    // console.log(checkedUsers);
   };
 
   const renderUser = (usersList: any) => {
@@ -69,16 +61,12 @@ const RequestFeedback: React.FC = () => {
         return (
           <article key={user.id} className={userstyles.userlist}>
             <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
-            {/* <div> */}
-
-              <div className={userstyles.avatar}>{user.personalDetail.firstName.charAt(0).toUpperCase()}</div>
-
-              <span>
-                {user.personalDetail.firstName} {user.personalDetail.surName}
-                <br />
-                {user.work.departments}
-              </span>
-              {/* </div> */}
+            <div className={userstyles.avatar}>{user.personalDetail.firstName.charAt(0).toUpperCase()}</div>
+            <span>
+              {user.personalDetail.firstName} {user.personalDetail.surName}
+              <br />
+              {user.work.departments}
+            </span>
           </article>
         );
       });
@@ -91,13 +79,10 @@ const RequestFeedback: React.FC = () => {
         <h2>{t("header")}</h2>
         <p>{t("reqparagraph")}</p>
         <div className={userstyles.users}>{renderUser(allUserList)}</div>
-        {/* <button onClick={handleSubmit}>SUBMIT</button> */}
         <BtnSuccess callBack={handleSubmit} name={t("subbtn")} disabled={selfFeedbackRequests.length > 0 ? true : false} />
-      </div>
-      {/* here is requested feedback which is created */}
-      <div>
         <CreatedRequestFeedback />
       </div>
+      <div></div>
     </main>
   );
 };

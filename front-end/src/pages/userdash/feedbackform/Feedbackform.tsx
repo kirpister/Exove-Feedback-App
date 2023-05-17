@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 import { useTranslation } from "react-i18next";
 
 import Accordion from "react-bootstrap/Accordion";
+import { useLocation } from "react-router-dom";
 
 interface AnswerFeedbackType {
   answers: Array<{ order: number; answer: Array<string | number> }>;
@@ -14,12 +15,12 @@ interface AnswerFeedbackType {
 
 function Feedbackform() {
   const [loading, setLoading] = useState<Boolean>(false);
+  const {state} = useLocation()
+
   const { t } = useTranslation<"trans">("trans");
   const { feedbackRequest } = useAppSelector((state) => state.answerFeedback);
   const { allUserList } = useAppSelector((state) => state.allUser);
-  const [answers, setAnswers] = useState<
-    Array<{ order: number; answer: Array<string | number> }>
-  >([]);
+  const [answers, setAnswers] = useState<Array<{ order: number; answer: Array<string | number> }>>([]);
 
   const renderRadioButton = (title: string, order: number) => {
     let value = [<></>];
@@ -33,11 +34,7 @@ function Feedbackform() {
                 type="radio"
                 value={i}
                 name={title}
-                onChange={(
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-                  >
-                ) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
                   setAnswers((prev) => {
                     const temp = [...prev];
                     const currentValue = Number(e.target.value);
@@ -79,15 +76,14 @@ function Feedbackform() {
         let userResult = allUserList.find((user) => user.id === userId);
 
         return (
-          <Accordion defaultActiveKey="1" style={{ margin: ".5rem", width: "95%" }}>
-            <Accordion.Item eventKey="0">
+          <Accordion defaultActiveKey="1" style={{ margin: ".5rem",width: "95%"  }}>
+            <Accordion.Item eventKey={finished?'0':'1'}>
               <Accordion.Header>
                 <div className={styles.accordionheader}>
                   <h3>
                     {" "}
-                    Feedback for {userResult?.personalDetail.firstName}{" "}
-                    {userResult?.personalDetail.surName} from{" "}
-                    {userResult?.work.departments[0]} department
+                    Feedback for {userResult?.personalDetail.firstName} {userResult?.personalDetail.surName} from {userResult?.work.departments[0]}{" "}
+                    department
                   </h3>
                   <div
                     className={styles.finishdiv}
@@ -106,8 +102,7 @@ function Feedbackform() {
                     return (
                       <div key={order}>
                         <label className={styles.questionlabel}>
-                          <span className={styles.numberspan}>{order}.</span>{" "}
-                          {title}
+                          <span className={styles.numberspan}>{order}.</span> {title}
                         </label>
                         {type === QuestionType.freeString ? (
                           <textarea
@@ -116,9 +111,7 @@ function Feedbackform() {
                               setAnswers((prev) => {
                                 const temp = [...prev];
                                 const currentValue = e.target.value;
-                                const index = temp.findIndex(
-                                  (e) => e.order === order
-                                );
+                                const index = temp.findIndex((e) => e.order === order);
                                 if (index !== -1) {
                                   temp[index].answer = [currentValue];
                                 } else {
@@ -129,9 +122,7 @@ function Feedbackform() {
                             }}
                           />
                         ) : (
-                          <div className={styles.radiodiv}>
-                            {renderRadioButton(title, order)}
-                          </div>
+                          <div className={styles.radiodiv}>{renderRadioButton(title, order)}</div>
                         )}
                       </div>
                     );

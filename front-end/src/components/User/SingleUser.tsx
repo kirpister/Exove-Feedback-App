@@ -16,19 +16,12 @@ interface SingleUserProps {
 }
 
 const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
-  const userDetails: any = useSelector(
-    (state: RootState) => state.authenticatedUser.userDetails
-  );
-  const { selectedRequesList } = useAppSelector(
-    (state) => state.requestUserlist
-  );
+  const { selectedRequesList } = useAppSelector((state) => state.requestUserlist);
   const { allUserList } = useAppSelector((state) => state.allUser);
   const dispatch = useAppDispatch();
   const checkDisable = () => {
     if (selectedRequesList) {
-      const index = selectedRequesList.userList.findIndex(
-        (id) => id === userInfo.id
-      );
+      const index = selectedRequesList.userList.findIndex((id) => id === userInfo.id);
       if (index !== -1) {
         return true;
       }

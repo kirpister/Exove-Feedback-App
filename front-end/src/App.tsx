@@ -51,6 +51,7 @@ const App = () => {
               <Route path=":id" element={<SetupUserList />} />
               <Route path=":id/confirm" element={<FinalConfirm />} />
             </Route>
+            <Route path="/requestfeedback" element={<RequestFeedback />} />
             <Route path="/allfeedbacks">
               <Route index element={<AllFeedbacks />} />
               <Route path=":singlefeedback" element={<SingleUserFeedback />} />
@@ -65,7 +66,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Userdash />} />
-            <Route path="/feedbackform" element={<AnswerFeedback />} />
+            <Route path="/answer" element={<AnswerFeedback />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="/requestfeedback" element={<RequestFeedback />} />
             <Route path="*" element={<ErrorPage />} />

@@ -48,6 +48,7 @@ export const initiateFetchNotifications = () => {
   return async (dispatch: AppDispatch) => {
     try {
       const { status, data } = await fetchNotifications();
+      console.log(data)
       if (status === 200) {
         dispatch(saveNotifications(data));
       }

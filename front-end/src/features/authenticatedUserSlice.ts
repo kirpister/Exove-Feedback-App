@@ -1,18 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { NavigateFunction } from "react-router-dom";
 import { AppDispatch } from "../app/store";
 import { UserDetails } from "../common/types/UserDetails";
-import { personalDetailType } from "../model/types/user";
 import { logoutSession } from "../services/logout";
 import { fetchUserPersonalDetails } from "../services/user";
 import { validateSession } from "../services/validate";
 import { resetUserList } from "./alluserSlicer";
-import { setFeedbackRequest } from "./answerFeedbackSlicer";
 import { resetAllFeedback } from "./createdFeedbackSlicer";
 import { resetFeedback } from "./feedbackSlice";
 import { resetNotifications } from "./notificationsSlice";
-import { setAllRequestFeedback } from "./requestFeedback";
 import { resetFeedbackRequestList } from "./requestUserListSlicer";
+import { DataType, personalDetailType } from "../model/types/user";
+import { setFeedbackRequest } from "./answerFeedbackSlicer";
+import { setAllRequestFeedback } from "./requestFeedback";
+import axios from "axios";
 
 interface AuthenticatedUserState {
   userDetails: UserDetails | undefined;
@@ -48,6 +49,9 @@ export const authenticatedUserSlice = createSlice({
       state.isLoading = false;
       state.isLoggedIn = false;
     },
+    setPersonalDetail(state, action: PayloadAction<personalDetailType>) {
+      state.personalDetails = action.payload;
+    },
   },
 });
 
@@ -68,11 +72,11 @@ export const initiateValidateSession = () => {
 export const initiateFetchingUserPersonalDetails = () => {
   return async (dispatch: AppDispatch) => {
     try {
-        const response = await fetchUserPersonalDetails();
-        if(response.status === 200) {
-          dispatch(savePersonalDetails(response.data.data));
-          dispatch(setFeedbackRequest(response.data.data.feedBack))
-          dispatch(setAllRequestFeedback(response.data.data.selfFeedbackRequests));
+        const {data,status} = await fetchUserPersonalDetails();
+        if(status === 200) {
+          dispatch(savePersonalDetails(data.data));
+          dispatch(setFeedbackRequest(data.data.feedBack))
+          dispatch(setAllRequestFeedback(data.data.selfFeedbackRequests));
         }
     } catch (error) {
       dispatch(setIsLoading(false));
@@ -98,7 +102,19 @@ export const initiateLogoutSession = (navigagte: NavigateFunction) => {
     }
   };
 };
-
-export const { saveUserDetails, setIsLoading, logout, savePersonalDetails } =
-  authenticatedUserSlice.actions;
+export const getPersonalDetailAPI = () => {
+  return async (dispatch: AppDispatch) => {
+    try {
+      axios.get<personalDetailType>("/user").then((res) => {
+        const { data, status } = res;
+        const user = data.data;
+        // setUsers({ ...user });
+        dispatch(setPersonalDetail(user));
+        dispatch(setFeedbackRequest(user?.feedBack));
+        dispatch(setAllRequestFeedback(user.selfFeedbackRequests));
+      });
+    } catch (error) {}
+  };
+};
+export const { saveUserDetails, setIsLoading, logout, setPersonalDetail,savePersonalDetails} = authenticatedUserSlice.actions;
 export default authenticatedUserSlice.reducer;
