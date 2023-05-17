@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   height: 100vh;
-  gap: 2rem;
 }
 
 .selected_reviewers {
@@ -13,5 +12,5 @@
   width: 55vw;
   border-radius: 0.5rem;
   height: 100vh;
-  margin-left: 3rem;
+  margin-right: 3rem;
 }

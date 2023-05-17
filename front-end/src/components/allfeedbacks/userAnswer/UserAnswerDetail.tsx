@@ -40,13 +40,14 @@ const UserAnswerDetail = (props: Propstype) => {
   };
   const renderUserAnswer = (answerDetail: AnswerType<string, number>) => {
     const { finished, user } = answerDetail;
-    // console.log("USER", user);
+    console.log("USERRRR", user);
+    console.log("finished", finished);
+
     return (
       <div
         onClick={() => {
           goNextRouter(dispatch, navigate, `${index}`, { answerDetail, index });
         }}
-        // to={`${index}`}
         className={classes.link}
         // state={{ answerDetail, index }}
       >
