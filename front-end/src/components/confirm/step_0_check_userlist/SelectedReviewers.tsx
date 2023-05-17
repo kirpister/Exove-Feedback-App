@@ -8,6 +8,7 @@ import { showLoading2s } from "../../../features/loadingSlicer";
 import { useNavigate } from "react-router-dom";
 import BtnSuccess from "../../button/success/BtnSuccess";
 import { getAllRequestUserListAPI } from "../../../features/requestUserListSlicer";
+import { ReminderText } from "../../../common/types/Reminder";
 
 export interface DataType {
   data: {
@@ -19,13 +20,6 @@ export interface DataType {
 interface AllUserRequestProps {
   isActive: any;
   requests: any;
-}
-
-enum ReminderText {
-  REMIND = "Remind",
-  REMINDER_BEING_SEND = "Sending...",
-  REMINDER_SENT_SUCCESSFULLY = "Reminder sent",
-  REMINDER_SENT_ERROR = "Reminder sending failed...",
 }
 
 const SelectedReviewers: React.FC<AllUserRequestProps> = ({
