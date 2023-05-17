@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./SingleUser.module.css";
+import styles from "./SingleUser.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { personalDetailType } from "../../model/types/user";
@@ -36,8 +36,8 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
     dispatch(addUserFromSelectRequestList({ allUserList, id: userInfo.id }));
   };
   return (
-    <article className={classes.single_user_card}>
-      <div className={classes.avatar}>
+    <article className={styles.single_user_card}>
+      <div className={styles.avatar}>
         {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
       </div>
       <span>
@@ -50,7 +50,7 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
           addNewUserToSelectedUserList(userInfo.id);
         }}
         // name="❮❮"
-        name={<img src={arrow} className={classes.img} />}
+        name={<img src={arrow} alt="arrow" className={styles.img} />}
         disabled={checkDisable()}
       />
     </article>
