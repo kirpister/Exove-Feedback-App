@@ -124,9 +124,9 @@ const AllUsersList: React.FC<AllUserProps> = ({
       <div
         style={{
           marginRight: "1px",
-          marginLeft: "5px",
-          height: hasScroll ? "650px" : "auto",
-          minHeight: "50px",
+
+          height: hasScroll ? "800px" : "auto",
+          minHeight: "100px",
         }}
         ref={listWrapper}
       >
