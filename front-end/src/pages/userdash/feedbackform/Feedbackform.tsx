@@ -76,7 +76,7 @@ function Feedbackform() {
         let userResult = allUserList.find((user) => user.id === userId);
 
         return (
-          <Accordion defaultActiveKey="1" style={{ margin: ".5rem" }}>
+          <Accordion defaultActiveKey="1" style={{ margin: ".5rem",width: "95%"  }}>
             <Accordion.Item eventKey={finished?'0':'1'}>
               <Accordion.Header>
                 <div className={styles.accordionheader}>
@@ -152,7 +152,7 @@ function Feedbackform() {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.headerh2}>{t("feedbackheader")}</h2>
+      <h2>{t("feedbackheader")}</h2>
       <div className={styles.instructions}>
         <p>{t("instruction")}</p>
         <p>{t("scale")}</p>

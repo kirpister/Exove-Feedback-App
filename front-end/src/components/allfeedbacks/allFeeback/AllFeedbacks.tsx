@@ -19,6 +19,8 @@ const AllFeedbacks = () => {
   let { allCreatedFeedback } = useAppSelector((state) => state.createdFeedback);
   const dispatch = useAppDispatch();
   const { allUserList } = useAppSelector((state) => state.allUser);
+  console.log("Alluserslist", allUserList);
+
   const navigate = useNavigate();
   const deleteFeedback = (feedbackId: string) => {
     const confirm = window.confirm(
@@ -28,7 +30,7 @@ const AllFeedbacks = () => {
   };
   const renderAllFeedback = (list: Array<CreatedFeebackType>) => {
     if (list.length === 0) {
-      return <div>NO Feedback List</div>;
+      return <div>No Feedback List</div>;
     }
     return list.map((item, index) => {
       const {
@@ -45,6 +47,17 @@ const AllFeedbacks = () => {
       const regex = /\^([\w-]+)\^/;
       const userId = details.title.match(regex)![1];
       let userResult = allUserList.find((user) => user.id === userId);
+
+      // Add sorting function to all users feedbacks.
+      let answersSort = answers.map((item) => {
+        return {
+          ...item,
+          finished: item.finished ? 1 : 0,
+        };
+      });
+      answersSort.sort((a: any, b: any) => {
+        return a.finished - b.finished;
+      });
 
       return (
         <Accordion defaultActiveKey="1" style={{ margin: ".5rem" }}>
@@ -89,10 +102,10 @@ const AllFeedbacks = () => {
               {/* <div className={classes.questions}>
                 {renderLitOfQuestion(details.questions)}
               </div> */}
-              {answers?.map((item, index) => {
+              {answersSort?.map((item, index) => {
                 return (
                   <ListGroup>
-                    <ListGroup.Item>
+                    <ListGroup.Item style={{ marginTop: ".3rem" }}>
                       <UserAnswerDetail
                         answerDetail={item}
                         index={index}

@@ -36,7 +36,7 @@ const Admindash: React.FC = () => {
               </tr>
               {/* <tr>
                 <td>Feedback Requests</td>
-                <td>{user.selfFeedbackRequests[0].requestFeedbackId.id}</td>
+                <td>{personalDetails.selfFeedbackRequests[0].requestFeedbackId.id}</td>
               </tr> */}
               <tr>
                 <td>{t("tdstatus")}</td>
@@ -57,7 +57,7 @@ const Admindash: React.FC = () => {
     <main>
       <div className={styles.admindash}>
         <h2>
-          {t("greeting")} {userDetails?.firstName}!
+          {t("greeting")} {user?.personalDetail.firstName}!
         </h2>
         <p>
           {t("date")} {new Date().toLocaleDateString()}

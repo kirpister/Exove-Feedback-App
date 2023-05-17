@@ -1,7 +1,7 @@
 .confirmation_wrapper {
   display: flex;
   justify-content: center;
-
+  width: 80vw;
   height: 100vh;
 }
 
@@ -14,5 +14,5 @@
   padding: 1.5rem;
   border-radius: 0.5rem;
   height: 100vh;
-  margin-left: 3rem;
+  margin-left: 2rem;
 }

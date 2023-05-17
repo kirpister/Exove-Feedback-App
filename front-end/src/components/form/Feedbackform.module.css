@@ -3,7 +3,19 @@
   margin: 2rem; */
 }
 
-.btn {
+.btnDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem;
+}
+
+.btnDiv button {
+  width: 200px;
+  height: fit-content;
+}
+
+/* .btn {
   width: 320px;
   padding: 0.5rem;
   border: 2px solid black;
@@ -19,4 +31,4 @@
   background-color: var(--purple-color);
   color: white;
   border: 1.5px solid var(--purple-color);
-}
+} */

@@ -3,6 +3,7 @@ import { NavigateFunction } from "react-router-dom";
 import { AppDispatch } from "../app/store";
 import { UserDetails } from "../common/types/UserDetails";
 import { logoutSession } from "../services/logout";
+import { fetchUserPersonalDetails } from "../services/user";
 import { validateSession } from "../services/validate";
 import { resetUserList } from "./alluserSlicer";
 import { resetAllFeedback } from "./createdFeedbackSlicer";
@@ -10,22 +11,22 @@ import { resetFeedback } from "./feedbackSlice";
 import { resetNotifications } from "./notificationsSlice";
 import { resetFeedbackRequestList } from "./requestUserListSlicer";
 import { DataType, personalDetailType } from "../model/types/user";
-import axios from "axios";
 import { setFeedbackRequest } from "./answerFeedbackSlicer";
 import { setAllRequestFeedback } from "./requestFeedback";
+import axios from "axios";
 
 interface AuthenticatedUserState {
   userDetails: UserDetails | undefined;
   isLoading: boolean;
   isLoggedIn: boolean;
-  personalDetails?: personalDetailType;
+  personalDetails: personalDetailType | undefined;
 }
 
 const initialState: AuthenticatedUserState = {
   userDetails: undefined,
   isLoading: true,
   isLoggedIn: false,
-  // personalDetails: [],
+  personalDetails: undefined,
 };
 
 export const authenticatedUserSlice = createSlice({
@@ -36,6 +37,9 @@ export const authenticatedUserSlice = createSlice({
       state.userDetails = action.payload;
       state.isLoading = false;
       state.isLoggedIn = true;
+    },
+    savePersonalDetails(state, action) {
+      state.personalDetails = action.payload;
     },
     setIsLoading(state, action) {
       state.isLoading = action.payload;
@@ -57,12 +61,28 @@ export const initiateValidateSession = () => {
       const { status, data } = await validateSession();
       if (status === 200) {
         dispatch(saveUserDetails(data));
+        dispatch(initiateFetchingUserPersonalDetails())
       }
     } catch (error) {
       dispatch(setIsLoading(false));
     }
   };
 };
+
+export const initiateFetchingUserPersonalDetails = () => {
+  return async (dispatch: AppDispatch) => {
+    try {
+        const {data,status} = await fetchUserPersonalDetails();
+        if(status === 200) {
+          dispatch(savePersonalDetails(data.data));
+          dispatch(setFeedbackRequest(data.data.feedBack))
+          dispatch(setAllRequestFeedback(data.data.selfFeedbackRequests));
+        }
+    } catch (error) {
+      dispatch(setIsLoading(false));
+    }
+  };
+}
 
 export const initiateLogoutSession = (navigagte: NavigateFunction) => {
   return async (dispatch: AppDispatch) => {
@@ -96,5 +116,5 @@ export const getPersonalDetailAPI = () => {
     } catch (error) {}
   };
 };
-export const { saveUserDetails, setIsLoading, logout, setPersonalDetail } = authenticatedUserSlice.actions;
+export const { saveUserDetails, setIsLoading, logout, setPersonalDetail,savePersonalDetails} = authenticatedUserSlice.actions;
 export default authenticatedUserSlice.reducer;

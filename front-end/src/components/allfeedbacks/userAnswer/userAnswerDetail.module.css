@@ -9,6 +9,13 @@
 .single_user_feedback {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  height: 3rem;
+}
+
+.single_user_feedback p {
+  margin: 0;
+  padding: 0;
 }
 
 .btn {

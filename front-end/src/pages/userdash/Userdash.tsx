@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import userstyles from "./userdash.module.css";
-
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import axios from "axios";
 import { personalDetailType } from "../../model/types/user";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
@@ -23,10 +20,10 @@ export interface DataType {
 const Userdash: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
 
-  const { userDetails, personalDetails: user } = useAppSelector((state) => state.authenticatedUser);
+  const { userDetails, personalDetails } = useAppSelector((state) => state.authenticatedUser);
   const userInfo = () => {
-    if (user) {
-      const status = user.selfFeedbackRequests[0]?.requestFeedbackId?.opened;
+    if (personalDetails) {
+      const status = personalDetails.selfFeedbackRequests[0]?.requestFeedbackId?.opened;
 
       return (
         <>
@@ -34,24 +31,20 @@ const Userdash: React.FC = () => {
             <tbody>
               <tr>
                 <td>{t("tdemployee")}</td>
-                <td>{user.personalDetail.firstName}</td>
+                <td>{personalDetails.personalDetail.firstName}</td>
               </tr>
               <tr>
                 <td>{t("tddepartment")}</td>
-                <td>{user.work.departments}</td>
+                <td>{personalDetails.work.departments}</td>
               </tr>
               <tr>
                 <td>{t("tdstart")}</td>
-                <td>{user.work.startDate}</td>
+                <td>{personalDetails.work.startDate}</td>
               </tr>
-              {/* <tr>
-                <td>Feedback Requests</td>
-                <td>{user.selfFeedbackRequests[0].requestFeedbackId.id}</td>
-              </tr> */}
               <tr>
                 <td>{t("tdstatus")}</td>
                 <td>
-                  {user.selfFeedbackRequests[0]?.requestFeedbackId.opened} {status ? <p>Opened</p> : <p>Closed</p>}
+                  {personalDetails.selfFeedbackRequests[0]?.requestFeedbackId.opened} {status ? "Opened" : "Closed"}
                 </td>
               </tr>
             </tbody>
@@ -67,7 +60,7 @@ const Userdash: React.FC = () => {
     <main className={userstyles.usermain}>
       <div className={userstyles.userdash}>
         <h2>
-          {t("greeting")} {userDetails?.firstName}!
+          {t("greeting")} {personalDetails?.personalDetail.firstName}!
         </h2>
         <p>
           {t("date")} {new Date().toLocaleDateString()}

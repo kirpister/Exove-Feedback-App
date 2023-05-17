@@ -14,7 +14,7 @@ function CreatedRequestFeedback() {
     if (selfFeedbackRequests.length > 0) {
       return selfFeedbackRequests.map((selfFeedbackRequest, index) => {
         return (
-          <Fragment key={index}>
+          <div key={index}>
             <p>Your Request List have {selfFeedbackRequest.requestFeedbackId.opened ? " " : "not"} opened yet</p>
             {selfFeedbackRequest.requestFeedbackId.userList.map((userId, index_1) => {
               return (
@@ -32,7 +32,7 @@ function CreatedRequestFeedback() {
               }}
               name="Delete "
             />
-          </Fragment>
+          </div>
         );
       });
     }
@@ -45,25 +45,12 @@ function CreatedRequestFeedback() {
 
   return selfFeedbackRequests.length > 0 ? (
     <div className={styles.requestwrapper}>
-      <h2>Selected Request List</h2>
-      {/* <table> */}
-      {/* <thead>
-          <tr>
-            <th>Name</th>
-            <th></th>
-            <th>Departments</th>
-          </tr>
-        </thead> */}
-      {renderRequestFeeback()}
-      {/* {<SingleUserList index={3} singleRequestedList={selfFeedbackRequests[0].requestFeedbackId} />} */}
-
-      {/* <BtnError
-        callBack={() => {
-          deleteRequestFeedback(selfFeedbackRequests[0].requestFeedbackId.id);
-        }}
-        name="Delete "
-        /> */}
-      {/* </table> */}
+      <table>
+        <thead>
+          <h2>Selected Request List</h2>
+        </thead>
+        <tbody>{renderRequestFeeback()}</tbody>
+      </table>
     </div>
   ) : (
     <></>
