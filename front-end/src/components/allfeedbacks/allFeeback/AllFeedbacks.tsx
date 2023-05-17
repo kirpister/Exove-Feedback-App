@@ -120,12 +120,14 @@ const AllFeedbacks = () => {
                   </ListGroup>
                 );
               })}
+              <div className={classes.deletebtn}>
               <BtnError
                 callBack={() => {
                   deleteFeedback(item.id);
                 }}
                 name="Delete This Feedback"
               />
+              </div>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

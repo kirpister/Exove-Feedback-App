@@ -98,7 +98,7 @@ const Login: React.FC = () => {
                 });
             }}
           >
-            {loading ? <Spinner animation="border" /> : t("loginbtn")}
+            {loading ? <Spinner size="sm" animation="border" /> : t("loginbtn")}
           </button>
         </div>
       </div>
