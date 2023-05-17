@@ -14,6 +14,17 @@ interface initialStateType {
     };
   }>;
 }
+interface selfFeedbackRequest {
+  requestFeedbackId: {
+    id: string;
+    createdAt: string;
+    opened: boolean;
+    userList: Array<string>;
+  }
+}
+export interface requestFeedback {
+  selfFeedbackRequests: selfFeedbackRequest[];
+}
 
 const initialState: initialStateType = {
   selfFeedbackRequests: [],
@@ -25,16 +36,7 @@ const createdRequestFeedbackSlicer = createSlice({
   reducers: {
     setAllRequestFeedback(
       state,
-      action: PayloadAction<
-        Array<{
-          requestFeedbackId: {
-            id: string;
-            createdAt: string;
-            opened: boolean;
-            userList: Array<string>;
-          };
-        }>
-      >
+      action: PayloadAction<selfFeedbackRequest[]>
     ) {
         state.selfFeedbackRequests = action.payload
     },
