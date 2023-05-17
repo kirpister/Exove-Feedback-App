@@ -47,36 +47,7 @@ interface DataType {
 }
 const Chart = (props: Propstype) => {
   const [data, setData] = useState<Array<DataType>>([
-    // {
-    //   subject: "Quality Focus",
-    //   A: 3,
-    //   // fullMark: 5,
-    // },
-    // {
-    //   subject: "People Skills",
-    //   A: 3,
-    //   // fullMark: 5,
-    // },
-    // {
-    //   subject: "Self Guidance",
-    //   A: 3,
-    //   // fullMark: 5,
-    // },
-    // {
-    //   subject: "Leadership",
-    //   A: 3,
-    //   // fullMark: 5,
-    // },
-    // {
-    //   subject: "Readiness for Change",
-    //   A: 3.4,
-    //   // fullMark: 5,
-    // },
-    // {
-    //   subject: "Creativity",
-    //   A: 0,
-    //   // fullMark: 5,
-    // },
+
   ]);
 
   const { createdBy, feedbackTo, answers, details } = props;
@@ -160,11 +131,11 @@ const Chart = (props: Propstype) => {
   }, [answers]);
   return (
     <>
-      <h1>Chart feedback data to {feedbackTo.personalDetail.firstName}</h1>
+      <h1 style={{marginLeft: "2rem"}}>Chart feedback data to {feedbackTo.personalDetail.firstName} {feedbackTo.personalDetail.surName}</h1>
       {data.length === 0 && <h1>No feedback available</h1>}
-      <RadarChart cx={300} cy={250} outerRadius={150} width={550} height={550} data={data}>
+      <RadarChart cx={300} cy={250} outerRadius={150} width={650} height={550} data={data} style={{margin: "0 auto"}}>
         <PolarGrid />
-        <PolarAngleAxis dataKey="subject" />
+        <PolarAngleAxis dataKey="subject" style={{margin: "1rem"}}/>
         <PolarRadiusAxis angle={32} domain={[0, 5]} />
         <Radar name="Employee" dataKey="A" stroke="#6712be" fill="#6712be" fillOpacity={0.4} />
         <Legend />
