@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 import { useTranslation } from "react-i18next";
 
 import Accordion from "react-bootstrap/Accordion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface AnswerFeedbackType {
   answers: Array<{ order: number; answer: Array<string | number> }>;
@@ -15,13 +15,13 @@ interface AnswerFeedbackType {
 
 function Feedbackform() {
   const [loading, setLoading] = useState<Boolean>(false);
-  const {state} = useLocation()
+  const { state } = useLocation();
 
   const { t } = useTranslation<"trans">("trans");
   const { feedbackRequest } = useAppSelector((state) => state.answerFeedback);
   const { allUserList } = useAppSelector((state) => state.allUser);
   const [answers, setAnswers] = useState<Array<{ order: number; answer: Array<string | number> }>>([]);
-
+  const naviagate = useNavigate();
   const renderRadioButton = (title: string, order: number) => {
     let value = [<></>];
     for (let i = 1; i <= 5; i++) {
@@ -61,9 +61,11 @@ function Feedbackform() {
     axios
       .patch(`user/feedback?feedbackId=${feedbackId}`, { answers: data })
       .then((res) => {
-        console.log(res);
+        const { data, status } = res;
+        alert("Success!");
+        naviagate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("check feedback again"));
   };
   const renderFeedback = () => {
     if (feedbackRequest.length > 0) {
@@ -76,8 +78,8 @@ function Feedbackform() {
         let userResult = allUserList.find((user) => user.id === userId);
 
         return (
-          <Accordion defaultActiveKey="1" style={{ margin: ".5rem",width: "95%"  }}>
-            <Accordion.Item eventKey={finished?'0':'1'}>
+          <Accordion defaultActiveKey="1" style={{ margin: ".5rem", width: "95%" }}>
+            <Accordion.Item eventKey={finished ? "0" : "1"}>
               <Accordion.Header>
                 <div className={styles.accordionheader}>
                   <h3>
@@ -134,7 +136,6 @@ function Feedbackform() {
                         setLoading(true);
                         submitAnswer(feedbackId.id, answers);
                         setLoading(false);
-                        alert("Success!");
                       }}
                       key={index}
                     />

@@ -225,7 +225,7 @@ export const createFeedbackUserList: RequestHandler = async (
   if (userListId.length < 5) {
     return createErrMessage(
       {
-        msg: 'userlist length < 5 ',
+        msg: 'Require at least 5 people on the user list ',
         status: StatusCode_Err.BAD_REQUEST_INVALID_SYNTAX,
       },
       next
