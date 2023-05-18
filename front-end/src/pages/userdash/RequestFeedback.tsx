@@ -14,9 +14,11 @@ import { getPersonalDetailAPI } from "../../features/authenticatedUserSlice";
 const RequestFeedback: React.FC = () => {
   const { t } = useTranslation<"trans">("trans");
   const { allUserList } = useAppSelector((state) => state.allUser);
-  const { selfFeedbackRequests } = useAppSelector((state) => state.requestFeedback);
+  const { selfFeedbackRequests } = useAppSelector(
+    (state) => state.requestFeedback
+  );
   const [checkedUsers, setCheckedUsers] = useState<CheckedUser[]>([]);
-  
+
   const dispatch = useAppDispatch();
   const handleSubmit = () => {
     let userListId = [];
@@ -40,7 +42,10 @@ const RequestFeedback: React.FC = () => {
         });
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, user: any) => {
+  const handleCheckboxChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    user: any
+  ) => {
     const isChecked = e.target.checked;
     const userId = user.id;
     if (isChecked) {
@@ -51,7 +56,9 @@ const RequestFeedback: React.FC = () => {
 
       setCheckedUsers((prevCheckedUsers) => [...prevCheckedUsers, checkedUser]);
     } else {
-      setCheckedUsers((prevCheckedUsers) => prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId));
+      setCheckedUsers((prevCheckedUsers) =>
+        prevCheckedUsers.filter((checkedUser) => checkedUser.id !== userId)
+      );
     }
   };
 
@@ -60,8 +67,15 @@ const RequestFeedback: React.FC = () => {
       return usersList.map((user) => {
         return (
           <article key={user.id} className={userstyles.userlist}>
-            <input type="checkbox" id={user.id} value={user.id} onChange={(e) => handleCheckboxChange(e, user)} />
-            <div className={userstyles.avatar}>{user.personalDetail.firstName.charAt(0).toUpperCase()}</div>
+            <input
+              type="checkbox"
+              id={user.id}
+              value={user.id}
+              onChange={(e) => handleCheckboxChange(e, user)}
+            />
+            <div className={userstyles.avatar}>
+              {user.personalDetail.firstName.charAt(0).toUpperCase()}
+            </div>
             <span>
               {user.personalDetail.firstName} {user.personalDetail.surName}
               <br />
@@ -79,7 +93,11 @@ const RequestFeedback: React.FC = () => {
         <h2>{t("header")}</h2>
         <p>{t("reqparagraph")}</p>
         <div className={userstyles.users}>{renderUser(allUserList)}</div>
-        <BtnSuccess callBack={handleSubmit} name={t("subbtn")} disabled={selfFeedbackRequests.length > 0 ? true : false} />
+        <BtnSuccess
+          callBack={handleSubmit}
+          name={t("subbtn")}
+          disabled={selfFeedbackRequests.length > 0 ? true : false}
+        />
         <CreatedRequestFeedback />
       </div>
       <div></div>
