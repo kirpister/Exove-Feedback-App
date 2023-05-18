@@ -134,20 +134,16 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
                 | undefined
             ) => {
               return (
-                <article className={styles.userlist}>
-                  {/* <input type="checkbox" id={styles.id} value={styles.id} /> */}
-                  <div className={styles.single_user_card}>
-                    <div className={styles.avatar}>
-                      {checkeUser(item)
-                        ?.personalDetail.firstName.charAt(0)
-                        .toUpperCase()}
-                    </div>
-                    <span>
-                      {checkeUser(item)?.personalDetail.firstName}{" "}
-                      {checkeUser(item)?.personalDetail.surName}
-                      {/* <br /> */}
-                    </span>
+                <article className={styles.single_user_card}>
+                  <div className={styles.avatar}>
+                    {checkeUser(item)
+                      ?.personalDetail.firstName.charAt(0)
+                      .toUpperCase()}
                   </div>
+                  <span>
+                    {checkeUser(item)?.personalDetail.firstName}{" "}
+                    {checkeUser(item)?.personalDetail.surName}
+                  </span>
                 </article>
               );
             }
