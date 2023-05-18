@@ -4,10 +4,10 @@
   width: 100vw;
 }
 
-.wrapper h2 {
+.loginform h2 {
   font-family: var(--bold-font);
   color: white;
-  margin: 2rem;
+  margin-bottom: 2rem;
   font-size: 2rem;
 }
 
@@ -15,6 +15,7 @@
   font-family: inherit;
   color: white;
   display: block;
+  margin-top: 1rem;
   margin-bottom: 0.3rem;
 }
 
