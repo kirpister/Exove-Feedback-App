@@ -38,5 +38,8 @@
     "REQUEST FEEDBACK TRANSLATIONS": "********",
     "header": "Request feedback",
     "reqparagraph": "Please choose five colleagues to give you feedback.",
-    "subbtn": "SUBMIT"
+    "subbtn": "SUBMIT",
+    "selectedusers": "Selected request list",
+    "selectp": "Your request list has not been opened yet",
+    "deletebtn": "Delete"
 }

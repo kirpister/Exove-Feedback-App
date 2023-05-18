@@ -1,9 +1,9 @@
 .list_wrapper {
-  /* margin: 3rem; */
+  margin: 3rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  justify-content: center;
+  justify-content:flex-start;
   align-items: center;
   height: 100%;
 }

@@ -22,7 +22,7 @@ function SingleUserList(props: PropsType) {
     return (
       <div className={styles.list_wrapper}>
         <h3>
-          Please confirm reviews for{" "}
+          Please confirm reviewers for{" "}
           <span>
             {
               checkeUser(singleRequestedList.requestUserId as string)
