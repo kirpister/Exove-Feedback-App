@@ -1,8 +1,8 @@
 .all_users_list {
+  margin-top: 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   background-color: transparent;
   border: solid 2px var(--light-grey-color);
@@ -10,6 +10,7 @@
   margin: 0 auto;
   height: 100%;
   padding: 0.5rem;
+  background-color: pink;
 }
 
 .all_users_list input {
@@ -24,5 +25,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  margin-top: 1rem;
   margin-right: 0.6rem;
 }
