@@ -30,7 +30,7 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
   });
 
   let isActiveStyle = isActive ? "isActive" : "";
-
+  console.log("REQ", requests);
   return (
     <article
       className={`${styles.single_user_card} ${styles[listInsideCheck]} ${styles[isActiveStyle]} `}

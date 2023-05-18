@@ -16,11 +16,10 @@
 }
 
 .btnsdiv button {
-  display: block;
+  /* display: block; */
   width: 230px;
 }
 
 .btnsdiv {
-  margin-top: -5rem;
   margin-bottom: 5rem;
 }
