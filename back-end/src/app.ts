@@ -23,12 +23,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan(':method :url :status :response-time ms '));
 app.use(cookieParser());
-app.use('/private/validate', validateRouter);
-app.use('/', welcomeRouter);
-app.use('/', authenRouter);
-app.use('/feedback', authenticationAdmin, feedBackRouter);
-app.use('/user', authenticationUser, userRouter);
-app.use('/admin', authenticationAdmin, adminRouter);
+app.use('/api/private/validate', validateRouter);
+app.use('/api/', welcomeRouter);
+app.use('/api/', authenRouter);
+app.use('/api/feedback', authenticationAdmin, feedBackRouter);
+app.use('/api/user', authenticationUser, userRouter);
+app.use('/api/admin', authenticationAdmin, adminRouter);
 
 app.use(errorHandler);
 app.use(unknownEndpoint);

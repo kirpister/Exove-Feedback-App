@@ -7,7 +7,7 @@ export const Notifications = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onMarkNotificationRead = (notificationId: string) => {
-    return fetch("/user/notifications", {
+    return fetch("/api/user/notifications", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export const Notifications = () => {
     });
   };
   const onDeleteNotification = (notificationId: string) => {
-    return fetch("/user/notifications", {
+    return fetch("/api/user/notifications", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const Login: React.FC = () => {
   const { t, i18n } = useTranslation<"trans">("trans");
 
   const onsubmitHandler = (uname: string, pwd: string) => {
-    return fetch("/login", {
+    return fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -173,7 +173,7 @@ export const createFeedbackAPI = async (confirmFeedback: FinalConfirmationType, 
   console.log('call api')
   showLoading2s(dispatch);
   try {
-    const { data, status } = await axios.post("/feedback", confirmFeedback);
+    const { data, status } = await axios.post("/api/feedback", confirmFeedback);
     if (status === 201) {
       showLoading2s(dispatch);
       alert(`feedback with requestList Id ${confirmFeedback.requestedListBy} created`);
