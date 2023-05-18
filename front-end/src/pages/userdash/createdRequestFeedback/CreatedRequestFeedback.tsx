@@ -5,7 +5,11 @@ import { deleteRequestFeedbackAPI } from "../../../features/requestFeedback";
 import styles from "./createRequestFeedback.module.css";
 import SingleUserList from "../../../components/confirm/step_2_modify_the_list/single_user_list/SingleUserList";
 
+import { useTranslation } from "react-i18next";
+import "../../../translations/i18n";
+
 function CreatedRequestFeedback() {
+  const { t } = useTranslation<"trans">("trans");
   const { selfFeedbackRequests } = useAppSelector((state) => state.requestFeedback);
   const { allUserList } = useAppSelector((state) => state.allUser);
   console.log(selfFeedbackRequests);
@@ -19,7 +23,7 @@ function CreatedRequestFeedback() {
             {selfFeedbackRequest.requestFeedbackId.userList.map((userId, index_1) => {
               return (
                 <tr>
-                  {index_1 + 1}
+                  <span style={{padding: ".4rem"}}>{index_1 + 1}</span>
                   <td key={index_1}>{allUserList.find((e) => e.id === userId)?.personalDetail.firstName}</td>
                   <td key={index_1}>{allUserList.find((e) => e.id === userId)?.personalDetail.surName}</td>
                   <td key={index_1}>{allUserList.find((e) => e.id === userId)?.work.departments[0]}</td>
@@ -30,7 +34,7 @@ function CreatedRequestFeedback() {
               callBack={() => {
                 deleteRequestFeedback(selfFeedbackRequest.requestFeedbackId.id);
               }}
-              name="Delete "
+              name={t("deletebtn")}
             />
           </div>
         );
@@ -47,7 +51,7 @@ function CreatedRequestFeedback() {
     <div className={styles.requestwrapper}>
       <table>
         <thead>
-          <h2>Selected Request List</h2>
+          <h2>{t("selectedusers")}</h2>
         </thead>
         <tbody>{renderRequestFeeback()}</tbody>
       </table>

@@ -38,5 +38,8 @@
     "REQUEST FEEDBACK TRANSLATIONS": "********",
     "header": "Pyydä palautetta",
     "reqparagraph": "Valitse viisi kollegaa joilta haluat palautetta.",
-    "subbtn": "LÄHETÄ"
+    "subbtn": "LÄHETÄ",
+    "selectedusers": "Valitut käyttäjät",
+    "selectp": "Pyyntöäsi ei ole vielä vahtistettu",
+    "deletebtn": "Poista"
 }
