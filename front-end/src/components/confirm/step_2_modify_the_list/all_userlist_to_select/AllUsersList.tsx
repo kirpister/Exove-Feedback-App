@@ -48,12 +48,18 @@ const AllUsersList: React.FC = (props: PropsType) => {
         ></input>
         <div
           style={{
+            marginTop: "",
             marginRight: "1px",
-            height: hasScroll ? "750px" : "auto",
-            minHeight: "50px",
+            height: hasScroll ? "750px" : "650px",
+            minHeight: "120px",
           }}
           ref={listWrapper}
         >
+          <div className={classes.scrolled_users}>
+            {usersListSearch.map((user) => (
+              <SingleUser key={user.id} userInfo={user} />
+            ))}
+          </div>
           <div className={classes.scrolled_users}>
             {usersListSearch.map((user) => (
               <SingleUser key={user.id} userInfo={user} />

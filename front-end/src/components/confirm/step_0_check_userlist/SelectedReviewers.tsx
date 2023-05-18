@@ -98,13 +98,11 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
         );
       }
     }
-    console.log("DATa", renderDataRequests);
     return renderDataRequests.map((userlist: any, i: any) => {
-      // console.log("userlist", userlist);
       return (
         <div key={userlist.id} className={styles.selected_reviewers}>
-          {/* <h2>list order</h2>
-          <p>this list condition: {userlist.opened ? "opened" : "not opened"}</p> */}
+          {/* <h2>list order</h2> */}
+
           <h3>
             Please confirm reviwers for{" "}
             <span>
@@ -118,6 +116,7 @@ const SelectedReviewers: React.FC<AllUserRequestProps> = ({
               }
             </span>
           </h3>
+          <p>condition: {userlist.opened ? "confirmed" : "not confirmed"}</p>
           {userlist.userList.map(
             (
               item: any,

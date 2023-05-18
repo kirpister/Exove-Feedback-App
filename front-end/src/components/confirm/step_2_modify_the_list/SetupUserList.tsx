@@ -67,12 +67,12 @@ function SetupUserList() {
             callBack={removeUserFromThelist}
           />
           <div className={styles.btnsdiv}>
-          <BtnSuccess
-            callBack={processNext}
-            name="Send Feedback Request"
-            key={id}
-          />
-          <BtnSuccess callBack={goBack} name="Go Back" key={id} />
+            <BtnSuccess callBack={goBack} name="Go Back" key={id} />
+            <BtnSuccess
+              callBack={processNext}
+              name="Send Feedback Request"
+              key={id}
+            />
           </div>
         </div>
       </div>
