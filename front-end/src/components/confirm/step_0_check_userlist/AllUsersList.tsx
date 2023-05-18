@@ -56,7 +56,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
     let requestedUserList = requests.filter((singleRequest: any) => {
       return singleRequest.requestUserId === item.id;
     });
-    // console.log("RUL", requestedUserList);
+
     return {
       ...item,
       userRequest: requestedUserList,
@@ -124,8 +124,9 @@ const AllUsersList: React.FC<AllUserProps> = ({
       <div
         style={{
           marginRight: "1px",
-          height: hasScroll ? "650px" : "auto",
-          minHeight: "50px",
+
+          height: hasScroll ? "800px" : "auto",
+          minHeight: "100px",
         }}
         ref={listWrapper}
       >

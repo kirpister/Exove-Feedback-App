@@ -1,9 +1,6 @@
 import React from "react";
-import classes from "./SingleUser.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
+import styles from "./SingleUser.module.css";
 import { personalDetailType } from "../../model/types/user";
-import BtnSuccess from "../button/success/BtnSuccess";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addUserFromSelectRequestList } from "../../features/requestUserListSlicer";
 import BtnSmall from "../button/small/BtnSmall";
@@ -16,12 +13,16 @@ interface SingleUserProps {
 }
 
 const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
-  const { selectedRequesList } = useAppSelector((state) => state.requestUserlist);
+  const { selectedRequesList } = useAppSelector(
+    (state) => state.requestUserlist
+  );
   const { allUserList } = useAppSelector((state) => state.allUser);
   const dispatch = useAppDispatch();
   const checkDisable = () => {
     if (selectedRequesList) {
-      const index = selectedRequesList.userList.findIndex((id) => id === userInfo.id);
+      const index = selectedRequesList.userList.findIndex(
+        (id) => id === userInfo.id
+      );
       if (index !== -1) {
         return true;
       }
@@ -32,25 +33,32 @@ const SingleUser: React.FC<SingleUserProps> = ({ userInfo }) => {
     dispatch(addUserFromSelectRequestList({ allUserList, id: userInfo.id }));
   };
   return (
-
-    <article className={classes.single_user_card}>
-      <div className={classes.avatar}>
-        {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
-
+    <article className={styles.single_user_card}>
+      <div className={styles.avatar_wrapper}>
+        <div className={styles.avatar}>
+          {userInfo.personalDetail.firstName.charAt(0).toUpperCase()}
+        </div>
       </div>
-      <span>
-        {userInfo.personalDetail.firstName} {userInfo.personalDetail.surName}
-        <br />
-        {userInfo.work.departments[0]}, {userInfo.work.roles[0]}
-      </span>
-      <BtnSmall
-        callBack={() => {
-          addNewUserToSelectedUserList(userInfo.id);
-        }}
-        // name="❮❮"
-        name={<img src={arrow} className={classes.img} />}
-        disabled={checkDisable()}
-      />
+
+      <div className={styles.user_btn}>
+        <span>
+          <div>
+            {userInfo.personalDetail.firstName}{" "}
+            {userInfo.personalDetail.surName}
+          </div>
+          <div>
+            {userInfo.work.departments[0]}, {userInfo.work.roles[0]}
+          </div>
+        </span>
+        <BtnSmall
+          callBack={() => {
+            addNewUserToSelectedUserList(userInfo.id);
+          }}
+          // name="❮❮"
+          name={<img src={arrow} alt="arrow" className={styles.img} />}
+          disabled={checkDisable()}
+        />
+      </div>
     </article>
   );
 };

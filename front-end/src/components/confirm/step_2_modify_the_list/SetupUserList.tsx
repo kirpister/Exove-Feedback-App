@@ -18,8 +18,8 @@ function SetupUserList() {
   const { selectedRequesList, requestLists } = useAppSelector(
     (state) => state.requestUserlist
   );
-  const { finalConfirm, sections, listUserId, requestedListBy, sendQuestion } =
-    useAppSelector((state) => state.feedback);
+  // const { finalConfirm, sections, listUserId, requestedListBy, sendQuestion } =
+  //   useAppSelector((state) => state.feedback);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
