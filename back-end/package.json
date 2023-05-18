@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "start": "npm run tsc && node dist/server.js",
+    "start-server": "node dist/server.js",
+    "start": "npm run tsc && npm run start-server",
     "dev": "ts-node-dev src/server.ts",
     "build:UI": "rm -rf build && cd ../front-end && npm run build && cp -r build ../back-end",
     "test": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles --forceExit",

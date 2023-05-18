@@ -29,7 +29,7 @@ const allUserSlicer = createSlice({
 
 export const getAllUserAPI = () => {
   return async (dispatch: AppDispatch) => {
-    axios.get<personalDetailType[]>("/user/get_all_user").then((res) => {
+    axios.get<personalDetailType[]>("/api/user/get_all_user").then((res) => {
       const { data, status } = res as unknown as DataType;
       if (status === 200) {
         dispatch(updateAllUserList(data.data));

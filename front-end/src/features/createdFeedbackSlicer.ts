@@ -61,7 +61,7 @@ const createdFeedbackSlicer = createSlice({
 export const getAllFeedbackAPI = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      const { data, status } = await axios.get("/feedback");
+      const { data, status } = await axios.get("/api/feedback");
       dispatch(setAllFeedback(data.data));
     } catch (error) {}
   };
@@ -71,7 +71,7 @@ export const deleteFeedbackAPI = (feedbackId: string) => {
   return async (dispatch: AppDispatch) => {
     try {
       const { data, status } = await axios.delete(
-        `/feedback?feedbackId=${feedbackId}`
+        `/api/feedback?feedbackId=${feedbackId}`
       );
       if (status === 200) {
         alert(`${data.msg}`);

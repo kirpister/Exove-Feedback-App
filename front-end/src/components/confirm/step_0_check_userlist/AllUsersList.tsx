@@ -73,7 +73,7 @@ const AllUsersList: React.FC<AllUserProps> = ({
     setReminderText(ReminderText.REMINDER_BEING_SEND);
     try {
       receiverUserIds.forEach(async (userId) => {
-        const response = await axios.post("/user/notifications/reminder", {
+        const response = await axios.post("/api/user/notifications/reminder", {
           receiverUserId: userId,
           msg: "Please send userlist to initiate feedback process",
         });

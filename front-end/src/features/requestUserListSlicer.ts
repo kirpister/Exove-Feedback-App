@@ -59,7 +59,7 @@ const requestListSlicer = createSlice({
 export const getAllRequestUserListAPI = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      const { data, status } = await axios.get("/feedback/requested_feedback");
+      const { data, status } = await axios.get("/api/feedback/requested_feedback");
       if (status === 200) {
         dispatch(getALlRequestUserlist(data.data));
       }

@@ -60,7 +60,7 @@ const createdRequestFeedbackSlicer = createSlice({
 
 export const deleteRequestFeedbackAPI = (id: string) => {
   return async (dispatch: AppDispatch) => {
-    const { data, status } = await axios.delete(`user/feedback_request?requestListId=${id}`);
+    const { data, status } = await axios.delete(`/api/user/feedback_request?requestListId=${id}`);
     if (status === 200) {
       showLoading2s(dispatch);
       alert("success delete");

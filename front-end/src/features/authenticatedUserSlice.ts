@@ -105,7 +105,7 @@ export const initiateLogoutSession = (navigagte: NavigateFunction) => {
 export const getPersonalDetailAPI = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      axios.get<personalDetailType>("/user").then((res) => {
+      axios.get<personalDetailType>("/api/user").then((res) => {
         const { data, status } = res;
         const user = data.data;
         // setUsers({ ...user });
