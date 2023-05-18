@@ -54,15 +54,15 @@ function FinalConfirm() {
       <div className={styles.two_btn}>
         <BtnSuccess
           callBack={() => {
-            sendToBackend();
-          }}
-          name="Send To Users"
-        />
-        <BtnSuccess
-          callBack={() => {
             navigate(-1);
           }}
           name="Go Back"
+        />
+        <BtnSuccess
+          callBack={() => {
+            sendToBackend();
+          }}
+          name="Send To Users"
         />
       </div>
     </div>

@@ -1,8 +1,8 @@
 .all_users_list {
+  margin-top: 1rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   background-color: transparent;
   border: solid 2px var(--light-grey-color);
@@ -24,5 +24,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  margin-top: 0.4rem;
   margin-right: 0.6rem;
 }
