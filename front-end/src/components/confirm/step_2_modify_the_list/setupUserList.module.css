@@ -16,11 +16,12 @@
 }
 
 .btnsdiv button {
-  display: block;
+  /* display: block; */
   width: 230px;
 }
 
 .btnsdiv {
-  margin-top: -5rem;
+  display: flex;
+  margin-top: -2rem;
   margin-bottom: 5rem;
 }

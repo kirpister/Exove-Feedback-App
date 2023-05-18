@@ -8,6 +8,7 @@ interface SingleUser1Props {
   onClickUser: Function;
   isActive: boolean;
   requests: any;
+  opened?: boolean;
 }
 
 const SingleUser1: React.FC<SingleUser1Props> = ({
@@ -30,7 +31,7 @@ const SingleUser1: React.FC<SingleUser1Props> = ({
   });
 
   let isActiveStyle = isActive ? "isActive" : "";
-
+  console.log(isActive);
   return (
     <article
       className={`${styles.single_user_card} ${styles[listInsideCheck]} ${styles[isActiveStyle]} `}
